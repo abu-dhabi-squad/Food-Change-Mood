@@ -5,10 +5,7 @@ import model.Food
 import model.Nutrition
 import java.time.LocalDate
 
-class FakeCsvFoodRepositoryImp(
-    private val csvFileReader: CsvFileReader,
-    private val foodCsvParser: FoodCsvParser
-) : FoodRepository {
+class FakeCsvFoodRepositoryImp() : FoodRepository {
     private val mexicanStyle = Food(
         id = 137739,
         name = "arriba baked winter squash mexican style",
