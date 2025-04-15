@@ -8,18 +8,19 @@ data class Food(
     val minutes: Int,
     val submittedDate: LocalDate?,
     val tags: List<String>,
-    val nutrition: List<Nutrient>,
+    val nutrition: Nutrition,
     val steps: List<String>,
     val description : String?,
     val ingredients: List<String>
 )
 
-data class Nutrient(
-    val type: NutrientType,
-    val value: Float
+data class Nutrition(
+    val calories: Float,
+    val totalFat: Float,
+    val sugar: Float,
+    val sodium: Float,
+    val protein: Float,
+    val saturated: Float,
+    val carbohydrates: Float
+
 )
-
-enum class NutrientType {
-    CALORIES, TOTAL_FAT, SUGAR, SODIUM, PROTEIN, SATURATED, CARBOHYDRATES
-}
-
