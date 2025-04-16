@@ -1,8 +1,14 @@
 package presentation
 
+import logic.usecase.GetRandomFoodUseCase
+import logic.usecase.GuessFoodPreparationTimeUseCase
+import model.Food
+import model.GuessWrongPreparationTimeException
 import kotlin.system.exitProcess
+
 class FoodChangeMoodConsoleUI(
-    // use cases will be here
+    private val getRandomFoodUseCase: GetRandomFoodUseCase,
+    private val guessFoodPreparationTimeUseCase: GuessFoodPreparationTimeUseCase
 ) {
     fun start() {
         showWelcome()
@@ -16,12 +22,12 @@ class FoodChangeMoodConsoleUI(
     private fun presentFeature() {
         showOptions()
         val input = getUserInput()
-        when(input){
+        when (input) {
             1 -> println("Healthy Fast Meals (<=15 min)")
             2 -> println("Search Meal by Name")
             3 -> println("Iraqi Meals")
             4 -> println("Easy Food Suggestions")
-            5 -> println("Guess Prep Time Game")
+            5 -> handelGuessFoodPreparationTimeGame()
             6 -> println("Egg-Free Sweets")
             7 -> println("Keto Diet Meal Helper")
             8 -> println("Search Foods by Add Date")
@@ -37,7 +43,6 @@ class FoodChangeMoodConsoleUI(
         }
         presentFeature()
     }
-
 
 
     private fun showOptions() {
@@ -66,6 +71,57 @@ class FoodChangeMoodConsoleUI(
     private fun getUserInput(): Int? {
         print("Enter your choice: ")
         return readlnOrNull()?.toIntOrNull()
+    }
+
+    private fun handelGuessFoodPreparationTimeGame() {
+        getRandomFoodUseCase().fold(
+            onSuccess = ::tryStartGuessFoodPreparationTimeGame,
+            onFailure = { showErrorMessage(it.message) })
+    }
+
+    private fun showErrorMessage(message: String?) {
+        if (message != null)
+            println(message)
+        else println("There are unknown error")
+    }
+
+    private fun tryStartGuessFoodPreparationTimeGame(food: Food) {
+        println("The food is ${food.name}")
+        try {
+            guessFoodPreparationTimeUseCase.setPreparationTime(food.minutes)
+            startGuessFoodPreparationTimeGame()
+        } catch (e: GuessWrongPreparationTimeException) {
+            println("error while start guess food preparation time game :${e.message}")
+        }
+
+    }
+
+
+    private fun startGuessFoodPreparationTimeGame() {
+        val userGuess = getUserPreparationTime()
+        if (userGuess != null)
+            guessFoodPreparationTimeUseCase.invoke(userGuess).fold(
+                onSuccess = { println(it) },
+                onFailure = { onUserGuessPreparationTimeFailure(it) }
+            )
+        else {
+            println("Invalid input")
+            startGuessFoodPreparationTimeGame()
+        }
+
+    }
+
+
+    private fun getUserPreparationTime(): Int? {
+        print("Please Guess  Preparation Time (in minute) : ")
+        return readlnOrNull()?.toIntOrNull()
+    }
+
+
+    private fun onUserGuessPreparationTimeFailure(throwable: Throwable) {
+        showErrorMessage(throwable.message)
+        if (throwable is GuessWrongPreparationTimeException)
+            startGuessFoodPreparationTimeGame()
     }
 
 
