@@ -3,7 +3,7 @@ package logic.usecase
 import logic.repository.FoodRepository
 
 
-class GetRandomPotatoMealsUseCase(
+class GetRandomPotatoesMealsUseCase(
     private val foodRepository: FoodRepository
 ) {
 
@@ -16,7 +16,7 @@ class GetRandomPotatoMealsUseCase(
                         throw Exception("error in getting meals")
                     },
                     onSuccess = { meals ->
-                         meals
+                        meals
                             .filter {
                                 !it.name.isNullOrBlank() && it.ingredients.any {
                                     it.contains(

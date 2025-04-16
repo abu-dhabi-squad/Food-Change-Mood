@@ -1,8 +1,8 @@
 package di
 
-import logic.usecase.GetRandomPotatoMealsUseCase
+import logic.usecase.GetRandomPotatoesMealsUseCase
 import org.koin.dsl.module
 
-val useCaseModule = module{
-    single{GetRandomPotatoMealsUseCase(get())}
+val useCaseModule = module {
+    single { GetRandomPotatoesMealsUseCase(get()) }
 }

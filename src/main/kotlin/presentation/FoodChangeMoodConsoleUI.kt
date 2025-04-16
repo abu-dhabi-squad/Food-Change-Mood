@@ -3,6 +3,7 @@ package presentation
 import kotlin.system.exitProcess
 class FoodChangeMoodConsoleUI(
     // use cases will be here
+
 ) {
     fun start() {
         showWelcome()
