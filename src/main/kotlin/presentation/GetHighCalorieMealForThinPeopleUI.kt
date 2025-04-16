@@ -6,7 +6,7 @@ import model.Food
 
 fun getHighCalorieMealUI(getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase){
     try {
-        getMealForThinPeopleUseCase.getMeal().let { suggestMeal->
+        getMealForThinPeopleUseCase.getMeal().also { suggestMeal->
             println("Meal Name: "+ suggestMeal.name+"\n")
             println("Meal Description: "+ suggestMeal.description+"\n")
 
