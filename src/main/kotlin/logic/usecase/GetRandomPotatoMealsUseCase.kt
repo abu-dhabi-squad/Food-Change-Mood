@@ -7,7 +7,7 @@ class GetRandomPotatoMealsUseCase(
     private val foodRepository: FoodRepository
 ) {
 
-    fun getTenRandomPotatoMeals(): List<String> {
+    fun getTenRandomPotatoesMeals(): List<String> {
         return try {
             foodRepository
                 .getFoods()
