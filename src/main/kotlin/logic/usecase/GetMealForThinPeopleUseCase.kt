@@ -15,7 +15,7 @@ class GetMealForThinPeopleUseCase(
                     meals ->
                     return meals.filter(::onlyHighCaloriesData)
                         .sortedByDescending { it.nutrition.calories }
-                        .takeIf { it.isNotEmpty() && it.size > mealIndex}
+                        .takeIf (::isTherelikableMeal)
                         ?.get(mealIndex)
                         ?: throw Exception("there is no high calories meals in list")
                             },
@@ -26,7 +26,9 @@ class GetMealForThinPeopleUseCase(
     private fun onlyHighCaloriesData(food: Food):Boolean{
         return food.name != null && food.description != null && food.nutrition.calories > 700.0
     }
-
+    private fun isTherelikableMeal(meals: List<Food>):Boolean{
+        return meals.isNotEmpty() && meals.size > mealIndex
+    }
     fun dislikeTheCurrentMeal(){
         mealIndex++
     }
