@@ -25,8 +25,8 @@ private fun isTheMealLikable(getMealForThinPeopleUseCase : GetMealForThinPeopleU
     println("Do you like it? {y/n}")
     readLine().let {
         when{
-            it == "Y" || it == "y" -> { return true }
-            it == "N" || it == "n" -> {
+            it.equals("y",true) -> { return true }
+            it.equals("n",true) -> {
                 getMealForThinPeopleUseCase.dislikeTheCurrentMeal()
                 return false
             }
