@@ -2,17 +2,24 @@ package presentation
 
 import logic.usecase.GetMealForThinPeopleUseCase
 import model.Food
+import model.WrongInputException
 
 
 fun getHighCalorieMealUI(getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase){
+    val shownSet = mutableSetOf<Int>()
+    getRandomHighCalorieMeal(getMealForThinPeopleUseCase,shownSet)
+}
+
+private fun getRandomHighCalorieMeal(getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase, shownSet: MutableSet<Int>){
     try {
-        getMealForThinPeopleUseCase.getMeal().also { suggestMeal->
+        getMealForThinPeopleUseCase.getMeal(shownSet).also { suggestMeal->
+            shownSet.add(suggestMeal.id)
             println("Meal Name: "+ suggestMeal.name+"\n")
             println("Meal Description: "+ suggestMeal.description+"\n")
 
-            when(isTheMealLikable(getMealForThinPeopleUseCase)){
+            when(isTheMealLikable()){
                 true -> showMealDetails(suggestMeal)
-                false -> getHighCalorieMealUI(getMealForThinPeopleUseCase)
+                false -> getRandomHighCalorieMeal(getMealForThinPeopleUseCase, shownSet)
             }
         }
     }
@@ -21,17 +28,14 @@ fun getHighCalorieMealUI(getMealForThinPeopleUseCase: GetMealForThinPeopleUseCas
     }
 }
 
-private fun isTheMealLikable(getMealForThinPeopleUseCase : GetMealForThinPeopleUseCase):Boolean{
+private fun isTheMealLikable():Boolean{
     println("Do you like it? {y/n}")
     readLine().let {
         when{
             it.equals("y",true) -> { return true }
-            it.equals("n",true) -> {
-                getMealForThinPeopleUseCase.dislikeTheCurrentMeal()
-                return false
-            }
+            it.equals("n",true) -> { return false }
             else -> {
-                throw Exception("wrong Input")
+                throw WrongInputException()
             }
         }
     }

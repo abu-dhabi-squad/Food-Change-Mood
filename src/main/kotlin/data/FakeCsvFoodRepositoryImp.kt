@@ -177,7 +177,7 @@ class FakeCsvFoodRepositoryImp() : FoodRepository {
     )
 
     private val bananas4IceCreamPie = Food(
-        id = 70971,
+        id = 70970,
         name = "bananas 4 ice cream  pie",
         minutes = 180,
         submittedDate = LocalDate.of(2003, 9, 10),
