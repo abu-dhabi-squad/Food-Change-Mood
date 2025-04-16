@@ -22,14 +22,16 @@ class GetMealForThinPeopleUseCase(
                 onFailure = {throw Exception("there is no food in list")},
             )
     }
-
     private fun onlyHighCaloriesData(food: Food):Boolean{
-        return food.name != null && food.description != null && food.nutrition.calories > 700.0
+        return food.name != null && food.description != null && food.nutrition.calories > CALORIES_THRESHOLD
     }
     private fun isTherelikableMeal(meals: List<Food>):Boolean{
         return meals.isNotEmpty() && meals.size > mealIndex
     }
     fun dislikeTheCurrentMeal(){
         mealIndex++
+    }
+    private companion object{
+        const val CALORIES_THRESHOLD = 700
     }
 }
