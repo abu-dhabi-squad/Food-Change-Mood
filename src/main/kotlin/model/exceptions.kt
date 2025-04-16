@@ -1,7 +1,8 @@
 package model
 
-open class ValidationException(message: String): Exception(message)
+open class AppException(message: String): Exception(message)
 
-class EmptyListException:ValidationException("there is no item in list")
+class EmptyListException:AppException("there is no item in list")
 
+class EmptyHighCalorieListException:AppException("there is no high calories meals in list")
 

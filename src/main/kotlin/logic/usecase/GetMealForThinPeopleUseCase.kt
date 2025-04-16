@@ -1,6 +1,7 @@
 package logic.usecase
 
 import logic.repository.FoodRepository
+import model.EmptyHighCalorieListException
 import model.EmptyListException
 import model.Food
 
@@ -18,7 +19,7 @@ class GetMealForThinPeopleUseCase(
                         .sortedByDescending { it.nutrition.calories }
                         .takeIf (::isTherelikableMeal)
                         ?.get(mealIndex)
-                        ?: throw EmptyListException()
+                        ?: throw EmptyHighCalorieListException()
                             },
                 onFailure = {throw EmptyListException()},
             )
