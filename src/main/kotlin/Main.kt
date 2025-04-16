@@ -6,9 +6,9 @@ import org.koin.mp.KoinPlatform.getKoin
 import presentation.FoodChangeMoodConsoleUI
 
 fun main() {
-     startKoin {
-         modules(appModule, useCaseModule)
-     }
-    val foodRepository = getKoin().get<FoodRepository>()
-    FoodChangeMoodConsoleUI().start()
+    startKoin {
+        modules(appModule, useCaseModule)
+    }
+    val ui: FoodChangeMoodConsoleUI = getKoin().get()
+    ui.start()
 }
