@@ -1,8 +1,9 @@
 package presentation
 
+import logic.usecase.GymHelperUseCase
 import kotlin.system.exitProcess
 class FoodChangeMoodConsoleUI(
-    // use cases will be here
+    private val gymHelperConsoleUI: GymHelperConsoleUI,
 ) {
     fun start() {
         showWelcome()
@@ -25,7 +26,7 @@ class FoodChangeMoodConsoleUI(
             6 -> println("Egg-Free Sweets")
             7 -> println("Keto Diet Meal Helper")
             8 -> println("Search Foods by Add Date")
-            9 -> println("Gym Helper (Calories/Protein)")
+            9 -> gymHelperConsoleUI.start()
             10 -> println("Explore Country Food Culture")
             11 -> println("Ingredient Guess Game")
             12 -> println("Potato-Based Meals")
@@ -41,6 +42,7 @@ class FoodChangeMoodConsoleUI(
 
 
     private fun showOptions() {
+        println()
         println("╔════════════════════════════════════╗")
         println("║      Food Change Mood Console      ║")
         println("╠════════════════════════════════════╣")
