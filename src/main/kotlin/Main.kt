@@ -9,6 +9,6 @@ fun main() {
      startKoin {
          modules(appModule, useCaseModule)
      }
-    val foodRepository = getKoin().get<FoodRepository>()
-    FoodChangeMoodConsoleUI().start()
+    val foodChangeMoodConsoleUI: FoodChangeMoodConsoleUI = getKoin().get()
+    foodChangeMoodConsoleUI.start()
 }

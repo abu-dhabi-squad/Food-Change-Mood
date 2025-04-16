@@ -1,8 +1,9 @@
 package presentation
 
+import logic.usecase.GetFoodByDateUseCase
 import kotlin.system.exitProcess
 class FoodChangeMoodConsoleUI(
-    // use cases will be here
+    private val getFoodByDateUseCase: GetFoodByDateUseCase
 ) {
     fun start() {
         showWelcome()
@@ -24,7 +25,7 @@ class FoodChangeMoodConsoleUI(
             5 -> println("Guess Prep Time Game")
             6 -> println("Egg-Free Sweets")
             7 -> println("Keto Diet Meal Helper")
-            8 -> println("Search Foods by Add Date")
+            8 -> getRandomHighCalorieMeal(getFoodByDateUseCase)
             9 -> println("Gym Helper (Calories/Protein)")
             10 -> println("Explore Country Food Culture")
             11 -> println("Ingredient Guess Game")
