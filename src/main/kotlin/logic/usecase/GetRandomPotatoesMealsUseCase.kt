@@ -17,17 +17,15 @@ class GetRandomPotatoesMealsUseCase(
             ?.take(MEALS_COUNT)
             ?.map { it.name.toString() } ?: throw NoMealsFoundException()
     }
-
-    companion object {
-        const val MEALS_COUNT = 10
-        const val POTATOES_KEYWORD = "potatoes"
-    }
-
     private fun hasValidName(name: String?): Boolean {
         return !name.isNullOrBlank()
     }
 
     private fun isIngredientsContainsPotatoes(ingredients: List<String>): Boolean {
         return ingredients.any { it.contains(POTATOES_KEYWORD, ignoreCase = true) }
+    }
+    companion object {
+        const val MEALS_COUNT = 10
+        const val POTATOES_KEYWORD = "potatoes"
     }
 }
