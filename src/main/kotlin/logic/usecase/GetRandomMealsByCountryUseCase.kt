@@ -27,16 +27,10 @@ class GetRandomMealsByCountryUseCase(
 
     private fun Food.matchesCountry(relatedWords: List<String>): Boolean {
 
-        val lowerName = name?.lowercase().orEmpty()
-        val lowerDesc = description?.lowercase().orEmpty()
-        val lowerTags = tags.map { it.lowercase() }
-
-        return relatedWords.any { word ->
-            val regex = Regex("\\b${Regex.escape(word)}\\b", RegexOption.IGNORE_CASE)
-            regex.containsMatchIn(lowerName) ||
-                    regex.containsMatchIn(lowerDesc) ||
-                    lowerTags.any { tag -> regex.containsMatchIn(tag) }
-        }
+        return listOf<List<String>>(
+            name?.lowercase()?.split(" ") ?: emptyList(),
+            description?.lowercase()?.split(" ") ?: emptyList(),
+            tags.map { it.lowercase() }).flatten().toSet().any { word -> word in relatedWords }
     }
 
 
