@@ -1,11 +1,16 @@
 package presentation
 
+import logic.usecase.GetRandomMealsByCountryUseCase
 import logic.usecase.GetIraqiMealsUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
 import kotlin.system.exitProcess
+
 class FoodChangeMoodConsoleUI(
-    private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase
-    , private val getIraqiMealsUseCase: GetIraqiMealsUseCase
+    private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,
+    private val randomPotatoesMealsConsoleUi: RandomPotatoesMealsConsoleUi,
+    private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
+    private val getFoodChangeMoodConsoleUi: ItalianMealsForLargeGroupUI,
+     private val getIraqiMealsUseCase: GetIraqiMealsUseCase
 ) {
     fun start() {
         showWelcome()
@@ -19,7 +24,7 @@ class FoodChangeMoodConsoleUI(
     private fun presentFeature() {
         showOptions()
         val input = getUserInput()
-        when(input){
+        when (input) {
             1 -> println("Healthy Fast Meals (<=15 min)")
             2 -> println("Search Meal by Name")
             3 -> getIraqiMealsUseCaseUI(getIraqiMealsUseCase)
@@ -29,12 +34,14 @@ class FoodChangeMoodConsoleUI(
             7 -> println("Keto Diet Meal Helper")
             8 -> println("Search Foods by Add Date")
             9 -> println("Gym Helper (Calories/Protein)")
-            10 -> println("Explore Country Food Culture")
+            10 -> getRandomMealsByCountryUI(getRandomMealsByCountryUseCase)
             11 -> println("Ingredient Guess Game")
-            12 -> println("Potato-Based Meals")
+            12 -> {
+                randomPotatoesMealsConsoleUi.displayRandomPotatoesMealsUI()
+            }
             13 -> getHighCalorieMealUI(getMealForThinPeopleUseCase)
             14 -> println("Seafood Meals (Protein Sorted)")
-            15 -> println("Italian Meals for Large Groups")
+            15 -> getFoodChangeMoodConsoleUi.start()
             0 -> exitProcess(0)
             else -> println("Invalid input")
         }
@@ -68,7 +75,4 @@ class FoodChangeMoodConsoleUI(
         print("Enter your choice: ")
         return readlnOrNull()?.toIntOrNull()
     }
-
-
-
 }

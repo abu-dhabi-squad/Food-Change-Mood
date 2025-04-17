@@ -1,10 +1,15 @@
 package model
 
-open class AppException(message: String): Exception(message)
+open class AppException(message: String) : Exception(message)
 
-class EmptyListException:AppException("there is no item in list")
+class NoMealsFoundException : AppException("No meals found!")
+
 
 class EmptyHighCalorieListException:AppException("there is no high calories meals in list")
 
 class WrongInputException:AppException("wrong Input")
+
+class EmptyListException:AppException("There is no item in list match the input")
 class NoIraqiMealsFoundException : AppException("No Iraqi meals found")
+
+class CountryMealsFetchException:AppException("Wrong country name")
