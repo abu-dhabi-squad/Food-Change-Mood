@@ -1,9 +1,7 @@
 package presentation
 
 import logic.usecase.GetMealForThinPeopleUseCase
-import model.Food
 import model.WrongInputException
-
 
 fun getHighCalorieMealUI(getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase){
     val shownSet = mutableSetOf<Int>()
