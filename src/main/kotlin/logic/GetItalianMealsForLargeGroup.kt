@@ -10,8 +10,7 @@ class GetItalianMealsForLargeGroupUsesCase(
     fun getItalianMealForLargeGroup(): List<String?> {
 
         return foodRepository.getFoods().getOrThrow()
-            .filter(::onlyHighQualityData)
-            .filter(::onlyItalianMealForLargeGroup)
+            .filter { onlyHighQualityData(it) && onlyItalianMealForLargeGroup(it) }
             .map { it.name }
     }
 
