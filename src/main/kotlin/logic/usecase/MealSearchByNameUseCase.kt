@@ -28,7 +28,6 @@ class MealSearchByNameUseCase(
                 }
             }
         }
-
         return table
     }
 
@@ -50,12 +49,10 @@ class MealSearchByNameUseCase(
                 textIndex++
             }
         }
-
         return false
     }
 
     fun findMealsByName(input: String): List<Food> {
-
         return foodRepository.getFoods()
             .getOrThrow()
             .filter{ isMatchingMealByName(it, input) }
