@@ -1,10 +1,12 @@
 package presentation
 
+import logic.usecase.GetMealForThinPeopleUseCase
 import kotlin.system.exitProcess
 
 class FoodChangeMoodConsoleUI(
     // use cases will be here
-    private val randomPotatoesMealsConsoleUi: RandomPotatoesMealsConsoleUi
+    private val randomPotatoesMealsConsoleUi: RandomPotatoesMealsConsoleUi,
+    private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase
 ) {
     fun start() {
         showWelcome()
@@ -33,8 +35,7 @@ class FoodChangeMoodConsoleUI(
             12 -> {
                 randomPotatoesMealsConsoleUi.displayRandomPotatoesMealsUI()
             }
-
-            13 -> println("High-Calorie Meals (>700 cal)")
+            13 -> getHighCalorieMealUI(getMealForThinPeopleUseCase)
             14 -> println("Seafood Meals (Protein Sorted)")
             15 -> println("Italian Meals for Large Groups")
             0 -> exitProcess(0)
@@ -42,7 +43,6 @@ class FoodChangeMoodConsoleUI(
         }
         presentFeature()
     }
-
 
     private fun showOptions() {
         println("╔════════════════════════════════════╗")
