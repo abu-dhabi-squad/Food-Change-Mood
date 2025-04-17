@@ -1,9 +1,10 @@
 package logic.usecase
 
 import logic.repository.FoodRepository
+import model.CountryMealsFetchException
 import model.EmptyListException
 import model.Food
-import model.WrongInputException
+
 
 class GetRandomMealsByCountryUseCase(
     private val foodRepository: FoodRepository
@@ -31,16 +32,18 @@ class GetRandomMealsByCountryUseCase(
         val lowerTags = tags.map { it.lowercase() }
 
         return relatedWords.any { word ->
-            lowerName.contains(word) ||
-                    lowerDesc.contains(word) ||
-                    lowerTags.any { tag -> tag.contains(word) }
+            val regex = Regex("\\b${Regex.escape(word)}\\b", RegexOption.IGNORE_CASE)
+            regex.containsMatchIn(lowerName) ||
+                    regex.containsMatchIn(lowerDesc) ||
+                    lowerTags.any { tag -> regex.containsMatchIn(tag) }
         }
     }
+
 
     private fun getRelatedCuisineKeywords(country: String): List<String> {
 
         val countryLowercase = country.lowercase().trim()
-        return CUISINE_KEYWORDS_BY_COUNTRY[countryLowercase] ?: throw WrongInputException()
+        return CUISINE_KEYWORDS_BY_COUNTRY[countryLowercase] ?: throw CountryMealsFetchException()
     }
 
     companion object{
