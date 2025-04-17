@@ -3,6 +3,7 @@ package presentation
 import logic.usecase.GetHealthyMealsUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
 import kotlin.system.exitProcess
+
 class FoodChangeMoodConsoleUI(
     private val getHealthyMealsUseCase: GetHealthyMealsUseCase,
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase
@@ -19,7 +20,7 @@ class FoodChangeMoodConsoleUI(
     private fun presentFeature() {
         showOptions()
         val input = getUserInput()
-        when(input){
+        when (input) {
             1 -> executeGetHealthyMeals()
             2 -> println("Search Meal by Name")
             3 -> println("Iraqi Meals")
@@ -41,13 +42,17 @@ class FoodChangeMoodConsoleUI(
         presentFeature()
     }
 
-    private fun executeGetHealthyMeals(){
-        if (getHealthyMealsUseCase.execute().isEmpty())
-            println("No meals found!")
-        else {
-            println("Healthy meals: -")
-            getHealthyMealsUseCase.execute().forEach { println(it) }
-        }
+    private fun executeGetHealthyMeals() {
+        if (getHealthyMealsUseCase.fetchHealthyFastFoods().isEmpty())
+            getHealthyMealsUseCase.fetchHealthyFastFoods()
+                .also { meals ->
+                    if (meals.isEmpty())
+                        println("No meals found!")
+                    else {
+                        println("Healthy meals: -")
+                        meals.forEach(::println)
+                    }
+                }
     }
 
 
@@ -78,7 +83,6 @@ class FoodChangeMoodConsoleUI(
         print("Enter your choice: ")
         return readlnOrNull()?.toIntOrNull()
     }
-
 
 
 }
