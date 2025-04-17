@@ -10,13 +10,14 @@ class EasyFoodSuggestionGameUseCase(
 
         return foodRepository.getFoods()
             .getOrThrow()
-            .filter { food ->
-                food.description != null &&
-                    food.minutes <= 30 &&
-                        food.ingredients.size <= 5 &&
-                        food.steps.size <= 6 }
+            .filter(::isValidEasyMeal)
             .shuffled()
             .take(10)
+    }
+
+    private fun isValidEasyMeal(food: Food): Boolean {
+        return food.description != null &&
+                food.minutes <= 30 && food.ingredients.size <= 5 && food.steps.size <= 6
     }
 
 }
