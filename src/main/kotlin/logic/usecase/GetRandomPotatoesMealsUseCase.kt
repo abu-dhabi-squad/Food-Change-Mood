@@ -1,6 +1,7 @@
 package logic.usecase
 
 import logic.repository.FoodRepository
+import model.NoMealsFoundException
 
 
 class GetRandomPotatoesMealsUseCase(
@@ -8,30 +9,27 @@ class GetRandomPotatoesMealsUseCase(
 ) {
 
     fun getTenRandomPotatoesMeals(): List<String> {
-        return try {
-            foodRepository
-                .getFoods()
-                .fold(
-                    onFailure = {
-                        throw Exception("error in getting meals")
-                    },
-                    onSuccess = { meals ->
-                        meals
-                            .filter {
-                                !it.name.isNullOrBlank() && it.ingredients.any {
-                                    it.contains(
-                                        POTATOES_KEYWORD,
-                                        ignoreCase = true
-                                    )
-                                }
-                            }
-                            .shuffled()
-                            .take(MEALS_COUNT)
-                            .map { it.name.toString() }
-                    })
-        } catch (e: Exception) {
-            throw e
+        val mealsResult = foodRepository.getFoods().getOrThrow()
+
+        val filteredNames = mealsResult
+            .filter {
+                !it.name.isNullOrBlank() &&
+                        it.ingredients.any { ingredient ->
+                            ingredient.contains(POTATOES_KEYWORD, ignoreCase = true)
+                        }
+            }
+            .takeIf { it.isNotEmpty() }
+            ?.mapNotNull { it.name }
+            ?.distinct() ?: throw NoMealsFoundException()
+
+
+        val randomSet = mutableSetOf<String>()
+        while (randomSet.size < MEALS_COUNT && randomSet.size < filteredNames.size) {
+            val randomMeal = filteredNames.random()
+            randomSet.add(randomMeal)
         }
+
+        return randomSet.toList()
     }
 
     companion object {
