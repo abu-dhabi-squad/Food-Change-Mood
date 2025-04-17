@@ -1,9 +1,10 @@
 ### IntelliJ IDEA ###
 out/
-build/
-.idea/
 .gradle/
+.idea/
+build/
 !**/src/main/**/out/
+
 !**/src/test/**/out/
 
 ### Kotlin ###
@@ -33,3 +34,4 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+/food.csv

@@ -1,9 +1,7 @@
 package presentation
 
 import logic.usecase.GetMealForThinPeopleUseCase
-import model.Food
 import model.WrongInputException
-
 
 fun getHighCalorieMealUI(getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase){
     val shownSet = mutableSetOf<Int>()
@@ -18,7 +16,7 @@ private fun getRandomHighCalorieMeal(getMealForThinPeopleUseCase: GetMealForThin
             println("Meal Description: "+ suggestMeal.description+"\n")
 
             when(isTheMealLikable()){
-                true -> showMealDetails(suggestMeal)
+                true -> suggestMeal.showDetails()
                 false -> getRandomHighCalorieMeal(getMealForThinPeopleUseCase, shownSet)
             }
         }
@@ -39,25 +37,4 @@ private fun isTheMealLikable():Boolean{
             }
         }
     }
-}
-
-fun showMealDetails(food: Food){
-    println("preparation time : " + food.minutes)
-    food.submittedDate?.also {
-        println("submittedDate : " +food.submittedDate.dayOfMonth+"-"+food.submittedDate.month.value+"-"+food.submittedDate.year+"\n")
-    }
-    println("\n"+"nutrition : ")
-    food.nutrition.also {
-        println("- calories = "+ it.calories)
-        println("- sodium = "+ it.sodium)
-        println("- sugar = "+ it.sugar)
-        println("- protein = "+ it.protein)
-        println("- totalFat = "+ it.totalFat)
-        println("- carbohydrates = "+ it.carbohydrates)
-        println("- saturated = "+ it.saturated)
-    }
-    println("\n"+"ingredients : ")
-    food.ingredients.forEach { println("- " +it) }
-    println("\n"+"steps : ")
-    food.steps.forEach { println("- " + it) }
 }

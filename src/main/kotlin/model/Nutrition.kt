@@ -18,4 +18,16 @@ data class Nutrition(
         println("${indent}Saturated: $saturated")
         println("${indent}Carbohydrates: $carbohydrates")
     }
+
+    fun showDetails(){
+        this.also {
+            println("- calories = "+ it.calories)
+            println("- sodium = "+ it.sodium)
+            println("- sugar = "+ it.sugar)
+            println("- protein = "+ it.protein)
+            println("- totalFat = "+ it.totalFat)
+            println("- carbohydrates = "+ it.carbohydrates)
+            println("- saturated = "+ it.saturated)
+        }
+    }
 }
