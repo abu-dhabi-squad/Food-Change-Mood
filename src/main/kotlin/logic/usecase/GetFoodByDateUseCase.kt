@@ -17,11 +17,6 @@ class GetFoodByDateUseCase(
             ?.map { it.id to it.name!! }
             ?: throw EmptySearchByDateListException()
     }
-    fun getMealById(id: Int): Food {
-        return foodRepository.getFoods()
-            .getOrThrow()
-            .find{it.id == id}!!
-    }
     private fun isOnlyHighQualityDataAndTheRequiredDate(food: Food, date: LocalDate):Boolean{
         return food.name != null && food.description != null && food.submittedDate == date
     }

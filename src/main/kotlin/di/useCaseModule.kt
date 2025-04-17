@@ -1,9 +1,11 @@
 package di
 
 import logic.usecase.GetFoodByDateUseCase
+import logic.usecase.GetMealByIdUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
 import org.koin.dsl.module
 import presentation.GetFoodByDateUI
+import presentation.GetMealByIdUI
 import util.DateParserImplementation
 import util.DateParserInterface
 import util.GetFoodByDateValidationImplementaion
@@ -15,5 +17,7 @@ val useCaseModule = module{
 
     single<DateParserInterface> { DateParserImplementation() }
     single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
-    single { GetFoodByDateUI(get(),get(), get()) }
+    single { GetMealByIdUI(get()) }
+    single { GetMealByIdUseCase(get()) }
+    single { GetFoodByDateUI(get(),get(), get(), get()) }
 }

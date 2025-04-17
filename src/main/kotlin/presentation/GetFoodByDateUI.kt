@@ -1,6 +1,7 @@
 package presentation
 
 import logic.usecase.GetFoodByDateUseCase
+import logic.usecase.GetMealByIdUseCase
 import model.InvalidIdException
 import model.WrongInputException
 import util.DateParserInterface
@@ -10,6 +11,7 @@ import java.time.LocalDate
 class GetFoodByDateUI(
     private val dateParserInterface: DateParserInterface,
     private val getFoodByDateUseCase: GetFoodByDateUseCase,
+    private val getMealByIdUseCase: GetMealByIdUseCase,
     private val getFoodByDateValidationInterface: GetFoodByDateValidationInterface
 )
 {
@@ -58,8 +60,8 @@ class GetFoodByDateUI(
         readLine()?.toIntOrNull()?.let { enteredID ->
             mealsByDate.takeIf { it.any { item -> item.first == enteredID } }
                 ?.let {
-                    getFoodByDateUseCase.getMealById(enteredID).showDetails()
-                    } ?: throw InvalidIdException()
+                    getMealByIdUseCase.getMealById(enteredID).showDetails()
+                } ?: throw InvalidIdException()
         }
     }
 }

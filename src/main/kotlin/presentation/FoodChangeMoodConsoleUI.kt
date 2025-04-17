@@ -5,6 +5,7 @@ import kotlin.system.exitProcess
 
 class FoodChangeMoodConsoleUI(
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
+    private val getMealByIdUI: GetMealByIdUI,
     private val getFoodByDateUI: GetFoodByDateUI
 ) {
     fun start() {
@@ -35,6 +36,7 @@ class FoodChangeMoodConsoleUI(
             13 -> getHighCalorieMealUI(getMealForThinPeopleUseCase)
             14 -> println("Seafood Meals (Protein Sorted)")
             15 -> println("Italian Meals for Large Groups")
+            16 -> getMealByIdUI.getDetailsById()
             0 -> exitProcess(0)
             else -> println("Invalid input")
         }
@@ -62,6 +64,7 @@ class FoodChangeMoodConsoleUI(
         println("║ 13. High-Calorie Meals (>700 cal)  ║")
         println("║ 14. Seafood Meals (Protein Sorted) ║")
         println("║ 15. Italian Meals for Large Groups ║")
+        println("║ 16. Search Meal by Meal' ID        ║")
         println("║ 0.  Exit                           ║")
         println("╚════════════════════════════════════╝")
     }
