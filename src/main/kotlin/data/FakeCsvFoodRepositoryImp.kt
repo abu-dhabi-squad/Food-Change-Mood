@@ -8,7 +8,7 @@ import java.time.LocalDate
 class FakeCsvFoodRepositoryImp() : FoodRepository {
     private val mexicanStyle = Food(
         id = 137739,
-        name = "arriba baked winter squash mexican style",
+        name = "Iraq baked winter squash mexican style",
         minutes = 55,
         submittedDate = LocalDate.of(2005, 9, 16),
         tags = listOf(
@@ -55,7 +55,7 @@ class FakeCsvFoodRepositoryImp() : FoodRepository {
             "if you feel more comfortable , cover the squash with aluminum foil the first half hour , give or take , of baking",
             "if desired , season with salt"
         ),
-        description = "autumn is my favorite time of year to cook! this recipe can be prepared either spicy or sweet, your choice! two of my posted mexican-inspired seasoning mix recipes are offered as suggestions.",
+        description = "Iraq is my favorite time of year to cook! this recipe can be prepared either spicy or sweet, your choice! two of my posted mexican-inspired seasoning mix recipes are offered as suggestions.",
         ingredients = listOf(
             "winter squash",
             "mexican seasoning",
@@ -69,7 +69,7 @@ class FakeCsvFoodRepositoryImp() : FoodRepository {
 
     private val breakfast = Food(
         id = 31490,
-        name = "arriba baked winter squash mexican style",
+        name = "Iraq baked winter squash mexican style",
         minutes = 30,
         submittedDate = LocalDate.of(2002, 6, 17),
         tags = listOf(
