@@ -1,7 +1,7 @@
 ### IntelliJ IDEA ###
 out/
 .gradle/
-.ideal/
+.idea/
 build/
 !**/src/main/**/out/
 !**/src/test/**/out/
