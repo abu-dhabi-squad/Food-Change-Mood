@@ -1,7 +1,9 @@
 package presentation
 
+import logic.usecase.GetMealForThinPeopleUseCase
 import logic.usecase.MealSearchByNameUseCase
 import kotlin.system.exitProcess
+
 class FoodChangeMoodConsoleUI(
     // use cases will be here
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
@@ -20,7 +22,7 @@ class FoodChangeMoodConsoleUI(
     private fun presentFeature() {
         showOptions()
         val input = getUserInput()
-        when(input){
+        when (input) {
             1 -> println("Healthy Fast Meals (<=15 min)")
             2 -> launchMealSearchByName()
             3 -> println("Iraqi Meals")
@@ -44,6 +46,19 @@ class FoodChangeMoodConsoleUI(
 
     private fun launchMealSearchByName() {
         print("Enter the meal name to search: ")
+        readlnOrNull()
+            ?.trim()
+            ?.takeIf { it.isNotEmpty() }
+            ?.let { input ->
+                mealSearchByNameUseCase.findMealsByName(input)
+                    .takeIf { it.isNotEmpty() }
+                    ?.also { results ->
+                        println("Search results for '$input':")
+                        results.forEach { println(it.name ?: "none") }
+                    }
+                    ?: println("No meals found for '$input'")
+            }
+            ?: println("Invalid input. Please enter a non-empty keyword.")
     }
 
     private fun showOptions() {
@@ -73,7 +88,6 @@ class FoodChangeMoodConsoleUI(
         print("Enter your choice: ")
         return readlnOrNull()?.toIntOrNull()
     }
-
 
 
 }
