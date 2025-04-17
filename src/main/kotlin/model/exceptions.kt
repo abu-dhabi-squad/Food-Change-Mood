@@ -9,3 +9,14 @@ class EmptyHighCalorieListException:AppException("there is no high calories meal
 class WrongInputException:AppException("wrong Input")
 
 class EmptySearchByDateListException:AppException("there is no meals in this date list")
+
+class InvalidDateFormateException:AppException("Invalid Date Formate")
+
+class InvalidYearException:AppException("Invalid Year Input")
+
+class InvalidMonthException:AppException("Invalid Month Input")
+
+class InvalidDayException:AppException("Invalid Day Input")
+
+class InvalidIdException:AppException("Invalid ID Input")
+
