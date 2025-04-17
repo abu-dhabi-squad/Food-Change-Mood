@@ -1,6 +1,8 @@
 package model
 
-open class AppException(message: String): Exception(message)
+open class AppException(message: String) : Exception(message)
+
+class NoMealsFoundException : AppException("No meals found!")
 
 class EmptyListException:AppException("there is no item in list")
 
