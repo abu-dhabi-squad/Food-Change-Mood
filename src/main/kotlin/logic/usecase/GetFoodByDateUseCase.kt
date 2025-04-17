@@ -12,7 +12,7 @@ class GetFoodByDateUseCase(
     fun getMealsByDate(date: LocalDate): List<Pair<Int,String>>{
         return foodRepository.getFoods()
             .getOrThrow()
-            .filter { IsItTheWantedDate(it,date) }
+            .filter { isOnlyHighQualityDataAndTheRequiredDate(it,date) }
             .takeIf { it.isNotEmpty() }
             ?.map { it.id to it.name!! }
             ?: throw EmptySearchByDateListException()
@@ -22,7 +22,7 @@ class GetFoodByDateUseCase(
             .getOrThrow()
             .find{it.id == id}!!
     }
-    private fun IsItTheWantedDate(food: Food, date: LocalDate):Boolean{
+    private fun isOnlyHighQualityDataAndTheRequiredDate(food: Food, date: LocalDate):Boolean{
         return food.name != null && food.description != null && food.submittedDate == date
     }
 }
