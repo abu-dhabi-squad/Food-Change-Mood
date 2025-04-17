@@ -8,3 +8,5 @@ class EmptyHighCalorieListException:AppException("there is no high calories meal
 
 class WrongInputException:AppException("wrong Input")
 
+class NoMealsFoundException(input: String) : Exception("No meals found matching the name: \"$input\"")
+

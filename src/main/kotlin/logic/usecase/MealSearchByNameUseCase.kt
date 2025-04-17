@@ -2,6 +2,7 @@ package logic.usecase
 
 import logic.repository.FoodRepository
 import model.Food
+import model.NoMealsFoundException
 
 class MealSearchByNameUseCase(
     private val foodRepository: FoodRepository
@@ -59,7 +60,7 @@ class MealSearchByNameUseCase(
             .getOrThrow()
             .filter{ isMatchingMealByName(it, input) }
             .takeIf { it.isNotEmpty() }
-            ?: throw IllegalStateException("No meals found matching the name: \"$input\"")
+            ?: throw NoMealsFoundException(input)
     }
 
     private fun isMatchingMealByName(food: Food, input: String): Boolean {
