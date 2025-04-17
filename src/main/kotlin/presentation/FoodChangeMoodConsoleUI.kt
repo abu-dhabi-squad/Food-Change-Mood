@@ -3,7 +3,8 @@ package presentation
 import logic.usecase.GetFoodByDateUseCase
 import kotlin.system.exitProcess
 class FoodChangeMoodConsoleUI(
-    private val getFoodByDateUseCase: GetFoodByDateUseCase
+    private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
+    private val getFoodByDateUseCase: GetFoodByDateUseCase,
 ) {
     fun start() {
         showWelcome()
@@ -30,7 +31,7 @@ class FoodChangeMoodConsoleUI(
             10 -> println("Explore Country Food Culture")
             11 -> println("Ingredient Guess Game")
             12 -> println("Potato-Based Meals")
-            13 -> println("High-Calorie Meals (>700 cal)")
+            13 -> getHighCalorieMealUI(getMealForThinPeopleUseCase)
             14 -> println("Seafood Meals (Protein Sorted)")
             15 -> println("Italian Meals for Large Groups")
             0 -> exitProcess(0)
