@@ -5,7 +5,7 @@ import logic.usecase.GetMealForThinPeopleUseCase
 import kotlin.system.exitProcess
 class FoodChangeMoodConsoleUI(
     // use cases will be here
-    private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase
+    private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase
 ) {
     fun start() {
