@@ -22,7 +22,7 @@ class FoodChangeMoodConsoleUI(
         when(input){
             1 -> println("Healthy Fast Meals (<=15 min)")
             2 -> println("Search Meal by Name")
-            3 -> getIraqiMealsUI(getIraqiMealsUseCase)
+            3 -> showAllIraqiMealsUI(getIraqiMealsUseCase)
             4 -> println("Easy Food Suggestions")
             5 -> println("Guess Prep Time Game")
             6 -> println("Egg-Free Sweets")
