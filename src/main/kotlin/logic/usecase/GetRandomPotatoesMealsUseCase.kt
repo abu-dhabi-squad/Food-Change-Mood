@@ -5,7 +5,7 @@ import logic.repository.FoodRepository
 class GetRandomPotatoesMealsUseCase(
     private val foodRepository: FoodRepository
 ) {
-    fun getTenRandomPotatoesMeals(): List<String> {
+    fun getRandomPotatoesMeals(): List<String> {
         return foodRepository.getFoods().getOrThrow()
             .filter {
                 hasValidName(it.name) && isIngredientsContainsPotatoes(it.ingredients)

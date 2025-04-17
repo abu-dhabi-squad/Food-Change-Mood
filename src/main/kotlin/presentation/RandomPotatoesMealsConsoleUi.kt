@@ -6,7 +6,7 @@ class RandomPotatoesMealsConsoleUi(private val getRandomPotatoesMealsUseCase: Ge
     fun displayRandomPotatoesMealsUI() {
 
         try {
-            val meals = getRandomPotatoesMealsUseCase.getTenRandomPotatoesMeals()
+            val meals = getRandomPotatoesMealsUseCase.getRandomPotatoesMeals()
 
             println("\nHere are some meals that include potatoes:\n")
             meals.also {

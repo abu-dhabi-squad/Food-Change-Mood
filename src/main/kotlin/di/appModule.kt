@@ -12,6 +12,6 @@ val appModule = module {
     single { File("food.csv") }
     single { FoodCsvParser(get()) }
     single<FoodRepository> { CsvFoodRepositoryImp(get()) }
-    single { FoodChangeMoodConsoleUI(get()) }
-    single{RandomPotatoesMealsConsoleUi(get())}
+    single { FoodChangeMoodConsoleUI(get(), get()) }
+    single { RandomPotatoesMealsConsoleUi(get()) }
 }
