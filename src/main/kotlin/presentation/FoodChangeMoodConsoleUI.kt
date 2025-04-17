@@ -3,7 +3,6 @@ package presentation
 import logic.usecase.GetRandomMealsByCountryUseCase
 import logic.usecase.GetIraqiMealsUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
-import logic.usecase.GetRandomMealsByCountryUseCase
 import kotlin.system.exitProcess
 class FoodChangeMoodConsoleUI(
     private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,
@@ -30,7 +29,7 @@ class FoodChangeMoodConsoleUI(
             2 -> println("Search Meal by Name")
             3 -> getIraqiMealsUseCaseUI(getIraqiMealsUseCase)
             4 -> println("Easy Food Suggestions")
-            5 -> println("Guess Prep Time Game")
+            5 -> guessFoodPreparationTimeGameUI.start()
             6 -> println("Egg-Free Sweets")
             7 -> println("Keto Diet Meal Helper")
             8 -> println("Search Foods by Add Date")
