@@ -5,15 +5,14 @@ import model.InvalidDayException
 import model.InvalidMonthException
 import model.InvalidYearException
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
-
-class GetFoodByDateValidationImplementaion: GetFoodByDateValidationInterface {
-
+class GetFoodByDateValidationImplementaion(
+    private val dateParserInterface: DateParserInterface
+): GetFoodByDateValidationInterface
+{
     override fun isValidDate(date: String): Boolean {
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         val formatedDate: LocalDate
-        try { formatedDate = LocalDate.parse(date, formatter)}catch (e: Exception){throw InvalidDateFormateException()}
+        try { formatedDate = dateParserInterface.parseDateFromString(date)}catch (e: Exception){throw InvalidDateFormateException()}
 
         isValidYear(formatedDate.year)
         isValidMonth(formatedDate.monthValue)

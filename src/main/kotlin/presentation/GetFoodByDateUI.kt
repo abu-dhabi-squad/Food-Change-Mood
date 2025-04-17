@@ -3,12 +3,12 @@ package presentation
 import logic.usecase.GetFoodByDateUseCase
 import model.InvalidIdException
 import model.WrongInputException
+import util.DateParserInterface
 import util.GetFoodByDateValidationInterface
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-
 
 class GetFoodByDateUI(
+    private val dateParserInterface: DateParserInterface,
     private val getFoodByDateUseCase: GetFoodByDateUseCase,
     private val getFoodByDateValidationInterface: GetFoodByDateValidationInterface
 )
@@ -29,7 +29,7 @@ class GetFoodByDateUI(
         print("Enter the Date (yyyy-MM-dd) : ")
         readLine()?.let { date ->
             getFoodByDateValidationInterface.isValidDate(date)
-            return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+            return dateParserInterface.parseDateFromString(date)
         }
         throw WrongInputException()
     }

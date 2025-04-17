@@ -5,6 +5,6 @@ import java.time.format.DateTimeFormatter
 
 class DateParserImplementation: DateParserInterface {
     override fun parseDateFromString(date: String): LocalDate {
-        return LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+        return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
     }
 }
