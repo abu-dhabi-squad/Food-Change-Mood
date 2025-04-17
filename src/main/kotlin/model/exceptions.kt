@@ -4,6 +4,8 @@ open class AppException(message: String) : Exception(message)
 
 class NoMealsFoundException : AppException("No meals found!")
 
+class EmptyListException :AppException("list is empty")
+
 class EmptyHighCalorieListException:AppException("there is no high calories meals in list")
 
 class WrongInputException:AppException("wrong Input")

@@ -7,6 +7,7 @@ import model.WrongInputException
 import util.DateParserInterface
 import util.GetFoodByDateValidationInterface
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class GetFoodByDateUI(
     private val dateParserInterface: DateParserInterface,
@@ -28,7 +29,7 @@ class GetFoodByDateUI(
     }
 
     private fun getInputDate(): LocalDate {
-        print("Enter the Date (yyyy-MM-dd) : ")
+        print("Enter the Date (yyyy-M-d) : ")
         readLine()?.let { date ->
             getFoodByDateValidationInterface.isValidDate(date)
             return dateParserInterface.parseDateFromString(date)

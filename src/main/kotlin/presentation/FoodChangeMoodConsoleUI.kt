@@ -44,9 +44,8 @@ class FoodChangeMoodConsoleUI(
             }
             13 -> getHighCalorieMealUI(getMealForThinPeopleUseCase)
             14 -> println("Seafood Meals (Protein Sorted)")
-            15 -> println("Italian Meals for Large Groups")
-            16 -> getMealByIdUI.getDetailsById()
             15 -> getFoodChangeMoodConsoleUi.start()
+            16 -> getMealByIdUI.getDetailsById()
             0 -> exitProcess(0)
             else -> println("Invalid input")
         }
