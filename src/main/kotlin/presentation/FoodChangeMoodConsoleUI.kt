@@ -4,7 +4,7 @@ import logic.usecase.GetHealthyMealsUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
 import kotlin.system.exitProcess
 class FoodChangeMoodConsoleUI(
-    private val getHealthyMealsUseCase: GetHealthyMealsUseCase
+    private val getHealthyMealsUseCase: GetHealthyMealsUseCase,
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase
 ) {
     fun start() {
