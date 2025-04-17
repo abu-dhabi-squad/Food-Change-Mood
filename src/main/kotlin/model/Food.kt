@@ -15,7 +15,7 @@ data class Food(
 )
 {
     fun showDetails(){
-        println("meal ID : " + this.id)
+        println("\n"+"meal ID : " + this.id)
         this.name?.also {name -> println("Meal Name : "+ name) }
         println("Meal Description : "+ this.description+"\n")
         println("preparation time : " + this.minutes)
