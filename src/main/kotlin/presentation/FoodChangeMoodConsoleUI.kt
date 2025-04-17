@@ -1,9 +1,10 @@
 package presentation
 
 import kotlin.system.exitProcess
+
 class FoodChangeMoodConsoleUI(
     // use cases will be here
-
+    private val randomPotatoesMealsConsoleUi: RandomPotatoesMealsConsoleUi
 ) {
     fun start() {
         showWelcome()
@@ -17,7 +18,7 @@ class FoodChangeMoodConsoleUI(
     private fun presentFeature() {
         showOptions()
         val input = getUserInput()
-        when(input){
+        when (input) {
             1 -> println("Healthy Fast Meals (<=15 min)")
             2 -> println("Search Meal by Name")
             3 -> println("Iraqi Meals")
@@ -29,7 +30,10 @@ class FoodChangeMoodConsoleUI(
             9 -> println("Gym Helper (Calories/Protein)")
             10 -> println("Explore Country Food Culture")
             11 -> println("Ingredient Guess Game")
-            12 -> println("Potato-Based Meals")
+            12 -> {
+                randomPotatoesMealsConsoleUi.displayRandomPotatoesMealsUI()
+            }
+
             13 -> println("High-Calorie Meals (>700 cal)")
             14 -> println("Seafood Meals (Protein Sorted)")
             15 -> println("Italian Meals for Large Groups")
@@ -38,7 +42,6 @@ class FoodChangeMoodConsoleUI(
         }
         presentFeature()
     }
-
 
 
     private fun showOptions() {
