@@ -4,13 +4,16 @@ import logic.usecase.GetRandomMealsByCountryUseCase
 import logic.usecase.GetIraqiMealsUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
 import kotlin.system.exitProcess
+
 class FoodChangeMoodConsoleUI(
+    private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
+    private val getMealByIdUI: GetMealByIdUI,
+    private val getFoodByDateUI: GetFoodByDateUI,
     private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,
     private val guessFoodPreparationTimeGameUI: GuessFoodPreparationTimeGameUI,
     private val randomPotatoesMealsConsoleUi: RandomPotatoesMealsConsoleUi,
-    private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
     private val getFoodChangeMoodConsoleUi: ItalianMealsForLargeGroupUI,
-     private val getIraqiMealsUseCase: GetIraqiMealsUseCase
+    private val getIraqiMealsUseCase: GetIraqiMealsUseCase,
 ) {
     fun start() {
         showWelcome()
@@ -32,7 +35,7 @@ class FoodChangeMoodConsoleUI(
             5 -> guessFoodPreparationTimeGameUI.start()
             6 -> println("Egg-Free Sweets")
             7 -> println("Keto Diet Meal Helper")
-            8 -> println("Search Foods by Add Date")
+            8 -> getFoodByDateUI.runUI()
             9 -> println("Gym Helper (Calories/Protein)")
             10 -> getRandomMealsByCountryUI(getRandomMealsByCountryUseCase)
             11 -> println("Ingredient Guess Game")
@@ -42,6 +45,7 @@ class FoodChangeMoodConsoleUI(
             13 -> getHighCalorieMealUI(getMealForThinPeopleUseCase)
             14 -> println("Seafood Meals (Protein Sorted)")
             15 -> getFoodChangeMoodConsoleUi.start()
+            16 -> getMealByIdUI.getDetailsById()
             0 -> exitProcess(0)
             else -> println("Invalid input")
         }
@@ -75,4 +79,6 @@ class FoodChangeMoodConsoleUI(
         print("Enter your choice: ")
         return readlnOrNull()?.toIntOrNull()
     }
+
+
 }

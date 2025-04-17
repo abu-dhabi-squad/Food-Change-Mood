@@ -15,9 +15,9 @@ val appModule = module {
     single { GuessFoodPreparationTimeGameUI(get(),get ()) }
     single { ItalianMealsForLargeGroupUI(get()) }
     single { File("food.csv") }
-    single { FoodCsvParser(get()) }
+    single { FoodCsvParser(get(), get()) }
     single<FoodRepository> { CsvFoodRepositoryImp(get()) }
     single { RandomPotatoesMealsConsoleUi(get()) }
     single { getIraqiMealsUseCaseUI(get()) }
-    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get()) }
+    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get(),get()) }
 }
