@@ -2,8 +2,6 @@ package di
 
 import data.CsvFoodRepositoryImp
 import data.FoodCsvParser
-import logic.repository.FoodRepository
-import org.koin.core.scope.get
 import org.koin.dsl.module
 import presentation.FoodChangeMoodConsoleUI
 import java.io.File
