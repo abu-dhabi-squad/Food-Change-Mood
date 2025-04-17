@@ -4,12 +4,8 @@ import data.CsvFoodRepositoryImp
 import data.FoodCsvParser
 import logic.repository.FoodRepository
 import org.koin.dsl.module
-import presentation.FoodChangeMoodConsoleUI
-import presentation.GuessFoodPreparationTimeGameUI
-import presentation.ItalianMealsForLargeGroupUI
+import presentation.*
 import java.io.File
-import presentation.RandomPotatoesMealsConsoleUi
-import presentation.getIraqiMealsUseCaseUI
 
 val appModule = module {
     single { GuessFoodPreparationTimeGameUI(get(),get ()) }
@@ -19,5 +15,6 @@ val appModule = module {
     single<FoodRepository> { CsvFoodRepositoryImp(get()) }
     single { RandomPotatoesMealsConsoleUi(get()) }
     single { getIraqiMealsUseCaseUI(get()) }
-    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get(),get()) }
+    single { GetHealthyMealsConsoleUI(get()) }
+    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get(),get(),get(),get()) }
 }
