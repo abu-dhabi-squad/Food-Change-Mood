@@ -7,6 +7,10 @@ import org.koin.dsl.module
 import presentation.FoodChangeMoodConsoleUI
 import presentation.GymHelperConsoleUI
 import presentation.*
+import util.DateParserImplementation
+import util.DateParserInterface
+import util.GetFoodByDateValidationImplementaion
+import util.GetFoodByDateValidationInterface
 import java.io.File
 
 val appModule = module {
@@ -19,5 +23,7 @@ val appModule = module {
     single { getIraqiMealsUseCaseUI(get()) }
     single { GetHealthyMealsConsoleUI(get()) }
     single { GymHelperConsoleUI(get()) }
+    single<DateParserInterface> { DateParserImplementation() }
+    single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
     single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get(),get(),get(),get(),get()) }
 }
