@@ -12,7 +12,7 @@ class GetFoodByDateValidationImplementaion: GetFoodByDateValidationInterface {
 
     override fun isValidDate(date: String): Boolean {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        var formatedDate: LocalDate
+        val formatedDate: LocalDate
         try { formatedDate = LocalDate.parse(date, formatter)}catch (e: Exception){throw InvalidDateFormateException()}
 
         isValidYear(formatedDate.year)
