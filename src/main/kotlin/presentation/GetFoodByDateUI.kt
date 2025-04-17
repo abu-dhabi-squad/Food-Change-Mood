@@ -1,30 +1,66 @@
 package presentation
 
 import logic.usecase.GetFoodByDateUseCase
-import model.Food
+import model.InvalidIdException
+import model.WrongInputException
+import util.GetFoodByDateValidationInterface
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
-fun getRandomHighCalorieMeal(getFoodByDateUseCase: GetFoodByDateUseCase){
-    try {
-        getFoodByDateUseCase.getMealsByDate(LocalDate.of(2005,11,11))
-            .apply {
-                this.forEach{ it -> println("id : " + it.first+ " - name: " + it.second)}
-                print("enter id: ")
-                readLine()?.toIntOrNull()?.let { it->
-                    if(this.any{item -> item.first == it}){
-                        getFoodByDateUseCase.getMealById(it).also { meal->
-                            meal.showDetails()
-                        }
-                    }
+
+class GetFoodByDateUI(
+    private val getFoodByDateUseCase: GetFoodByDateUseCase,
+    private val getFoodByDateValidationInterface: GetFoodByDateValidationInterface
+)
+{
+    fun runUI() {
+        try {
+            getFoodByDateUseCase.getMealsByDate(getInputDate())
+                .let { mealsByDate ->
+                    mealsByDate.forEach { it -> println("id : " + it.first + " - name: " + it.second) }
+                    getDetailsOfMeals(mealsByDate)
+                }
+        } catch (e: Exception) {
+            println(e.message)
+        }
+    }
+
+    private fun getInputDate(): LocalDate {
+        print("Enter the Date (yyyy-MM-dd) : ")
+        readLine()?.let { date ->
+            getFoodByDateValidationInterface.isValidDate(date)
+            return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+        }
+        throw WrongInputException()
+    }
+
+    private fun getDetailsOfMeals(mealsByDate: List<Pair<Int, String>>) {
+
+        print("do you want to see details of one of the Meals (Y/N) : ")
+        readLine().let {
+            when {
+                it.equals("y", true) -> {
+                    getDetailsById(mealsByDate)
+                    getDetailsOfMeals(mealsByDate)
+                }
+                it.equals("n", true) -> {
+                    return
+                }
+                else -> {
+                    throw WrongInputException()
                 }
             }
-
+        }
     }
-    catch (e: Exception){
-        println(e.message)
+
+    private fun getDetailsById(mealsByDate: List<Pair<Int, String>>) {
+        print("enter id of the meal : ")
+        readLine()?.toIntOrNull()?.let { enteredID ->
+            mealsByDate.takeIf { it.any { item -> item.first == enteredID } }
+                ?.let {
+                    getFoodByDateUseCase.getMealById(enteredID).showDetails()
+                    } ?: throw InvalidIdException()
+        }
     }
 }
 
-private fun getInputDate(){
-    print("Enter year: ")
-}

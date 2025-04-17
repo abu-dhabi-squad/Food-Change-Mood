@@ -6,7 +6,7 @@ import kotlin.system.exitProcess
 
 class FoodChangeMoodConsoleUI(
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
-    private val getFoodByDateUseCase: GetFoodByDateUseCase,
+    private val getFoodByDateUI: GetFoodByDateUI
 ) {
     fun start() {
         showWelcome()
@@ -28,7 +28,7 @@ class FoodChangeMoodConsoleUI(
             5 -> println("Guess Prep Time Game")
             6 -> println("Egg-Free Sweets")
             7 -> println("Keto Diet Meal Helper")
-            8 -> getRandomHighCalorieMeal(getFoodByDateUseCase)
+            8 -> getFoodByDateUI.runUI()
             9 -> println("Gym Helper (Calories/Protein)")
             10 -> println("Explore Country Food Culture")
             11 -> println("Ingredient Guess Game")
