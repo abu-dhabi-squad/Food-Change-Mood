@@ -1,9 +1,14 @@
 package presentation
 
+import logic.usecase.GetRandomMealsByCountryUseCase
+import logic.usecase.GetMealForThinPeopleUseCase
 import kotlin.system.exitProcess
+
 class FoodChangeMoodConsoleUI(
+    private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,
+    private val randomPotatoesMealsConsoleUi: RandomPotatoesMealsConsoleUi,
+    private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
     private val getFoodChangeMoodConsoleUi: ItalianMealsForLargeGroupUI
-    // use cases will be here
 ) {
     fun start() {
         showWelcome()
@@ -17,7 +22,7 @@ class FoodChangeMoodConsoleUI(
     private fun presentFeature() {
         showOptions()
         val input = getUserInput()
-        when(input){
+        when (input) {
             1 -> println("Healthy Fast Meals (<=15 min)")
             2 -> println("Search Meal by Name")
             3 -> println("Iraqi Meals")
@@ -27,10 +32,12 @@ class FoodChangeMoodConsoleUI(
             7 -> println("Keto Diet Meal Helper")
             8 -> println("Search Foods by Add Date")
             9 -> println("Gym Helper (Calories/Protein)")
-            10 -> println("Explore Country Food Culture")
+            10 -> getRandomMealsByCountryUI(getRandomMealsByCountryUseCase)
             11 -> println("Ingredient Guess Game")
-            12 -> println("Potato-Based Meals")
-            13 -> println("High-Calorie Meals (>700 cal)")
+            12 -> {
+                randomPotatoesMealsConsoleUi.displayRandomPotatoesMealsUI()
+            }
+            13 -> getHighCalorieMealUI(getMealForThinPeopleUseCase)
             14 -> println("Seafood Meals (Protein Sorted)")
             15 -> getFoodChangeMoodConsoleUi.start()
             0 -> exitProcess(0)
@@ -38,8 +45,6 @@ class FoodChangeMoodConsoleUI(
         }
         presentFeature()
     }
-
-
 
     private fun showOptions() {
         println("╔════════════════════════════════════╗")
@@ -68,6 +73,4 @@ class FoodChangeMoodConsoleUI(
         print("Enter your choice: ")
         return readlnOrNull()?.toIntOrNull()
     }
-
-
 }
