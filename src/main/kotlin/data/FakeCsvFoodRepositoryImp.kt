@@ -302,7 +302,7 @@ class FakeCsvFoodRepositoryImp() : FoodRepository {
         id = 42198,
         name = "better than sex  strawberries",
         minutes = 1460,
-        submittedDate = LocalDate.of(2002, 10, 3),
+        submittedDate = LocalDate.of(2003, 9, 10),
         tags = listOf(
             "weeknight",
             "time-to-make",
