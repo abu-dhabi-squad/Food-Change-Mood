@@ -8,11 +8,11 @@ class RandomPotatoesMealsConsoleUi(private val getRandomPotatoesMealsUseCase: Ge
         try {
             val meals = getRandomPotatoesMealsUseCase.getTenRandomPotatoesMeals()
 
-                println("\nHere are some meals that include potatoes:\n")
-                meals.forEachIndexed { index, mealName ->
-                    println("${index + 1}) $mealName")
-                }
-                promptForMoreMeals()
+            println("\nHere are some meals that include potatoes:\n")
+            meals.also {
+                it.forEachIndexed { index, mealName -> println("${index + 1}) $mealName") }
+            }
+            promptForMoreMeals()
         } catch (exception: Exception) {
             println("\n${exception.message}")
         }

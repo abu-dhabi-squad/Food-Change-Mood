@@ -10,7 +10,7 @@ class GetRandomPotatoesMealsUseCase(
     fun getTenRandomPotatoesMeals(): List<String> {
         return foodRepository.getFoods().getOrThrow()
             .filter {
-              hasValidName(it.name)&&isIngredientsContainsPotatoes(it.ingredients)
+                hasValidName(it.name) && isIngredientsContainsPotatoes(it.ingredients)
             }
             .takeIf { it.isNotEmpty() }
             ?.shuffled()
@@ -22,6 +22,7 @@ class GetRandomPotatoesMealsUseCase(
         const val MEALS_COUNT = 10
         const val POTATOES_KEYWORD = "potatoes"
     }
+
     private fun hasValidName(name: String?): Boolean {
         return !name.isNullOrBlank()
     }
