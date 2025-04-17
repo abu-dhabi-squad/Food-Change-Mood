@@ -55,11 +55,10 @@ class MealSearchByNameUseCase(
 
     fun findMealsByName(input: String): List<Food> {
 
-        val meals = foodRepository.getFoods().getOrThrow()
-
-        return meals.filter { food ->
+        return foodRepository.getFoods().getOrThrow().filter { food ->
             val mealName = food.name?.lowercase() ?: return@filter false
             isContainsPattern(mealName, input.lowercase())
-        }
+        }.takeIf { it.isNotEmpty() }
+            ?: throw IllegalStateException("No meals found matching the name: \"$input\"")
     }
 }
