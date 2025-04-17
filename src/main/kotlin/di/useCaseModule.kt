@@ -1,6 +1,7 @@
 package di
 
 import logic.GetItalianMealsForLargeGroupUseCase
+import logic.usecase.GetIraqiMealsUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
 import logic.usecase.GetRandomFoodUseCase
 import logic.usecase.GetRandomPotatoesMealsUseCase
@@ -19,4 +20,5 @@ val useCaseModule = module {
     single { GetRandomMealsByCountryUseCase(get()) }
     single { GetRandomPotatoesMealsUseCase(get()) }
     single { GetItalianMealsForLargeGroupUseCase(get()) }
+    single { GetIraqiMealsUseCase(get()) }
 }

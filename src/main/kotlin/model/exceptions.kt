@@ -15,5 +15,6 @@ class RichMaxAttemptException (exceptionMessage : String?):Exception(exceptionMe
 
 
 class EmptyListException:AppException("There is no item in list match the input")
+class NoIraqiMealsFoundException : AppException("No Iraqi meals found")
 
 class CountryMealsFetchException:AppException("Wrong country name")
