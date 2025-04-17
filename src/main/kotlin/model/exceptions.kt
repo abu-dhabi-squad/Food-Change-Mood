@@ -9,6 +9,11 @@ class EmptyHighCalorieListException:AppException("there is no high calories meal
 
 class WrongInputException:AppException("wrong Input")
 
+class RichMaxAttemptException (exceptionMessage : String?):Exception(exceptionMessage)
+
+
+
+
 class EmptyListException:AppException("There is no item in list match the input")
 class NoIraqiMealsFoundException : AppException("No Iraqi meals found")
 

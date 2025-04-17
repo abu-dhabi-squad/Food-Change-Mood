@@ -4,9 +4,9 @@ import logic.usecase.GetRandomMealsByCountryUseCase
 import logic.usecase.GetIraqiMealsUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
 import kotlin.system.exitProcess
-
 class FoodChangeMoodConsoleUI(
     private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,
+    private val guessFoodPreparationTimeGameUI: GuessFoodPreparationTimeGameUI,
     private val randomPotatoesMealsConsoleUi: RandomPotatoesMealsConsoleUi,
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
     private val getFoodChangeMoodConsoleUi: ItalianMealsForLargeGroupUI,
@@ -29,7 +29,7 @@ class FoodChangeMoodConsoleUI(
             2 -> println("Search Meal by Name")
             3 -> getIraqiMealsUseCaseUI(getIraqiMealsUseCase)
             4 -> println("Easy Food Suggestions")
-            5 -> println("Guess Prep Time Game")
+            5 -> guessFoodPreparationTimeGameUI.start()
             6 -> println("Egg-Free Sweets")
             7 -> println("Keto Diet Meal Helper")
             8 -> println("Search Foods by Add Date")
