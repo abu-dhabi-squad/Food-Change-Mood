@@ -2,10 +2,12 @@ package presentation
 
 import logic.usecase.GetRandomMealsByCountryUseCase
 import logic.usecase.GetIraqiMealsUseCase
+import logic.usecase.GetHealthyMealsUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
 import kotlin.system.exitProcess
 
 class FoodChangeMoodConsoleUI(
+    private val getHealthyMealsUseCase: GetHealthyMealsUseCase,
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
     private val getMealByIdUI: GetMealByIdUI,
     private val getFoodByDateUI: GetFoodByDateUI,
@@ -14,6 +16,7 @@ class FoodChangeMoodConsoleUI(
     private val randomPotatoesMealsConsoleUi: RandomPotatoesMealsConsoleUi,
     private val getFoodChangeMoodConsoleUi: ItalianMealsForLargeGroupUI,
     private val getIraqiMealsUseCase: GetIraqiMealsUseCase,
+    private val getHealthyMealsConsoleUI: GetHealthyMealsConsoleUI
 ) {
     fun start() {
         showWelcome()
@@ -28,7 +31,7 @@ class FoodChangeMoodConsoleUI(
         showOptions()
         val input = getUserInput()
         when (input) {
-            1 -> println("Healthy Fast Meals (<=15 min)")
+            1 -> getHealthyMealsConsoleUI.executeHealthyMeals()
             2 -> println("Search Meal by Name")
             3 -> getIraqiMealsUseCaseUI(getIraqiMealsUseCase)
             4 -> println("Easy Food Suggestions")
@@ -42,6 +45,7 @@ class FoodChangeMoodConsoleUI(
             12 -> {
                 randomPotatoesMealsConsoleUi.displayRandomPotatoesMealsUI()
             }
+
             13 -> getHighCalorieMealUI(getMealForThinPeopleUseCase)
             14 -> println("Seafood Meals (Protein Sorted)")
             15 -> getFoodChangeMoodConsoleUi.start()
