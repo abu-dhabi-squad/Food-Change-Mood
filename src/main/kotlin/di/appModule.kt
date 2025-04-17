@@ -2,7 +2,6 @@ package di
 
 import data.CsvFoodRepositoryImp
 import data.FoodCsvParser
-import data.FakeCsvFoodRepositoryImp
 import logic.repository.FoodRepository
 import org.koin.dsl.module
 import presentation.FoodChangeMoodConsoleUI
@@ -17,6 +16,6 @@ val appModule = module {
     single { FoodCsvParser(get()) }
     single<FoodRepository> { CsvFoodRepositoryImp(get()) }
     single { RandomPotatoesMealsConsoleUi(get()) }
-    single { FoodChangeMoodConsoleUI(get(),get()) }
+    single { FoodChangeMoodConsoleUI(get(),get(),get(),get(),get()) }
     single { getIraqiMealsUseCaseUI(get()) }
 }
