@@ -19,7 +19,9 @@ class GetHealthyMealsUseCase(private val foodRepository: FoodRepository) {
                         saturated <= satFatThreshold &&
                         carbohydrates <= carbThreshold
                     }
-                }.map { meal -> meal.name ?: "none" }
+                }.map { meal ->
+                    "${meal.name ?: "Unnamed meal"}\n${meal.description ?: "No description"}"
+                }
             } ?: emptyList()
     }
 
