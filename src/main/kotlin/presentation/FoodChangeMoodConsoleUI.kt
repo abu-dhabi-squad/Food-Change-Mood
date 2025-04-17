@@ -2,6 +2,7 @@ package presentation
 
 import kotlin.system.exitProcess
 class FoodChangeMoodConsoleUI(
+    private val getFoodChangeMoodConsoleUi: ItalianMealsForLargeGroupUI
     // use cases will be here
 ) {
     fun start() {
@@ -31,7 +32,7 @@ class FoodChangeMoodConsoleUI(
             12 -> println("Potato-Based Meals")
             13 -> println("High-Calorie Meals (>700 cal)")
             14 -> println("Seafood Meals (Protein Sorted)")
-            15 -> println("Italian Meals for Large Groups")
+            15 -> getFoodChangeMoodConsoleUi.start()
             0 -> exitProcess(0)
             else -> println("Invalid input")
         }
