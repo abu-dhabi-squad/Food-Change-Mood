@@ -6,13 +6,13 @@ import model.Food
 class EasyFoodSuggestionGameUseCase(
     private val foodRepository: FoodRepository
 ) {
-    fun suggest10RandomEasyMeals(): List<Food>{
+    fun suggestRandomEasyMeals(count: Int = 10): List<Food>{
 
         return foodRepository.getFoods()
             .getOrThrow()
             .filter(::isValidEasyMeal)
             .shuffled()
-            .take(10)
+            .take(count)
     }
 
     private fun isValidEasyMeal(food: Food): Boolean {

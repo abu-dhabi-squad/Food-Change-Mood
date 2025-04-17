@@ -66,7 +66,7 @@ class FoodChangeMoodConsoleUI(
     }
 
     private fun launchSEasyFoodSuggestionGame() {
-        val meals = easyFoodSuggestionGameUseCase.suggest10RandomEasyMeals()
+        val meals = easyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
         if (meals.isEmpty()) {
             println("No easy meals found. Please try again.")
             return
