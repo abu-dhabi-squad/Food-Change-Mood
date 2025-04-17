@@ -8,7 +8,7 @@ import java.time.LocalDate
 class FakeCsvFoodRepositoryImp() : FoodRepository {
     private val mexicanStyle = Food(
         id = 137739,
-        name = "arriba baked winter squash mexican style",
+        name = "iraq arriba baked winter squash mexican style",
         minutes = 55,
         submittedDate = LocalDate.of(2005, 9, 16),
         tags = listOf(
@@ -69,7 +69,7 @@ class FakeCsvFoodRepositoryImp() : FoodRepository {
 
     private val breakfast = Food(
         id = 31490,
-        name = "arriba baked winter squash mexican style",
+        name = "iraq arriba baked winter squash mexican style",
         minutes = 30,
         submittedDate = LocalDate.of(2002, 6, 17),
         tags = listOf(
@@ -300,11 +300,11 @@ class FakeCsvFoodRepositoryImp() : FoodRepository {
 
     private val betterThanSexStrawberries = Food(
         id = 42198,
-        name = "better than sex  strawberries",
+        name = " better than sex  strawberries",
         minutes = 1460,
         submittedDate = LocalDate.of(2002, 10, 3),
         tags = listOf(
-            "weeknight",
+            "iraq",
             "time-to-make",
             "course",
             "main-ingredient",

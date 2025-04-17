@@ -7,4 +7,4 @@ class EmptyListException:AppException("there is no item in list")
 class EmptyHighCalorieListException:AppException("there is no high calories meals in list")
 
 class WrongInputException:AppException("wrong Input")
-
+class NoIraqiMealsFoundException : AppException("No Iraqi meals found")
