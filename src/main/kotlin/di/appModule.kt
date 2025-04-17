@@ -7,6 +7,5 @@ import presentation.FoodChangeMoodConsoleUI
 
 val appModule = module {
     single<FoodRepository> { FakeCsvFoodRepositoryImp() }
-
-    single { FoodChangeMoodConsoleUI(get()) }
+    single { FoodChangeMoodConsoleUI(get(), get()) }
 }
