@@ -1,12 +1,14 @@
 package model
 
-open class AppException(message: String): Exception(message)
+open class AppException(message: String) : Exception(message)
 
-class EmptyListException:AppException("there is no item in list")
+class NoMealsFoundException : AppException("No meals found!")
 
 class EmptyHighCalorieListException:AppException("there is no high calories meals in list")
 
 class WrongInputException:AppException("wrong Input")
+
+class RichMaxAttemptException (exceptionMessage : String?):Exception(exceptionMessage)
 
 class EmptySearchByDateListException:AppException("there is no meals in this date list")
 
@@ -20,3 +22,6 @@ class InvalidDayException:AppException("Invalid Day Input")
 
 class InvalidIdException:AppException("Invalid ID Input")
 
+class NoIraqiMealsFoundException : AppException("No Iraqi meals found")
+
+class CountryMealsFetchException:AppException("Wrong country name")

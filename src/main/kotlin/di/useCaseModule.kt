@@ -2,7 +2,13 @@ package di
 
 import logic.usecase.GetFoodByDateUseCase
 import logic.usecase.GetMealByIdUseCase
+import logic.GetItalianMealsForLargeGroupUseCase
+import logic.usecase.GetIraqiMealsUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
+import logic.usecase.GetRandomFoodUseCase
+import logic.usecase.GetRandomMealsByCountryUseCase
+import logic.usecase.GetRandomPotatoesMealsUseCase
+import logic.usecase.GuessFoodPreparationTimeUseCase
 import org.koin.dsl.module
 import presentation.GetFoodByDateUI
 import presentation.GetMealByIdUI
@@ -11,10 +17,16 @@ import util.DateParserInterface
 import util.GetFoodByDateValidationImplementaion
 import util.GetFoodByDateValidationInterface
 
-val useCaseModule = module{
+val useCaseModule = module {
+    single { GetRandomFoodUseCase(get()) }
+    single { GuessFoodPreparationTimeUseCase() }
     single { GetMealForThinPeopleUseCase(get()) }
-    single { GetFoodByDateUseCase(get()) }
+    single { GetRandomMealsByCountryUseCase(get()) }
+    single { GetRandomPotatoesMealsUseCase(get()) }
+    single { GetItalianMealsForLargeGroupUseCase(get()) }
+    single { GetIraqiMealsUseCase(get()) }
 
+    single { GetFoodByDateUseCase(get()) }
     single<DateParserInterface> { DateParserImplementation() }
     single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
     single { GetMealByIdUI(get()) }
