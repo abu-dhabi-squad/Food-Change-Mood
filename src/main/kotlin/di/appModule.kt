@@ -8,6 +8,7 @@ import presentation.FoodChangeMoodConsoleUI
 import presentation.ItalianMealsForLargeGroupUI
 import java.io.File
 import presentation.RandomPotatoesMealsConsoleUi
+import presentation.getIraqiMealsUseCaseUI
 
 val appModule = module {
     single { ItalianMealsForLargeGroupUI(get()) }
@@ -15,5 +16,6 @@ val appModule = module {
     single { FoodCsvParser(get()) }
     single<FoodRepository> { CsvFoodRepositoryImp(get()) }
     single { RandomPotatoesMealsConsoleUi(get()) }
-    single { FoodChangeMoodConsoleUI(get(), get(), get(), get()) }
+    single { FoodChangeMoodConsoleUI(get(),get(),get(),get(),get()) }
+    single { getIraqiMealsUseCaseUI(get()) }
 }
