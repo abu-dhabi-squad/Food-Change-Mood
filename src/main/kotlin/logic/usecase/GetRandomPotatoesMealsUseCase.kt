@@ -7,11 +7,8 @@ import model.NoMealsFoundException
 class GetRandomPotatoesMealsUseCase(
     private val foodRepository: FoodRepository
 ) {
-
     fun getTenRandomPotatoesMeals(): List<String> {
-        val mealsResult = foodRepository.getFoods().getOrThrow()
-
-        val filteredNames = mealsResult
+        return foodRepository.getFoods().getOrThrow()
             .filter {
                 !it.name.isNullOrBlank() &&
                         it.ingredients.any { ingredient ->
@@ -19,17 +16,9 @@ class GetRandomPotatoesMealsUseCase(
                         }
             }
             .takeIf { it.isNotEmpty() }
-            ?.mapNotNull { it.name }
-            ?.distinct() ?: throw NoMealsFoundException()
-
-
-        val randomSet = mutableSetOf<String>()
-        while (randomSet.size < MEALS_COUNT && randomSet.size < filteredNames.size) {
-            val randomMeal = filteredNames.random()
-            randomSet.add(randomMeal)
-        }
-
-        return randomSet.toList()
+            ?.shuffled()
+            ?.take(MEALS_COUNT)
+            ?.map { it.name.toString() } ?: throw NoMealsFoundException()
     }
 
     companion object {
