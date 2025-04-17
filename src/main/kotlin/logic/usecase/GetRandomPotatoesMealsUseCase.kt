@@ -12,10 +12,9 @@ class GetRandomPotatoesMealsUseCase(
             .filter {
                 hasValidName(it.name) && isIngredientsContainsPotatoes(it.ingredients)
             }
-            .takeIf { it.isNotEmpty() }
-            ?.shuffled()
-            ?.take(MEALS_COUNT)
-            ?.map { it.name.toString() } ?: throw NoMealsFoundException()
+            .shuffled()
+            .take(MEALS_COUNT)
+            .map { it.name.toString() }
     }
     private fun hasValidName(name: String?): Boolean {
         return !name.isNullOrBlank()
