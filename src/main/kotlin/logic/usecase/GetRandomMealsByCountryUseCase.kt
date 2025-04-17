@@ -16,6 +16,7 @@ class GetRandomMealsByCountryUseCase(
             .getOrThrow()
             .filter { meal -> meal.matchesCountry(getRelatedCuisineKeywords(country)) }
             .takeIf { meals -> meals.isNotEmpty() }
+            ?.distinctBy { it.name?.lowercase()?.trim() }
             ?.mapNotNull { meal -> meal.name }
             ?.shuffled()
             ?.take(MAXIMUM_NUMBER_OF_MEALS)
@@ -39,13 +40,13 @@ class GetRandomMealsByCountryUseCase(
     private fun getRelatedCuisineKeywords(country: String): List<String> {
 
         val countryLowercase = country.lowercase().trim()
-        return cuisineKeywordsByCountry[countryLowercase] ?: throw WrongInputException()
+        return CUISINE_KEYWORDS_BY_COUNTRY[countryLowercase] ?: throw WrongInputException()
     }
 
     companion object{
 
         const val MAXIMUM_NUMBER_OF_MEALS = 20
-        val cuisineKeywordsByCountry = mapOf(
+        val CUISINE_KEYWORDS_BY_COUNTRY = mapOf(
             "afghanistan" to listOf("afghan", "afghani", "asian"),
             "albania" to listOf("albanian", "european"),
             "algeria" to listOf("algerian", "african"),

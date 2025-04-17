@@ -28,10 +28,7 @@ class FoodChangeMoodConsoleUI(
             7 -> println("Keto Diet Meal Helper")
             8 -> println("Search Foods by Add Date")
             9 -> println("Gym Helper (Calories/Protein)")
-            10 -> {
-                println("Explore Country Food Culture")
-                getRandomMealsByCountryUI(getRandomMealsByCountryUseCase)
-            }
+            10 -> getRandomMealsByCountryUI(getRandomMealsByCountryUseCase)
             11 -> println("Ingredient Guess Game")
             12 -> println("Potato-Based Meals")
             13 -> println("High-Calorie Meals (>700 cal)")
