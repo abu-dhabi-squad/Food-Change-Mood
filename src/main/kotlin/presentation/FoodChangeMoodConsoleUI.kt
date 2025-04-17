@@ -4,10 +4,8 @@ import logic.usecase.GetMealForThinPeopleUseCase
 import logic.usecase.GetRandomMealsByCountryUseCase
 import kotlin.system.exitProcess
 class FoodChangeMoodConsoleUI(
-    private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
     private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,
     private val guessFoodPreparationTimeGameUI: GuessFoodPreparationTimeGameUI,
-    private val randomPotatoesMealsConsoleUi: RandomPotatoesMealsConsoleUi
     private val randomPotatoesMealsConsoleUi: RandomPotatoesMealsConsoleUi,
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
     private val getFoodChangeMoodConsoleUi: ItalianMealsForLargeGroupUI
