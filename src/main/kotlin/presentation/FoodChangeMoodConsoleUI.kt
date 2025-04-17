@@ -1,7 +1,9 @@
 package presentation
 
 import logic.usecase.GetFoodByDateUseCase
+import logic.usecase.GetMealForThinPeopleUseCase
 import kotlin.system.exitProcess
+
 class FoodChangeMoodConsoleUI(
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
     private val getFoodByDateUseCase: GetFoodByDateUseCase,
