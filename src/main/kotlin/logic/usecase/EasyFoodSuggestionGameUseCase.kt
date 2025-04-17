@@ -7,7 +7,7 @@ import model.NoEasyMealsFoundException
 class EasyFoodSuggestionGameUseCase(
     private val foodRepository: FoodRepository
 ) {
-    fun suggestRandomEasyMeals(count: Int = 10): List<Food>{
+    fun suggestRandomEasyMeals(count: Int = DEFAULT_SUGGESTED_MEALS_COUNT): List<Food>{
 
         return foodRepository.getFoods()
             .getOrThrow()
@@ -20,7 +20,16 @@ class EasyFoodSuggestionGameUseCase(
 
     private fun isValidEasyMeal(food: Food): Boolean {
         return food.description != null &&
-                food.minutes <= 30 && food.ingredients.size <= 5 && food.steps.size <= 6
+                food.minutes <= MAX_MINUTES &&
+                food.ingredients.size <= MAX_INGREDIENTS &&
+                food.steps.size <= MAX_STEPS
+    }
+
+    companion object {
+        private const val DEFAULT_SUGGESTED_MEALS_COUNT = 10
+        private const val MAX_MINUTES = 30
+        private const val MAX_INGREDIENTS = 5
+        private const val MAX_STEPS = 6
     }
 
 }
