@@ -1,9 +1,9 @@
 package presentation
 
-import logic.GetItalianMealsForLargeGroupUsesCase
+import logic.GetItalianMealsForLargeGroupUseCase
 
 class ItalianMealsForLargeGroupUI(
-    private val getItalianMealsForLargeGroup: GetItalianMealsForLargeGroupUsesCase
+    private val getItalianMealsForLargeGroup: GetItalianMealsForLargeGroupUseCase
 ) {
     fun start() {
             italianMealsForLargeGroup()
@@ -11,8 +11,8 @@ class ItalianMealsForLargeGroupUI(
 
     private fun italianMealsForLargeGroup(){
         return getItalianMealsForLargeGroup.getItalianMealForLargeGroup().forEach {
-            println(it.first)
-            println(it.second)
+            println("\nName: ${it.first}")
+            println("Description: ${it.second}")
         }
     }
 
