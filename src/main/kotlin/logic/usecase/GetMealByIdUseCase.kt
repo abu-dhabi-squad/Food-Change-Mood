@@ -12,7 +12,6 @@ class GetMealByIdUseCase(
         return foodRepository.getFoods()
             .getOrThrow()
             .find{it.id == id}
-            .takeIf { it != null }
             ?: throw InvalidIdException()
     }
 }
