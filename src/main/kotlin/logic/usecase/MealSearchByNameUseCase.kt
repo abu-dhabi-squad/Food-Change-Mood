@@ -1,6 +1,7 @@
 package logic.usecase
 
 import logic.repository.FoodRepository
+import model.Food
 
 class MealSearchByNameUseCase(
     private val foodRepository: FoodRepository
@@ -29,6 +30,7 @@ class MealSearchByNameUseCase(
 
         return table
     }
+
     private fun isContainsPattern(text: String, pattern: String): Boolean {
         if (pattern.isEmpty()) return true
 
@@ -49,5 +51,14 @@ class MealSearchByNameUseCase(
         }
 
         return false
+    }
+
+    fun findMealsByNameInput(input: String): List<Food> {
+        val meals = foodRepository.getFoods().getOrElse { emptyList() }
+
+        return meals.filter { food ->
+            val mealName = food.name?.lowercase() ?: return@filter false
+            isContainsPattern(mealName, input.lowercase())
+        }
     }
 }
