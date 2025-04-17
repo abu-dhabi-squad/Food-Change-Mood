@@ -6,7 +6,11 @@ import model.Food
 class CsvFoodRepositoryImp(
     private val foodCsvParser: FoodCsvParser
 ) : FoodRepository {
+    private val foods = mutableListOf<Food>()
     override fun getFoods(): Result<List<Food>> {
-        return Result.success(foodCsvParser.parseCsvFileToFoods())
+        if (foods.isEmpty()) {
+            foodCsvParser.parseCsvFileToFoods().also { foods.addAll(it) }
+        }
+        return Result.success(foods)
     }
 }
