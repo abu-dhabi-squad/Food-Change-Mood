@@ -3,9 +3,10 @@ package presentation
 import logic.usecase.GetRandomMealsByCountryUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
 import kotlin.system.exitProcess
+
 class FoodChangeMoodConsoleUI(
-    // use cases will be here
     private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,
+    private val randomPotatoesMealsConsoleUi: RandomPotatoesMealsConsoleUi,
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase
 ) {
     fun start() {
@@ -20,7 +21,7 @@ class FoodChangeMoodConsoleUI(
     private fun presentFeature() {
         showOptions()
         val input = getUserInput()
-        when(input){
+        when (input) {
             1 -> println("Healthy Fast Meals (<=15 min)")
             2 -> println("Search Meal by Name")
             3 -> println("Iraqi Meals")
@@ -32,7 +33,9 @@ class FoodChangeMoodConsoleUI(
             9 -> println("Gym Helper (Calories/Protein)")
             10 -> getRandomMealsByCountryUI(getRandomMealsByCountryUseCase)
             11 -> println("Ingredient Guess Game")
-            12 -> println("Potato-Based Meals")
+            12 -> {
+                randomPotatoesMealsConsoleUi.displayRandomPotatoesMealsUI()
+            }
             13 -> getHighCalorieMealUI(getMealForThinPeopleUseCase)
             14 -> println("Seafood Meals (Protein Sorted)")
             15 -> println("Italian Meals for Large Groups")

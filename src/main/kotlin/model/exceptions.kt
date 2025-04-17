@@ -1,6 +1,8 @@
 package model
 
-open class AppException(message: String): Exception(message)
+open class AppException(message: String) : Exception(message)
+
+class NoMealsFoundException : AppException("No meals found!")
 
 
 class EmptyHighCalorieListException:AppException("there is no high calories meals in list")
