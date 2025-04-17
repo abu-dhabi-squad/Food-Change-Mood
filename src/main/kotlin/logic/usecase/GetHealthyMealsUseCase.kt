@@ -16,8 +16,8 @@ class GetHealthyMealsUseCase(private val foodRepository: FoodRepository) {
                 fastFoods.filter {
                     with(it.nutrition) {
                         totalFat <= fatThreshold &&
-                                saturated <= satFatThreshold &&
-                                carbohydrates <= carbThreshold
+                        saturated <= satFatThreshold &&
+                        carbohydrates <= carbThreshold
                     }
                 }.map { meal -> meal.name ?: "none" }
             } ?: emptyList()
