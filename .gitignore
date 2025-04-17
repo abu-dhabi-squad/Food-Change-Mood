@@ -30,3 +30,17 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Build Folders ###
+/build/
+/out/
+/.gradle/
+
+### Kotlin ###
+*.lock
+*.bin
+.kotlin/
+
+### IntelliJ ###
+.idea/
+*.iml
