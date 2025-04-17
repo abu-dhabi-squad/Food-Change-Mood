@@ -53,7 +53,7 @@ class MealSearchByNameUseCase(
         return false
     }
 
-    fun findMealsByNameInput(input: String): List<Food> {
+    fun findMealsByName(input: String): List<Food> {
         val meals = foodRepository.getFoods().getOrElse { emptyList() }
 
         return meals.filter { food ->
