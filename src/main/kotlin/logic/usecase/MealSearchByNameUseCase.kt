@@ -29,4 +29,25 @@ class MealSearchByNameUseCase(
 
         return table
     }
+    private fun isContainsPattern(text: String, pattern: String): Boolean {
+        if (pattern.isEmpty()) return true
+
+        val prefixTable = buildPrefixTable(pattern)
+        var textIndex = 0
+        var patternIndex = 0
+
+        while (textIndex < text.length) {
+            if (text[textIndex] == pattern[patternIndex]) {
+                textIndex++
+                patternIndex++
+                if (patternIndex == pattern.length) return true
+            } else if (patternIndex != 0) {
+                patternIndex = prefixTable[patternIndex - 1]
+            } else {
+                textIndex++
+            }
+        }
+
+        return false
+    }
 }
