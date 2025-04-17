@@ -1,8 +1,10 @@
 package presentation
 
+import logic.usecase.MealSearchByNameUseCase
 import kotlin.system.exitProcess
 class FoodChangeMoodConsoleUI(
     // use cases will be here
+    private val mealSearchByNameUseCase: MealSearchByNameUseCase
 ) {
     fun start() {
         showWelcome()
@@ -18,7 +20,7 @@ class FoodChangeMoodConsoleUI(
         val input = getUserInput()
         when(input){
             1 -> println("Healthy Fast Meals (<=15 min)")
-            2 -> println("Search Meal by Name")
+            2 -> launchMealSearchByName()
             3 -> println("Iraqi Meals")
             4 -> println("Easy Food Suggestions")
             5 -> println("Guess Prep Time Game")
@@ -38,6 +40,9 @@ class FoodChangeMoodConsoleUI(
         presentFeature()
     }
 
+    private fun launchMealSearchByName() {
+        print("Enter the meal name to search: ")
+    }
 
 
     private fun showOptions() {
