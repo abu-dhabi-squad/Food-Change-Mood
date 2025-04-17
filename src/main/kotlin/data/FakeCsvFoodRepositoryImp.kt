@@ -6,6 +6,19 @@ import model.Nutrition
 import java.time.LocalDate
 
 class FakeCsvFoodRepositoryImp() : FoodRepository {
+    private val calmYourNerves=Food(
+        id = 39959,
+        name = "calm your nerves  tonic",
+        minutes = 5,
+        submittedDate = LocalDate.of(2002,10,9),
+        tags = listOf("15-minutes-or-less", "time-to-make", "preparation", "easy", "number-of-servings"),
+        nutrition = Nutrition(
+            8.2f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f
+        ),
+        steps = listOf("combine herbs", "dosage: one-half teaspoonful mixed in one-half glass of cold water , followed by a glass of hot water , one hour before each meal and upon retiring", "this can be put in gelatin capsules", "two no", "00 capsules would contain the required amount for one dose", "more can be taken with beneficial results"),
+        description = "my boss gave me this recipe several years ago. the recipe supposedly came from the ",
+        ingredients = listOf("gentian root", "scullcap herb", "burnet root", "wood bethony", "spearmint")
+    )
     private val mexicanStyle = Food(
         id = 137739,
         name = "arriba baked winter squash mexican style",

@@ -1,8 +1,9 @@
 package presentation
 
+import logic.usecase.GetHealthyMealsUseCase
 import kotlin.system.exitProcess
 class FoodChangeMoodConsoleUI(
-    // use cases will be here
+    private val getHealthyMealsUseCase: GetHealthyMealsUseCase
 ) {
     fun start() {
         showWelcome()
@@ -17,7 +18,7 @@ class FoodChangeMoodConsoleUI(
         showOptions()
         val input = getUserInput()
         when(input){
-            1 -> println("Healthy Fast Meals (<=15 min)")
+            1 -> executeGetHealthyMeals()
             2 -> println("Search Meal by Name")
             3 -> println("Iraqi Meals")
             4 -> println("Easy Food Suggestions")
@@ -38,6 +39,14 @@ class FoodChangeMoodConsoleUI(
         presentFeature()
     }
 
+    private fun executeGetHealthyMeals(){
+        if (getHealthyMealsUseCase.execute().isEmpty())
+            println("No meals found!")
+        else {
+            println("Healthy meals: -")
+            getHealthyMealsUseCase.execute().forEach { println(it) }
+        }
+    }
 
 
     private fun showOptions() {
