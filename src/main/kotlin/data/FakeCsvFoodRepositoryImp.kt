@@ -189,6 +189,189 @@ class FakeCsvFoodRepositoryImp() : FoodRepository {
         )
     )
 
+    private val bananas4IceCreamPie = Food(
+        id = 70970,
+        name = "bananas 4 ice cream  pie",
+        minutes = 180,
+        submittedDate = LocalDate.of(2003, 9, 10),
+        tags = listOf(
+            "weeknight",
+            "time-to-make",
+            "course",
+            "main-ingredient",
+            "preparation",
+            "pies-and-tarts",
+            "desserts",
+            "lunch",
+            "snacks",
+            "no-cook",
+            "refrigerator",
+            "kid-friendly",
+            "frozen-desserts",
+            "pies",
+            "chocolate",
+            "dietary",
+            "inexpensive",
+            "equipment",
+            "number-of-servings",
+            "technique",
+            "4-hours-or-less"
+        ),
+        nutrition = Nutrition(
+            calories = 4270.8f,
+            totalFat = 254.0f,
+            sugar = 1306.0f,
+            sodium = 111.0f,
+            protein = 127.0f,
+            saturated = 431.0f,
+            carbohydrates = 220.0f
+        ),
+        steps = listOf(
+            "crumble cookies into a 9-inch pie plate",
+            "or cake pan",
+            "pat down to form an even layer",
+            "drizzle 1 cup of chocolate topping evenly over the cookies with a small spoon",
+            "scoop the vanilla ice cream on top of the chocolate and smooth down",
+            "cover with half of the sliced bananas', 'top with strawberry ice cream",
+            "cover and freeze until firm",
+            "before serving" ,
+            "top with 1 / 4 cup chocolate topping" ,
+            "whipped cream" ,
+            "and sliced bananas"
+        ),
+        description = "this modified version of 'mom's' chili was a hit at our 2004 christmas party. we made an extra large pot to have some left to freeze but it never made it to the freezer. it was a favorite by all. perfect for any cold and rainy day. you won't find this one in a cookbook. it is truly an original.",
+        ingredients = listOf(
+            "chocolate sandwich style cookies",
+            "chocolate syrup",
+            "vanilla ice cream",
+            "bananas",
+            "strawberry ice cream",
+            "whipped cream"
+        )
+    )
+
+    private val bananas4IceCreamPienull = Food(
+        id = 70971,
+        name = "bananas 4 ice cream  pie",
+        minutes = 180,
+        submittedDate = LocalDate.of(2003, 9, 10),
+        tags = listOf(
+            "weeknight",
+            "time-to-make",
+            "course",
+            "main-ingredient",
+            "preparation",
+            "pies-and-tarts",
+            "desserts",
+            "lunch",
+            "snacks",
+            "no-cook",
+            "refrigerator",
+            "kid-friendly",
+            "frozen-desserts",
+            "pies",
+            "chocolate",
+            "dietary",
+            "inexpensive",
+            "equipment",
+            "number-of-servings",
+            "technique",
+            "4-hours-or-less"
+        ),
+        nutrition = Nutrition(
+            calories = 4270.8f,
+            totalFat = 254.0f,
+            sugar = 1306.0f,
+            sodium = 111.0f,
+            protein = 127.0f,
+            saturated = 431.0f,
+            carbohydrates = 220.0f
+        ),
+        steps = listOf(
+            "crumble cookies into a 9-inch pie plate",
+            "or cake pan",
+            "pat down to form an even layer",
+            "drizzle 1 cup of chocolate topping evenly over the cookies with a small spoon",
+            "scoop the vanilla ice cream on top of the chocolate and smooth down",
+            "cover with half of the sliced bananas', 'top with strawberry ice cream",
+            "cover and freeze until firm",
+            "before serving" ,
+            "top with 1 / 4 cup chocolate topping" ,
+            "whipped cream" ,
+            "and sliced bananas"
+        ),
+        description = null,
+        ingredients = listOf(
+            "chocolate sandwich style cookies",
+            "chocolate syrup",
+            "vanilla ice cream",
+            "bananas",
+            "strawberry ice cream",
+            "whipped cream"
+        )
+    )
+
+    private val betterThanSexStrawberries = Food(
+        id = 42198,
+        name = "better than sex  strawberries",
+        minutes = 1460,
+        submittedDate = LocalDate.of(2002, 10, 3),
+        tags = listOf(
+            "weeknight",
+            "time-to-make",
+            "course",
+            "main-ingredient",
+            "preparation",
+            "pies-and-tarts",
+            "desserts",
+            "lunch",
+            "snacks",
+            "no-cook",
+            "refrigerator",
+            "kid-friendly",
+            "frozen-desserts",
+            "pies",
+            "chocolate",
+            "dietary",
+            "inexpensive",
+            "equipment",
+            "number-of-servings",
+            "technique",
+            "4-hours-or-less"
+        ),
+        nutrition = Nutrition(
+            calories = 7034.1f,
+            totalFat = 254.0f,
+            sugar = 1306.0f,
+            sodium = 111.0f,
+            protein = 127.0f,
+            saturated = 431.0f,
+            carbohydrates = 220.0f
+        ),
+        steps = listOf(
+            "crumble cookies into a 9-inch pie plate",
+            "or cake pan",
+            "pat down to form an even layer",
+            "drizzle 1 cup of chocolate topping evenly over the cookies with a small spoon",
+            "scoop the vanilla ice cream on top of the chocolate and smooth down",
+            "cover with half of the sliced bananas', 'top with strawberry ice cream",
+            "cover and freeze until firm",
+            "before serving" ,
+            "top with 1 / 4 cup chocolate topping" ,
+            "whipped cream" ,
+            "and sliced bananas"
+        ),
+        description = "simple but sexy. this was in my local newspaper's food section. cook time reflects refrigeration time.  i've been asked several times if this should be baked.  just to clarify, no, it is not, it is a refrigerator dessert. i'm not sure why it contains raw egg, but most tiramisu recipes do too.",
+        ingredients = listOf(
+            "chocolate sandwich style cookies",
+            "chocolate syrup",
+            "vanilla ice cream",
+            "bananas",
+            "strawberry ice cream",
+            "whipped cream"
+        )
+    )
+
     override fun getFoods(): Result<List<Food>> =
-        Result.success(listOf(mexicanStyle, breakfast, crockpoiltChail))
+        Result.success(listOf(mexicanStyle, breakfast, crockpoiltChail,bananas4IceCreamPienull,bananas4IceCreamPie,betterThanSexStrawberries))
 }

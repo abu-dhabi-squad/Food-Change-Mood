@@ -1,9 +1,11 @@
 package presentation
 
 import logic.usecase.GetHealthyMealsUseCase
+import logic.usecase.GetMealForThinPeopleUseCase
 import kotlin.system.exitProcess
 class FoodChangeMoodConsoleUI(
     private val getHealthyMealsUseCase: GetHealthyMealsUseCase
+    private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase
 ) {
     fun start() {
         showWelcome()
@@ -30,7 +32,7 @@ class FoodChangeMoodConsoleUI(
             10 -> println("Explore Country Food Culture")
             11 -> println("Ingredient Guess Game")
             12 -> println("Potato-Based Meals")
-            13 -> println("High-Calorie Meals (>700 cal)")
+            13 -> getHighCalorieMealUI(getMealForThinPeopleUseCase)
             14 -> println("Seafood Meals (Protein Sorted)")
             15 -> println("Italian Meals for Large Groups")
             0 -> exitProcess(0)
@@ -76,6 +78,7 @@ class FoodChangeMoodConsoleUI(
         print("Enter your choice: ")
         return readlnOrNull()?.toIntOrNull()
     }
+
 
 
 }
