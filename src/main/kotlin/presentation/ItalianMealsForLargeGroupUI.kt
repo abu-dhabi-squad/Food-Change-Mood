@@ -11,7 +11,8 @@ class ItalianMealsForLargeGroupUI(
 
     private fun italianMealsForLargeGroup(){
         return getItalianMealsForLargeGroup.getItalianMealForLargeGroup().forEach {
-            println(it)
+            println(it.first)
+            println(it.second)
         }
     }
 

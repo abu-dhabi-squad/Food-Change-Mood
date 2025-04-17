@@ -7,11 +7,11 @@ class GetItalianMealsForLargeGroupUsesCase(
     private val foodRepository : FoodRepository
 ) {
 
-    fun getItalianMealForLargeGroup(): List<String?> {
+    fun getItalianMealForLargeGroup(): List<Pair<String?, String?>> {
 
         return foodRepository.getFoods().getOrThrow()
             .filter { onlyHighQualityData(it) && onlyItalianMealForLargeGroup(it) }
-            .map { it.name }
+            .map { it.name to it.description }
     }
 
     private fun onlyItalianMealForLargeGroup(food: Food): Boolean{
