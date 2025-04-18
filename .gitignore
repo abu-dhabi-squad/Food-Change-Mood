@@ -1,3 +1,6 @@
+### IntelliJ ###
+*.iml
+
 ### IntelliJ IDEA ###
 out/
 .gradle/
@@ -44,6 +47,3 @@ bin/
 *.lock
 *.bin
 .kotlin/
-
-### IntelliJ ###
-*.iml
