@@ -10,6 +10,10 @@ import presentation.GuessFoodPreparationTimeGameUI
 import presentation.ItalianMealsForLargeGroupUI
 import presentation.RandomKetoMealUI
 import presentation.*
+import util.DateParserImplementation
+import util.DateParserInterface
+import util.GetFoodByDateValidationImplementaion
+import util.GetFoodByDateValidationInterface
 import java.io.File
 
 val appModule = module {
@@ -22,5 +26,8 @@ val appModule = module {
     single { getIraqiMealsUseCaseUI(get()) }
     single { RandomKetoMealUI (get(),get())}
     single { GetHealthyMealsConsoleUI(get()) }
+    single { GymHelperConsoleUI(get()) }
+    single<DateParserInterface> { DateParserImplementation() }
+    single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
     single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get(),get(),get(),get(),get()) }
 }

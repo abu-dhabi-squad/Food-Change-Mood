@@ -5,6 +5,7 @@ import logic.usecase.GetMealByIdUseCase
 import logic.GetItalianMealsForLargeGroupUseCase
 import logic.usecase.GetIraqiMealsUseCase
 import logic.usecase.GetKetoDietMealsUseCase
+import logic.usecase.GymHelperUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
 import logic.usecase.GetRandomFoodUseCase
 import logic.usecase.GetRandomKetoMealUseCase
@@ -23,6 +24,7 @@ import util.GetFoodByDateValidationInterface
 val useCaseModule = module {
     single { GetRandomFoodUseCase(get()) }
     single { GuessFoodPreparationTimeUseCase() }
+    single { GymHelperUseCase(get()) }
     single { GetMealForThinPeopleUseCase(get()) }
     single { GetHealthyMealsUseCase(get()) }
     single { GetRandomMealsByCountryUseCase(get()) }
