@@ -2,7 +2,6 @@ package presentation
 
 import logic.usecase.GetRandomMealsByCountryUseCase
 import logic.usecase.GetIraqiMealsUseCase
-import logic.usecase.GetHealthyMealsUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
 import kotlin.system.exitProcess
 
@@ -20,8 +19,9 @@ class FoodChangeMoodConsoleUI(
     private val getIraqiMealsUseCase: GetIraqiMealsUseCase,
     private val getSweetsWithoutEggsConsoleUI: SweetsWithoutEggsConsoleUI,
     private val randomKetoMealUI: RandomKetoMealUI,
-    private val getHealthyMealsConsoleUI: GetHealthyMealsConsoleUI
-) {
+    private val getHealthyMealsConsoleUI: GetHealthyMealsConsoleUI,
+    private val getMealBySearchForNameUI: GetMealByNameUI
+    ) {
     fun start() {
         showWelcome()
         presentFeature()
@@ -36,7 +36,7 @@ class FoodChangeMoodConsoleUI(
         val input = getUserInput()
         when (input) {
             1 -> getHealthyMealsConsoleUI.executeHealthyMeals()
-            2 -> println("Search Meal by Name")
+            2 -> getMealBySearchForNameUI.start()
             3 -> getIraqiMealsUseCaseUI(getIraqiMealsUseCase)
             4 -> println("Easy Food Suggestions")
             5 -> guessFoodPreparationTimeGameUI.start()
