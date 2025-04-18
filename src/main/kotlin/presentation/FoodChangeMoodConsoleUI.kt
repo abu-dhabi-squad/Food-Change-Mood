@@ -1,16 +1,18 @@
 package presentation
 
-import logic.usecase.GetRandomMealsByCountryUseCase
 import logic.usecase.GetIraqiMealsUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
+import logic.usecase.GetRandomMealsByCountryUseCase
 import kotlin.system.exitProcess
+
 class FoodChangeMoodConsoleUI(
     private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,
     private val guessFoodPreparationTimeGameUI: GuessFoodPreparationTimeGameUI,
     private val randomPotatoesMealsConsoleUi: RandomPotatoesMealsConsoleUi,
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
     private val getFoodChangeMoodConsoleUi: ItalianMealsForLargeGroupUI,
-     private val getIraqiMealsUseCase: GetIraqiMealsUseCase
+    private val getIraqiMealsUseCase: GetIraqiMealsUseCase,
+    private val randomKetoMealUI: RandomKetoMealUI
 ) {
     fun start() {
         showWelcome()
@@ -31,7 +33,7 @@ class FoodChangeMoodConsoleUI(
             4 -> println("Easy Food Suggestions")
             5 -> guessFoodPreparationTimeGameUI.start()
             6 -> println("Egg-Free Sweets")
-            7 -> println("Keto Diet Meal Helper")
+            7 -> randomKetoMealUI.start()
             8 -> println("Search Foods by Add Date")
             9 -> println("Gym Helper (Calories/Protein)")
             10 -> getRandomMealsByCountryUI(getRandomMealsByCountryUseCase)
@@ -39,6 +41,7 @@ class FoodChangeMoodConsoleUI(
             12 -> {
                 randomPotatoesMealsConsoleUi.displayRandomPotatoesMealsUI()
             }
+
             13 -> getHighCalorieMealUI(getMealForThinPeopleUseCase)
             14 -> println("Seafood Meals (Protein Sorted)")
             15 -> getFoodChangeMoodConsoleUi.start()

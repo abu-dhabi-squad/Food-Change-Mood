@@ -3,10 +3,12 @@ package di
 import data.CsvFoodRepositoryImp
 import data.FoodCsvParser
 import logic.repository.FoodRepository
+import org.koin.core.scope.get
 import org.koin.dsl.module
 import presentation.FoodChangeMoodConsoleUI
 import presentation.GuessFoodPreparationTimeGameUI
 import presentation.ItalianMealsForLargeGroupUI
+import presentation.RandomKetoMealUI
 import java.io.File
 import presentation.RandomPotatoesMealsConsoleUi
 import presentation.getIraqiMealsUseCaseUI
@@ -19,5 +21,6 @@ val appModule = module {
     single<FoodRepository> { CsvFoodRepositoryImp(get()) }
     single { RandomPotatoesMealsConsoleUi(get()) }
     single { getIraqiMealsUseCaseUI(get()) }
-    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get()) }
+    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get()) }
+    single { RandomKetoMealUI (get(),get())}
 }

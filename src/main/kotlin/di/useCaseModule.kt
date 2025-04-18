@@ -2,8 +2,10 @@ package di
 
 import logic.GetItalianMealsForLargeGroupUseCase
 import logic.usecase.GetIraqiMealsUseCase
+import logic.usecase.GetKetoDietMealsUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
 import logic.usecase.GetRandomFoodUseCase
+import logic.usecase.GetRandomKetoMealUseCase
 import logic.usecase.GetRandomMealsByCountryUseCase
 import logic.usecase.GetRandomPotatoesMealsUseCase
 import logic.usecase.GuessFoodPreparationTimeUseCase
@@ -17,4 +19,6 @@ val useCaseModule = module {
     single { GetRandomPotatoesMealsUseCase(get()) }
     single { GetItalianMealsForLargeGroupUseCase(get()) }
     single { GetIraqiMealsUseCase(get()) }
+    single { GetKetoDietMealsUseCase(get()) }
+    single { GetRandomKetoMealUseCase() }
 }

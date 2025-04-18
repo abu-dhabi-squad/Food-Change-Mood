@@ -11,6 +11,7 @@ class WrongInputException:AppException("wrong Input")
 
 class RichMaxAttemptException (exceptionMessage : String?):Exception(exceptionMessage)
 
+class NoKetoMealFoundException : Exception("No keto meal found!")
 
 
 
