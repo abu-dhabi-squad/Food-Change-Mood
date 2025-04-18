@@ -22,6 +22,10 @@ val useCaseModule = module {
     single<DateParserInterface> { DateParserImplementation() }
     single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
     single { GetFoodByDateUseCase(get())}
+    single { GetRandomKetoDietMealsUseCase(get()) }
+    single { GetFoodByDateUseCase(get()) }
+    single<DateParserInterface> { DateParserImplementation() }
+    single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
     single { GetMealByIdUI(get()) }
     single { GetMealByIdUseCase(get()) }
     single { GetSweetsWithoutEggsUseCase(get()) }
