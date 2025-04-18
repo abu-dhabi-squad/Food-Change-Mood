@@ -5,7 +5,6 @@ import model.EmptySearchByDateListException
 import model.Food
 import java.time.LocalDate
 
-
 class GetFoodByDateUseCase(
     private val foodRepository: FoodRepository
 ) {

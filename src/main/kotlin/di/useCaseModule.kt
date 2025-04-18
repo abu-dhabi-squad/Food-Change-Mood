@@ -14,6 +14,7 @@ import util.*
 import org.koin.dsl.module
 import presentation.GetFoodByDateUI
 import presentation.GetMealByIdUI
+import presentation.GetEasyFoodSuggestionUI
 
 val useCaseModule = module {
     single { GetRandomFoodUseCase(get()) }
@@ -30,9 +31,16 @@ val useCaseModule = module {
     single<DateParserInterface> { DateParserImplementation() }
     single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
     single { GetFoodByDateUseCase(get())}
+    single { GetRandomKetoDietMealsUseCase(get()) }
+    single { GetFoodByDateUseCase(get()) }
+    single<DateParserInterface> { DateParserImplementation() }
+    single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
     single { GetMealByIdUI(get()) }
     single { GetMealByIdUseCase(get()) }
     single { GetSweetsWithoutEggsUseCase(get()) }
     single { GetSeaFoodMealsSortedByProteinUseCase(get()) }
     single { GetFoodByDateUI(get(),get(), get(), get()) }
+    single { EasyFoodSuggestionGameUseCase(get()) }
+    single { GetEasyFoodSuggestionUI(get()) }
+    single { GetMealBySearchForNameUseCase(get())}
 }

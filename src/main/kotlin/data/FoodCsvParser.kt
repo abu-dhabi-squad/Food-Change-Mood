@@ -113,7 +113,7 @@ class FoodCsvParser(
 
 
     private fun parseStringToListOfString(text: String): List<String> =
-        text.removeSurrounding("['", "']").split("', '", ignoreCase = true)
+        text.removeSurrounding("['", "']").removeSurrounding("['", "\"]").split("', '", ignoreCase = true)
 
 
     private fun parseStringToListOfFloat(text: String): List<Float> =

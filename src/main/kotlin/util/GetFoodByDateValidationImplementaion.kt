@@ -1,6 +1,6 @@
 package util
 
-import model.InvalidDateFormateException
+import model.InvalidDateFormatException
 import model.InvalidDayException
 import model.InvalidMonthException
 import model.InvalidYearException
@@ -12,7 +12,7 @@ class GetFoodByDateValidationImplementaion(
 {
     override fun isValidDate(date: String): Boolean {
         val formatedDate: LocalDate
-        try { formatedDate = dateParserInterface.parseDateFromString(date)}catch (e: Exception){throw InvalidDateFormateException()}
+        try { formatedDate = dateParserInterface.parseDateFromString(date)}catch (e: Exception){throw InvalidDateFormatException()}
 
         isValidYear(formatedDate.year)
         isValidMonth(formatedDate.monthValue)

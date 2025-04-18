@@ -5,7 +5,9 @@ import data.FoodCsvParser
 import logic.repository.FoodRepository
 import org.koin.dsl.module
 import presentation.FoodChangeMoodConsoleUI
-import presentation.GymHelperConsoleUI
+import presentation.GuessFoodPreparationTimeGameUI
+import presentation.ItalianMealsForLargeGroupUI
+import presentation.RandomKetoMealUI
 import presentation.*
 import util.DateParserImplementation
 import util.DateParserInterface
@@ -22,11 +24,13 @@ val appModule = module {
     single<FoodRepository> { CsvFoodRepositoryImp(get()) }
     single { RandomPotatoesMealsConsoleUi(get()) }
     single { getIraqiMealsUseCaseUI(get()) }
+    single { RandomKetoMealUI (get())}
     single { GetHealthyMealsConsoleUI(get()) }
+    single { GetMealByNameUI(get()) }
     single { GymHelperConsoleUI(get()) }
     single { SweetsWithoutEggsConsoleUI(get()) }
     single { SeaFoodMealsSortedByProteinUI (get())}
     single<DateParserInterface> { DateParserImplementation() }
     single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
-    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get(),get(),get(),get(),get(), get(), get()) }
+    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get(),get(),get(),get(),get(), get(), get(),get(), get(), get()) }
 }
