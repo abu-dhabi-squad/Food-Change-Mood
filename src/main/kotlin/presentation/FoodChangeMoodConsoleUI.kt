@@ -1,12 +1,25 @@
 package presentation
 
+import logic.usecase.GetRandomMealsByCountryUseCase
+import logic.usecase.GetIraqiMealsUseCase
+import logic.usecase.GetHealthyMealsUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
 import logic.usecase.MealSearchByNameUseCase
 import kotlin.system.exitProcess
 
 class FoodChangeMoodConsoleUI(
-    // use cases will be here
+    private val gymHelperConsoleUI: GymHelperConsoleUI,
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
+    private val getHealthyMealsUseCase: GetHealthyMealsUseCase,
+    private val getMealByIdUI: GetMealByIdUI,
+    private val getFoodByDateUI: GetFoodByDateUI,
+    private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,
+    private val guessFoodPreparationTimeGameUI: GuessFoodPreparationTimeGameUI,
+    private val randomPotatoesMealsConsoleUi: RandomPotatoesMealsConsoleUi,
+    private val getSeaFoodMealsSortedByProteinUI: SeaFoodMealsSortedByProteinUI,
+    private val getFoodChangeMoodConsoleUi: ItalianMealsForLargeGroupUI,
+    private val getIraqiMealsUseCase: GetIraqiMealsUseCase,
+    private val getHealthyMealsConsoleUI: GetHealthyMealsConsoleUI,
     private val mealSearchByNameUseCase: MealSearchByNameUseCase
 
 ) {
@@ -23,21 +36,22 @@ class FoodChangeMoodConsoleUI(
         showOptions()
         val input = getUserInput()
         when (input) {
-            1 -> println("Healthy Fast Meals (<=15 min)")
+            1 -> getHealthyMealsConsoleUI.executeHealthyMeals()
             2 -> launchMealSearchByName()
-            3 -> println("Iraqi Meals")
+            3 -> getIraqiMealsUseCaseUI(getIraqiMealsUseCase)
             4 -> println("Easy Food Suggestions")
-            5 -> println("Guess Prep Time Game")
+            5 -> guessFoodPreparationTimeGameUI.start()
             6 -> println("Egg-Free Sweets")
             7 -> println("Keto Diet Meal Helper")
-            8 -> println("Search Foods by Add Date")
-            9 -> println("Gym Helper (Calories/Protein)")
-            10 -> println("Explore Country Food Culture")
+            8 -> getFoodByDateUI.runUI()
+            9 -> gymHelperConsoleUI.start()
+            10 -> getRandomMealsByCountryUI(getRandomMealsByCountryUseCase)
             11 -> println("Ingredient Guess Game")
-            12 -> println("Potato-Based Meals")
+            12 -> { randomPotatoesMealsConsoleUi.displayRandomPotatoesMealsUI() }
             13 -> getHighCalorieMealUI(getMealForThinPeopleUseCase)
-            14 -> println("Seafood Meals (Protein Sorted)")
-            15 -> println("Italian Meals for Large Groups")
+            14 -> getSeaFoodMealsSortedByProteinUI.start()
+            15 -> getFoodChangeMoodConsoleUi.start()
+            16 -> getMealByIdUI.getDetailsById()
             0 -> exitProcess(0)
             else -> println("Invalid input")
         }
@@ -62,6 +76,7 @@ class FoodChangeMoodConsoleUI(
     }
 
     private fun showOptions() {
+        println()
         println("╔════════════════════════════════════╗")
         println("║      Food Change Mood Console      ║")
         println("╠════════════════════════════════════╣")
@@ -88,6 +103,4 @@ class FoodChangeMoodConsoleUI(
         print("Enter your choice: ")
         return readlnOrNull()?.toIntOrNull()
     }
-
-
 }
