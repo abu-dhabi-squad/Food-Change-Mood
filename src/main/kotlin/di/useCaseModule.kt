@@ -5,10 +5,6 @@ import logic.usecase.*
 import org.koin.dsl.module
 import presentation.GetFoodByDateUI
 import presentation.GetMealByIdUI
-import util.DateParserImplementation
-import util.DateParserInterface
-import util.GetFoodByDateValidationImplementaion
-import util.GetFoodByDateValidationInterface
 
 val useCaseModule = module {
     single { GetRandomFoodUseCase(get()) }
@@ -24,5 +20,6 @@ val useCaseModule = module {
     single { GetMealByIdUI(get()) }
     single { GetMealByIdUseCase(get()) }
     single { GetSweetsWithoutEggsUseCase(get()) }
+    single { GetSeaFoodMealsSortedByProteinUseCase(get()) }
     single { GetFoodByDateUI(get(),get(), get(), get()) }
 }
