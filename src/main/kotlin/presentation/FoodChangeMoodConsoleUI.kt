@@ -1,6 +1,5 @@
 package presentation
 
-import logic.usecase.GymHelperUseCase
 import logic.usecase.GetRandomMealsByCountryUseCase
 import logic.usecase.GetIraqiMealsUseCase
 import logic.usecase.GetHealthyMealsUseCase
@@ -16,6 +15,7 @@ class FoodChangeMoodConsoleUI(
     private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,
     private val guessFoodPreparationTimeGameUI: GuessFoodPreparationTimeGameUI,
     private val randomPotatoesMealsConsoleUi: RandomPotatoesMealsConsoleUi,
+    private val getSeaFoodMealsSortedByProteinUIUI: SeaFoodMealsSortedByProteinUI,
     private val getFoodChangeMoodConsoleUi: ItalianMealsForLargeGroupUI,
     private val getIraqiMealsUseCase: GetIraqiMealsUseCase,
     private val getHealthyMealsConsoleUI: GetHealthyMealsConsoleUI
@@ -46,7 +46,7 @@ class FoodChangeMoodConsoleUI(
             11 -> println("Ingredient Guess Game")
             12 -> { randomPotatoesMealsConsoleUi.displayRandomPotatoesMealsUI() }
             13 -> getHighCalorieMealUI(getMealForThinPeopleUseCase)
-            14 -> println("Seafood Meals (Protein Sorted)")
+            14 -> getSeaFoodMealsSortedByProteinUIUI.start()
             15 -> getFoodChangeMoodConsoleUi.start()
             16 -> getMealByIdUI.getDetailsById()
             0 -> exitProcess(0)
