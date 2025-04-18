@@ -1,13 +1,33 @@
 package di
 
-import data.FakeCsvFoodRepositoryImp
+import data.CsvFoodRepositoryImp
+import data.FoodCsvParser
 import logic.repository.FoodRepository
 import logic.usecase.EasyFoodSuggestionGameUseCase
 import org.koin.dsl.module
 import presentation.FoodChangeMoodConsoleUI
+import presentation.GymHelperConsoleUI
+import presentation.*
+import util.DateParserImplementation
+import util.DateParserInterface
+import util.GetFoodByDateValidationImplementaion
+import util.GetFoodByDateValidationInterface
+import java.io.File
 
 val appModule = module {
-    single<FoodRepository> { FakeCsvFoodRepositoryImp() }
-
-    single { FoodChangeMoodConsoleUI(get(),get())}
+    single { GuessFoodPreparationTimeGameUI(get(), get()) }
+    single { ItalianMealsForLargeGroupUI(get()) }
+    single { GuessIngredientConsoleUI(get()) }
+    single { File("food.csv") }
+    single { FoodCsvParser(get(), get()) }
+    single<FoodRepository> { CsvFoodRepositoryImp(get()) }
+    single { RandomPotatoesMealsConsoleUi(get()) }
+    single { getIraqiMealsUseCaseUI(get()) }
+    single { GetHealthyMealsConsoleUI(get()) }
+    single { GymHelperConsoleUI(get()) }
+    single { SweetsWithoutEggsConsoleUI(get()) }
+    single { SeaFoodMealsSortedByProteinUI (get())}
+    single<DateParserInterface> { DateParserImplementation() }
+    single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
+    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get(),get(),get(),get(),get(), get(), get()) }
 }
