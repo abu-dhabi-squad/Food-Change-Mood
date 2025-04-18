@@ -27,5 +27,5 @@ val appModule = module {
     single { SeaFoodMealsSortedByProteinUI (get())}
     single<DateParserInterface> { DateParserImplementation() }
     single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
-    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get(),get(),get(),get(),get(), get()) }
+    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get(),get(),get(),get(),get(), get(), get()) }
 }

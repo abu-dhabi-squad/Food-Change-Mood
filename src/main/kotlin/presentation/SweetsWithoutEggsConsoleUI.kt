@@ -10,7 +10,8 @@ class SweetsWithoutEggsConsoleUI(
         try {
             getSweetsWithoutEggsUseCase.getSweetsWithoutEggs().forEach { meal ->
                 println("We suggest: ${meal.name}")
-                print("Do you like it? ")
+                println("Description: ${meal.description}")
+                print("\nDo you like it? ")
                 val input = readlnOrNull()?.trim()
                 when {
                     input.equals("y", true) -> {meal.print(); return}
