@@ -1,6 +1,9 @@
 package presentation
 
 import logic.usecase.GetMealForThinPeopleUseCase
+import model.WrongInputException
+
+
 fun getHighCalorieMealUI(getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase){
     val shownSet = mutableSetOf<Int>()
     getRandomHighCalorieMeal(getMealForThinPeopleUseCase,shownSet)
@@ -14,12 +17,25 @@ private fun getRandomHighCalorieMeal(getMealForThinPeopleUseCase: GetMealForThin
             println("Meal Description: "+ suggestMeal.description+"\n")
 
             when(isTheMealLikable()){
-                true -> showMealDetails(suggestMeal)
+                true -> suggestMeal.showDetails()
                 false -> getRandomHighCalorieMeal(getMealForThinPeopleUseCase, shownSet)
             }
         }
     }
     catch (e: Exception){
         println(e.message)
+    }
+}
+
+private fun isTheMealLikable():Boolean{
+    println("Do you like it? {y/n}")
+    readLine().let {
+        when{
+            it.equals("y",true) -> { return true }
+            it.equals("n",true) -> { return false }
+            else -> {
+                throw WrongInputException()
+            }
+        }
     }
 }

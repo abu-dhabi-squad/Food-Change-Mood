@@ -2,12 +2,16 @@ package data
 
 import model.Food
 import model.Nutrition
+import util.DateParserInterface
 import java.io.File
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 
-class FoodCsvParser(private val csvFile: File) {
+class FoodCsvParser(
+    private val csvFile: File,
+    private val dateParserInterface: DateParserInterface
+) {
 
     fun parseCsvFileToFoods(): List<Food> {
         return if (csvFile.exists()) {
@@ -101,8 +105,7 @@ class FoodCsvParser(private val csvFile: File) {
 
     private fun parseDate(text: String): LocalDate? {
         return try {
-            val formatter = DateTimeFormatter.ofPattern("M/d/yyyy")
-            LocalDate.parse(text, formatter)
+            dateParserInterface.parseDateFromString(text)
         } catch (exception: DateTimeParseException) {
             null
         }

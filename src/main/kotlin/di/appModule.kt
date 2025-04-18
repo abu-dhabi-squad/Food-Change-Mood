@@ -9,18 +9,19 @@ import presentation.FoodChangeMoodConsoleUI
 import presentation.GuessFoodPreparationTimeGameUI
 import presentation.ItalianMealsForLargeGroupUI
 import presentation.RandomKetoMealUI
+import presentation.*
 import java.io.File
-import presentation.RandomPotatoesMealsConsoleUi
-import presentation.getIraqiMealsUseCaseUI
 
 val appModule = module {
     single { GuessFoodPreparationTimeGameUI(get(),get ()) }
     single { ItalianMealsForLargeGroupUI(get()) }
     single { File("food.csv") }
-    single { FoodCsvParser(get()) }
+    single { FoodCsvParser(get(), get()) }
     single<FoodRepository> { CsvFoodRepositoryImp(get()) }
     single { RandomPotatoesMealsConsoleUi(get()) }
     single { getIraqiMealsUseCaseUI(get()) }
     single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get()) }
     single { RandomKetoMealUI (get(),get())}
+    single { GetHealthyMealsConsoleUI(get()) }
+    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get(),get(),get(),get()) }
 }
