@@ -5,7 +5,7 @@ import logic.usecase.EasyFoodSuggestionGameUseCase
 import kotlin.system.exitProcess
 class FoodChangeMoodConsoleUI(
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
-    private val easyFoodSuggestionGameUseCase: EasyFoodSuggestionGameUseCase
+    private val easyFoodSuggestionUI: GetEasyFoodSuggestionUI
 
 ) {
     fun start() {
@@ -24,7 +24,7 @@ class FoodChangeMoodConsoleUI(
             1 -> println("Healthy Fast Meals (<=15 min)")
             2 -> println("Search Meal by Name")
             3 -> println("Iraqi Meals")
-            4 -> launchSEasyFoodSuggestionGame()
+            4 -> easyFoodSuggestionUI.launchSEasyFoodSuggestionGame()
             5 -> println("Guess Prep Time Game")
             6 -> println("Egg-Free Sweets")
             7 -> println("Keto Diet Meal Helper")
@@ -65,25 +65,6 @@ class FoodChangeMoodConsoleUI(
         println("╚════════════════════════════════════╝")
     }
 
-    private fun launchSEasyFoodSuggestionGame() {
-        val meals = easyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
-        if (meals.isEmpty()) {
-            println("No easy meals found. Please try again.")
-            return
-        }
-
-        println("\n  Here are 10 easy meals for you:")
-        meals.forEachIndexed { index, meal ->
-            println("--------------------------------------------------")
-            println("${index + 1}. ${meal.name ?: "Unnamed Meal"}")
-            println("Prepared Time: ${meal.minutes} minutes")
-            println("Description: ${meal.description ?: "No description available"}")
-            println("Ingredients: ${meal.ingredients.joinToString(", ")}")
-            println("Steps: ${meal.steps.size} steps")
-            println("Nutrition: Calories = ${meal.nutrition.calories}, Protein = ${meal.nutrition.protein}g")
-        }
-        println("--------------------------------------------------\n")
-    }
 
     private fun getUserInput(): Int? {
         print("Enter your choice: ")
