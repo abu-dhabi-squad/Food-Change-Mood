@@ -1,7 +1,6 @@
 package logic.usecase
 
 import logic.repository.FoodRepository
-import model.CountryMealsFetchException
 import model.EmptyListException
 import model.Food
 

@@ -12,7 +12,7 @@ fun getRandomMealsByCountryUI(
         val meals = inputCountry?.let {
             getRandomMealsByCountryUseCase.getRandomMeals(it)
         }
-        meals?.forEachIndexed { index, meal ->
+        meals?.takeIf { meals -> meals.isNotEmpty() }?.forEachIndexed { index, meal ->
             println("${index + 1}. $meal")
         } ?: println("No meals matched your input.")
     } catch (e: Exception) {
