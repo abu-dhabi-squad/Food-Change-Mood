@@ -7,16 +7,20 @@ import model.NoMealsFoundException
 class GetSweetsWithoutEggsUseCase(
     private val foodRepository: FoodRepository
 ) {
-    fun getSweetsWithoutEggs(): List<Food> {
+    fun getSweetsWithoutEggs(shownMeals: Set<Int>): Food {
         return foodRepository.getFoods().getOrThrow()
-            .filter(::isValidMealWithoutEgg)
+            .filter { meal -> isValidMealWithoutEgg(meal) && isNotShownBefore(meal, shownMeals) }
             .takeIf { it.isNotEmpty() }
-            ?.shuffled()
+            ?.random()
             ?: throw NoMealsFoundException()
     }
 
     private fun isValidMealWithoutEgg(meal: Food): Boolean {
         return isValidMeal(meal) && isSweet(meal) && isEggFree(meal)
+    }
+
+    private fun isNotShownBefore(meal: Food, shownMeals: Set<Int>): Boolean {
+        return meal.id !in shownMeals
     }
 
     private fun isValidMeal(meal: Food) = !meal.name.isNullOrBlank() && !meal.description.isNullOrBlank()
