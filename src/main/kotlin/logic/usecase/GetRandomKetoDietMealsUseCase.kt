@@ -16,10 +16,7 @@ class GetRandomKetoDietMealsUseCase(private val foodRepository: FoodRepository) 
     private fun isKetoDietMeal(
         nutrition: Nutrition
     ): Boolean {
-        if (!isValidSugarAmount(nutrition.sugar))
-            return false
-
-        val isKeto = isValidFatPercentage(nutrition.totalFat, nutrition.calories) &&
+        val isKeto = isValidSugarAmount(nutrition.sugar) && isValidFatPercentage(nutrition.totalFat, nutrition.calories) &&
                 isValidProteinPercentage(nutrition.protein, nutrition.calories) &&
                 isValidCarbPercentage(nutrition.carbohydrates, nutrition.calories) &&
                 isValidSaturatedFatPercentage(nutrition.saturated, nutrition.totalFat)
