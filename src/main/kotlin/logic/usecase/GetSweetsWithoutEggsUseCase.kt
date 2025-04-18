@@ -16,16 +16,16 @@ class GetSweetsWithoutEggsUseCase(
     }
 
     private fun isValidMealWithoutEgg(meal: Food): Boolean {
-        return !meal.name.isNullOrBlank()
-                && !meal.description.isNullOrBlank()
-                && (
-                        meal.name.lowercase().split(" ").contains(SWEET_KEYWORD)
-                        || meal.description.lowercase().split(" ").contains(SWEET_KEYWORD)
-                        || meal.tags.any { it.equals(SWEET_KEYWORD, true) }
-                )
-                && meal.ingredients.isNotEmpty()
-                && !meal.ingredients.contains(EGG_KEYWORD)
+        return isValidMeal(meal) && isSweet(meal) && isEggFree(meal)
     }
+
+    private fun isValidMeal(meal: Food) = !meal.name.isNullOrBlank() && !meal.description.isNullOrBlank()
+
+    private fun isSweet(meal: Food) = meal.name?.lowercase()?.split(" ")?.contains(SWEET_KEYWORD) == true
+            || meal.description?.lowercase()?.split(" ")?.contains(SWEET_KEYWORD) == true
+            || meal.tags.any { it.equals(SWEET_KEYWORD, true) }
+
+    private fun isEggFree(meal: Food) = meal.ingredients.isNotEmpty() && !meal.ingredients.contains(EGG_KEYWORD)
 
     companion object {
         const val EGG_KEYWORD = "egg"
