@@ -8,13 +8,14 @@ import presentation.*
 import java.io.File
 
 val appModule = module {
-    single { GuessFoodPreparationTimeGameUI(get(),get ()) }
+    single { GuessFoodPreparationTimeGameUI(get(), get()) }
     single { ItalianMealsForLargeGroupUI(get()) }
+    single { GuessIngredientConsoleUI(get()) }
     single { File("food.csv") }
     single { FoodCsvParser(get(), get()) }
     single<FoodRepository> { CsvFoodRepositoryImp(get()) }
     single { RandomPotatoesMealsConsoleUi(get()) }
     single { getIraqiMealsUseCaseUI(get()) }
     single { GetHealthyMealsConsoleUI(get()) }
-    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get(),get(),get(),get()) }
+    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
 }

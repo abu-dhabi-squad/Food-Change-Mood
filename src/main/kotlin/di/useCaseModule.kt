@@ -10,6 +10,7 @@ import logic.usecase.GetRandomMealsByCountryUseCase
 import logic.usecase.GetRandomPotatoesMealsUseCase
 import logic.usecase.GuessFoodPreparationTimeUseCase
 import logic.usecase.GetHealthyMealsUseCase
+import logic.usecase.GuessIngredientUseCase
 import org.koin.dsl.module
 import presentation.GetFoodByDateUI
 import presentation.GetMealByIdUI
@@ -27,7 +28,7 @@ val useCaseModule = module {
     single { GetRandomPotatoesMealsUseCase(get()) }
     single { GetItalianMealsForLargeGroupUseCase(get()) }
     single { GetIraqiMealsUseCase(get()) }
-
+    single { GuessIngredientUseCase(get()) }
     single { GetFoodByDateUseCase(get()) }
     single<DateParserInterface> { DateParserImplementation() }
     single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
