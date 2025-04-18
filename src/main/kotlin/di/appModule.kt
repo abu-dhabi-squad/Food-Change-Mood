@@ -14,7 +14,7 @@ import util.GetFoodByDateValidationInterface
 import java.io.File
 
 val appModule = module {
-    single { GuessFoodPreparationTimeGameUI(get(),get ()) }
+    single { GuessFoodPreparationTimeGameUI(get(), get()) }
     single { ItalianMealsForLargeGroupUI(get()) }
     single { File("food.csv") }
     single { FoodCsvParser(get(), get()) }
@@ -23,8 +23,9 @@ val appModule = module {
     single { getIraqiMealsUseCaseUI(get()) }
     single { GetHealthyMealsConsoleUI(get()) }
     single { GymHelperConsoleUI(get()) }
+    single { SweetsWithoutEggsConsoleUI(get()) }
     single { SeaFoodMealsSortedByProteinUI (get())}
     single<DateParserInterface> { DateParserImplementation() }
     single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
-    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get(),get(),get(),get(),get(), get()) }
+    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get(),get(),get(),get(),get(), get(), get()) }
 }
