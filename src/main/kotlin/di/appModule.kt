@@ -26,7 +26,8 @@ val appModule = module {
     single { RandomKetoMealUI (get())}
     single { GetHealthyMealsConsoleUI(get()) }
     single { GymHelperConsoleUI(get()) }
+    single { SeaFoodMealsSortedByProteinUI (get())}
     single<DateParserInterface> { DateParserImplementation() }
     single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
-    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get(),get(),get(),get(),get()) }
+    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get(),get(),get(),get(),get(), get()) }
 }

@@ -14,6 +14,7 @@ class FoodChangeMoodConsoleUI(
     private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,
     private val guessFoodPreparationTimeGameUI: GuessFoodPreparationTimeGameUI,
     private val randomPotatoesMealsConsoleUi: RandomPotatoesMealsConsoleUi,
+    private val getSeaFoodMealsSortedByProteinUI: SeaFoodMealsSortedByProteinUI,
     private val getFoodChangeMoodConsoleUi: ItalianMealsForLargeGroupUI,
     private val getIraqiMealsUseCase: GetIraqiMealsUseCase,
     private val randomKetoMealUI: RandomKetoMealUI,
@@ -45,7 +46,7 @@ class FoodChangeMoodConsoleUI(
             11 -> println("Ingredient Guess Game")
             12 -> { randomPotatoesMealsConsoleUi.displayRandomPotatoesMealsUI() }
             13 -> getHighCalorieMealUI(getMealForThinPeopleUseCase)
-            14 -> println("Seafood Meals (Protein Sorted)")
+            14 -> getSeaFoodMealsSortedByProteinUI.start()
             15 -> getFoodChangeMoodConsoleUi.start()
             16 -> getMealByIdUI.getDetailsById()
             0 -> exitProcess(0)

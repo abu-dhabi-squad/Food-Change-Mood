@@ -1,17 +1,7 @@
 package di
 
-import logic.usecase.GetFoodByDateUseCase
-import logic.usecase.GetMealByIdUseCase
 import logic.GetItalianMealsForLargeGroupUseCase
-import logic.usecase.GetIraqiMealsUseCase
-import logic.usecase.GetRandomKetoDietMealsUseCase
-import logic.usecase.GymHelperUseCase
-import logic.usecase.GetMealForThinPeopleUseCase
-import logic.usecase.GetRandomFoodUseCase
-import logic.usecase.GetRandomMealsByCountryUseCase
-import logic.usecase.GetRandomPotatoesMealsUseCase
-import logic.usecase.GuessFoodPreparationTimeUseCase
-import logic.usecase.GetHealthyMealsUseCase
+import logic.usecase.*
 import org.koin.dsl.module
 import presentation.GetFoodByDateUI
 import presentation.GetMealByIdUI
@@ -36,5 +26,6 @@ val useCaseModule = module {
     single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
     single { GetMealByIdUI(get()) }
     single { GetMealByIdUseCase(get()) }
+    single { GetSeaFoodMealsSortedByProteinUseCase(get()) }
     single { GetFoodByDateUI(get(),get(), get(), get()) }
 }
