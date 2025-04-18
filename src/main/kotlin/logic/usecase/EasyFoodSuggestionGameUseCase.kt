@@ -8,7 +8,6 @@ class EasyFoodSuggestionGameUseCase(
     private val foodRepository: FoodRepository
 ) {
     fun suggestRandomEasyMeals(count: Int = DEFAULT_SUGGESTED_MEALS_COUNT): List<Food>{
-
         return foodRepository.getFoods()
             .getOrThrow()
             .filter(::isValidEasyMeal)

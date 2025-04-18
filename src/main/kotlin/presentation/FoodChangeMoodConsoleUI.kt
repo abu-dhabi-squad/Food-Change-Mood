@@ -2,9 +2,7 @@ package presentation
 
 import logic.usecase.GetRandomMealsByCountryUseCase
 import logic.usecase.GetIraqiMealsUseCase
-import logic.usecase.GetHealthyMealsUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
-import logic.usecase.EasyFoodSuggestionGameUseCase
 import kotlin.system.exitProcess
 
 class FoodChangeMoodConsoleUI(
