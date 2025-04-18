@@ -12,8 +12,7 @@ class GetMealBySearchForNameUI(private val getMealBySearchForNameUseCase: GetMea
             ?.let { input ->
                 try {
                     getMealBySearchForNameUseCase.findMealsByName(input)
-                        .takeIf { it.isNotEmpty() }
-                        ?.also { results ->
+                        .also { results ->
                             println("Search results for '$input':")
                             results.forEach { println(it.name ?: "none") }
                         }
