@@ -1,3 +1,6 @@
+### IntelliJ ###
+ *.iml
+
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
@@ -31,6 +34,8 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-build/
-.gradle/
-.idea/
+
+ ### Build Folders ###
+ /build/
+ /out/
+ /.gradle/
