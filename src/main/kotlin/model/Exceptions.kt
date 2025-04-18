@@ -12,7 +12,7 @@ class EmptyListException : AppException("list is empty")
 
 class EmptyHighCalorieListException : AppException("there is no high calories meals in list")
 
-class RichMaxAttemptException(exceptionMessage: String?) : Exception(exceptionMessage)
+class RichMaxAttemptException(preparationTime:Int) : Exception("You have reached the maximum number of attempts.The correct preparation time is $preparationTime minutes")
 
 class EmptySearchByDateListException : AppException("there is no meals in this date list")
 
