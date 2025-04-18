@@ -18,6 +18,7 @@ class FoodChangeMoodConsoleUI(
     private val getFoodChangeMoodConsoleUi: ItalianMealsForLargeGroupUI,
     private val getIraqiMealsUseCase: GetIraqiMealsUseCase,
     private val getHealthyMealsConsoleUI: GetHealthyMealsConsoleUI,
+    private val getSweetsWithoutEggsConsoleUI: SweetsWithoutEggsConsoleUI,
     private val getMealBySearchForNameUI: GetMealBySearchForNameUI,
 ) {
     fun start() {
@@ -38,7 +39,7 @@ class FoodChangeMoodConsoleUI(
             3 -> getIraqiMealsUseCaseUI(getIraqiMealsUseCase)
             4 -> println("Easy Food Suggestions")
             5 -> guessFoodPreparationTimeGameUI.start()
-            6 -> println("Egg-Free Sweets")
+            6 -> getSweetsWithoutEggsConsoleUI.start()
             7 -> println("Keto Diet Meal Helper")
             8 -> getFoodByDateUI.runUI()
             9 -> gymHelperConsoleUI.start()
