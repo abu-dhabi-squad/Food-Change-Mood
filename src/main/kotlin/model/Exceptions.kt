@@ -8,7 +8,7 @@ class EmptyListException :AppException("list is empty")
 
 class EmptyHighCalorieListException:AppException("there is no high calories meals in list")
 
-class WrongInputException:AppException("wrong Input")
+class WrongInputException:AppException("\nWrong Input!")
 
 class RichMaxAttemptException (exceptionMessage : String?):Exception(exceptionMessage)
 

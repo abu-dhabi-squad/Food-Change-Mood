@@ -7,17 +7,20 @@ import logic.usecase.GetMealForThinPeopleUseCase
 import kotlin.system.exitProcess
 
 class FoodChangeMoodConsoleUI(
-    private val getHealthyMealsUseCase: GetHealthyMealsUseCase,
     private val guessIngredientConsoleUI: GuessIngredientConsoleUI,
+    private val gymHelperConsoleUI: GymHelperConsoleUI,
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
+    private val getHealthyMealsUseCase: GetHealthyMealsUseCase,
     private val getMealByIdUI: GetMealByIdUI,
     private val getFoodByDateUI: GetFoodByDateUI,
     private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,
     private val guessFoodPreparationTimeGameUI: GuessFoodPreparationTimeGameUI,
     private val randomPotatoesMealsConsoleUi: RandomPotatoesMealsConsoleUi,
+    private val getSeaFoodMealsSortedByProteinUI: SeaFoodMealsSortedByProteinUI,
     private val getFoodChangeMoodConsoleUi: ItalianMealsForLargeGroupUI,
     private val getIraqiMealsUseCase: GetIraqiMealsUseCase,
-    private val getHealthyMealsConsoleUI: GetHealthyMealsConsoleUI
+    private val getHealthyMealsConsoleUI: GetHealthyMealsConsoleUI,
+    private val getSweetsWithoutEggsConsoleUI: SweetsWithoutEggsConsoleUI,
 ) {
     fun start() {
         showWelcome()
@@ -37,17 +40,15 @@ class FoodChangeMoodConsoleUI(
             3 -> getIraqiMealsUseCaseUI(getIraqiMealsUseCase)
             4 -> println("Easy Food Suggestions")
             5 -> guessFoodPreparationTimeGameUI.start()
-            6 -> println("Egg-Free Sweets")
+            6 -> getSweetsWithoutEggsConsoleUI.start()
             7 -> println("Keto Diet Meal Helper")
             8 -> getFoodByDateUI.runUI()
-            9 -> println("Gym Helper (Calories/Protein)")
+            9 -> gymHelperConsoleUI.start()
             10 -> getRandomMealsByCountryUI(getRandomMealsByCountryUseCase)
             11 -> guessIngredientConsoleUI.start()
-            12 -> {
-                randomPotatoesMealsConsoleUi.displayRandomPotatoesMealsUI()
-            }
+            12 -> { randomPotatoesMealsConsoleUi.displayRandomPotatoesMealsUI() }
             13 -> getHighCalorieMealUI(getMealForThinPeopleUseCase)
-            14 -> println("Seafood Meals (Protein Sorted)")
+            14 -> getSeaFoodMealsSortedByProteinUI.start()
             15 -> getFoodChangeMoodConsoleUi.start()
             16 -> getMealByIdUI.getDetailsById()
             0 -> exitProcess(0)
@@ -57,6 +58,7 @@ class FoodChangeMoodConsoleUI(
     }
 
     private fun showOptions() {
+        println()
         println("╔════════════════════════════════════╗")
         println("║      Food Change Mood Console      ║")
         println("╠════════════════════════════════════╣")
@@ -83,6 +85,4 @@ class FoodChangeMoodConsoleUI(
         print("Enter your choice: ")
         return readlnOrNull()?.toIntOrNull()
     }
-
-
 }
