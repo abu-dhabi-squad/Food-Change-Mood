@@ -29,7 +29,7 @@ class RandomPotatoesMealsConsoleUi(private val getRandomPotatoesMealsUseCase: Ge
                 }
 
                 input.equals("n", ignoreCase = true) -> {
-                    println("Thanks! Enjoy your meals \n")
+                    println("Thanks! , Enjoy your meals \n")
                     return
 
                 }

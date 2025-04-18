@@ -12,19 +12,17 @@ class GetRandomPotatoesMealsUseCase(
             }
             .shuffled()
             .take(MEALS_COUNT)
-            .map { it.name!! }
+            .mapNotNull { it.name }
     }
 
-    private fun hasValidName(name: String?): Boolean {
-        return !name.isNullOrBlank()
-    }
+    private fun hasValidName(name: String?): Boolean = !name.isNullOrBlank()
 
     private fun isIngredientsContainsPotatoes(ingredients: List<String>): Boolean {
         return ingredients.any { it.contains(POTATOES_KEYWORD, ignoreCase = true) }
     }
 
     companion object {
-        const val MEALS_COUNT = 10
-        const val POTATOES_KEYWORD = "potatoes"
+        private const val MEALS_COUNT = 10
+        private const val POTATOES_KEYWORD = "potatoes"
     }
 }
