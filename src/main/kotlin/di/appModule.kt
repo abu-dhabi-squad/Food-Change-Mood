@@ -20,8 +20,7 @@ val appModule = module {
     single<FoodRepository> { CsvFoodRepositoryImp(get()) }
     single { RandomPotatoesMealsConsoleUi(get()) }
     single { getIraqiMealsUseCaseUI(get()) }
-    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get()) }
     single { RandomKetoMealUI (get(),get())}
     single { GetHealthyMealsConsoleUI(get()) }
-    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get(),get(),get(),get()) }
+    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get(),get(),get(),get(),get()) }
 }

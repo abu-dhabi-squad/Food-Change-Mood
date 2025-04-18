@@ -7,20 +7,24 @@ class RandomKetoMealUI(
     private val getKetoDietMealsUseCase: GetKetoDietMealsUseCase,
     private val getRandomKetoMealUseCase: GetRandomKetoMealUseCase
 ) {
-    lateinit var ketoMeals: List<Food>
+    var ketoMeals: List<Food>
     private val shownKetoMealsId = mutableListOf<Int>()
 
     init {
-        ketoMeals = getKetoDietMealsUseCase()
+        ketoMeals = try {
+            getKetoDietMealsUseCase()
+        }catch (ex :Exception){
+            emptyList()
+        }
     }
 
     fun start() {
         try {
-            val food = getRandomKetoMealUseCase(ketoMeals, shownKetoMealsId)
-            println(food.name)
-            shownKetoMealsId.add(food.id)
+            val randomKetoMeal = getRandomKetoMealUseCase(ketoMeals, shownKetoMealsId)
+            println(randomKetoMeal.name)
+            shownKetoMealsId.add(randomKetoMeal.id)
             when (isTheMealLikable()) {
-                true -> showMealDetails(food)
+                true -> randomKetoMeal.showDetails()
                 false -> start()
             }
         } catch (ex: Exception) {
