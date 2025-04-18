@@ -1,6 +1,7 @@
 package logic.usecase
 
 import logic.repository.FoodRepository
+import model.EmptySearchByDateListException
 import model.Food
 
 class GetSeaFoodMealsSortedByProteinUseCase(private val foodRepository: FoodRepository) {
@@ -9,5 +10,7 @@ class GetSeaFoodMealsSortedByProteinUseCase(private val foodRepository: FoodRepo
             .getOrThrow()
             .filter { meal -> meal.tags.any { it.contains("seafood", ignoreCase = true) } }
             .sortedByDescending { it.nutrition.protein }
+            .takeIf { it.isNotEmpty() }
+            ?: throw EmptySearchByDateListException()
     }
 }
