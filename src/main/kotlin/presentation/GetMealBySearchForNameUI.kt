@@ -10,13 +10,17 @@ class GetMealBySearchForNameUI(private val getMealBySearchForNameUseCase: GetMea
             ?.trim()
             ?.takeIf { it.isNotEmpty() }
             ?.let { input ->
-                getMealBySearchForNameUseCase.findMealsByName(input)
-                    .takeIf { it.isNotEmpty() }
-                    ?.also { results ->
-                        println("Search results for '$input':")
-                        results.forEach { println(it.name ?: "none") }
-                    }
-                    ?: println("No meals found for '$input'")
+                try {
+                    getMealBySearchForNameUseCase.findMealsByName(input)
+                        .takeIf { it.isNotEmpty() }
+                        ?.also { results ->
+                            println("Search results for '$input':")
+                            results.forEach { println(it.name ?: "none") }
+                        }
+                        ?: println("No meals found for '$input'")
+                }catch (exception:Exception) {
+                    println(exception)
+                }
             }
             ?: println("Invalid input. Please enter a non-empty keyword.")
     }
