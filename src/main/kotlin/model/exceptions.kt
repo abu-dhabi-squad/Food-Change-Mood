@@ -8,7 +8,7 @@ class EmptyListException :AppException("list is empty")
 
 class EmptyHighCalorieListException:AppException("there is no high calories meals in list")
 
-class WrongInputException:AppException("wrong Input")
+class WrongInputException:AppException("\nWrong Input!")
 
 class RichMaxAttemptException (exceptionMessage : String?):Exception(exceptionMessage)
 
@@ -27,4 +27,3 @@ class InvalidIdException:AppException("Invalid ID Input")
 class NoIraqiMealsFoundException : AppException("No Iraqi meals found")
 
 class CountryMealsFetchException:AppException("Wrong country name")
-

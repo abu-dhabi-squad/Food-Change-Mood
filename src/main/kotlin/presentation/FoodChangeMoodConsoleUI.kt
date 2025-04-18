@@ -3,7 +3,6 @@ package presentation
 import logic.usecase.GetRandomMealsByCountryUseCase
 import logic.usecase.GetIraqiMealsUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
-import logic.usecase.GetMealBySearchForNameUseCase
 import kotlin.system.exitProcess
 
 class FoodChangeMoodConsoleUI(
