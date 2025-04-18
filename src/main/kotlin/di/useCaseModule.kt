@@ -4,11 +4,10 @@ import logic.usecase.GetFoodByDateUseCase
 import logic.usecase.GetMealByIdUseCase
 import logic.GetItalianMealsForLargeGroupUseCase
 import logic.usecase.GetIraqiMealsUseCase
-import logic.usecase.GetKetoDietMealsUseCase
+import logic.usecase.GetRandomKetoDietMealsUseCase
 import logic.usecase.GymHelperUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
 import logic.usecase.GetRandomFoodUseCase
-import logic.usecase.GetRandomKetoMealUseCase
 import logic.usecase.GetRandomMealsByCountryUseCase
 import logic.usecase.GetRandomPotatoesMealsUseCase
 import logic.usecase.GuessFoodPreparationTimeUseCase
@@ -31,9 +30,7 @@ val useCaseModule = module {
     single { GetRandomPotatoesMealsUseCase(get()) }
     single { GetItalianMealsForLargeGroupUseCase(get()) }
     single { GetIraqiMealsUseCase(get()) }
-    single { GetKetoDietMealsUseCase(get()) }
-    single { GetRandomKetoMealUseCase() }
-
+    single { GetRandomKetoDietMealsUseCase(get()) }
     single { GetFoodByDateUseCase(get()) }
     single<DateParserInterface> { DateParserImplementation() }
     single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }

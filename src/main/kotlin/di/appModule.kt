@@ -23,7 +23,7 @@ val appModule = module {
     single<FoodRepository> { CsvFoodRepositoryImp(get()) }
     single { RandomPotatoesMealsConsoleUi(get()) }
     single { getIraqiMealsUseCaseUI(get()) }
-    single { RandomKetoMealUI (get(),get())}
+    single { RandomKetoMealUI (get())}
     single { GetHealthyMealsConsoleUI(get()) }
     single { GymHelperConsoleUI(get()) }
     single<DateParserInterface> { DateParserImplementation() }

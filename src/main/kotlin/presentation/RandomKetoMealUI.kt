@@ -1,35 +1,40 @@
 package presentation
 
-import logic.usecase.GetKetoDietMealsUseCase
-import logic.usecase.GetRandomKetoMealUseCase
+import logic.usecase.GetRandomKetoDietMealsUseCase
 import model.Food
+import model.WrongInputException
+
 class RandomKetoMealUI(
-    private val getKetoDietMealsUseCase: GetKetoDietMealsUseCase,
-    private val getRandomKetoMealUseCase: GetRandomKetoMealUseCase
+    private val getRandomKetoDietMealsUseCase: GetRandomKetoDietMealsUseCase,
 ) {
     var ketoMeals: List<Food>
-    private val shownKetoMealsId = mutableListOf<Int>()
 
     init {
         ketoMeals = try {
-            getKetoDietMealsUseCase()
-        }catch (ex :Exception){
+            getRandomKetoDietMealsUseCase()
+        } catch (ex: Exception) {
             emptyList()
         }
     }
 
     fun start() {
-        try {
-            val randomKetoMeal = getRandomKetoMealUseCase(ketoMeals, shownKetoMealsId)
-            println(randomKetoMeal.name)
-            shownKetoMealsId.add(randomKetoMeal.id)
-            when (isTheMealLikable()) {
-                true -> randomKetoMeal.showDetails()
-                false -> start()
-            }
-        } catch (ex: Exception) {
-            println(ex.message)
-        }
+        if (ketoMeals.isEmpty())
+            println("No Keto Diet Meals Found.")
+        else
+            showKetoDietMeals()
     }
 
+    private fun showKetoDietMeals(){
+        for (randomKetoMeal in ketoMeals) {
+            println(randomKetoMeal.name)
+            try {
+                if (isTheMealLikable()) {
+                    randomKetoMeal.showDetails()
+                    break
+                }
+            }catch (ex:WrongInputException){
+                println(ex.message)
+            }
+        }
+    }
 }

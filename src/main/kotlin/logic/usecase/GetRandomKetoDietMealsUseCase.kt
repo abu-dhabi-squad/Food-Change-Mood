@@ -4,11 +4,13 @@ import logic.repository.FoodRepository
 import model.Food
 import model.Nutrition
 
-class GetKetoDietMealsUseCase(private val foodRepository: FoodRepository) {
+class GetRandomKetoDietMealsUseCase(private val foodRepository: FoodRepository) {
     operator fun invoke(): List<Food> {
         return foodRepository.getFoods()
             .getOrThrow()
             .filter { isKetoDietMeal(it.nutrition) }
+            .shuffled()
+
     }
 
     private fun isKetoDietMeal(
