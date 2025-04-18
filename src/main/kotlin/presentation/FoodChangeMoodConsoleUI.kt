@@ -18,7 +18,7 @@ class FoodChangeMoodConsoleUI(
     private val getIraqiMealsUseCase: GetIraqiMealsUseCase,
     private val getHealthyMealsConsoleUI: GetHealthyMealsConsoleUI,
     private val getSweetsWithoutEggsConsoleUI: SweetsWithoutEggsConsoleUI,
-    private val getMealBySearchForNameUI: GetMealBySearchForNameUI,
+    private val getMealBySearchForNameUI: GetMealByNameUI,
 ) {
     fun start() {
         showWelcome()
@@ -34,7 +34,7 @@ class FoodChangeMoodConsoleUI(
         val input = getUserInput()
         when (input) {
             1 -> getHealthyMealsConsoleUI.executeHealthyMeals()
-            2 -> getMealBySearchForNameUI.executeMealSearchByName()
+            2 -> getMealBySearchForNameUI.start()
             3 -> getIraqiMealsUseCaseUI(getIraqiMealsUseCase)
             4 -> println("Easy Food Suggestions")
             5 -> guessFoodPreparationTimeGameUI.start()
