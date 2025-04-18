@@ -3,7 +3,6 @@ package di
 import data.CsvFoodRepositoryImp
 import data.FoodCsvParser
 import logic.repository.FoodRepository
-import logic.usecase.MealSearchByNameUseCase
 import org.koin.dsl.module
 import presentation.FoodChangeMoodConsoleUI
 import presentation.GymHelperConsoleUI
@@ -23,6 +22,7 @@ val appModule = module {
     single { RandomPotatoesMealsConsoleUi(get()) }
     single { getIraqiMealsUseCaseUI(get()) }
     single { GetHealthyMealsConsoleUI(get()) }
+    single { GetMealBySearchForNameUI(get()) }
     single { GymHelperConsoleUI(get()) }
     single { SeaFoodMealsSortedByProteinUI (get())}
     single<DateParserInterface> { DateParserImplementation() }

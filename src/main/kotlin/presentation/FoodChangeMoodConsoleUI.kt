@@ -2,15 +2,13 @@ package presentation
 
 import logic.usecase.GetRandomMealsByCountryUseCase
 import logic.usecase.GetIraqiMealsUseCase
-import logic.usecase.GetHealthyMealsUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
-import logic.usecase.MealSearchByNameUseCase
+import logic.usecase.GetMealBySearchForNameUseCase
 import kotlin.system.exitProcess
 
 class FoodChangeMoodConsoleUI(
     private val gymHelperConsoleUI: GymHelperConsoleUI,
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
-    private val getHealthyMealsUseCase: GetHealthyMealsUseCase,
     private val getMealByIdUI: GetMealByIdUI,
     private val getFoodByDateUI: GetFoodByDateUI,
     private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,
@@ -20,8 +18,7 @@ class FoodChangeMoodConsoleUI(
     private val getFoodChangeMoodConsoleUi: ItalianMealsForLargeGroupUI,
     private val getIraqiMealsUseCase: GetIraqiMealsUseCase,
     private val getHealthyMealsConsoleUI: GetHealthyMealsConsoleUI,
-    private val mealSearchByNameUseCase: MealSearchByNameUseCase
-
+    private val getMealBySearchForNameUI: GetMealBySearchForNameUI,
 ) {
     fun start() {
         showWelcome()
@@ -37,7 +34,7 @@ class FoodChangeMoodConsoleUI(
         val input = getUserInput()
         when (input) {
             1 -> getHealthyMealsConsoleUI.executeHealthyMeals()
-            2 -> launchMealSearchByName()
+            2 -> getMealBySearchForNameUI.executeMealSearchByName()
             3 -> getIraqiMealsUseCaseUI(getIraqiMealsUseCase)
             4 -> println("Easy Food Suggestions")
             5 -> guessFoodPreparationTimeGameUI.start()
@@ -56,23 +53,6 @@ class FoodChangeMoodConsoleUI(
             else -> println("Invalid input")
         }
         presentFeature()
-    }
-
-    private fun launchMealSearchByName() {
-        print("Enter the meal name to search: ")
-        readlnOrNull()
-            ?.trim()
-            ?.takeIf { it.isNotEmpty() }
-            ?.let { input ->
-                mealSearchByNameUseCase.findMealsByName(input)
-                    .takeIf { it.isNotEmpty() }
-                    ?.also { results ->
-                        println("Search results for '$input':")
-                        results.forEach { println(it.name ?: "none") }
-                    }
-                    ?: println("No meals found for '$input'")
-            }
-            ?: println("Invalid input. Please enter a non-empty keyword.")
     }
 
     private fun showOptions() {
