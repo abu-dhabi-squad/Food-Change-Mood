@@ -5,12 +5,12 @@ import model.Food
 import model.Nutrition
 
 class GetRandomKetoDietMealsUseCase(private val foodRepository: FoodRepository) {
-    operator fun invoke(): List<Food> {
+
+    operator fun invoke(showedKetoMeals: MutableList<Int>): Food {
         return foodRepository.getFoods()
             .getOrThrow()
-            .filter { isKetoDietMeal(it.nutrition) }
-            .shuffled()
-
+            .filter { isKetoDietMeal(it.nutrition) && it.id !in showedKetoMeals }
+            .random()
     }
 
     private fun isKetoDietMeal(

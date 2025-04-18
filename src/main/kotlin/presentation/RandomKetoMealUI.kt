@@ -2,39 +2,30 @@ package presentation
 
 import logic.usecase.GetRandomKetoDietMealsUseCase
 import model.Food
-import model.WrongInputException
 
 class RandomKetoMealUI(
     private val getRandomKetoDietMealsUseCase: GetRandomKetoDietMealsUseCase,
 ) {
-    var ketoMeals: List<Food>
-
-    init {
-        ketoMeals = try {
-            getRandomKetoDietMealsUseCase()
-        } catch (ex: Exception) {
-            emptyList()
-        }
-    }
+    private lateinit var ketoMeal: Food
+    private val showedKetoMeals = mutableListOf<Int>()
 
     fun start() {
-        if (ketoMeals.isEmpty())
-            println("No Keto Diet Meals Found.")
-        else
-            showKetoDietMeals()
+        showKetoDietMeals()
     }
 
     private fun showKetoDietMeals(){
-        for (randomKetoMeal in ketoMeals) {
-            println(randomKetoMeal.name)
-            try {
-                if (isLikedMeal()) {
-                    randomKetoMeal.showDetails()
-                    break
-                }
-            }catch (ex:WrongInputException){
-                println(ex.message)
+        try {
+            ketoMeal = getRandomKetoDietMealsUseCase(showedKetoMeals)
+            showedKetoMeals.add(ketoMeal.id)
+            println(ketoMeal.name)
+            if (isLikedMeal()) {
+                ketoMeal.showDetails()
+            } else {
+                showKetoDietMeals()
             }
+
+        } catch (ex: Exception) {
+            println(ex.message)
         }
     }
 }
