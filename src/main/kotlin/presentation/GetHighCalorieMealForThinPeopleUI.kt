@@ -15,7 +15,7 @@ private fun getRandomHighCalorieMeal(getMealForThinPeopleUseCase: GetMealForThin
             println("Meal Name: "+ suggestMeal.name+"\n")
             println("Meal Description: "+ suggestMeal.description+"\n")
 
-            when(isTheMealLikable()){
+            when(isLikedMeal()){
                 true -> suggestMeal.showDetails()
                 false -> getRandomHighCalorieMeal(getMealForThinPeopleUseCase, shownSet)
             }
