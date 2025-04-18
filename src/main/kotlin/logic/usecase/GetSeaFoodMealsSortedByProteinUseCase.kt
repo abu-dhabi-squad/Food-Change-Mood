@@ -8,9 +8,13 @@ class GetSeaFoodMealsSortedByProteinUseCase(private val foodRepository: FoodRepo
     operator fun invoke(): List<Food> {
         return foodRepository.getFoods()
             .getOrThrow()
-            .filter { meal -> meal.tags.any { it.contains("seafood", ignoreCase = true) } }
+            .filter { meal -> meal.tags.any { it.contains(SEAFOOD, ignoreCase = true) } }
             .sortedByDescending { it.nutrition.protein }
             .takeIf { it.isNotEmpty() }
             ?: throw EmptySearchByDateListException()
+    }
+
+    companion object {
+        const val SEAFOOD = "seafood"
     }
 }
