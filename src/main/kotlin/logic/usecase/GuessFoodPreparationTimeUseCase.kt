@@ -1,18 +1,19 @@
 package logic.usecase
 
+import model.GuessPreparationTimeState
 import model.RichMaxAttemptException
 
 
 class GuessFoodPreparationTimeUseCase() {
-    operator fun invoke(userGuess: Int, preparationTime: Int, attempts: Int): Pair<Boolean,String> {
+    operator fun invoke(userGuess: Int, preparationTime: Int, attempts: Int): GuessPreparationTimeState {
         return if (userGuess == preparationTime)
-            Pair(true,"Congratulations! You guessed the correct preparation time.")
+             GuessPreparationTimeState.CORRECT
         else if (attempts == MAX_ATTEMPT)
-            throw RichMaxAttemptException("You have reached the maximum number of attempts.The correct preparation time is $preparationTime minutes")
+            throw RichMaxAttemptException(preparationTime)
         else if (userGuess < preparationTime)
-            Pair(false,"The preparation time is too low.")
+             GuessPreparationTimeState.TOO_LOW
         else
-            Pair(false,"The preparation time is too high.")
+             GuessPreparationTimeState.TOO_HIGH
     }
 
     companion object {
