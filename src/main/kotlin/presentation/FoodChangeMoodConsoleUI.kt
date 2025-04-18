@@ -6,6 +6,7 @@ import logic.usecase.GetMealForThinPeopleUseCase
 import kotlin.system.exitProcess
 
 class FoodChangeMoodConsoleUI(
+    private val guessIngredientConsoleUI: GuessIngredientConsoleUI,
     private val gymHelperConsoleUI: GymHelperConsoleUI,
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
     private val getMealByIdUI: GetMealByIdUI,
@@ -43,7 +44,7 @@ class FoodChangeMoodConsoleUI(
             8 -> getFoodByDateUI.runUI()
             9 -> gymHelperConsoleUI.start()
             10 -> getRandomMealsByCountryUI(getRandomMealsByCountryUseCase)
-            11 -> println("Ingredient Guess Game")
+            11 -> guessIngredientConsoleUI.start()
             12 -> { randomPotatoesMealsConsoleUi.displayRandomPotatoesMealsUI() }
             13 -> getHighCalorieMealUI(getMealForThinPeopleUseCase)
             14 -> getSeaFoodMealsSortedByProteinUI.start()

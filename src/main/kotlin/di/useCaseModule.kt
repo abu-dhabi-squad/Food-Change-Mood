@@ -2,8 +2,7 @@ package di
 
 import logic.GetItalianMealsForLargeGroupUseCase
 import logic.usecase.*
-import logic.usecase.GetMealForThinPeopleUseCase
-import logic.usecase.GetMealBySearchForNameUseCase
+import util.*
 import org.koin.dsl.module
 import presentation.GetFoodByDateUI
 import presentation.GetMealByIdUI
@@ -18,6 +17,10 @@ val useCaseModule = module {
     single { GetRandomPotatoesMealsUseCase(get()) }
     single { GetItalianMealsForLargeGroupUseCase(get()) }
     single { GetIraqiMealsUseCase(get()) }
+    single { GuessIngredientUseCase(get()) }
+    single { GetFoodByDateUseCase(get()) }
+    single<DateParserInterface> { DateParserImplementation() }
+    single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
     single { GetFoodByDateUseCase(get())}
     single { GetMealByIdUI(get()) }
     single { GetMealByIdUseCase(get()) }
