@@ -7,6 +7,7 @@ import logic.usecase.GetMealForThinPeopleUseCase
 import kotlin.system.exitProcess
 
 class FoodChangeMoodConsoleUI(
+    private val guessIngredientConsoleUI: GuessIngredientConsoleUI,
     private val gymHelperConsoleUI: GymHelperConsoleUI,
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
     private val getMealByIdUI: GetMealByIdUI,
@@ -17,6 +18,7 @@ class FoodChangeMoodConsoleUI(
     private val getSeaFoodMealsSortedByProteinUI: SeaFoodMealsSortedByProteinUI,
     private val getFoodChangeMoodConsoleUi: ItalianMealsForLargeGroupUI,
     private val getIraqiMealsUseCase: GetIraqiMealsUseCase,
+    private val getSweetsWithoutEggsConsoleUI: SweetsWithoutEggsConsoleUI,
     private val randomKetoMealUI: RandomKetoMealUI,
     private val getHealthyMealsConsoleUI: GetHealthyMealsConsoleUI
 ) {
@@ -38,12 +40,12 @@ class FoodChangeMoodConsoleUI(
             3 -> getIraqiMealsUseCaseUI(getIraqiMealsUseCase)
             4 -> println("Easy Food Suggestions")
             5 -> guessFoodPreparationTimeGameUI.start()
-            6 -> println("Egg-Free Sweets")
-            7 -> randomKetoMealUI.start()
+            6 -> getSweetsWithoutEggsConsoleUI.start()
+            7 -> println("Keto Diet Meal Helper")
             8 -> getFoodByDateUI.runUI()
             9 -> gymHelperConsoleUI.start()
             10 -> getRandomMealsByCountryUI(getRandomMealsByCountryUseCase)
-            11 -> println("Ingredient Guess Game")
+            11 -> guessIngredientConsoleUI.start()
             12 -> { randomPotatoesMealsConsoleUi.displayRandomPotatoesMealsUI() }
             13 -> getHighCalorieMealUI(getMealForThinPeopleUseCase)
             14 -> getSeaFoodMealsSortedByProteinUI.start()
