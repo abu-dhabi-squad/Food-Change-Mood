@@ -9,22 +9,22 @@ class GetMealBySearchForNameUseCase(
 ) {
     private fun buildPrefixTable(pattern: String): IntArray {
         val table = IntArray(pattern.length)
-        var length = 0
-        var i = 1
+        var prefixLength = 0
+        var indexOfCurrentChar = 1
 
-        while (i < pattern.length) {
+        while (indexOfCurrentChar < pattern.length) {
             when {
-                pattern[i] == pattern[length] -> {
-                    length++
-                    table[i] = length
-                    i++
+                pattern[indexOfCurrentChar] == pattern[prefixLength] -> {
+                    prefixLength++
+                    table[indexOfCurrentChar] = prefixLength
+                    indexOfCurrentChar++
                 }
-                length != 0 -> {
-                    length = table[length - 1]
+                prefixLength != 0 -> {
+                    prefixLength = table[prefixLength - 1]
                 }
                 else -> {
-                    table[i] = 0
-                    i++
+                    table[indexOfCurrentChar] = 0
+                    indexOfCurrentChar++
                 }
             }
         }
