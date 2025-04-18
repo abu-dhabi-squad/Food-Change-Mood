@@ -15,7 +15,7 @@ class RichMaxAttemptException (exceptionMessage : String?):Exception(exceptionMe
 class EmptySearchByDateListException:AppException("there is no meals in this date list")
 
 class InvalidDateFormateException:AppException("Invalid Date Formate")
-class NoKetoMealFoundException : Exception("No keto meal found!")
+class NoKetoMealFoundException : AppException("No keto meal found!")
 
 class InvalidYearException:AppException("Invalid Year Input")
 
