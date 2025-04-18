@@ -1,6 +1,5 @@
 package di
 
-import logic.usecase.EasyFoodSuggestionGameUseCase
 import logic.GetItalianMealsForLargeGroupUseCase
 import logic.usecase.GetIraqiMealsUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
@@ -32,6 +31,10 @@ val useCaseModule = module {
     single<DateParserInterface> { DateParserImplementation() }
     single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
     single { GetFoodByDateUseCase(get())}
+    single { GetRandomKetoDietMealsUseCase(get()) }
+    single { GetFoodByDateUseCase(get()) }
+    single<DateParserInterface> { DateParserImplementation() }
+    single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
     single { GetMealByIdUI(get()) }
     single { GetMealByIdUseCase(get()) }
     single { GetSweetsWithoutEggsUseCase(get()) }
@@ -39,4 +42,5 @@ val useCaseModule = module {
     single { GetFoodByDateUI(get(),get(), get(), get()) }
     single { EasyFoodSuggestionGameUseCase(get()) }
     single { GetEasyFoodSuggestionUI(get()) }
+    single { GetMealBySearchForNameUseCase(get())}
 }

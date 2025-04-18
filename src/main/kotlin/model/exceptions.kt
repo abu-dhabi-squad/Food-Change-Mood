@@ -1,7 +1,6 @@
 package model
 
-
-open class AppException(message: String): Exception(message)
+open class AppException(message: String) : Exception(message)
 
 class EmptyListException:AppException("there is no item in list")
 
@@ -12,6 +11,12 @@ class WrongInputException:AppException("wrong Input")
 class NoEasyMealsFoundException : AppException("No easy meals found matching the criteria.")
 
 class NoMealsFoundException : AppException("No meals found!")
+
+class EmptyListException :AppException("list is empty")
+
+class EmptyHighCalorieListException:AppException("there is no high calories meals in list")
+
+class WrongInputException:AppException("\nWrong Input!")
 
 class RichMaxAttemptException (exceptionMessage : String?):Exception(exceptionMessage)
 

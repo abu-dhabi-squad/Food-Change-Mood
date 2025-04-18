@@ -17,10 +17,11 @@ class FoodChangeMoodConsoleUI(
     private val getSeaFoodMealsSortedByProteinUI: SeaFoodMealsSortedByProteinUI,
     private val getFoodChangeMoodConsoleUi: ItalianMealsForLargeGroupUI,
     private val getIraqiMealsUseCase: GetIraqiMealsUseCase,
-    private val getHealthyMealsConsoleUI: GetHealthyMealsConsoleUI,
     private val getSweetsWithoutEggsConsoleUI: SweetsWithoutEggsConsoleUI,
+    private val randomKetoMealUI: RandomKetoMealUI,
+    private val getHealthyMealsConsoleUI: GetHealthyMealsConsoleUI,
+    private val getMealBySearchForNameUI: GetMealByNameUI,
     private val easyFoodSuggestionUI: GetEasyFoodSuggestionUI
-
 ) {
     fun start() {
         showWelcome()
@@ -36,11 +37,11 @@ class FoodChangeMoodConsoleUI(
         val input = getUserInput()
         when (input) {
             1 -> getHealthyMealsConsoleUI.executeHealthyMeals()
-            2 -> println("Search Meal by Name")
+            2 -> getMealBySearchForNameUI.start()
             3 -> getIraqiMealsUseCaseUI(getIraqiMealsUseCase)
             4 -> easyFoodSuggestionUI.launchSEasyFoodSuggestionGame()            5 -> guessFoodPreparationTimeGameUI.start()
             6 -> getSweetsWithoutEggsConsoleUI.start()
-            7 -> println("Keto Diet Meal Helper")
+            7 -> randomKetoMealUI.start()
             8 -> getFoodByDateUI.runUI()
             9 -> gymHelperConsoleUI.start()
             10 -> getRandomMealsByCountryUI(getRandomMealsByCountryUseCase)
