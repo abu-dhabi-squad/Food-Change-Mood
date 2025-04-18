@@ -18,17 +18,6 @@ class GuessIngredientUseCase(
         }
     }
 
-    private fun isNotInMeal(meal: Food): (String) -> Boolean {
-        return { ingredient -> ingredient !in meal.ingredients }
-    }
-
-    private fun isValidMeal() : (Food) -> Boolean{
-        return { meal ->
-            meal.name.toString().isNotEmpty()
-                    && meal.ingredients.isNotEmpty()
-        }
-    }
-
     private fun getRandomMeals(): List<Food> {
         return foodRepository
             .getFoods()
@@ -42,10 +31,21 @@ class GuessIngredientUseCase(
             ?: throw NoMealsFoundException()
     }
 
+    private fun isValidMeal() : (Food) -> Boolean{
+        return { meal ->
+            meal.name.toString().isNotEmpty()
+                    && meal.ingredients.isNotEmpty()
+        }
+    }
+
     private fun getIngredients(): Set<String> {
         return getRandomMeals().map { meals ->
             meals.ingredients
         }.flatten().toSet()
+    }
+
+    private fun isNotInMeal(meal: Food): (String) -> Boolean {
+        return { ingredient -> ingredient !in meal.ingredients }
     }
 
     companion object {
