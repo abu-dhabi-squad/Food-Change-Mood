@@ -12,8 +12,20 @@ data class Food(
     val steps: List<String>,
     val description : String?,
     val ingredients: List<String>
-)
-{
+) {
+    fun print() {
+        println("\n----- Meal -----")
+        println("Name: $name")
+        println("Minutes: $minutes")
+        println("SubmittedDate: $submittedDate")
+        println("Description: $description")
+        println("Tags: $tags")
+        println("Ingredients: $ingredients")
+        println("Steps: $steps")
+        println("Nutrition:")
+        nutrition.print("\t- ")
+    }
+
     fun showDetails(){
         println("\n"+"meal ID : " + this.id)
         this.name?.also {name -> println("Meal Name : "+ name) }
