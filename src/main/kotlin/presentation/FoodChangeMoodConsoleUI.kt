@@ -1,6 +1,5 @@
 package presentation
 
-import logic.usecase.GymHelperUseCase
 import logic.usecase.GetRandomMealsByCountryUseCase
 import logic.usecase.GetIraqiMealsUseCase
 import logic.usecase.GetHealthyMealsUseCase
@@ -10,7 +9,6 @@ import kotlin.system.exitProcess
 class FoodChangeMoodConsoleUI(
     private val gymHelperConsoleUI: GymHelperConsoleUI,
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
-    private val getHealthyMealsUseCase: GetHealthyMealsUseCase,
     private val getMealByIdUI: GetMealByIdUI,
     private val getFoodByDateUI: GetFoodByDateUI,
     private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,
