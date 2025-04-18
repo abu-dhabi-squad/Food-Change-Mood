@@ -10,7 +10,6 @@ class FoodChangeMoodConsoleUI(
     private val guessIngredientConsoleUI: GuessIngredientConsoleUI,
     private val gymHelperConsoleUI: GymHelperConsoleUI,
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
-    private val getHealthyMealsUseCase: GetHealthyMealsUseCase,
     private val getMealByIdUI: GetMealByIdUI,
     private val getFoodByDateUI: GetFoodByDateUI,
     private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,

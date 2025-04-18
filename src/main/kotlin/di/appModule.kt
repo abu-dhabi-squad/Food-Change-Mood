@@ -23,7 +23,6 @@ val appModule = module {
     single { RandomPotatoesMealsConsoleUi(get()) }
     single { getIraqiMealsUseCaseUI(get()) }
     single { GetHealthyMealsConsoleUI(get()) }
-    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
     single { GymHelperConsoleUI(get()) }
     single { SweetsWithoutEggsConsoleUI(get()) }
     single { SeaFoodMealsSortedByProteinUI (get())}
