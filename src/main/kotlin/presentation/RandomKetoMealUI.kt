@@ -28,7 +28,7 @@ class RandomKetoMealUI(
         for (randomKetoMeal in ketoMeals) {
             println(randomKetoMeal.name)
             try {
-                if (isTheMealLikable()) {
+                if (isLikedMeal()) {
                     randomKetoMeal.showDetails()
                     break
                 }

@@ -3,9 +3,9 @@ package presentation
 import model.WrongInputException
 
 
-fun isTheMealLikable(): Boolean {
+fun isLikedMeal(): Boolean {
     println("Do you like it? {y/n}")
-    readLine().let {
+    readlnOrNull()?.let {
         when {
             it.equals("y", true) -> {
                 return true
@@ -19,6 +19,6 @@ fun isTheMealLikable(): Boolean {
                 throw WrongInputException()
             }
         }
-    }
+    } ?: throw WrongInputException()
 }
 
