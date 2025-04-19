@@ -1,4 +1,4 @@
-package logic
+package logic.usecase
 
 import logic.repository.FoodRepository
 import model.Food
