@@ -19,7 +19,7 @@ class FoodChangeMoodConsoleUI(
     private val getIraqiMealsUseCase: GetIraqiMealsUseCase,
     private val getSweetsWithoutEggsConsoleUI: SweetsWithoutEggsConsoleUI,
     private val randomKetoMealUI: RandomKetoMealUI,
-    private val getHealthyMealsConsoleUI: GetHealthyMealsConsoleUI,
+    private val getHealthyMealsUI: GetHealthyMealsUI,
     private val getMealBySearchForNameUI: GetMealByNameUI,
     private val easyFoodSuggestionUI: GetEasyFoodSuggestionUI
 ) {
@@ -36,7 +36,7 @@ class FoodChangeMoodConsoleUI(
         showOptions()
         val input = getUserInput()
         when (input) {
-            1 -> getHealthyMealsConsoleUI.executeHealthyMeals()
+            1 -> getHealthyMealsUI.executeHealthyMeals()
             2 -> getMealBySearchForNameUI.start()
             3 -> getIraqiMealsUseCaseUI(getIraqiMealsUseCase)
             4 -> easyFoodSuggestionUI.launchSEasyFoodSuggestionGame()
