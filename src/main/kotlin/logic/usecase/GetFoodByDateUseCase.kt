@@ -11,12 +11,13 @@ class GetFoodByDateUseCase(
     fun getMealsByDate(date: LocalDate): List<Pair<Int,String>>{
         return foodRepository.getFoods()
             .getOrThrow()
-            .filter { isOnlyHighQualityDataAndTheValidDate(it,date) }
+            .filter { meal-> meal.isHighQuality() && meal.submittedDate==date }
             .takeIf { it.isNotEmpty() }
-            ?.map { it.id to it.name!! }
+            ?.mapNotNull { food -> food.name?.let { food.id to it } }
             ?: throw EmptySearchByDateListException()
     }
-    private fun isOnlyHighQualityDataAndTheValidDate(food: Food, date: LocalDate):Boolean{
-        return food.name != null && food.description != null && food.submittedDate == date
+
+    private fun Food.isHighQuality(): Boolean {
+        return name != null && description != null
     }
 }
