@@ -8,7 +8,7 @@ class GetMealByIdUI(
 {
     fun getDetailsById() {
         print("enter id of the meal : ")
-        readLine()?.toIntOrNull()?.let { enteredID ->
+        readlnOrNull()?.toIntOrNull()?.let { enteredID ->
             try {
                 getMealByIdUseCase.getMealById(enteredID).showDetails()
             }catch (exception:Exception){
