@@ -10,5 +10,6 @@ fun main() {
     }
     val foodChangeMoodConsoleUI: FoodChangeMoodConsoleUI = getKoin().get()
     foodChangeMoodConsoleUI.start()
-
 }
+
+fun sum(a: Int, b: Int): Int = a + b
