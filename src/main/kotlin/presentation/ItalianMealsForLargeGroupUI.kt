@@ -1,6 +1,6 @@
 package presentation
 
-import logic.GetItalianMealsForLargeGroupUseCase
+import logic.usecase.GetItalianMealsForLargeGroupUseCase
 
 class ItalianMealsForLargeGroupUI(
     private val getItalianMealsForLargeGroup: GetItalianMealsForLargeGroupUseCase

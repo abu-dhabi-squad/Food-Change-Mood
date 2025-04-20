@@ -1,6 +1,6 @@
 package di
 
-import logic.GetItalianMealsForLargeGroupUseCase
+import logic.usecase.GetItalianMealsForLargeGroupUseCase
 import logic.usecase.GetIraqiMealsUseCase
 import logic.usecase.GetMealForThinPeopleUseCase
 import logic.usecase.GetRandomFoodUseCase
