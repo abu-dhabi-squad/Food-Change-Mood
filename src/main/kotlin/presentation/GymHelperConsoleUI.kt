@@ -2,16 +2,19 @@ package presentation
 
 import logic.usecase.GymHelperUseCase
 import model.Food
+import presentation.input_reader.FloatReader
 
 class GymHelperConsoleUI(
     private val gymHelperUseCase: GymHelperUseCase,
-) {
-    fun start() {
+    private val floatReader: FloatReader
+) : ChangeFoodMoodLauncher {
+
+    override fun launchUI() {
         try {
             print("\nEnter desired calories: ")
-            val calories = readlnOrNull()?.toFloatOrNull() ?: throw Exception("Invalid input")
+            val calories = floatReader.read() ?: throw Exception("Invalid input")
             print("Enter desired proteins: ")
-            val proteins = readlnOrNull()?.toFloatOrNull() ?: throw Exception("Invalid input")
+            val proteins = floatReader.read() ?: throw Exception("Invalid input")
             println()
             gymHelperUseCase.getListOfMealsForGym(calories, proteins).forEach { food: Food -> food.print() }
         } catch (exception: Exception) {

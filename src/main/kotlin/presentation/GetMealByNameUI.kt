@@ -1,25 +1,34 @@
 package presentation
 
 import logic.usecase.GetMealBySearchForNameUseCase
+import presentation.input_reader.StringReader
 
-class GetMealByNameUI(private val getMealBySearchForNameUseCase: GetMealBySearchForNameUseCase) {
+class GetMealByNameUI(
+    private val getMealBySearchForNameUseCase: GetMealBySearchForNameUseCase,
+    private val stringReader: StringReader
+) : ChangeFoodMoodLauncher {
 
-    fun start() {
+    override fun launchUI() {
         print("Enter the meal name to search: ")
-        readlnOrNull()
+        stringReader.read()
             ?.trim()
             ?.takeIf { it.isNotEmpty() }
             ?.let { input ->
                 try {
-                    getMealBySearchForNameUseCase.findMealsByName(input)
-                        .also { results ->
-                            println("Search results for '$input':")
-                            results.forEach { println(it.name ?: "none") }
-                        }
-                }catch (exception:Exception) {
+                    printResultFromSearch(input)
+                } catch (exception: Exception) {
                     println(exception)
                 }
             }
             ?: println("Invalid input. Please enter a non-empty keyword.")
     }
+
+    private fun printResultFromSearch(input: String) {
+        getMealBySearchForNameUseCase.findMealsByName(input)
+            .also { results ->
+                println("Search results for '$input':")
+                results.forEach { println(it.name ?: "none") }
+            }
+    }
+
 }

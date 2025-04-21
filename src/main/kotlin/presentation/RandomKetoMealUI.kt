@@ -5,15 +5,11 @@ import model.Food
 
 class RandomKetoMealUI(
     private val getRandomKetoDietMealsUseCase: GetRandomKetoDietMealsUseCase,
-) {
+) : ChangeFoodMoodLauncher {
     private lateinit var ketoMeal: Food
     private val showedKetoMeals = mutableListOf<Int>()
 
-    fun start() {
-        showKetoDietMeals()
-    }
-
-    private fun showKetoDietMeals(){
+    override fun launchUI() {
         try {
             ketoMeal = getRandomKetoDietMealsUseCase(showedKetoMeals)
             showedKetoMeals.add(ketoMeal.id)
@@ -21,7 +17,7 @@ class RandomKetoMealUI(
             if (isLikedMeal()) {
                 ketoMeal.showDetails()
             } else {
-                showKetoDietMeals()
+                launchUI()
             }
 
         } catch (ex: Exception) {

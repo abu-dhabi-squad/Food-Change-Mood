@@ -2,9 +2,9 @@ package presentation
 
 import logic.usecase.GetHealthyMealsUseCase
 
-class GetHealthyMealsUI(private val getHealthyMealsUseCase: GetHealthyMealsUseCase) {
+class GetHealthyMealsUI(private val getHealthyMealsUseCase: GetHealthyMealsUseCase) : ChangeFoodMoodLauncher {
 
-    fun executeHealthyMeals() {
+    override fun launchUI() {
         try {
             getHealthyMealsUseCase.fetchHealthyFastFoods().also { meals ->
                 println("Healthy meals:\n")
