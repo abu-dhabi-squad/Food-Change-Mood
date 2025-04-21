@@ -1,4 +1,4 @@
-package presentation.input_reader
+package presentation.ui_io
 
 open class FloatReader: InputReader<Float> {
     override fun read(): Float? {

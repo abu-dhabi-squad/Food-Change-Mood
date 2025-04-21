@@ -1,4 +1,4 @@
-package presentation.input_reader
+package presentation.ui_io
 
 open class StringReader:InputReader<String> {
     override fun read(): String? {

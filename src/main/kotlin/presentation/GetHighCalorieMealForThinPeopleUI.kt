@@ -1,6 +1,7 @@
 package presentation
 
 import logic.usecase.GetMealForThinPeopleUseCase
+import util.showDetails
 
 class GetHighCalorieMealForThinPeopleUI(
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,

@@ -1,6 +1,7 @@
 package presentation
 
 import logic.usecase.GetSweetsWithoutEggsUseCase
+import util.print
 
 class SweetsWithoutEggsConsoleUI(
     private val getSweetsWithoutEggsUseCase: GetSweetsWithoutEggsUseCase,

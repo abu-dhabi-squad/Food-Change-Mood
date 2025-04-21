@@ -2,7 +2,6 @@ package presentation
 
 import model.WrongInputException
 
-
 fun isLikedMeal(): Boolean {
     println("Do you like it? {y/n}")
     readlnOrNull()?.let {

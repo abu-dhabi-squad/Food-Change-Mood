@@ -4,10 +4,11 @@ import logic.usecase.GetFoodByDateUseCase
 import logic.usecase.GetMealByIdUseCase
 import model.InvalidIdException
 import model.WrongInputException
-import presentation.input_reader.IntReader
-import presentation.input_reader.StringReader
+import presentation.ui_io.IntReader
+import presentation.ui_io.StringReader
 import util.DateParserInterface
 import util.GetFoodByDateValidationInterface
+import util.showDetails
 import java.time.LocalDate
 
 class GetFoodByDateUI(

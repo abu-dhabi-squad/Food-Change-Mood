@@ -1,7 +1,7 @@
 package presentation
 
 import logic.usecase.GetRandomPotatoesMealsUseCase
-import presentation.input_reader.StringReader
+import presentation.ui_io.StringReader
 
 class RandomPotatoesMealsConsoleUi(
     private val getRandomPotatoesMealsUseCase: GetRandomPotatoesMealsUseCase,

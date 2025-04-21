@@ -1,6 +1,6 @@
 package presentation
 
-import presentation.input_reader.IntReader
+import presentation.ui_io.IntReader
 import kotlin.system.exitProcess
 
 class FoodChangeMoodConsoleUI(

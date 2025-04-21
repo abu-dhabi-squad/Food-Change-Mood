@@ -1,7 +1,7 @@
 package presentation
 
 import logic.usecase.GetMealBySearchForNameUseCase
-import presentation.input_reader.StringReader
+import presentation.ui_io.StringReader
 
 class GetMealByNameUI(
     private val getMealBySearchForNameUseCase: GetMealBySearchForNameUseCase,

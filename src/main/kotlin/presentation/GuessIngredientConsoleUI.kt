@@ -2,7 +2,7 @@ package presentation
 
 import logic.usecase.GuessIngredientUseCase
 import model.WrongInputException
-import presentation.input_reader.IntReader
+import presentation.ui_io.IntReader
 
 class GuessIngredientConsoleUI(
     private val guessIngredientUseCase: GuessIngredientUseCase,

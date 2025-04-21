@@ -2,6 +2,7 @@ package presentation
 
 import logic.usecase.GetRandomKetoDietMealsUseCase
 import model.Food
+import util.showDetails
 
 class RandomKetoMealUI(
     private val getRandomKetoDietMealsUseCase: GetRandomKetoDietMealsUseCase,

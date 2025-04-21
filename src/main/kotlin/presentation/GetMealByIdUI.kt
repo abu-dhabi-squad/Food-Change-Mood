@@ -1,7 +1,8 @@
 package presentation
 
 import logic.usecase.GetMealByIdUseCase
-import presentation.input_reader.IntReader
+import presentation.ui_io.IntReader
+import util.showDetails
 
 class GetMealByIdUI(
     private val getMealByIdUseCase: GetMealByIdUseCase,

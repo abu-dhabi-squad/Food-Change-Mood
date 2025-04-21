@@ -2,7 +2,8 @@ package presentation
 
 import logic.usecase.GymHelperUseCase
 import model.Food
-import presentation.input_reader.FloatReader
+import presentation.ui_io.FloatReader
+import util.print
 
 class GymHelperConsoleUI(
     private val gymHelperUseCase: GymHelperUseCase,

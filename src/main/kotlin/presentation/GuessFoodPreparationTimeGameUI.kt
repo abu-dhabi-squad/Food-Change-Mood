@@ -4,7 +4,7 @@ import logic.usecase.GetRandomFoodUseCase
 import logic.usecase.GuessFoodPreparationTimeUseCase
 import model.Food
 import model.GuessPreparationTimeState
-import presentation.input_reader.IntReader
+import presentation.ui_io.IntReader
 
 class GuessFoodPreparationTimeGameUI(
     private val getRandomFoodUseCase: GetRandomFoodUseCase,

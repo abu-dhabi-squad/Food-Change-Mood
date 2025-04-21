@@ -1,7 +1,7 @@
 package presentation
 
 import logic.usecase.GetRandomMealsByCountryUseCase
-import presentation.input_reader.StringReader
+import presentation.ui_io.StringReader
 
 class GetRandomMealsByCountryUI(
     private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase, private val stringReader: StringReader
