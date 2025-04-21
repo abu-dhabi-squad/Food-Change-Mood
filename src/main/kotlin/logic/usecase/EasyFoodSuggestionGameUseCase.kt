@@ -3,6 +3,7 @@ package logic.usecase
 import logic.repository.FoodRepository
 import model.Food
 import model.NoEasyMealsFoundException
+import util.takeShuffled
 
 class EasyFoodSuggestionGameUseCase(
     private val foodRepository: FoodRepository
@@ -11,9 +12,8 @@ class EasyFoodSuggestionGameUseCase(
         return foodRepository.getFoods()
             .getOrThrow()
             .filter(::isValidEasyMeal)
-            .shuffled()
-            .take(count)
             .takeIf { it.isNotEmpty() }
+            ?.takeShuffled(count)
             ?: throw NoEasyMealsFoundException()
     }
 

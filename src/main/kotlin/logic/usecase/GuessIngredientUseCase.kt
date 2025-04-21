@@ -4,6 +4,7 @@ import logic.repository.FoodRepository
 import model.Food
 import model.IngredientQuestion
 import model.NoMealsFoundException
+import util.takeShuffled
 
 class GuessIngredientUseCase(
     private val foodRepository: FoodRepository
@@ -23,11 +24,10 @@ class GuessIngredientUseCase(
             .getFoods()
             .getOrThrow()
             .filter(isValidMeal())
-            .shuffled()
             .takeIf { meals ->
                 meals.isNotEmpty()
             }
-            ?.take(MAXIMUM_QUESTIONS)
+            ?.takeShuffled(MAXIMUM_QUESTIONS)
             ?: throw NoMealsFoundException()
     }
 

@@ -3,6 +3,7 @@ package logic.usecase
 import logic.repository.FoodRepository
 import model.EmptyListException
 import model.Food
+import util.takeShuffled
 
 
 class GetRandomMealsByCountryUseCase(
@@ -18,8 +19,7 @@ class GetRandomMealsByCountryUseCase(
             .takeIf { meals -> meals.isNotEmpty() }
             ?.distinctBy { it.name?.lowercase()?.trim() }
             ?.mapNotNull { meal -> meal.name }
-            ?.shuffled()
-            ?.take(MAXIMUM_NUMBER_OF_MEALS)
+            ?.takeShuffled(MAXIMUM_NUMBER_OF_MEALS)
             ?.sorted()
             ?: throw EmptyListException()
     }
