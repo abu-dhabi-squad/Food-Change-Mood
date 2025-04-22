@@ -1,6 +1,7 @@
 package presentation
 
 import logic.usecase.GetSweetsWithoutEggsUseCase
+import util.isLikedMeal
 import util.print
 
 class SweetsWithoutEggsConsoleUI(

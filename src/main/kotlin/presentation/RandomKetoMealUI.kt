@@ -2,6 +2,7 @@ package presentation
 
 import logic.usecase.GetRandomKetoDietMealsUseCase
 import model.Food
+import util.isLikedMeal
 import util.showDetails
 
 class RandomKetoMealUI(

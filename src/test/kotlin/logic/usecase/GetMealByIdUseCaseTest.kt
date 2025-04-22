@@ -5,15 +5,13 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import logic.repository.FoodRepository
-import model.Food
 import model.InvalidIdException
-import model.Nutrition
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import java.time.LocalDate
+import util.createMeal
 
-class GetMealByIdUseCaseTest{
+class GetMealByIdUseCaseTest {
     private lateinit var getMealByIdUseCase: GetMealByIdUseCase
     private val foodRepository: FoodRepository = mockk(relaxed = true)
 
@@ -46,7 +44,7 @@ class GetMealByIdUseCaseTest{
     @Test
     fun `getMealById should throw InvalidIdException when data is low quality as name is null`() {
         //given
-        val data = mutableListOf(createMeal(2000,null,"description 1"))
+        val data = mutableListOf(createMeal(2000, null, "description 1"))
         every { foodRepository.getFoods() } returns Result.success(data)
         //when & then
         assertThrows<InvalidIdException> {
@@ -57,7 +55,7 @@ class GetMealByIdUseCaseTest{
     @Test
     fun `getMealById should throw InvalidIdException when data is low quality as description is null`() {
         //given
-        val data = mutableListOf(createMeal(2000,"name1",null))
+        val data = mutableListOf(createMeal(2000, "name1", null))
         every { foodRepository.getFoods() } returns Result.success(data)
         //when & then
         assertThrows<InvalidIdException> {
@@ -69,9 +67,9 @@ class GetMealByIdUseCaseTest{
     fun `getMealById should throw InvalidIdException when data does not have the id`() {
         //given
         val data = mutableListOf(
-            createMeal(2100,"name1","description1"),
-            createMeal(2200,"name2","description2"),
-            createMeal(2300,"name3","description3")
+            createMeal(2100, "name1", "description1"),
+            createMeal(2200, "name2", "description2"),
+            createMeal(2300, "name3", "description3")
         )
         every { foodRepository.getFoods() } returns Result.success(data)
         //when & then
@@ -84,31 +82,13 @@ class GetMealByIdUseCaseTest{
     fun `getMealById should return only meal that matches the id when data does have the id`() {
         //given
         val data = mutableListOf(
-            createMeal(2100,"name1","description1"),
-            createMeal(2200,"name2","description2"),
-            createMeal(2300,"name3","description3")
+            createMeal(2100, "name1", "description1"),
+            createMeal(2200, "name2", "description2"),
+            createMeal(2300, "name3", "description3")
         )
         every { foodRepository.getFoods() } returns Result.success(data)
         //when & then
-        Truth.assertThat(getMealByIdUseCase.getMealById(2100)).isEqualTo(createMeal(2100,"name1","description1"))
+        Truth.assertThat(getMealByIdUseCase.getMealById(2100)).isEqualTo(createMeal(2100, "name1", "description1"))
     }
-
-    private fun createMeal(
-        id: Int,
-        name: String?,
-        description: String?,
-    ): Food {
-        return Food(
-            id,
-            name,
-            minutes = 3,
-            LocalDate.now(),
-            tags = listOf(),
-            nutrition = Nutrition(0f, totalFat = 0f, sugar = 0f, sodium = 0f, protein = 0f, saturated = 0f, carbohydrates = 0f),
-            steps = listOf(),
-            description,
-            ingredients = listOf()
-        )
-    }
-
 }
+

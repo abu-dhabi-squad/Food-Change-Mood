@@ -2,6 +2,7 @@ package presentation
 
 import logic.usecase.GetMealForThinPeopleUseCase
 import presentation.ui_io.Printer
+import util.isLikedMeal
 import util.showDetails
 
 class GetHighCalorieMealForThinPeopleUI(
