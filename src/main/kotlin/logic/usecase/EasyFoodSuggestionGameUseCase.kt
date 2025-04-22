@@ -3,7 +3,7 @@ package logic.usecase
 import logic.repository.FoodRepository
 import model.Food
 import model.NoEasyMealsFoundException
-import util.takeShuffled
+import logic.takeShuffled
 
 class EasyFoodSuggestionGameUseCase(
     private val foodRepository: FoodRepository

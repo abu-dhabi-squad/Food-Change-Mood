@@ -20,4 +20,3 @@ fun isLikedMeal(): Boolean {
         }
     } ?: throw WrongInputException()
 }
-
