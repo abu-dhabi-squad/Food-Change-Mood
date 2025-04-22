@@ -10,7 +10,7 @@ class GetRandomMealsByCountryUI(
 ) : ChangeFoodMoodLauncher, Printer {
 
     override fun launchUI() {
-        print("Enter a country name: ")
+        print(ENTER_INPUT_MESSAGE)
         val inputCountry = stringReader.read()?.trim()
         try {
             val meals = inputCountry?.let {
@@ -25,7 +25,7 @@ class GetRandomMealsByCountryUI(
     private fun printRandomMealsByCountry(meals: List<String>?) {
         meals?.forEachIndexed { index, meal ->
             println("${index + 1}. $meal")
-        } ?: println("No meals matched your input.")
+        } ?: println(NO_MEALS_MATCHED_YOUR_INPUT_MESSAGE)
     }
 
     override fun print(input: Any) {
@@ -34,5 +34,11 @@ class GetRandomMealsByCountryUI(
 
     override fun println(input: Any) {
         kotlin.io.println(input)
+    }
+
+    companion object{
+
+        const val NO_MEALS_MATCHED_YOUR_INPUT_MESSAGE = "No meals matched your input."
+        const val ENTER_INPUT_MESSAGE = "Enter a country name: "
     }
 }
