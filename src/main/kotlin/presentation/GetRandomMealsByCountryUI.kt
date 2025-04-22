@@ -1,11 +1,13 @@
 package presentation
 
 import logic.usecase.GetRandomMealsByCountryUseCase
+import presentation.ui_io.Printer
 import presentation.ui_io.StringReader
 
 class GetRandomMealsByCountryUI(
-    private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase, private val stringReader: StringReader
-) : ChangeFoodMoodLauncher {
+    private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,
+    private val stringReader: StringReader
+) : ChangeFoodMoodLauncher, Printer {
 
     override fun launchUI() {
         print("Enter a country name: ")
@@ -26,4 +28,11 @@ class GetRandomMealsByCountryUI(
         } ?: println("No meals matched your input.")
     }
 
+    override fun print(input: Any) {
+        kotlin.io.print(input)
+    }
+
+    override fun println(input: Any) {
+        kotlin.io.println(input)
+    }
 }
