@@ -1,7 +1,6 @@
 package presentation
 
 import logic.usecase.GetMealForThinPeopleUseCase
-import util.showDetails
 
 class GetHighCalorieMealForThinPeopleUI(
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
@@ -19,7 +18,7 @@ class GetHighCalorieMealForThinPeopleUI(
                 println("Meal Description: " + suggestMeal.description + "\n")
 
                 when (isLikedMeal()) {
-                    true -> suggestMeal.showDetails()
+                    true -> println(suggestMeal.getFullDetails())
                     false -> getRandomHighCalorieMeal(shownSet)
                 }
             }

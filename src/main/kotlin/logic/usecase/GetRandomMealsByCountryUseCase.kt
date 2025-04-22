@@ -3,7 +3,7 @@ package logic.usecase
 import logic.repository.FoodRepository
 import model.EmptyListException
 import model.Food
-import util.takeShuffled
+import logic.takeShuffled
 
 
 class GetRandomMealsByCountryUseCase(

@@ -2,7 +2,6 @@ package presentation
 
 import logic.usecase.GetRandomKetoDietMealsUseCase
 import model.Food
-import util.showDetails
 
 class RandomKetoMealUI(
     private val getRandomKetoDietMealsUseCase: GetRandomKetoDietMealsUseCase,
@@ -16,7 +15,7 @@ class RandomKetoMealUI(
             showedKetoMeals.add(ketoMeal.id)
             println(ketoMeal.name)
             if (isLikedMeal()) {
-                ketoMeal.showDetails()
+                println(ketoMeal.getFullDetails())
             } else {
                 launchUI()
             }
