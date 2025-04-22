@@ -3,7 +3,6 @@ package presentation
 import logic.usecase.GymHelperUseCase
 import model.Food
 import presentation.ui_io.FloatReader
-import util.print
 
 class GymHelperConsoleUI(
     private val gymHelperUseCase: GymHelperUseCase,
@@ -17,7 +16,7 @@ class GymHelperConsoleUI(
             print("Enter desired proteins: ")
             val proteins = floatReader.read() ?: throw Exception("Invalid input")
             println()
-            gymHelperUseCase.getListOfMealsForGym(calories, proteins).forEach { food: Food -> food.print() }
+            gymHelperUseCase.getListOfMealsForGym(calories, proteins).forEach { food: Food -> println(food.getFullDetails()) }
         } catch (exception: Exception) {
             println(exception.message)
         }

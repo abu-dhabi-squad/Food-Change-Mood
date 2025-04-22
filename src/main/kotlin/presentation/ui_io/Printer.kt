@@ -1,6 +1,6 @@
 package presentation.ui_io
 
 interface Printer {
-    fun print(input: Any = "")
-    fun println(input: Any = "\n")
+    fun display(input: Any = "")
+    fun displayLn(input: Any = "\n")
 }

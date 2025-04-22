@@ -1,7 +1,7 @@
 package logic.usecase
 
 import logic.repository.FoodRepository
-import util.takeShuffled
+import logic.takeShuffled
 
 class GetRandomPotatoesMealsUseCase(
     private val foodRepository: FoodRepository
