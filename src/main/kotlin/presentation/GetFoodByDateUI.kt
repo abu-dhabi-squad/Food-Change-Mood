@@ -31,7 +31,7 @@ class GetFoodByDateUI(
                     getDetailsOfMeals(mealsByDate)
                 }
         } catch (e: Exception) {
-            println(e.message)
+            e.message?.let { printer.println(it) }
         }
     }
 
@@ -51,7 +51,7 @@ class GetFoodByDateUI(
                 "y" -> try {
                     getDetailsById(mealsByDate)
                 } catch (e: Exception) {
-                    println(e.message)
+                    e.message?.let { printer.println(it) }
                 }
 
                 "n" -> return
