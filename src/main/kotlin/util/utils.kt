@@ -24,7 +24,6 @@ fun isLikedMeal(): Boolean {
     } ?: throw WrongInputException()
 }
 
-
 fun createMeal(
     id: Int,
     name: String? = null,

@@ -79,7 +79,7 @@ class GetMealByIdUseCaseTest {
     }
 
     @Test
-    fun `getMealById should return only meal that matches the id when data does have the id`() {
+    fun `getMealById should return the meal that matches the id when data does have the id and high quality data`() {
         //given
         val data = mutableListOf(
             createMeal(2100, "name1", "description1"),
