@@ -27,7 +27,7 @@ class GetFoodByDateUseCaseTest{
         //given
         every { foodRepository.getFoods() } returns Result.success(mutableListOf())
         //when & then
-        org.junit.jupiter.api.assertThrows<EmptySearchByDateListException> {
+        assertThrows<EmptySearchByDateListException> {
             getFoodByDateUseCase.getMealsByDate(LocalDate.now())
         }
         verify(exactly = 1) { foodRepository.getFoods() }
@@ -38,7 +38,7 @@ class GetFoodByDateUseCaseTest{
         //given
         every { foodRepository.getFoods() } returns Result.success(mutableListOf())
         //when & then
-        org.junit.jupiter.api.assertThrows<EmptySearchByDateListException> {
+        assertThrows<EmptySearchByDateListException> {
             getFoodByDateUseCase.getMealsByDate(LocalDate.now())
         }
     }
@@ -49,7 +49,7 @@ class GetFoodByDateUseCaseTest{
         val data = mutableListOf(createMeal(2000,null, LocalDate.now(),"description 1"))
         every { foodRepository.getFoods() } returns Result.success(data)
         //when & then
-        org.junit.jupiter.api.assertThrows<EmptySearchByDateListException> {
+        assertThrows<EmptySearchByDateListException> {
             getFoodByDateUseCase.getMealsByDate(LocalDate.now())
         }
     }
@@ -60,7 +60,7 @@ class GetFoodByDateUseCaseTest{
         val data = mutableListOf(createMeal(2000,"name1", LocalDate.now(),null))
         every { foodRepository.getFoods() } returns Result.success(data)
         //when & then
-        org.junit.jupiter.api.assertThrows<EmptySearchByDateListException> {
+        assertThrows<EmptySearchByDateListException> {
             getFoodByDateUseCase.getMealsByDate(LocalDate.now())
         }
     }

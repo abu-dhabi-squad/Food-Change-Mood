@@ -1,7 +1,6 @@
 package logic.usecase
 
 import com.google.common.truth.Truth
-import data.CsvFoodRepositoryImp
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
