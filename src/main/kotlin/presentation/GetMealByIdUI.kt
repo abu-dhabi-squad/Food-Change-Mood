@@ -2,7 +2,6 @@ package presentation
 
 import logic.usecase.GetMealByIdUseCase
 import presentation.ui_io.IntReader
-import util.showDetails
 
 class GetMealByIdUI(
     private val getMealByIdUseCase: GetMealByIdUseCase,
@@ -12,7 +11,7 @@ class GetMealByIdUI(
         print("enter id of the meal : ")
         intReader.read()?.let { enteredID ->
             try {
-                getMealByIdUseCase.getMealById(enteredID).showDetails()
+                println(getMealByIdUseCase.getMealById(enteredID).getFullDetails())
             } catch (exception: Exception) {
                 println(exception.message)
             }
