@@ -5,6 +5,7 @@ import data.CsvFoodRepositoryImp
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import logic.repository.FoodRepository
 import model.EmptyHighCalorieListException
 import model.Food
 import model.Nutrition
@@ -15,7 +16,7 @@ import java.time.LocalDate
 
 class GetMealForThinPeopleUseCaseTest {
     private lateinit var getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase
-    private val foodRepository: CsvFoodRepositoryImp = mockk(relaxed = true)
+    private val foodRepository: FoodRepository = mockk(relaxed = true)
 
     @BeforeEach
     fun setup() {
