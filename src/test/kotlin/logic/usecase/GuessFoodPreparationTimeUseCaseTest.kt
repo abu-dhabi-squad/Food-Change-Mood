@@ -16,7 +16,7 @@ class GuessFoodPreparationTimeUseCaseTest{
     }
 
     @Test
-    fun `guessFoodPreparationTimeUseCase when user guess equal the preparation time then return CORRECT`(){
+    fun `guessFoodPreparationTimeUseCase should return CORRECT when user guess equal the preparation time`(){
 
         val userGuess = 15
         val preparationTime = 15
@@ -28,7 +28,7 @@ class GuessFoodPreparationTimeUseCaseTest{
     }
 
     @Test
-    fun `guessFoodPreparationTimeUseCase when user guess high than the preparation time then return TOO_HIGH`(){
+    fun `guessFoodPreparationTimeUseCase should return TOO_HIGH when user guess high than the preparation time`(){
         val userGuess = 20
         val preparationTime = 15
         val attempts = 2
@@ -39,7 +39,7 @@ class GuessFoodPreparationTimeUseCaseTest{
     }
 
     @Test
-    fun `guessFoodPreparationTimeUseCase when user guess less than the preparation time then return TOO_LOW`(){
+    fun `guessFoodPreparationTimeUseCase should return TOO_LOW when user guess less than the preparation time`(){
         val userGuess = 10
         val preparationTime = 15
         val attempts = 2
@@ -50,7 +50,7 @@ class GuessFoodPreparationTimeUseCaseTest{
     }
 
     @Test
-    fun `guessFoodPreparationTimeUseCase when rich max attempts with incorrect guess value then throw RichMaxAttemptException`(){
+    fun `guessFoodPreparationTimeUseCase should throw RichMaxAttemptException when rich max attempts with incorrect guess value`(){
         val userGuess = 10
         val preparationTime = 15
         val attempts = 3
@@ -63,7 +63,7 @@ class GuessFoodPreparationTimeUseCaseTest{
 
 
     @Test
-    fun `guessFoodPreparationTimeUseCase when rich max attempts with correct guess value then  return CORRECT`(){
+    fun `guessFoodPreparationTimeUseCase should return CORRECT when rich max attempts with correct guess value`(){
         val userGuess = 15
         val preparationTime = 15
         val attempts = 3
