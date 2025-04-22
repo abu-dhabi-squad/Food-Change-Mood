@@ -2,13 +2,12 @@ package di
 
 import data.CsvFoodRepositoryImp
 import data.FoodCsvParser
+import data.FoodMapper
+import data.FoodParser
 import logic.repository.FoodRepository
 import org.koin.dsl.module
-import presentation.FoodChangeMoodConsoleUI
-import presentation.GuessFoodPreparationTimeGameUI
-import presentation.ItalianMealsForLargeGroupUI
-import presentation.RandomKetoMealUI
-import presentation.*
+import presentation.ui_io.ConsolePrinter
+import presentation.ui_io.Printer
 import util.DateParserImplementation
 import util.DateParserInterface
 import util.GetFoodByDateValidationImplementaion
@@ -16,21 +15,15 @@ import util.GetFoodByDateValidationInterface
 import java.io.File
 
 val appModule = module {
-    single { GuessFoodPreparationTimeGameUI(get(), get()) }
-    single { ItalianMealsForLargeGroupUI(get()) }
-    single { GuessIngredientConsoleUI(get()) }
     single { File("food.csv") }
-    single { FoodCsvParser(get(), get()) }
-    single<FoodRepository> { CsvFoodRepositoryImp(get()) }
-    single { RandomPotatoesMealsConsoleUi(get()) }
-    single { getIraqiMealsUseCaseUI(get()) }
-    single { RandomKetoMealUI (get())}
-    single { GetHealthyMealsUI(get()) }
-    single { GetMealByNameUI(get()) }
-    single { GymHelperConsoleUI(get()) }
-    single { SweetsWithoutEggsConsoleUI(get()) }
-    single { SeaFoodMealsSortedByProteinUI (get())}
+    single<FoodParser> { FoodCsvParser(get(), get()) }
     single<DateParserInterface> { DateParserImplementation() }
     single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
-    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(),get(),get(),get(),get(),get(),get(),get(), get(), get(),get(), get(), get()) }
+    single<FoodRepository> { CsvFoodRepositoryImp(get()) }
+    single<DateParserInterface> { DateParserImplementation() }
+    single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
+    single<DateParserInterface> { DateParserImplementation() }
+    single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
+    single<Printer> { ConsolePrinter() }
+    single { FoodMapper(get()) }
 }

@@ -10,10 +10,10 @@ import java.time.format.DateTimeParseException
 
 class FoodCsvParser(
     private val csvFile: File,
-    private val dateParserInterface: DateParserInterface
-) {
+    private val foodMapper: FoodMapper
+) : FoodParser {
 
-    fun parseCsvFileToFoods(): List<Food> {
+    override fun parse(): List<Food> {
         return if (csvFile.exists()) {
             getFoodsList()
         } else emptyList()
@@ -22,7 +22,7 @@ class FoodCsvParser(
     private fun getFoodsList(): List<Food> {
         return parseCsvLines().drop(1)
             .asSequence()
-            .map { parseFoodRow(it) }
+            .map { foodMapper.parseFoodRow(it) }
             .toList()
     }
 
@@ -78,46 +78,5 @@ class FoodCsvParser(
         }
         return rows
     }
-
-    private fun parseFoodRow(row: List<String>): Food {
-        return Food(
-            name = row[ColumnIndex.NAME].trim(),
-            id = row[ColumnIndex.ID].toInt(),
-            minutes = row[ColumnIndex.MINUTES].toInt(),
-            submittedDate = parseDate(row[ColumnIndex.SUBMITTED_DATE]),
-            tags = parseStringToListOfString(row[ColumnIndex.TAGS]),
-            nutrition = parseStringToListOfFloat(row[ColumnIndex.NUTRITION]).let {
-                Nutrition(
-                    sodium = it[NutritionColumnIndex.SODIUM],
-                    saturated = it[NutritionColumnIndex.SATURATED],
-                    carbohydrates = it[NutritionColumnIndex.CARBOHYDRATES],
-                    sugar = it[NutritionColumnIndex.SUGAR],
-                    calories = it[NutritionColumnIndex.CALORIES],
-                    totalFat = it[NutritionColumnIndex.TOTAL_FAT],
-                    protein = it[NutritionColumnIndex.PROTEIN]
-                )
-            },
-            steps = parseStringToListOfString(row[ColumnIndex.STEPS]),
-            description = row[ColumnIndex.DESCRIPTION].trim(),
-            ingredients = parseStringToListOfString(row[ColumnIndex.INGREDIENTS])
-        )
-    }
-
-    private fun parseDate(text: String): LocalDate? {
-        return try {
-            dateParserInterface.parseDateFromString(text)
-        } catch (exception: DateTimeParseException) {
-            null
-        }
-    }
-
-
-    private fun parseStringToListOfString(text: String): List<String> =
-        text.removeSurrounding("['", "']").removeSurrounding("['", "\"]").split("', '", ignoreCase = true)
-
-
-    private fun parseStringToListOfFloat(text: String): List<Float> =
-        text.removeSurrounding("[", "]").split(",").map { it.toFloat() }
-
 
 }

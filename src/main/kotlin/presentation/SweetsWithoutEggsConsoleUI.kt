@@ -1,20 +1,23 @@
 package presentation
 
 import logic.usecase.GetSweetsWithoutEggsUseCase
-import model.WrongInputException
+import util.print
 
 class SweetsWithoutEggsConsoleUI(
     private val getSweetsWithoutEggsUseCase: GetSweetsWithoutEggsUseCase,
-) {
-    fun start() {
+) : ChangeFoodMoodLauncher {
+    override fun launchUI() {
         val shownMeals = mutableSetOf<Int>()
         try {
             do {
                 val meal = getSweetsWithoutEggsUseCase.getSweetsWithoutEggs(shownMeals)
                 println("We suggest: ${meal.name}")
                 println("Description: ${meal.description}")
-                when(isLikedMeal()) {
-                    true -> { meal.print(); break }
+                when (isLikedMeal()) {
+                    true -> {
+                        meal.print(); break
+                    }
+
                     false -> shownMeals.add(meal.id)
                 }
             } while (true)

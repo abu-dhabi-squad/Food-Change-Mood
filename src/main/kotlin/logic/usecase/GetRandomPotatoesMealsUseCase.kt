@@ -1,6 +1,7 @@
 package logic.usecase
 
 import logic.repository.FoodRepository
+import util.takeShuffled
 
 class GetRandomPotatoesMealsUseCase(
     private val foodRepository: FoodRepository
@@ -10,8 +11,7 @@ class GetRandomPotatoesMealsUseCase(
             .filter {
                 hasValidName(it.name) && isIngredientsContainsPotatoes(it.ingredients)
             }
-            .shuffled()
-            .take(MEALS_COUNT)
+            .takeShuffled(MEALS_COUNT)
             .mapNotNull { it.name }
     }
 

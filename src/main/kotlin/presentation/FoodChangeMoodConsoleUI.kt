@@ -1,29 +1,29 @@
 package presentation
 
-import logic.usecase.GetRandomMealsByCountryUseCase
-import logic.usecase.GetIraqiMealsUseCase
-import logic.usecase.GetMealForThinPeopleUseCase
+import presentation.ui_io.IntReader
 import kotlin.system.exitProcess
 
 class FoodChangeMoodConsoleUI(
     private val guessIngredientConsoleUI: GuessIngredientConsoleUI,
     private val gymHelperConsoleUI: GymHelperConsoleUI,
-    private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
     private val getMealByIdUI: GetMealByIdUI,
     private val getFoodByDateUI: GetFoodByDateUI,
-    private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,
     private val guessFoodPreparationTimeGameUI: GuessFoodPreparationTimeGameUI,
     private val randomPotatoesMealsConsoleUi: RandomPotatoesMealsConsoleUi,
     private val getSeaFoodMealsSortedByProteinUI: SeaFoodMealsSortedByProteinUI,
     private val getFoodChangeMoodConsoleUi: ItalianMealsForLargeGroupUI,
-    private val getIraqiMealsUseCase: GetIraqiMealsUseCase,
     private val getSweetsWithoutEggsConsoleUI: SweetsWithoutEggsConsoleUI,
     private val randomKetoMealUI: RandomKetoMealUI,
     private val getHealthyMealsUI: GetHealthyMealsUI,
     private val getMealBySearchForNameUI: GetMealByNameUI,
-    private val easyFoodSuggestionUI: GetEasyFoodSuggestionUI
-) {
-    fun start() {
+    private val easyFoodSuggestionUI: GetEasyFoodSuggestionUI,
+    private val getHighCalorieMealForThinPeopleUI: GetHighCalorieMealForThinPeopleUI,
+    private val getIraqiMealsUI: GetIraqiMealsUI,
+    private val getRandomMealsByCountryUI: GetRandomMealsByCountryUI,
+    private val intReader: IntReader
+) : ChangeFoodMoodLauncher {
+
+    override fun launchUI() {
         showWelcome()
         presentFeature()
     }
@@ -34,24 +34,25 @@ class FoodChangeMoodConsoleUI(
 
     private fun presentFeature() {
         showOptions()
-        val input = getUserInput()
+        print("Enter your choice: ")
+        val input = intReader.read()
         when (input) {
-            1 -> getHealthyMealsUI.executeHealthyMeals()
-            2 -> getMealBySearchForNameUI.start()
-            3 -> getIraqiMealsUseCaseUI(getIraqiMealsUseCase)
-            4 -> easyFoodSuggestionUI.launchSEasyFoodSuggestionGame()
-            5 -> guessFoodPreparationTimeGameUI.start()
-            6 -> getSweetsWithoutEggsConsoleUI.start()
-            7 -> randomKetoMealUI.start()
-            8 -> getFoodByDateUI.runUI()
-            9 -> gymHelperConsoleUI.start()
-            10 -> getRandomMealsByCountryUI(getRandomMealsByCountryUseCase)
-            11 -> guessIngredientConsoleUI.start()
-            12 -> { randomPotatoesMealsConsoleUi.displayRandomPotatoesMealsUI() }
-            13 -> getHighCalorieMealUI(getMealForThinPeopleUseCase)
-            14 -> getSeaFoodMealsSortedByProteinUI.start()
-            15 -> getFoodChangeMoodConsoleUi.start()
-            16 -> getMealByIdUI.getDetailsById()
+            1 -> getHealthyMealsUI.launchUI()
+            2 -> getMealBySearchForNameUI.launchUI()
+            3 -> getIraqiMealsUI.launchUI()
+            4 -> easyFoodSuggestionUI.launchUI()
+            5 -> guessFoodPreparationTimeGameUI.launchUI()
+            6 -> getSweetsWithoutEggsConsoleUI.launchUI()
+            7 -> randomKetoMealUI.launchUI()
+            8 -> getFoodByDateUI.launchUI()
+            9 -> gymHelperConsoleUI.launchUI()
+            10 -> getRandomMealsByCountryUI.launchUI()
+            11 -> guessIngredientConsoleUI.launchUI()
+            12 -> randomPotatoesMealsConsoleUi.launchUI()
+            13 -> getHighCalorieMealForThinPeopleUI.launchUI()
+            14 -> getSeaFoodMealsSortedByProteinUI.launchUI()
+            15 -> getFoodChangeMoodConsoleUi.launchUI()
+            16 -> getMealByIdUI.launchUI()
             0 -> exitProcess(0)
             else -> println("Invalid input")
         }
@@ -82,8 +83,4 @@ class FoodChangeMoodConsoleUI(
         println("╚════════════════════════════════════╝")
     }
 
-    private fun getUserInput(): Int? {
-        print("Enter your choice: ")
-        return readlnOrNull()?.toIntOrNull()
-    }
 }

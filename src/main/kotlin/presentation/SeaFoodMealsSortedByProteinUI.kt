@@ -4,8 +4,9 @@ import logic.usecase.GetSeaFoodMealsSortedByProteinUseCase
 
 class SeaFoodMealsSortedByProteinUI(
     private val getSeafoodMealsSortedByProtein: GetSeaFoodMealsSortedByProteinUseCase,
-) {
-    fun start() {
+) : ChangeFoodMoodLauncher {
+
+    override fun launchUI() {
         try {
             println("🍤 All Seafood Meals Sorted by Protein Content:\n")
 
@@ -18,4 +19,5 @@ class SeaFoodMealsSortedByProteinUI(
             println(exception.message)
         }
     }
+
 }
