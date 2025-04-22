@@ -1,23 +1,16 @@
 package logic.usecase
 
 import com.google.common.truth.Truth
-import com.sun.net.httpserver.Authenticator.Success
 import data.CsvFoodRepositoryImp
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import logic.repository.FoodRepository
-import model.AppException
 import model.EmptyHighCalorieListException
 import model.Food
 import model.Nutrition
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.junit.jupiter.params.provider.CsvSource
-import org.junit.jupiter.params.provider.ValueSource
 import java.time.LocalDate
 
 class GetMealForThinPeopleUseCaseTest {
