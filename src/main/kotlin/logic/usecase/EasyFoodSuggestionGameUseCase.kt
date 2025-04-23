@@ -18,9 +18,12 @@ class EasyFoodSuggestionGameUseCase(
     }
 
     private fun isValidEasyMeal(food: Food): Boolean {
-        return food.description != null &&
+        return food.name != null &&
+                food.description != null &&
                 food.minutes <= MAX_MINUTES &&
+                food.ingredients.isNotEmpty()&&
                 food.ingredients.size <= MAX_INGREDIENTS &&
+                food.steps.isNotEmpty() &&
                 food.steps.size <= MAX_STEPS
     }
 
