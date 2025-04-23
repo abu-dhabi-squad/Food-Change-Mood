@@ -13,13 +13,13 @@ import presentation.ui_io.Printer
 class GetHighCalorieMealForThinPeopleUITest{
 
     private val printer: Printer = mockk(relaxed = true)
-    private val isLikedMeal: IsLikedMeal = mockk(relaxed = true)
+    private val getUserTaste: GetUserTaste = mockk(relaxed = true)
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase = mockk(relaxed = true)
     private lateinit var getHighCalorieMealForThinPeopleUI : GetHighCalorieMealForThinPeopleUI
 
     @BeforeEach
     fun setUp(){
-        getHighCalorieMealForThinPeopleUI = GetHighCalorieMealForThinPeopleUI(getMealForThinPeopleUseCase, printer, isLikedMeal)
+        getHighCalorieMealForThinPeopleUI = GetHighCalorieMealForThinPeopleUI(getMealForThinPeopleUseCase, printer, getUserTaste)
     }
 
     @Test
@@ -37,7 +37,7 @@ class GetHighCalorieMealForThinPeopleUITest{
         // Given
         val meal = createMeal(id = 2000, name = "name1", description = "description1")
         every { getMealForThinPeopleUseCase.getMeal(any()) } returns meal
-        every { isLikedMeal.run() } returns true
+        every { getUserTaste.run() } returns true
         // When
         getHighCalorieMealForThinPeopleUI.launchUI()
         //then
@@ -50,7 +50,7 @@ class GetHighCalorieMealForThinPeopleUITest{
         // Given
         val meal = createMeal(id = 2000, name = "name1", description = "description1")
         every { getMealForThinPeopleUseCase.getMeal(any()) } returns meal
-        every { isLikedMeal.run() } returns true
+        every { getUserTaste.run() } returns true
         // When
         getHighCalorieMealForThinPeopleUI.launchUI()
         //then
@@ -66,7 +66,7 @@ class GetHighCalorieMealForThinPeopleUITest{
         val meal1 = createMeal(id = 2000, name = "name1", description = "description1")
         val meal2 = createMeal(id = 2100, name = "name2", description = "description2")
         every { getMealForThinPeopleUseCase.getMeal(any()) } returns meal1 andThen meal2
-        every { isLikedMeal.run() } returns false andThen true
+        every { getUserTaste.run() } returns false andThen true
         // When
         getHighCalorieMealForThinPeopleUI.launchUI()
         //then

@@ -10,20 +10,20 @@ import presentation.ui_io.ConsolePrinter
 import presentation.ui_io.Printer
 import util.DateParserImplementation
 import util.DateParserInterface
-import util.GetFoodByDateValidationImplementaion
-import util.GetFoodByDateValidationInterface
+import util.DateValidationImplementaion
+import util.DateValidationInterface
 import java.io.File
 
 val appModule = module {
     single { File("food.csv") }
     single<FoodParser> { FoodCsvParser(get(), get()) }
     single<DateParserInterface> { DateParserImplementation() }
-    single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
+    single<DateValidationInterface> { DateValidationImplementaion(get()) }
     single<FoodRepository> { CsvFoodRepositoryImp(get()) }
     single<DateParserInterface> { DateParserImplementation() }
-    single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
+    single<DateValidationInterface> { DateValidationImplementaion(get()) }
     single<DateParserInterface> { DateParserImplementation() }
-    single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
+    single<DateValidationInterface> { DateValidationImplementaion(get()) }
     single<Printer> { ConsolePrinter() }
     single { FoodMapper(get()) }
 }

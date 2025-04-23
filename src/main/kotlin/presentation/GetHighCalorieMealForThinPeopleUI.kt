@@ -6,7 +6,7 @@ import presentation.ui_io.Printer
 class GetHighCalorieMealForThinPeopleUI(
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
     private val printer: Printer,
-    private val isLikedMeal: IsLikedMeal,
+    private val getUserTaste: GetUserTaste,
 ) : ChangeFoodMoodLauncher {
 
     override fun launchUI() {
@@ -19,7 +19,7 @@ class GetHighCalorieMealForThinPeopleUI(
             getMealForThinPeopleUseCase.getMeal(shownSet).also { suggestMeal ->
                 shownSet.add(suggestMeal.id)
                 printer.displayLn(suggestMeal.getNameAndDescription())
-                when (isLikedMeal.run()) {
+                when (getUserTaste.run()) {
                     true -> printer.displayLn(suggestMeal.getFullDetails())
                     false -> getRandomHighCalorieMeal(shownSet)
                 }

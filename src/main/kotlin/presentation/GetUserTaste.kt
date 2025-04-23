@@ -4,7 +4,7 @@ import model.WrongInputException
 import presentation.ui_io.Printer
 import presentation.ui_io.StringReader
 
-class IsLikedMeal(
+class GetUserTaste(
     private val printer: Printer,
     private val inputReader: StringReader
 ) {

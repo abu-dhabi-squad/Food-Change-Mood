@@ -1,22 +1,21 @@
 package util
 
-import model.InvalidDateFormatException
-import model.InvalidDayException
-import model.InvalidMonthException
-import model.InvalidYearException
+import model.*
 import java.time.LocalDate
 
-class GetFoodByDateValidationImplementaion(
+class DateValidationImplementaion(
     private val dateParserInterface: DateParserInterface
-): GetFoodByDateValidationInterface
+): DateValidationInterface
 {
     override fun isValidDate(date: String): Boolean {
         val formatedDate: LocalDate
         try { formatedDate = dateParserInterface.parseDateFromString(date)}catch (e: Exception){throw InvalidDateFormatException()}
 
+        if(formatedDate.isAfter(LocalDate.now())) throw InvalidDateException()
+
         isValidYear(formatedDate.year)
         isValidMonth(formatedDate.monthValue)
-        isValidDay(formatedDate)
+        isValidDay(formatedDate.dayOfMonth, formatedDate.lengthOfMonth())
         return true
     }
 
@@ -28,7 +27,8 @@ class GetFoodByDateValidationImplementaion(
         if (month in 1..12) return true else  throw InvalidMonthException()
     }
 
-    override fun isValidDay(date:LocalDate): Boolean {
-        if(!date.isAfter(LocalDate.now())) return true else throw InvalidDayException()
+    override fun isValidDay(day: Int, daysOfTheMonth: Int): Boolean{
+        if (day in 1..daysOfTheMonth) return true else throw InvalidDayException()
     }
+
 }

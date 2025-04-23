@@ -4,17 +4,14 @@ import com.google.common.truth.Truth
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.spyk
-import model.InvalidDateFormatException
-import model.InvalidDayException
-import model.InvalidMonthException
-import model.InvalidYearException
+import model.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.time.LocalDate
 
-class GetFoodByDateValidationImplementaionTest{
+class DateValidationImplementaionTest{
     private val dateParserInterface: DateParserInterface = mockk(relaxed = true)
-    private val getFoodByDateValidation = spyk(GetFoodByDateValidationImplementaion(dateParserInterface))
+    private val getFoodByDateValidation = spyk(DateValidationImplementaion(dateParserInterface))
 
     @Test
     fun `isValidYear should throw InvalidYearException when year from the future`() {
@@ -73,22 +70,36 @@ class GetFoodByDateValidationImplementaionTest{
     }
 
     @Test
-    fun `isValidDay should throw InvalidDayException when the date is after the current day`() {
+    fun `isValidDay should throw InvalidDayException when day is less than 1`() {
         //given
-        val date = LocalDate.of(LocalDate.now().year,LocalDate.now().month,LocalDate.now().dayOfMonth+1)
+        val day = 0
+        val daysOfTheMonth = LocalDate.now().lengthOfMonth()
         //when & then
         assertThrows<InvalidDayException> {
-            getFoodByDateValidation.isValidDay(date)
+            getFoodByDateValidation.isValidDay(day, daysOfTheMonth)
+        }
+    }
+
+    @Test
+    fun `isValidDay should throw InvalidDayException when day is more than the last day of the month`() {
+        //given
+        val day = LocalDate.now().lengthOfMonth() + 1
+        val daysOfTheMonth = LocalDate.now().lengthOfMonth()
+        //when & then
+        assertThrows<InvalidDayException> {
+            getFoodByDateValidation.isValidDay(day, daysOfTheMonth)
         }
     }
 
     @Test
     fun `isValidDay should return true when day is valid`() {
         //given
-        val date = LocalDate.of(2002,7,2)
+        val day = 12
+        val daysOfTheMonth = LocalDate.now().lengthOfMonth()
         //when & then
-        Truth.assertThat(getFoodByDateValidation.isValidDay(date)).isTrue()
+        Truth.assertThat(getFoodByDateValidation.isValidDay(day, daysOfTheMonth)).isTrue()
     }
+
 
     @Test
     fun `isValidDate should throw InvalidDateFormatException when dateParserInterface throw Exception`() {
@@ -101,14 +112,14 @@ class GetFoodByDateValidationImplementaionTest{
     }
 
     @Test
-    fun `isValidDate should throw InvalidDayException when isValidDay throw InvalidDayException`() {
+    fun `isValidDate should throw InvalidDateException when the date is from the future`() {
         //given
-        every{dateParserInterface.parseDateFromString(any())} returns LocalDate.of(2002,12,12)
-        every{getFoodByDateValidation.isValidDay(any())} throws InvalidDayException()
+        every{dateParserInterface.parseDateFromString(any())} returns LocalDate.of(LocalDate.now().year,LocalDate.now().month,LocalDate.now().dayOfMonth + 1)
         every{getFoodByDateValidation.isValidYear(any())} returns true
         every{getFoodByDateValidation.isValidMonth(any())} returns true
+        every{getFoodByDateValidation.isValidDay(any(),any())} returns true
         //when & then
-        assertThrows<InvalidDayException> {
+        assertThrows<InvalidDateException> {
             getFoodByDateValidation.isValidDate("2002-12-12")
         }
     }
@@ -119,7 +130,7 @@ class GetFoodByDateValidationImplementaionTest{
         every{dateParserInterface.parseDateFromString(any())} returns LocalDate.of(2002,12,12)
         every{getFoodByDateValidation.isValidYear(any())} throws InvalidYearException()
         every{getFoodByDateValidation.isValidMonth(any())} returns true
-        every{getFoodByDateValidation.isValidDay(any())} returns true
+        every{getFoodByDateValidation.isValidDay(any(),any())} returns true
         //when & then
         assertThrows<InvalidYearException> {
             getFoodByDateValidation.isValidDate("2002-12-12")
@@ -132,11 +143,31 @@ class GetFoodByDateValidationImplementaionTest{
         every{dateParserInterface.parseDateFromString(any())} returns LocalDate.of(2002,12,12)
         every{getFoodByDateValidation.isValidMonth(any())} throws InvalidMonthException()
         every{getFoodByDateValidation.isValidYear(any())} returns true
-        every{getFoodByDateValidation.isValidDay(any())} returns true
-
+        every{getFoodByDateValidation.isValidDay(any(),any())} returns true
         //when & then
         assertThrows<InvalidMonthException> {
             getFoodByDateValidation.isValidDate("2002-12-12")
         }
+    }
+
+    @Test
+    fun `isValidDate should throw InvalidDayException when isValidDay throw InvalidDayException`() {
+        //given
+        every{dateParserInterface.parseDateFromString(any())} returns LocalDate.of(2002,12,12)
+        every{getFoodByDateValidation.isValidMonth(any())} returns true
+        every{getFoodByDateValidation.isValidYear(any())} returns true
+        every{getFoodByDateValidation.isValidDay(any(),any())} throws InvalidDayException()
+        //when & then
+        assertThrows<InvalidDayException> {
+            getFoodByDateValidation.isValidDate("2002-12-12")
+        }
+    }
+
+    @Test
+    fun `isValidDate should return true when the date is valid`() {
+        //given
+        every{dateParserInterface.parseDateFromString(any())} returns LocalDate.of(2002,12,12)
+        //when & then
+        Truth.assertThat(getFoodByDateValidation.isValidDate("2002-12-12")).isTrue()
     }
 }
