@@ -23,7 +23,7 @@ class GetHighCalorieMealForThinPeopleUITest{
     }
 
     @Test
-    fun `launchUI should display "there is no high calories meals in list" when getMeal throw EmptyHighCalorieListException`(){
+    fun `launchUI should display there is no high calories meals in list when getMeal throw EmptyHighCalorieListException`(){
         // Given
         every { getMealForThinPeopleUseCase.getMeal(any()) } throws EmptyHighCalorieListException()
         // When
