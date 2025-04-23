@@ -26,16 +26,16 @@ class GetFoodByDateUI(
         try {
             getFoodByDateUseCase.getMealsByDate(getInputDate())
                 .let { mealsByDate ->
-                    mealsByDate.forEach { (id, name) -> printer.println("id: $id - name: $name") }
+                    mealsByDate.forEach { (id, name) -> printer.displayLn("id: $id - name: $name") }
                     getDetailsOfMeals(mealsByDate)
                 }
         } catch (e: Exception) {
-            e.message?.let { printer.println(it) }
+            e.message?.let { printer.displayLn(it) }
         }
     }
 
     private fun getInputDate(): LocalDate {
-        printer.print("Enter the Date (yyyy-M-d) : ")
+        printer.display("Enter the Date (yyyy-M-d) : ")
         return stringReader.read()
             ?.takeIf { date -> getFoodByDateValidationInterface.isValidDate(date) }
             ?.let { date -> dateParserInterface.parseDateFromString(date) }
@@ -44,23 +44,23 @@ class GetFoodByDateUI(
 
     private fun getDetailsOfMeals(mealsByDate: List<Pair<Int, String>>) {
         while (true) {
-            printer.print("Do you want to see details of one of the Meals (Y/N)? ")
+            printer.display("Do you want to see details of one of the Meals (Y/N)? ")
             val input = stringReader.read()?.trim()?.lowercase()
             when (input) {
                 "y" -> try {
                     getDetailsById(mealsByDate)
                 } catch (e: Exception) {
-                    e.message?.let { printer.println(it) }
+                    e.message?.let { printer.displayLn(it) }
                 }
 
                 "n" -> return
-                else -> printer.println("Please enter Y or N.")
+                else -> printer.displayLn("Please enter Y or N.")
             }
         }
     }
 
     private fun getDetailsById(mealsByDate: List<Pair<Int, String>>) {
-        printer.print("enter id of the meal : ")
+        printer.display("enter id of the meal : ")
         intReader.read()?.let { enteredID ->
             mealsByDate.takeIf { it.any { item -> item.first == enteredID } }
                 ?.let {

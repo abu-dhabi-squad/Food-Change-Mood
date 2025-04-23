@@ -9,7 +9,6 @@ import model.InvalidIdException
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import util.createMeal
 
 class GetMealByIdUseCaseTest {
     private lateinit var getMealByIdUseCase: GetMealByIdUseCase

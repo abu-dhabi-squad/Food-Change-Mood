@@ -1,9 +1,11 @@
 package presentation
 
 import logic.usecase.GetMealForThinPeopleUseCase
+import presentation.ui_io.Printer
 
 class GetHighCalorieMealForThinPeopleUI(
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase,
+    private val printer: Printer
 ) : ChangeFoodMoodLauncher {
     override fun launchUI() {
         val shownSet = mutableSetOf<Int>()
@@ -14,18 +16,16 @@ class GetHighCalorieMealForThinPeopleUI(
         try {
             getMealForThinPeopleUseCase.getMeal(shownSet).also { suggestMeal ->
                 shownSet.add(suggestMeal.id)
-                println("Meal Name: " + suggestMeal.name + "\n")
-                println("Meal Description: " + suggestMeal.description + "\n")
+                printer.displayLn("Meal Name: " + suggestMeal.name + "\n")
+                printer.displayLn("Meal Description: " + suggestMeal.description + "\n")
 
                 when (isLikedMeal()) {
-                    true -> println(suggestMeal.getFullDetails())
+                    true -> printer.displayLn(suggestMeal.getFullDetails())
                     false -> getRandomHighCalorieMeal(shownSet)
                 }
             }
         } catch (e: Exception) {
-            println(e.message)
+            e.message?.let { printer.displayLn(it) }
         }
     }
-
-
 }
