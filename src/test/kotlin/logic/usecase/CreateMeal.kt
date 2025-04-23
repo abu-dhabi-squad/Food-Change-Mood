@@ -2,39 +2,28 @@ package logic.usecase
 
 import model.Food
 import model.Nutrition
-import java.time.LocalDate
 
 fun createMeal(
-    id: Int,
-    name: String? = null,
-    description: String? = null,
+    name: String?,
+    description: String?,
     minutes: Int = 0,
-    submittedDate: LocalDate = LocalDate.now(),
-    tags: List<String> = listOf(),
-    calories: Float = 0f,
-    totalFat: Float = 0f,
-    sugar: Float = 0f,
-    sodium: Float = 0f,
-    protein: Float = 0f,
-    saturated: Float = 0f,
-    carbohydrates: Float = 0f,
-    steps: List<String> = listOf(),
-    ingredients: List<String> = listOf()
+    steps: List<String>,
+    ingredients: List<String>
 ): Food {
     return Food(
-        id = id,
+        id = 0,
         name = name,
         minutes = minutes,
-        submittedDate = submittedDate,
-        tags = tags,
+        submittedDate = null,
+        tags = emptyList(),
         nutrition = Nutrition(
-            calories = calories,
-            totalFat = totalFat,
-            sugar = sugar,
-            sodium = sodium,
-            protein = protein,
-            saturated = saturated,
-            carbohydrates = carbohydrates
+            calories = 0f,
+            totalFat = 0f,
+            sugar = 0f,
+            sodium = 0f,
+            protein = 0f,
+            saturated = 0f,
+            carbohydrates = 0f
         ),
         steps = steps,
         description = description,
