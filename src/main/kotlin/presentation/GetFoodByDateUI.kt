@@ -9,7 +9,6 @@ import presentation.ui_io.Printer
 import presentation.ui_io.StringReader
 import util.DateParserInterface
 import util.GetFoodByDateValidationInterface
-import util.showDetails
 import java.time.LocalDate
 
 class GetFoodByDateUI(
@@ -65,7 +64,7 @@ class GetFoodByDateUI(
         intReader.read()?.let { enteredID ->
             mealsByDate.takeIf { it.any { item -> item.first == enteredID } }
                 ?.let {
-                    getMealByIdUseCase.getMealById(enteredID).showDetails()
+                    println(getMealByIdUseCase.getMealById(enteredID).getFullDetails())
                 } ?: throw InvalidIdException()
         } ?: throw WrongInputException()
     }

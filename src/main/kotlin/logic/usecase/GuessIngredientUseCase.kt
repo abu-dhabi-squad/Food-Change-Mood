@@ -4,7 +4,7 @@ import logic.repository.FoodRepository
 import model.Food
 import model.IngredientQuestion
 import model.NoMealsFoundException
-import util.takeShuffled
+import logic.takeShuffled
 
 class GuessIngredientUseCase(
     private val foodRepository: FoodRepository

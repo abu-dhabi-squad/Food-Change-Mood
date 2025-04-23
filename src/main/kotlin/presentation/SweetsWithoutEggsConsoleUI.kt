@@ -1,8 +1,6 @@
 package presentation
 
 import logic.usecase.GetSweetsWithoutEggsUseCase
-import util.isLikedMeal
-import util.print
 
 class SweetsWithoutEggsConsoleUI(
     private val getSweetsWithoutEggsUseCase: GetSweetsWithoutEggsUseCase,
@@ -16,7 +14,7 @@ class SweetsWithoutEggsConsoleUI(
                 println("Description: ${meal.description}")
                 when (isLikedMeal()) {
                     true -> {
-                        meal.print(); break
+                        print(meal.getFullDetails()); break
                     }
 
                     false -> shownMeals.add(meal.id)
