@@ -16,7 +16,7 @@ class GetFoodByDateValidationImplementaion(
 
         isValidYear(formatedDate.year)
         isValidMonth(formatedDate.monthValue)
-        isValidDay(formatedDate.dayOfMonth,formatedDate)
+        isValidDay(formatedDate)
         return true
     }
 
@@ -28,9 +28,7 @@ class GetFoodByDateValidationImplementaion(
         if (month in 1..12) return true else  throw InvalidMonthException()
     }
 
-    override fun isValidDay(day: Int, date:LocalDate): Boolean {
-        if(day in 1..date.lengthOfMonth() && !date.isAfter(LocalDate.now()))
-            return true
-        else throw InvalidDayException()
+    override fun isValidDay(date:LocalDate): Boolean {
+        if(!date.isAfter(LocalDate.now())) return true else throw InvalidDayException()
     }
 }
