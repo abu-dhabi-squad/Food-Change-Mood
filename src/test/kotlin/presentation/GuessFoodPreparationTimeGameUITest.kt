@@ -41,7 +41,7 @@ class GuessFoodPreparationTimeGameUITest {
         // when
         guessFoodPreparationTimeGameUI.launchUI()
         // then
-        assertThat(printer.getDisplayLnInput(0).toString()).contains(food.name)
+        assertThat(printer.getDisplayLnInput(0).toString()).isEqualTo("The Food is ${food.name}")
     }
 
 
