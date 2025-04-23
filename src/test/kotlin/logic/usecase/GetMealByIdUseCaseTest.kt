@@ -1,6 +1,7 @@
 package logic.usecase
 
 import com.google.common.truth.Truth
+import createMeal
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

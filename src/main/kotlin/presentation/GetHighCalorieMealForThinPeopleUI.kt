@@ -16,9 +16,7 @@ class GetHighCalorieMealForThinPeopleUI(
         try {
             getMealForThinPeopleUseCase.getMeal(shownSet).also { suggestMeal ->
                 shownSet.add(suggestMeal.id)
-                printer.displayLn("Meal Name: " + suggestMeal.name + "\n")
-                printer.displayLn("Meal Description: " + suggestMeal.description + "\n")
-
+                printer.displayLn(suggestMeal.getNameAndDescription())
                 when (isLikedMeal()) {
                     true -> printer.displayLn(suggestMeal.getFullDetails())
                     false -> getRandomHighCalorieMeal(shownSet)

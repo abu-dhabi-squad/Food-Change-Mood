@@ -1,5 +1,3 @@
-package logic.usecase
-
 import model.Food
 import model.Nutrition
 import java.time.LocalDate
