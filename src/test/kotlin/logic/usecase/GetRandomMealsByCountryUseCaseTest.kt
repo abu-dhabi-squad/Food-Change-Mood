@@ -100,10 +100,10 @@ class GetRandomMealsByCountryUseCaseTest {
     fun `getRandomMeals should throw when repository fails`() {
 
         // when
-        every { foodRepository.getFoods() } returns Result.failure(RuntimeException())
+        every { foodRepository.getFoods() } returns Result.failure(EmptyListException())
 
         // then
-        assertFailsWith<RuntimeException> {
+        assertFailsWith<EmptyListException> {
             useCase.getRandomMeals("japanese")
         }
     }

@@ -10,23 +10,29 @@ class GetRandomMealsByCountryUI(
 ) : ChangeFoodMoodLauncher, Printer {
 
     override fun launchUI() {
+
         display(ENTER_INPUT_MESSAGE)
         val inputCountry = stringReader.read()?.trim()
+
+        if (inputCountry.isNullOrEmpty()) {
+            displayLn(EMPTY_INPUT_MESSAGE)
+            return
+        }
+
         try {
-            val meals = inputCountry?.let {
-                getRandomMealsByCountryUseCase.getRandomMeals(it)
-            }
+            val meals = getRandomMealsByCountryUseCase.getRandomMeals(inputCountry)
             printRandomMealsByCountry(meals)
         } catch (e: Exception) {
-            displayLn("Error: ${e.message}")
+            displayLn(NO_MEALS_MATCHED_YOUR_INPUT_MESSAGE)
         }
     }
 
     private fun printRandomMealsByCountry(meals: List<String>?) {
         meals?.forEachIndexed { index, meal ->
             displayLn("${index + 1}. $meal")
-        } ?: displayLn(NO_MEALS_MATCHED_YOUR_INPUT_MESSAGE)
+        }
     }
+
 
     override fun display(input: Any) {
         print(input)
@@ -38,6 +44,7 @@ class GetRandomMealsByCountryUI(
 
     companion object{
 
+        const val EMPTY_INPUT_MESSAGE = "No country was entered. Please try again."
         const val NO_MEALS_MATCHED_YOUR_INPUT_MESSAGE = "No meals matched your input."
         const val ENTER_INPUT_MESSAGE = "Enter a country name: "
     }

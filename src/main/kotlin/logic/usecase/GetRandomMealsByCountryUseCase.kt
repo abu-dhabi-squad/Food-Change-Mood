@@ -15,7 +15,7 @@ class GetRandomMealsByCountryUseCase(
         return foodRepository
             .getFoods()
             .getOrThrow()
-            .filter { meal -> meal.matchesCountry(country) }
+            .filter { meal -> meal.matchesCountry(country) && country.isNotEmpty() }
             .takeIf { meals -> meals.isNotEmpty() }
             ?.distinctBy { it.name?.lowercase()?.trim() }
             ?.mapNotNull { meal -> meal.name }
