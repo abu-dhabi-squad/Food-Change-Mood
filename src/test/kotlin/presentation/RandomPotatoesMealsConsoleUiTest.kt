@@ -56,7 +56,6 @@ class RandomPotatoesMealsConsoleUiTest {
     fun `should show invalid message then exit on valid input`() {
         // Given
         every { useCase.getRandomPotatoesMeals() } returns listOf("Hash Browns")
-        // Given
         every { stringReader.read() } returnsMany listOf("x", "n")
 
         // When
