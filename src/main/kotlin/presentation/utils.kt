@@ -1,8 +1,6 @@
 package presentation
 
 import model.WrongInputException
-import presentation.ui_io.Printer
-import presentation.ui_io.StringReader
 
 fun isLikedMeal(): Boolean {
     println("Do you like it? {y/n}")

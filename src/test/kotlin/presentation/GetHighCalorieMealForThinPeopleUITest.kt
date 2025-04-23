@@ -3,19 +3,16 @@ package presentation
 import createMeal
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.spyk
 import io.mockk.verify
 import logic.usecase.GetMealForThinPeopleUseCase
 import model.EmptyHighCalorieListException
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import presentation.ui_io.Printer
-import presentation.ui_io.StringReader
 
 class GetHighCalorieMealForThinPeopleUITest{
 
     private val printer: Printer = mockk(relaxed = true)
-    //private val inputReader: StringReader = mockk(relaxed = true)
     private val isLikedMeal: IsLikedMeal = mockk(relaxed = true)
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase = mockk(relaxed = true)
     private lateinit var getHighCalorieMealForThinPeopleUI : GetHighCalorieMealForThinPeopleUI
@@ -40,6 +37,7 @@ class GetHighCalorieMealForThinPeopleUITest{
         // Given
         val meal = createMeal(id = 2000, name = "name1", description = "description1")
         every { getMealForThinPeopleUseCase.getMeal(any()) } returns meal
+        every { isLikedMeal.run() } returns true
         // When
         getHighCalorieMealForThinPeopleUI.launchUI()
         //then
@@ -57,6 +55,7 @@ class GetHighCalorieMealForThinPeopleUITest{
         getHighCalorieMealForThinPeopleUI.launchUI()
         //then
         verify (exactly = 1) { getMealForThinPeopleUseCase.getMeal(any()) }
+        verify { printer.displayLn(meal.getNameAndDescription()) }
         verify { printer.displayLn(meal.getFullDetails()) }
     }
 

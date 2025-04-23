@@ -6,7 +6,6 @@ import io.mockk.mockk
 import io.mockk.verify
 import logic.usecase.GetMealByIdUseCase
 import model.InvalidIdException
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import presentation.ui_io.IntReader
@@ -24,7 +23,7 @@ class GetMealByIdUITest {
     }
 
     @Test
-    fun `launchUI should display "enter id of the meal  " when called`(){
+    fun `launchUI should display enter id of the meal when called`(){
         // Given
         // When
         getMealByIdUI.launchUI()
@@ -33,7 +32,7 @@ class GetMealByIdUITest {
     }
 
     @Test
-    fun `launchUI should display "Invalid ID Input" when getMealById throw InvalidIdException`(){
+    fun `launchUI should display Invalid ID Input when getMealById throw InvalidIdException`(){
         // Given
         every { getMealByIdUseCase.getMealById(any()) } throws InvalidIdException()
         // When
