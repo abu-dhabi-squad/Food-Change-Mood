@@ -1,10 +1,11 @@
 package presentation
 
 import logic.usecase.GetRandomMealsByCountryUseCase
-import presentation.ui_io.StringReader
+import presentation.ui_io.InputReader
 
 class GetRandomMealsByCountryUI(
-    private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase, private val stringReader: StringReader
+    private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,
+    private val stringReader: InputReader<String>
 ) : ChangeFoodMoodLauncher {
 
     override fun launchUI() {

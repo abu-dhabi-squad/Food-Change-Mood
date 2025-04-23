@@ -2,11 +2,11 @@ package presentation
 
 import logic.usecase.GuessIngredientUseCase
 import model.WrongInputException
-import presentation.ui_io.IntReader
+import presentation.ui_io.InputReader
 
 class GuessIngredientConsoleUI(
     private val guessIngredientUseCase: GuessIngredientUseCase,
-    private val intReader: IntReader
+    private val intReader: InputReader<Int>
 ) : ChangeFoodMoodLauncher {
 
     override fun launchUI() {

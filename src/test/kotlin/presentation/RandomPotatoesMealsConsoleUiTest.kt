@@ -6,12 +6,12 @@ import io.mockk.mockk
 import logic.usecase.GetRandomPotatoesMealsUseCase
 import org.junit.jupiter.api.BeforeEach
 import presentation.ui_io.Printer
-import presentation.ui_io.StringReader
+import presentation.ui_io.InputReader
 import kotlin.test.Test
 
 class RandomPotatoesMealsConsoleUiTest {
     private val useCase: GetRandomPotatoesMealsUseCase = mockk()
-    private val stringReader: StringReader = mockk(relaxed = true)
+    private val stringReader: InputReader<String> = mockk(relaxed = true)
     private val printer: Printer = mockk(relaxed = true)
     private lateinit var ui: RandomPotatoesMealsConsoleUi
 
