@@ -6,8 +6,9 @@ import model.Nutrition
 
 fun createFood(
     name: String?,
-    description: String?,
-    tags: List<String>
+    description: String? = null,
+    tags: List<String> = emptyList<String>(),
+    ingredients: List<String> = emptyList<String>()
 ): Food {
     return Food(
         id = 0,
@@ -18,6 +19,6 @@ fun createFood(
         nutrition = Nutrition(0.0f, 0.0f, 0.0f, 0.0f, 0.0f,0.0f,0.0f), // default empty nutrition
         steps = emptyList(),
         description = description,
-        ingredients = emptyList()
+        ingredients = ingredients
     )
 }
