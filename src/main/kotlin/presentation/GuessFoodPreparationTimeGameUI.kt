@@ -5,7 +5,6 @@ import logic.usecase.GuessFoodPreparationTimeUseCase
 import model.Food
 import model.GuessPreparationTimeState
 import presentation.ui_io.InputReader
-import presentation.ui_io.IntReader
 import presentation.ui_io.Printer
 
 class GuessFoodPreparationTimeGameUI(

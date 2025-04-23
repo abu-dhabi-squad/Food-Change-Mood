@@ -13,9 +13,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import presentation.ui_io.InputReader
-import presentation.ui_io.IntReader
-import presentation.ui_io.Printer
-import java.nio.CharBuffer
 
 
 class GuessFoodPreparationTimeGameUITest {

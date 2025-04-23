@@ -26,4 +26,5 @@ val appModule = module {
     single<GetFoodByDateValidationInterface> { GetFoodByDateValidationImplementaion(get()) }
     single<Printer> { ConsolePrinter() }
     single { FoodMapper(get()) }
+
 }
