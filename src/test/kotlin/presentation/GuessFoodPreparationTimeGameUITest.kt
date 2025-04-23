@@ -39,6 +39,19 @@ class GuessFoodPreparationTimeGameUITest {
         assertThat(printer.getDisplayLnInput(0).toString()).contains(food.name)
 
     }
+    @Test
+    fun `launchUI should congratulation message when user guess the correct preparation time`(){
+        // given
+        val food = createFood(name = "chicken" , minutes = 5)
+        every { getRandomFoodUseCase.invoke() } returns food
+        every { intReader.read() } returns 5
+        // when
+        guessFoodPreparationTimeGameUI.launchUI()
+        // then
+        assertThat(printer.getDisplayLnInput(1).toString()).contains("You guessed the correct preparation time")
+
+    }
+
 
 
     @Test
