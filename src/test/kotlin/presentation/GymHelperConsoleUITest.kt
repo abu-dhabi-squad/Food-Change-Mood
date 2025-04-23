@@ -1,40 +1,29 @@
 package presentation
 
-import com.google.common.truth.Truth
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import logic.usecase.GymHelperUseCase
 import logic.usecase.createMealForGymHelper
 import model.NoMealsFoundException
 import model.WrongInputException
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import presentation.ui_io.FloatReader
-import java.io.ByteArrayOutputStream
-import java.io.PrintStream
+import presentation.ui_io.InputReader
+import presentation.ui_io.Printer
 
 class GymHelperConsoleUITest {
     private lateinit var gymHelperUseCase: GymHelperUseCase
-    private val floatReader: FloatReader = mockk(relaxed = true)
+    private val floatReader: InputReader<Float> = mockk(relaxed = true)
+    private val consolePrinter: Printer = mockk(relaxed = true)
     private lateinit var gymHelperConsoleUI: GymHelperConsoleUI
-
-    private val originalOut = System.out
-    private lateinit var outputStream: ByteArrayOutputStream
 
     @BeforeEach
     fun setUp() {
         gymHelperUseCase = mockk(relaxed = true)
-        gymHelperConsoleUI = GymHelperConsoleUI(gymHelperUseCase, floatReader)
-        outputStream = ByteArrayOutputStream()
-        System.setOut(PrintStream(outputStream))
-    }
-
-    @AfterEach
-    fun tearDown() {
-        System.setOut(originalOut)
+        gymHelperConsoleUI = GymHelperConsoleUI(gymHelperUseCase, floatReader, consolePrinter)
     }
 
     @Test
@@ -50,14 +39,13 @@ class GymHelperConsoleUITest {
 
         // When
         gymHelperConsoleUI.launchUI()
-        val printed = outputStream.toString().trim()
 
         // Then
         listOf(
             createMealForGymHelper(name = "Meal 4", calories = 148.0F, proteins = 17.0F),
             createMealForGymHelper(name = "Meal 5", calories = 150.0F, proteins = 18.0F),
         ).forEach {
-            Truth.assertThat(printed).contains(it.getFullDetails())
+            verify(exactly = 1) { consolePrinter.displayLn(it.getFullDetails()) }
         }
     }
 
@@ -71,10 +59,9 @@ class GymHelperConsoleUITest {
 
         // When
         gymHelperConsoleUI.launchUI()
-        val printed = outputStream.toString().trim()
 
         // Then
-        Truth.assertThat(printed).contains(NoMealsFoundException().message)
+        verify(exactly = 1) { consolePrinter.displayLn(NoMealsFoundException().message) }
     }
 
     @ParameterizedTest
@@ -92,10 +79,9 @@ class GymHelperConsoleUITest {
 
         // When
         gymHelperConsoleUI.launchUI()
-        val printed = outputStream.toString().trim()
 
         // Then
-        Truth.assertThat(printed).contains(WrongInputException().message)
+        verify(exactly = 1) { consolePrinter.displayLn(WrongInputException().message) }
     }
 
     @ParameterizedTest
@@ -113,9 +99,8 @@ class GymHelperConsoleUITest {
 
         // When
         gymHelperConsoleUI.launchUI()
-        val printed = outputStream.toString().trim()
 
         // Then
-        Truth.assertThat(printed).contains(WrongInputException().message)
+        verify(exactly = 1) { consolePrinter.displayLn(WrongInputException().message) }
     }
 }
