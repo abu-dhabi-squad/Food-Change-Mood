@@ -9,7 +9,7 @@ fun createMealForGymHelper(name: String, calories: Float, proteins: Float): Food
         id = 1,
         name = name,
         minutes = 15,
-        submittedDate = LocalDate.now(),
+        submittedDate = null,
         nutrition = Nutrition(
             calories = calories,
             protein = proteins,
