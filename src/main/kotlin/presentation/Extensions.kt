@@ -2,7 +2,6 @@ package presentation
 
 import model.Food
 import model.Nutrition
-import presentation.ui_io.StringReader
 
 fun Food.getFullDetails(): String {
     val strBuilder = StringBuilder()

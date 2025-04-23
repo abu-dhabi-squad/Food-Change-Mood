@@ -6,11 +6,8 @@ import io.mockk.mockk
 import io.mockk.verify
 import logic.usecase.GetMealForThinPeopleUseCase
 import model.EmptyHighCalorieListException
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 import presentation.ui_io.Printer
 import presentation.ui_io.StringReader
 
