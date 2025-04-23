@@ -33,6 +33,23 @@ class GuessFoodPreparationTimeUseCaseTest {
     }
 
     @Test
+    fun `guessFoodPreparationTimeUseCase should return CORRECT when rich max attempts with correct guess value`() {
+        // given
+        val userGuess = 15
+        val preparationTime = 15
+        val attempts = 3
+        // when
+        val result = guessFoodPreparationTimeUseCase(
+            userGuess = userGuess,
+            preparationTime = preparationTime,
+            attempts = attempts
+        )
+        // then
+        assertThat(result).isEqualTo(GuessPreparationTimeState.CORRECT)
+    }
+
+
+    @Test
     fun `should return TOO_HIGH when user guess high than the preparation time`() {
         // given
         val userGuess = 20
@@ -81,20 +98,5 @@ class GuessFoodPreparationTimeUseCaseTest {
     }
 
 
-    @Test
-    fun `guessFoodPreparationTimeUseCase should return CORRECT when rich max attempts with correct guess value`() {
-        // given
-        val userGuess = 15
-        val preparationTime = 15
-        val attempts = 3
-        // when &&
-        val result = guessFoodPreparationTimeUseCase(
-            userGuess = userGuess,
-            preparationTime = preparationTime,
-            attempts = attempts
-        )
-        // then
-        assertThat(result).isEqualTo(GuessPreparationTimeState.CORRECT)
-    }
 
 }
