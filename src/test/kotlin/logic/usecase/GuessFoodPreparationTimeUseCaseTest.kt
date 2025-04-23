@@ -19,7 +19,7 @@ class GuessFoodPreparationTimeUseCaseTest {
     }
 
     @ParameterizedTest
-    @CsvSource("10,15,2", "15,15,3")
+    @CsvSource("15,15,2", "15,15,3")
     fun `should return CORRECT when user guess equal the preparation time`(userGuess : Int , preparationTime : Int, attempts:Int) {
         // when
         val result = guessFoodPreparationTimeUseCase(
