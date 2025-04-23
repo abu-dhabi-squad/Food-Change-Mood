@@ -6,6 +6,8 @@ import model.RichMaxAttemptException
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 class GuessFoodPreparationTimeUseCaseTest {
 
@@ -16,28 +18,9 @@ class GuessFoodPreparationTimeUseCaseTest {
         guessFoodPreparationTimeUseCase = GuessFoodPreparationTimeUseCase()
     }
 
-    @Test
-    fun `should return CORRECT when user guess equal the preparation time`() {
-        // given
-        val userGuess = 15
-        val preparationTime = 15
-        val attempts = 2
-        // when
-        val result = guessFoodPreparationTimeUseCase(
-            userGuess = userGuess,
-            preparationTime = preparationTime,
-            attempts = attempts
-        )
-        // then
-        assertThat(result).isEqualTo(GuessPreparationTimeState.CORRECT)
-    }
-
-    @Test
-    fun `guessFoodPreparationTimeUseCase should return CORRECT when rich max attempts with correct guess value`() {
-        // given
-        val userGuess = 15
-        val preparationTime = 15
-        val attempts = 3
+    @ParameterizedTest
+    @CsvSource("10,15,2", "15,15,3")
+    fun `should return CORRECT when user guess equal the preparation time`(userGuess : Int , preparationTime : Int, attempts:Int) {
         // when
         val result = guessFoodPreparationTimeUseCase(
             userGuess = userGuess,
