@@ -41,6 +41,7 @@ class GetHighCalorieMealForThinPeopleUITest{
         // When
         getHighCalorieMealForThinPeopleUI.launchUI()
         //then
+        verify (exactly = 1) { getMealForThinPeopleUseCase.getMeal(any()) }
         verify { printer.displayLn(meal.getNameAndDescription()) }
     }
 
@@ -53,6 +54,7 @@ class GetHighCalorieMealForThinPeopleUITest{
         // When
         getHighCalorieMealForThinPeopleUI.launchUI()
         //then
+        verify (exactly = 1) { getMealForThinPeopleUseCase.getMeal(any()) }
         verify { printer.displayLn(meal.getFullDetails()) }
     }
 
@@ -67,6 +69,7 @@ class GetHighCalorieMealForThinPeopleUITest{
         // When
         getHighCalorieMealForThinPeopleUI.launchUI()
         //then
+        verify (exactly = 2) { getMealForThinPeopleUseCase.getMeal(any()) }
         verify { printer.displayLn(meal1.getNameAndDescription()) }
         verify { printer.displayLn(meal2.getNameAndDescription()) }
         verify { printer.displayLn(meal2.getFullDetails()) }
