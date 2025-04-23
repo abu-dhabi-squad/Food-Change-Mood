@@ -6,8 +6,12 @@ import io.mockk.mockk
 import logic.usecase.GetRandomFoodUseCase
 import logic.usecase.GuessFoodPreparationTimeUseCase
 import logic.usecase.createFood
+import model.GuessPreparationTimeState
+import model.RichMaxAttemptException
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import presentation.ui_io.InputReader
 import presentation.ui_io.IntReader
 import presentation.ui_io.Printer
@@ -22,8 +26,8 @@ class GuessFoodPreparationTimeGameUITest {
     private  var printer: PrinterForTest = PrinterForTest()
     @BeforeEach
     fun setup(){
-        getRandomFoodUseCase = mockk(relaxed = true)
-        guessFoodPreparationTimeUseCase  = mockk(relaxed = true)
+        getRandomFoodUseCase = mockk()
+        guessFoodPreparationTimeUseCase  = mockk()
         guessFoodPreparationTimeGameUI = GuessFoodPreparationTimeGameUI(getRandomFoodUseCase, guessFoodPreparationTimeUseCase, intReader, printer)
     }
 
@@ -33,23 +37,81 @@ class GuessFoodPreparationTimeGameUITest {
         val food = createFood(name = "chicken" , minutes = 5)
         every { getRandomFoodUseCase.invoke() } returns food
         every { intReader.read() } returns 5
+        every { guessFoodPreparationTimeUseCase.invoke(5,5,1) } returns GuessPreparationTimeState.CORRECT
         // when
         guessFoodPreparationTimeGameUI.launchUI()
         // then
         assertThat(printer.getDisplayLnInput(0).toString()).contains(food.name)
-
     }
+
+
     @Test
-    fun `launchUI should congratulation message when user guess the correct preparation time`(){
-        // given
+    fun `launchUI should show prompt message to allow the user enter preparation time when game starts`(){
         val food = createFood(name = "chicken" , minutes = 5)
         every { getRandomFoodUseCase.invoke() } returns food
         every { intReader.read() } returns 5
+        every { guessFoodPreparationTimeUseCase.invoke(5,5,1) } returns GuessPreparationTimeState.CORRECT
         // when
         guessFoodPreparationTimeGameUI.launchUI()
         // then
-        assertThat(printer.getDisplayLnInput(1).toString()).contains("You guessed the correct preparation time")
+        assertThat(printer.getDisplayInput(0).toString()).contains("Guess the preparation time")
+    }
 
+    @ParameterizedTest
+    @CsvSource("5,5,1","5,5,3")
+    fun `launchUI should show congratulation message when user guess the correct preparation time`(userGuess : Int ,preparationTime : Int, attempts:Int){
+        // given
+        val food = createFood(name = "chicken" , minutes = preparationTime)
+        every { getRandomFoodUseCase.invoke() } returns food
+        every { intReader.read() } returns userGuess
+        every { guessFoodPreparationTimeUseCase.invoke(userGuess,preparationTime,attempts) } returns GuessPreparationTimeState.CORRECT
+        // when
+        guessFoodPreparationTimeGameUI.launchUI()
+        // then
+        assertThat(printer.getDisplayLnInput(0).toString()).contains(food.name)
+    }
+
+    @Test
+    fun `launchUI should show too low  message when user guess is less than the preparation time`(){
+        // given
+        val food = createFood(name = "chicken" , minutes = 5)
+        every { getRandomFoodUseCase.invoke() } returns food
+        every { intReader.read() } returns 3
+        every { guessFoodPreparationTimeUseCase.invoke(3,5,1) } returns GuessPreparationTimeState.TOO_LOW
+
+        // when
+        guessFoodPreparationTimeGameUI.launchUI()
+        // then
+        assertThat(printer.getDisplayLnInput(1).toString()).contains("too low")
+    }
+
+    @Test
+    fun `launchUI should show rich max attempt message when user guess wrong after 2 attempts`(){
+        // given
+        val food = createFood(name = "chicken" , minutes = 5)
+        every { getRandomFoodUseCase.invoke() } returns food
+        every { intReader.read() } returns 3
+        every { guessFoodPreparationTimeUseCase.invoke(3,5,any()) } throws RichMaxAttemptException(preparationTime = food.minutes)
+
+        // when
+        guessFoodPreparationTimeGameUI.launchUI()
+        // then
+        assertThat(printer.getDisplayLnInput(1).toString()).contains("You have reached the maximum number of attempts.The correct preparation time is ${food.minutes} minutes")
+    }
+
+
+    @Test
+    fun `launchUI should show too high  message when user guess is higher than the preparation time`(){
+        // given
+        val food = createFood(name = "chicken" , minutes = 5)
+        every { getRandomFoodUseCase.invoke() } returns food
+        every { intReader.read() } returns 7
+        every { guessFoodPreparationTimeUseCase.invoke(7,5,1) } returns GuessPreparationTimeState.TOO_HIGH
+
+        // when
+        guessFoodPreparationTimeGameUI.launchUI()
+        // then
+        assertThat(printer.getDisplayLnInput(1).toString()).contains("too high")
     }
 
 
@@ -68,25 +130,4 @@ class GuessFoodPreparationTimeGameUITest {
 
 }
 
-
-class PrinterForTest : Printer{
-   private var displayLnInputs = ArrayList<Any>()
-    private var displayInputs = ArrayList<Any>()
-
-    override fun display(input: Any) {
-        displayInputs.add(input)
-    }
-
-    override fun displayLn(input: Any) {
-        displayLnInputs.add(input)
-
-    }
-
-    fun getDisplayInput(index : Int) : Any{
-        return displayInputs
-    }
-    fun getDisplayLnInput(index : Int) : Any{
-        return displayLnInputs
-    }
-}
 

@@ -52,7 +52,6 @@ class GuessFoodPreparationTimeGameUI(
                 printer.displayLn("Congratulations! You guessed the correct preparation time.")
                 endTheGame()
             }
-
             GuessPreparationTimeState.TOO_LOW -> printer.displayLn("The preparation time is too low.")
             GuessPreparationTimeState.TOO_HIGH -> printer.displayLn("The preparation time is too high")
         }
