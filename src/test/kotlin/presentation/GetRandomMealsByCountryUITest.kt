@@ -7,8 +7,8 @@ import model.NoMealsFoundException
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import presentation.ui_io.ConsolePrinter
+import presentation.ui_io.InputReader
 import presentation.ui_io.Printer
-import presentation.ui_io.StringReader
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 import kotlin.test.assertTrue
@@ -16,7 +16,7 @@ import kotlin.test.assertTrue
 class GetRandomMealsByCountryUITest {
 
     private lateinit var useCase: GetRandomMealsByCountryUseCase
-    private lateinit var stringReader: StringReader
+    private lateinit var reader: InputReader
     private lateinit var ui: GetRandomMealsByCountryUI
     private val outContent = ByteArrayOutputStream()
     private lateinit var printer: Printer
@@ -24,9 +24,9 @@ class GetRandomMealsByCountryUITest {
     @BeforeEach
     fun setUp() {
         useCase = mockk<GetRandomMealsByCountryUseCase>()
-        stringReader = mockk<StringReader>()
+        reader = mockk()
         printer = ConsolePrinter()
-        ui = GetRandomMealsByCountryUI(useCase, stringReader, printer)
+        ui = GetRandomMealsByCountryUI(useCase, reader, printer)
         System.setOut(PrintStream(outContent))
     }
 
@@ -38,7 +38,7 @@ class GetRandomMealsByCountryUITest {
         val meals = listOf("Pizza", "Pasta")
 
         // when
-        every { stringReader.read() } returns country
+        every { reader.readString() } returns country
         every { useCase.getRandomMeals(country = country) } returns meals
         ui.launchUI()
         val output = outContent.toString()
@@ -53,7 +53,7 @@ class GetRandomMealsByCountryUITest {
         // given
         val country = ""
         // when
-        every { stringReader.read() } returns country
+        every { reader.readString() } returns country
         ui.launchUI()
         val output = outContent.toString()
         // then
@@ -66,7 +66,7 @@ class GetRandomMealsByCountryUITest {
         val country = "UnknownLand"
 
         // when
-        every { stringReader.read() } returns country
+        every { reader.readString() } returns country
         every { useCase.getRandomMeals(country) } throws NoMealsFoundException()
 
         ui.launchUI()
@@ -81,7 +81,7 @@ class GetRandomMealsByCountryUITest {
         // given
         val country = null
         // when
-        every { stringReader.read() } returns country
+        every { reader.readString() } returns country
         ui.launchUI()
         val output = outContent.toString()
         // then

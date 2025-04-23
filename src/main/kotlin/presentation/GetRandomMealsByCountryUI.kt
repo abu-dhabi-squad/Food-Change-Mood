@@ -6,14 +6,14 @@ import presentation.ui_io.Printer
 
 class GetRandomMealsByCountryUI(
     private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,
-    private val stringReader: InputReader<String>,
+    private val reader: InputReader,
     private val printer: Printer,
 ) : ChangeFoodMoodLauncher{
 
     override fun launchUI() {
 
         printer.display(ENTER_INPUT_MESSAGE)
-        val inputCountry = stringReader.read()?.trim()
+        val inputCountry = reader.readString()?.trim()
 
         if (inputCountry.isNullOrEmpty()) {
             printer.displayLn(EMPTY_INPUT_MESSAGE)

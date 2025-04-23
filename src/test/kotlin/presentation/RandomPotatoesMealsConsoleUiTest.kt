@@ -11,13 +11,13 @@ import kotlin.test.Test
 
 class RandomPotatoesMealsConsoleUiTest {
     private val useCase: GetRandomPotatoesMealsUseCase = mockk()
-    private val stringReader: InputReader<String> = mockk(relaxed = true)
+    private val reader: InputReader = mockk(relaxed = true)
     private val printer: Printer = mockk(relaxed = true)
     private lateinit var ui: RandomPotatoesMealsConsoleUi
 
     @BeforeEach
     fun setUp() {
-        ui = RandomPotatoesMealsConsoleUi(useCase, stringReader, printer)
+        ui = RandomPotatoesMealsConsoleUi(useCase, reader, printer)
     }
 
     @Test
@@ -25,7 +25,7 @@ class RandomPotatoesMealsConsoleUiTest {
         // Given
         every { useCase.getRandomPotatoesMeals() } returns listOf("Mashed Potatoes", "Potato Salad")
         // Given
-        every { stringReader.read() } returns "n"
+        every { reader.readString() } returns "n"
 
         // When
         ui.launchUI()
@@ -42,7 +42,7 @@ class RandomPotatoesMealsConsoleUiTest {
     fun `should show meals again when user inputs Y`() {
         // Given
         every { useCase.getRandomPotatoesMeals() } returns listOf("Fries")
-        every { stringReader.read() } returnsMany listOf("y", "n")
+        every { reader.readString() } returnsMany listOf("y", "n")
 
         // When
         ui.launchUI()
@@ -56,7 +56,7 @@ class RandomPotatoesMealsConsoleUiTest {
     fun `should show invalid message then exit on valid input`() {
         // Given
         every { useCase.getRandomPotatoesMeals() } returns listOf("Hash Browns")
-        every { stringReader.read() } returnsMany listOf("x", "n")
+        every { reader.readString() } returnsMany listOf("x", "n")
 
         // When
         ui.launchUI()

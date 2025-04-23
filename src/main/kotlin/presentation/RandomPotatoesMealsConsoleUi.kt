@@ -6,7 +6,7 @@ import presentation.ui_io.Printer
 
 class RandomPotatoesMealsConsoleUi(
     private val getRandomPotatoesMealsUseCase: GetRandomPotatoesMealsUseCase,
-    private val stringReader: InputReader<String>,
+    private val reader: InputReader,
     private val  printer: Printer
 
 ) : ChangeFoodMoodLauncher {
@@ -28,7 +28,7 @@ class RandomPotatoesMealsConsoleUi(
     private fun promptForMoreMeals() {
         while (true) {
             printer.displayLn("\nWould you like to see more potato meals? (Y/N)")
-            val input = stringReader.read()
+            val input = reader.readString()
             when {
                 input.equals("y", ignoreCase = true) -> {
                     launchUI()
