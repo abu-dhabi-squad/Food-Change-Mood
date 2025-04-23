@@ -6,7 +6,7 @@ import model.Nutrition
 fun createMeal(
     name: String?,
     description: String?,
-    minutes: Int = 0,
+    minutes: Int,
     steps: List<String>,
     ingredients: List<String>
 ): Food {
