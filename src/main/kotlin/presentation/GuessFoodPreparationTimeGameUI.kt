@@ -10,7 +10,7 @@ import presentation.ui_io.Printer
 class GuessFoodPreparationTimeGameUI(
     private val getRandomFoodUseCase: GetRandomFoodUseCase,
     private val guessFoodPreparationTimeUseCase: GuessFoodPreparationTimeUseCase,
-    private val intReader: InputReader<Int>,
+    private val reader: InputReader,
     private val printer : Printer
 ) : ChangeFoodMoodLauncher {
     private var attemptsCount = 0
@@ -32,7 +32,7 @@ class GuessFoodPreparationTimeGameUI(
         try {
             while (!isGameFinished) {
                 printer.display("Guess the preparation time (in minutes): ")
-                val userGuess = intReader.read()
+                val userGuess = reader.readInt()
                 if (userGuess == null) {
                     printer.displayLn("Invalid input. Please enter a number.")
                     continue
