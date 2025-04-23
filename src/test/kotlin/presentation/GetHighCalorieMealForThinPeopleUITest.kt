@@ -3,6 +3,7 @@ package presentation
 import createMeal
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.spyk
 import io.mockk.verify
 import logic.usecase.GetMealForThinPeopleUseCase
 import model.EmptyHighCalorieListException
@@ -14,13 +15,14 @@ import presentation.ui_io.StringReader
 class GetHighCalorieMealForThinPeopleUITest{
 
     private val printer: Printer = mockk(relaxed = true)
-    private val inputReader: StringReader = mockk(relaxed = true)
+    //private val inputReader: StringReader = mockk(relaxed = true)
+    private val isLikedMeal: IsLikedMeal = mockk(relaxed = true)
     private val getMealForThinPeopleUseCase: GetMealForThinPeopleUseCase = mockk(relaxed = true)
     private lateinit var getHighCalorieMealForThinPeopleUI : GetHighCalorieMealForThinPeopleUI
 
     @BeforeEach
     fun setUp(){
-        getHighCalorieMealForThinPeopleUI = GetHighCalorieMealForThinPeopleUI(getMealForThinPeopleUseCase, printer, inputReader)
+        getHighCalorieMealForThinPeopleUI = GetHighCalorieMealForThinPeopleUI(getMealForThinPeopleUseCase, printer, isLikedMeal)
     }
 
     @Test
@@ -50,7 +52,7 @@ class GetHighCalorieMealForThinPeopleUITest{
         // Given
         val meal = createMeal(id = 2000, name = "name1", description = "description1")
         every { getMealForThinPeopleUseCase.getMeal(any()) } returns meal
-        every { inputReader.read() } returns "y"
+        every { isLikedMeal.run() } returns true
         // When
         getHighCalorieMealForThinPeopleUI.launchUI()
         //then
@@ -65,7 +67,7 @@ class GetHighCalorieMealForThinPeopleUITest{
         val meal1 = createMeal(id = 2000, name = "name1", description = "description1")
         val meal2 = createMeal(id = 2100, name = "name2", description = "description2")
         every { getMealForThinPeopleUseCase.getMeal(any()) } returns meal1 andThen meal2
-        every { inputReader.read() } returns "n" andThen "y"
+        every { isLikedMeal.run() } returns false andThen true
         // When
         getHighCalorieMealForThinPeopleUI.launchUI()
         //then

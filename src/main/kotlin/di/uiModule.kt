@@ -4,6 +4,7 @@ import org.koin.dsl.module
 import presentation.*
 
 val uiModule = module {
+    single { IsLikedMeal(get(), get()) }
     single { GetMealByIdUI(get(),get(),get()) }
     single { GuessFoodPreparationTimeGameUI(get(), get(), get()) }
     single { ItalianMealsForLargeGroupUI(get()) }
