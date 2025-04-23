@@ -3,7 +3,7 @@ package logic.usecase
 import io.mockk.every
 import io.mockk.mockk
 import logic.repository.FoodRepository
-import model.EmptyListException
+import model.NoMealsFoundException
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import kotlin.test.Test
@@ -53,7 +53,7 @@ class GetRandomMealsByCountryUseCaseTest {
         every { foodRepository.getFoods() } returns Result.success(foods)
 
         // then
-        assertFailsWith<EmptyListException> {
+        assertFailsWith<NoMealsFoundException> {
             useCase.getRandomMeals("korean")
         }
     }
@@ -100,10 +100,10 @@ class GetRandomMealsByCountryUseCaseTest {
     fun `getRandomMeals should throw when repository fails`() {
 
         // when
-        every { foodRepository.getFoods() } returns Result.failure(EmptyListException())
+        every { foodRepository.getFoods() } returns Result.failure(NoMealsFoundException())
 
         // then
-        assertFailsWith<EmptyListException> {
+        assertFailsWith<NoMealsFoundException> {
             useCase.getRandomMeals("japanese")
         }
     }
@@ -115,6 +115,24 @@ class GetRandomMealsByCountryUseCaseTest {
         val foods = listOf(
             createFood(name = "sushi", description = "Japanese", tags = listOf("Japanese")),
             createFood(name = "SUSHI", description = "Also Japanese", tags = listOf("Japanese")),
+        )
+
+        // when
+        every { foodRepository.getFoods() } returns Result.success(foods)
+
+        val result = useCase.getRandomMeals("japanese")
+
+        // then
+        assertEquals(listOf("sushi"), result)
+    }
+
+    @Test
+    fun `getRandomMeals should skip null names and descriptions`() {
+
+        // given
+        val foods = listOf(
+            createFood(name = "sushi", description = null, tags = listOf("Japanese")),
+            createFood(name = null, description = null, tags = listOf("Japanese")),
         )
 
         // when

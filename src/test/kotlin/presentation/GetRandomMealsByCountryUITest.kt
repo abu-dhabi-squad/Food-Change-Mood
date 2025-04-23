@@ -3,8 +3,11 @@ package presentation
 import io.mockk.every
 import io.mockk.mockk
 import logic.usecase.GetRandomMealsByCountryUseCase
+import model.NoMealsFoundException
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import presentation.ui_io.ConsolePrinter
+import presentation.ui_io.Printer
 import presentation.ui_io.StringReader
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
@@ -16,12 +19,14 @@ class GetRandomMealsByCountryUITest {
     private lateinit var stringReader: StringReader
     private lateinit var ui: GetRandomMealsByCountryUI
     private val outContent = ByteArrayOutputStream()
+    private lateinit var printer: Printer
 
     @BeforeEach
     fun setUp() {
         useCase = mockk<GetRandomMealsByCountryUseCase>()
         stringReader = mockk<StringReader>()
-        ui = GetRandomMealsByCountryUI(useCase, stringReader)
+        printer = ConsolePrinter()
+        ui = GetRandomMealsByCountryUI(useCase, stringReader, printer)
         System.setOut(PrintStream(outContent))
     }
 
@@ -44,7 +49,7 @@ class GetRandomMealsByCountryUITest {
     }
 
     @Test
-    fun `should display error message when user input is empty or null`() {
+    fun `should display error message when user input is empty`() {
         // given
         val country = ""
         // when
@@ -62,13 +67,25 @@ class GetRandomMealsByCountryUITest {
 
         // when
         every { stringReader.read() } returns country
-        every { useCase.getRandomMeals(country) } throws RuntimeException()
+        every { useCase.getRandomMeals(country) } throws NoMealsFoundException()
 
         ui.launchUI()
         val output = outContent.toString()
 
         // then
-        assertTrue(output.contains(GetRandomMealsByCountryUI.NO_MEALS_MATCHED_YOUR_INPUT_MESSAGE))
+        assertTrue(output.contains(GetRandomMealsByCountryUI.NO_MEALS_FOUND))
+    }
+
+    @Test
+    fun `should display error message when user input is null`() {
+        // given
+        val country = null
+        // when
+        every { stringReader.read() } returns country
+        ui.launchUI()
+        val output = outContent.toString()
+        // then
+        assertTrue(output.contains(GetRandomMealsByCountryUI.EMPTY_INPUT_MESSAGE))
     }
 }
 

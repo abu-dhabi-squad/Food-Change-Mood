@@ -12,7 +12,7 @@ val uiModule = module {
     single { GetIraqiMealsUI(get()) }
     single { RandomKetoMealUI(get()) }
     single { GetHealthyMealsUI(get()) }
-    single { GetRandomMealsByCountryUI(get(), get()) }
+    single { GetRandomMealsByCountryUI(get(), get() , get()) }
     single { GetMealByNameUI(get(), get()) }
     single { GymHelperConsoleUI(get(), get(), get()) }
     single { SweetsWithoutEggsConsoleUI(get()) }
