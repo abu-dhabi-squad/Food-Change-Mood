@@ -1,6 +1,8 @@
 package presentation
 
 import model.WrongInputException
+import presentation.ui_io.Printer
+import presentation.ui_io.StringReader
 
 fun isLikedMeal(): Boolean {
     println("Do you like it? {y/n}")
@@ -21,3 +23,24 @@ fun isLikedMeal(): Boolean {
     } ?: throw WrongInputException()
 }
 
+fun isLikedMeal(
+    printer: Printer,
+    inputReader: StringReader
+): Boolean {
+    printer.displayLn("Do you like it? {y/n}")
+    inputReader.read()?.let {
+        when {
+            it.equals("y", true) -> {
+                return true
+            }
+
+            it.equals("n", true) -> {
+                return false
+            }
+
+            else -> {
+                throw WrongInputException()
+            }
+        }
+    } ?: throw WrongInputException()
+}
