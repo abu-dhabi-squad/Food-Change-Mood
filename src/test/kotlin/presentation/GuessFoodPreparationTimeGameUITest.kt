@@ -41,7 +41,7 @@ class GuessFoodPreparationTimeGameUITest {
         // when
         guessFoodPreparationTimeGameUI.launchUI()
         // then
-        assertThat(printer.getDisplayLnInput(0).toString()).contains(food.name)
+        assertThat(printer.getDisplayLnInput(0).toString()).isEqualTo("The Food is ${food.name}")
     }
 
 
@@ -127,6 +127,20 @@ class GuessFoodPreparationTimeGameUITest {
         // then
         assertThat(printer.getDisplayLnInput(0).toString()).contains(exceptionMessage)
     }
+
+    @Test
+    fun `launchUI should show invalid input message when intReader return null`(){
+        // given
+        val food = createFood(name = "chicken" , minutes = 5)
+        every { getRandomFoodUseCase.invoke() } returns food
+        every { intReader.read() } returns null andThen 5
+        every { guessFoodPreparationTimeUseCase.invoke(5,5,1) } returns GuessPreparationTimeState.CORRECT
+        // when
+        guessFoodPreparationTimeGameUI.launchUI()
+        // then
+        assertThat(printer.getDisplayLnInput(1).toString()).contains("Invalid input.")
+    }
+
 
 }
 
