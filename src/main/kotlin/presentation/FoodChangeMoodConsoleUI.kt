@@ -1,6 +1,6 @@
 package presentation
 
-import presentation.ui_io.IntReader
+import presentation.ui_io.InputReader
 import kotlin.system.exitProcess
 
 class FoodChangeMoodConsoleUI(
@@ -20,7 +20,7 @@ class FoodChangeMoodConsoleUI(
     private val getHighCalorieMealForThinPeopleUI: GetHighCalorieMealForThinPeopleUI,
     private val getIraqiMealsUI: GetIraqiMealsUI,
     private val getRandomMealsByCountryUI: GetRandomMealsByCountryUI,
-    private val intReader: IntReader
+    private val intReader: InputReader<Int>
 ) : ChangeFoodMoodLauncher {
 
     override fun launchUI() {
