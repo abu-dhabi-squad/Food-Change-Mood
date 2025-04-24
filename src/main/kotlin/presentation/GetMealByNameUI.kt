@@ -30,7 +30,7 @@ class GetMealByNameUI(
         getMealBySearchNameUseCase.findMealsByName(input)
             .also { results ->
                 printer.displayLn("Search results for '$input':")
-                results.forEach { printer.displayLn(it ?: "none") }
+                results.forEach { printer.displayLn(it.name ?: "none") }
             }
     }
 

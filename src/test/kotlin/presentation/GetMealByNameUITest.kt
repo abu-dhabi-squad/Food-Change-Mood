@@ -99,7 +99,8 @@ class GetMealByNameUITest{
             printer.displayLn("Search results for '$input':")
             printer.displayLn("Unnamed Food 1")
             printer.displayLn("unnamed Food 2")
-            printer.displayLn("none")}
+            printer.displayLn("none")
+        }
     }
 
     @Test
