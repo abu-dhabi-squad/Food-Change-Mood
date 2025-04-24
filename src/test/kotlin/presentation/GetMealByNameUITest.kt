@@ -118,4 +118,25 @@ class GetMealByNameUITest{
             printer.displayLn(exception)
         }
     }
+
+    @Test
+    fun `should display NoMealsFoundException message if all meal names are null`() {
+        // given
+        val searchInput = "invalid meal"
+        val exception = NoMealsFoundException()
+
+        every { reader.readString() } returns searchInput
+        every { useCase.findMealsByName(searchInput) } throws exception
+
+        // when
+        ui.launchUI()
+
+        // then
+        verify {
+            printer.displayLn(exception)
+        }
+        verify(exactly = 0) {
+            printer.displayLn("Search results for '$searchInput':")
+        }
+    }
 }
