@@ -20,7 +20,7 @@ class ItalianMealsForLargeGroupUITest {
     }
 
     @Test
-    fun `should display italian meals with their descriptions`() {
+    fun `should display ita lian meals with their descriptions`() {
         // Given
         every { useCase.getItalianMealForLargeGroup() } returns listOf(
             "Pizza Margherita" to "Classic Neapolitan pizza with tomato, mozzarella, and basil",

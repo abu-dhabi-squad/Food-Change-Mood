@@ -6,8 +6,11 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import logic.repository.FoodRepository
+import model.EmptyListException
+import model.Food
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import java.time.LocalDate
 
 class GetItalianMealsForLargeGroupUseCaseTest {
@@ -53,7 +56,7 @@ class GetItalianMealsForLargeGroupUseCaseTest {
     }
 
     @Test
-    fun `should return name and description only if description is not null`() {
+    fun `should return name and description when description is not null`() {
         // Given
         val meals = listOf(
             createMeal(
@@ -81,7 +84,7 @@ class GetItalianMealsForLargeGroupUseCaseTest {
     }
 
     @Test
-    fun `should return name and description only if name is not null`() {
+    fun `should return name and description when name is not null`() {
         // Given
         val meals = listOf(
             createMeal(
@@ -107,4 +110,55 @@ class GetItalianMealsForLargeGroupUseCaseTest {
         assertThat(result).isEqualTo(listOf("Pizza" to "Cheesy pizza"))
         verify(exactly = 1) { foodRepository.getFoods() }
     }
+
+    @Test
+    fun `should return empty list exception when list is empty`() {
+        // Given
+        val meals:List<Food> = listOf()
+
+        every { foodRepository.getFoods() } returns Result.success(meals)
+
+        // When and Then
+        assertThrows<EmptyListException>{
+            getItalianMealsForLargeGroupUseCase.getItalianMealForLargeGroup()
+        }
+    }
+
+    @Test
+    fun `should return empty list exception when all tags of meals not contain 'italian' and 'for-large-groups'`() {
+        // Given
+        val meals = listOf(
+            createMeal(
+                id = 1,
+                name = "Pizza",
+                description = "Cheesy pizza",
+                tags = listOf("cairo", "large-groups")
+            ),
+            createMeal(
+                id = 2,
+                name = "pasta",
+                description = "Classic pasta",
+                tags = listOf("paris", "large-groups")
+            )
+        )
+
+        every { foodRepository.getFoods() } returns Result.success(meals)
+
+        // When and Then
+        assertThrows<EmptyListException>{
+            getItalianMealsForLargeGroupUseCase.getItalianMealForLargeGroup()
+        }
+    }
+
+    @Test
+    fun `should throw exception when food repository returns failure`() {
+        // Given
+        every { foodRepository.getFoods() } returns Result.failure(Exception())
+
+        // When and Then
+        assertThrows<Exception>{
+            getItalianMealsForLargeGroupUseCase.getItalianMealForLargeGroup()
+        }
+    }
+
 }
