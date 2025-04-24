@@ -11,7 +11,7 @@ val uiModule = module {
     single { GuessIngredientConsoleUI(get(), get(), get()) }
     single { RandomPotatoesMealsConsoleUi(get(), get(),get()) }
     single { GetIraqiMealsUI(get(),get()) }
-    single { RandomKetoMealUI(get()) }
+    single { RandomKetoMealUI(get(),get(),get()) }
     single { GetHealthyMealsUI(get()) }
     single { GetRandomMealsByCountryUI(get(), get() , get()) }
     single { GetMealByNameUI(get(), get()) }

@@ -2,9 +2,12 @@ package presentation
 
 import logic.usecase.GetRandomKetoDietMealsUseCase
 import model.Food
+import presentation.ui_io.Printer
 
 class RandomKetoMealUI(
     private val getRandomKetoDietMealsUseCase: GetRandomKetoDietMealsUseCase,
+    private val getUserTaste: GetUserTaste,
+    private val printer: Printer
 ) : ChangeFoodMoodLauncher {
     private lateinit var ketoMeal: Food
     private val showedKetoMeals = mutableListOf<Int>()
@@ -13,9 +16,9 @@ class RandomKetoMealUI(
         try {
             ketoMeal = getRandomKetoDietMealsUseCase(showedKetoMeals)
             showedKetoMeals.add(ketoMeal.id)
-            println(ketoMeal.name)
-            if (isLikedMeal()) {
-                println(ketoMeal.getFullDetails())
+            printer.displayLn(ketoMeal.name)
+            if (getUserTaste.run()) {
+                printer.displayLn(ketoMeal.getFullDetails())
             } else {
                 launchUI()
             }
