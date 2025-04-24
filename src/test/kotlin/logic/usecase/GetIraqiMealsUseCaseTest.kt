@@ -136,31 +136,6 @@ class GetIraqiMealsUseCaseTest {
         assertEquals(1, result.size)
     }
 
-    @Test
-    fun `should set default name when name is empty string`() {
-        // Given
-         val emptyNameMeal = createMealHelper(name = "", description = "Iraqi dish")
-       every { foodRepository.getFoods() } returns Result.success(listOf(emptyNameMeal))
-
-        // When
-        val result = getIraqiMealsUseCase.getAllIraqiMeals()
-
-        // Then
-        assertEquals("unnamed", result[0].name)
-    }
-
-    @Test
-    fun `should set default description when description is empty string`() {
-        // Given
-        val emptyDescMeal = createMealHelper(name = "Iraqi Kebab", description = "")
-        every { foodRepository.getFoods() } returns Result.success(listOf(emptyDescMeal))
-
-        // When
-        val result = getIraqiMealsUseCase.getAllIraqiMeals()
-
-        // Then
-        assertEquals("no description", result[0].description)
-    }
 
     @Test
     fun `should reject meal when name or description is null`() {
