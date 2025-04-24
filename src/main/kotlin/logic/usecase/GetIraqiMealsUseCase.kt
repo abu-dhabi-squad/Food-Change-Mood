@@ -12,6 +12,7 @@ class GetIraqiMealsUseCase(
         return foodRepository.getFoods()
             .getOrThrow()
             .filter(::isOnlyIraqiMeal)
+            .map(::normalizeFood)
             .takeIf { meals -> meals.isNotEmpty() }
             ?: throw NoIraqiMealsFoundException()
     }
@@ -19,6 +20,13 @@ class GetIraqiMealsUseCase(
     private fun isOnlyIraqiMeal(food: Food): Boolean {
         return (food.name?.contains("Iraq", ignoreCase = true) == true ||
                 food.description?.contains("Iraq", ignoreCase = true) == true ||
-                food.tags?.any { it.contains("Iraq", ignoreCase = true) } == true)
+                food.tags.any { it.contains("Iraq", ignoreCase = true) } == true)
+    }
+
+    private fun normalizeFood(food: Food): Food {
+        return food.copy(
+            name = food.name ?: "unnamed",
+            description = food.description ?: "no description"
+        )
     }
 }
