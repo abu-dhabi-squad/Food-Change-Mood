@@ -5,7 +5,7 @@ import model.Food
 import model.NoEasyMealsFoundException
 import logic.takeShuffled
 
-class EasyFoodSuggestionGameUseCase(
+class GetEasyFoodSuggestionGameUseCase(
     private val foodRepository: FoodRepository
 ) {
     fun suggestRandomEasyMeals(count: Int = DEFAULT_SUGGESTED_MEALS_COUNT): List<Food>{

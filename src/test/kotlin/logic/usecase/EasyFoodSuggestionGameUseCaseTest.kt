@@ -12,12 +12,12 @@ import org.junit.jupiter.api.Test
 class EasyFoodSuggestionGameUseCaseTest {
 
     private lateinit var foodRepository: FoodRepository
-    private lateinit var easyFoodSuggestionGameUseCase: EasyFoodSuggestionGameUseCase
+    private lateinit var getEasyFoodSuggestionGameUseCase: GetEasyFoodSuggestionGameUseCase
 
     @BeforeEach
     fun setup(){
         foodRepository = mockk()
-        easyFoodSuggestionGameUseCase = EasyFoodSuggestionGameUseCase(foodRepository)
+        getEasyFoodSuggestionGameUseCase = GetEasyFoodSuggestionGameUseCase(foodRepository)
     }
 
     @Test
@@ -52,7 +52,7 @@ class EasyFoodSuggestionGameUseCaseTest {
         every { foodRepository.getFoods() } returns Result.success(foods)
 
         //when
-        val meals = easyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
+        val meals = getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
 
         //then
         assertThat(meals).containsExactly(chickenFood,saladFood)
@@ -76,7 +76,7 @@ class EasyFoodSuggestionGameUseCaseTest {
 
         // when + then
         assertThrows(NoEasyMealsFoundException::class.java) {
-            easyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
+            getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
         }
     }
 
@@ -87,7 +87,7 @@ class EasyFoodSuggestionGameUseCaseTest {
 
         //then
         assertThrows(NoEasyMealsFoundException::class.java) {
-            easyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
+            getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
         }
     }
 
@@ -96,7 +96,7 @@ class EasyFoodSuggestionGameUseCaseTest {
         every { foodRepository.getFoods() } returns Result.success(emptyList())
 
         assertThrows(NoEasyMealsFoundException::class.java) {
-            easyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
+            getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
         }
     }
 
@@ -130,7 +130,7 @@ class EasyFoodSuggestionGameUseCaseTest {
         )
 
         //when
-        val result = easyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
+        val result = getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
 
         //then
         assertThat(result).containsExactly(validEasyMeal)
@@ -169,7 +169,7 @@ class EasyFoodSuggestionGameUseCaseTest {
         )
 
         // when
-        val result = easyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
+        val result = getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
 
         // then
         assertThat(result).containsExactly(validMeal)
@@ -187,7 +187,7 @@ class EasyFoodSuggestionGameUseCaseTest {
 
         every { foodRepository.getFoods() } returns Result.success(listOf(validMeal))
 
-        val result = easyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
+        val result = getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
 
         assertThat(result).containsExactly(validMeal)
     }
@@ -223,7 +223,7 @@ class EasyFoodSuggestionGameUseCaseTest {
         )
 
         assertThrows(NoEasyMealsFoundException::class.java) {
-            easyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
+            getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
         }
     }
 

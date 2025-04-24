@@ -1,18 +1,18 @@
 package presentation
 
-import logic.usecase.EasyFoodSuggestionGameUseCase
+import logic.usecase.GetEasyFoodSuggestionGameUseCase
 import model.Food
 import model.NoEasyMealsFoundException
 import presentation.ui_io.Printer
 
 class GetEasyFoodSuggestionUI(
-    private val easyFoodSuggestionGameUseCase: EasyFoodSuggestionGameUseCase,
+    private val getEasyFoodSuggestionGameUseCase: GetEasyFoodSuggestionGameUseCase,
     private val printer: Printer
 ) : ChangeFoodMoodLauncher {
 
     override fun launchUI() {
         try {
-            val meals = easyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
+            val meals = getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
             if (meals.isEmpty()) {
                 printer.displayLn(EMPTY_INPUT_MESSAGE)
                 return

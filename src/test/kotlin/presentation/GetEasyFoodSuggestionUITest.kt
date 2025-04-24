@@ -3,7 +3,7 @@ package presentation
 import io.mockk.every
 import io.mockk.mockk
 import junit.framework.TestCase.assertTrue
-import logic.usecase.EasyFoodSuggestionGameUseCase
+import logic.usecase.GetEasyFoodSuggestionGameUseCase
 import logic.usecase.createMeal
 import model.NoEasyMealsFoundException
 import org.junit.jupiter.api.BeforeEach
@@ -14,7 +14,7 @@ import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 
 class GetEasyFoodSuggestionUITest {
-    private lateinit var useCase: EasyFoodSuggestionGameUseCase
+    private lateinit var useCase: GetEasyFoodSuggestionGameUseCase
     private lateinit var ui: GetEasyFoodSuggestionUI
     private lateinit var printer: Printer
     private val outContent = ByteArrayOutputStream()
