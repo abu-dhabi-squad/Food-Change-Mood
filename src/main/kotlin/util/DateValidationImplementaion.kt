@@ -4,8 +4,8 @@ import model.*
 import java.time.LocalDate
 
 class DateValidationImplementaion(
-    private val dateParserInterface: DateParserInterface
-): DateValidationInterface
+    private val dateParserInterface: DateParser
+): DateValidation
 {
     override fun isValidDate(date: String): Boolean {
         val formatedDate: LocalDate

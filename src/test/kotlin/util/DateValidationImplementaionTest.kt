@@ -10,7 +10,7 @@ import org.junit.jupiter.api.assertThrows
 import java.time.LocalDate
 
 class DateValidationImplementaionTest{
-    private val dateParserInterface: DateParserInterface = mockk(relaxed = true)
+    private val dateParserInterface: DateParser = mockk(relaxed = true)
     private lateinit var dateValidation: DateValidationImplementaion
 
     @BeforeEach

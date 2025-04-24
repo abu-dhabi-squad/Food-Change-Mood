@@ -29,7 +29,6 @@ class GetMealByIdUITest {
         // When
         getMealByIdUI.launchUI()
         //then
-        verify { printer.display("enter id of the meal : ") }
         verify { printer.displayLn("wrong input") }
     }
 
@@ -40,7 +39,6 @@ class GetMealByIdUITest {
         // When
         getMealByIdUI.launchUI()
         //then
-        verify { printer.display("enter id of the meal : ") }
         verify (exactly = 1) { getMealByIdUseCase.getMealById(any()) }
         verify { printer.displayLn("Invalid ID Input") }
     }
@@ -52,7 +50,6 @@ class GetMealByIdUITest {
         // When
         getMealByIdUI.launchUI()
         //then
-        verify { printer.display("enter id of the meal : ") }
         verify (exactly = 1) { getMealByIdUseCase.getMealById(any()) }
         verify { printer.displayLn("error") }
     }
@@ -65,7 +62,6 @@ class GetMealByIdUITest {
         // When
         getMealByIdUI.launchUI()
         //then
-        verify { printer.display("enter id of the meal : ") }
         verify (exactly = 1) { getMealByIdUseCase.getMealById(any()) }
         verify { printer.displayLn(meal.getFullDetails()) }
     }

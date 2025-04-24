@@ -6,15 +6,15 @@ import model.InvalidIdException
 import model.WrongInputException
 import presentation.ui_io.InputReader
 import presentation.ui_io.Printer
-import util.DateParserInterface
-import util.DateValidationInterface
+import util.DateParser
+import util.DateValidation
 import java.time.LocalDate
 
 class GetFoodByDateUI(
-    private val dateParserInterface: DateParserInterface,
+    private val dateParserInterface: DateParser,
     private val getFoodByDateUseCase: GetFoodByDateUseCase,
     private val getMealByIdUseCase: GetMealByIdUseCase,
-    private val DateValidationInterface: DateValidationInterface,
+    private val DateValidationInterface: DateValidation,
     private val reader: InputReader,
     private val printer: Printer
 ) : ChangeFoodMoodLauncher {

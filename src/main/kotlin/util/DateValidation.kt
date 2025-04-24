@@ -1,5 +1,5 @@
 package util
 
-interface DateValidationInterface {
+interface DateValidation {
     fun isValidDate(date: String):Boolean
 }
