@@ -11,7 +11,7 @@ class GetMealForThinPeopleUseCase(
         return foodRepository.getFoods()
             .getOrThrow()
             .filter { isDataHighQuality(it) && IsNewHighCalorieMeal(it, shownSet) }
-            .takeIf { meals -> meals.isNotEmpty() }
+            .takeIf { it.isNotEmpty() }
             ?.random()
             ?: throw EmptyHighCalorieListException()
     }

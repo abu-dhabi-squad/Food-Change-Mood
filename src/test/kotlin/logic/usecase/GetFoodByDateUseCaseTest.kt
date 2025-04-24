@@ -105,8 +105,6 @@ class GetFoodByDateUseCaseTest{
         }
     }
 
-
-
     @Test
     fun `getMealsByDate should return only the data that matches the date when the data is high quality`() {
         //given
