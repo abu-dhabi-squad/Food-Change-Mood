@@ -2,12 +2,12 @@ package data
 
 import model.Food
 import model.Nutrition
-import util.DateParserInterface
+import util.DateParser
 import java.time.LocalDate
 import java.time.format.DateTimeParseException
 
 class FoodMapper(
-    private val dateParserInterface: DateParserInterface
+    private val dateParserInterface: DateParser
 ) {
     fun parseFoodRow(row: List<String>): Food {
         return Food(
