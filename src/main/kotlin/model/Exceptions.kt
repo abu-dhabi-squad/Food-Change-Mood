@@ -22,6 +22,8 @@ class InvalidDateFormatException : AppException("Invalid Date Format")
 
 class InvalidYearException : AppException("Invalid Year Input")
 
+class InvalidDateException : AppException("Invalid Date Input")
+
 class InvalidMonthException : AppException("Invalid Month Input")
 
 class InvalidDayException : AppException("Invalid Day Input")
