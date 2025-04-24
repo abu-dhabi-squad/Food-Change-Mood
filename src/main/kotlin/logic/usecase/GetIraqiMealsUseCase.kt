@@ -10,12 +10,12 @@ class GetIraqiMealsUseCase(
     fun getAllIraqiMeals(): List<Food> {
         return foodRepository.getFoods()
             .getOrThrow()
-            .filter { isValidiraqiMeal(it) && isOnlyIraqiMeal(it) }
+            .filter { isValidMeal(it) && isOnlyIraqiMeal(it) }
             .takeIf { it.isNotEmpty() }
             ?: throw NoIraqiMealsFoundException()
     }
 
-    private fun isValidiraqiMeal(food: Food): Boolean {
+    private fun isValidMeal(food: Food): Boolean {
         return !(food.name.isNullOrEmpty() && food.description.isNullOrEmpty())
     }
 
@@ -26,3 +26,6 @@ class GetIraqiMealsUseCase(
 
 
 }
+
+
+

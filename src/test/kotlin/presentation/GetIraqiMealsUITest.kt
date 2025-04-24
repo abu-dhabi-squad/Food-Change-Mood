@@ -2,6 +2,7 @@ import io.mockk.*
 import logic.repository.FoodRepository
 import logic.usecase.GetIraqiMealsUseCase
 import logic.usecase.createMealHelper
+import model.NoIraqiMealsFoundException
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import presentation.GetIraqiMealsUI
@@ -56,7 +57,7 @@ class GetIraqiMealsUITest {
 
         // Then
         verify {
-            consolePrinter.displayLn("No Iraqi meals found.")
+            consolePrinter.displayLn(NoIraqiMealsFoundException().message)
         }
     }
 
