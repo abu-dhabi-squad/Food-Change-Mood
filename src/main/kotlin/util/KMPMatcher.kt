@@ -2,7 +2,7 @@ package util
 
 object KMPMatcher {
 
-    fun isContainsPattern(text: String, pattern: String): Boolean {
+     fun isContainsPattern(text: String, pattern: String): Boolean {
         if (pattern.isEmpty()) return true
 
         val prefixTable = buildPrefixTable(pattern)

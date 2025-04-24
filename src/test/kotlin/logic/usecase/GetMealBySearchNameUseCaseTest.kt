@@ -139,4 +139,15 @@ class GetMealBySearchNameUseCaseTest {
         }
     }
 
+    @Test
+    fun `should throw NoMealsFoundException when repository returns empty list`() {
+        // given
+        every { repository.getFoods() } returns Result.success(emptyList())
+
+        // then
+        assertFailsWith<NoMealsFoundException> {
+            getMealBySearchNameUseCase.findMealsByName("Pizza")
+        }
+    }
+
 }
