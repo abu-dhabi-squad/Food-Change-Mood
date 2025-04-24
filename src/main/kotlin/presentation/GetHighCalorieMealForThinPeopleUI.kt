@@ -26,6 +26,7 @@ class GetHighCalorieMealForThinPeopleUI(
             }
         } catch (e: Exception) {
             e.message?.let { printer.displayLn(it) }
+                ?: printer.displayLn("error")
         }
     }
 }

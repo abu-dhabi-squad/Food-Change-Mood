@@ -33,6 +33,16 @@ class GetHighCalorieMealForThinPeopleUITest{
     }
 
     @Test
+    fun `launchUI should display error when getMeal throw Exception`(){
+        // Given
+        every { getMealForThinPeopleUseCase.getMeal(any()) } throws Exception()
+        // When
+        getHighCalorieMealForThinPeopleUI.launchUI()
+        //then
+        verify { printer.displayLn("error") }
+    }
+
+    @Test
     fun `launchUI should display the name and the discription of the meal when getMeal returns the meal`(){
         // Given
         val meal = createMeal(id = 2000, name = "name1", description = "description1")
