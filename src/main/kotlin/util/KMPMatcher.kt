@@ -23,7 +23,7 @@ object KMPMatcher {
         return false
     }
 
-    private fun buildPrefixTable(pattern: String): IntArray {
+    fun buildPrefixTable(pattern: String): IntArray {
         val table = IntArray(pattern.length)
         var prefixLength = 0
         var indexOfCurrentChar = 1
