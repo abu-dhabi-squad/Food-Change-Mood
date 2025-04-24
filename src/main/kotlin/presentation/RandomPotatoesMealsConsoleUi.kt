@@ -1,11 +1,12 @@
 package presentation
 
 import logic.usecase.GetRandomPotatoesMealsUseCase
+import presentation.ui_io.InputReader
 import presentation.ui_io.StringReader
 
 class RandomPotatoesMealsConsoleUi(
     private val getRandomPotatoesMealsUseCase: GetRandomPotatoesMealsUseCase,
-    private val stringReader: StringReader
+    private val stringReader: InputReader<String>
 ) : ChangeFoodMoodLauncher {
 
     override fun launchUI() {

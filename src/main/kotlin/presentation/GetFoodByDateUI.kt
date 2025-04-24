@@ -4,20 +4,20 @@ import logic.usecase.GetFoodByDateUseCase
 import logic.usecase.GetMealByIdUseCase
 import model.InvalidIdException
 import model.WrongInputException
+import presentation.ui_io.InputReader
 import presentation.ui_io.IntReader
 import presentation.ui_io.Printer
-import presentation.ui_io.StringReader
 import util.DateParserInterface
-import util.GetFoodByDateValidationInterface
+import util.DateValidationInterface
 import java.time.LocalDate
 
 class GetFoodByDateUI(
     private val dateParserInterface: DateParserInterface,
     private val getFoodByDateUseCase: GetFoodByDateUseCase,
     private val getMealByIdUseCase: GetMealByIdUseCase,
-    private val getFoodByDateValidationInterface: GetFoodByDateValidationInterface,
+    private val DateValidationInterface: DateValidationInterface,
     private val intReader: IntReader,
-    private val stringReader: StringReader,
+    private val stringReader: InputReader<String>,
     private val printer: Printer
 
 ) : ChangeFoodMoodLauncher {
@@ -37,7 +37,7 @@ class GetFoodByDateUI(
     private fun getInputDate(): LocalDate {
         printer.display("Enter the Date (yyyy-M-d) : ")
         return stringReader.read()
-            ?.takeIf { date -> getFoodByDateValidationInterface.isValidDate(date) }
+            ?.takeIf { date -> DateValidationInterface.isValidDate(date) }
             ?.let { date -> dateParserInterface.parseDateFromString(date) }
             ?: throw WrongInputException()
     }

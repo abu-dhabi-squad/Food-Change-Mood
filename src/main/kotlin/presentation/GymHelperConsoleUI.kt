@@ -3,10 +3,11 @@ package presentation
 import logic.usecase.GymHelperUseCase
 import model.Food
 import presentation.ui_io.FloatReader
+import presentation.ui_io.InputReader
 
 class GymHelperConsoleUI(
     private val gymHelperUseCase: GymHelperUseCase,
-    private val floatReader: FloatReader
+    private val floatReader: InputReader<Float>
 ) : ChangeFoodMoodLauncher {
 
     override fun launchUI() {

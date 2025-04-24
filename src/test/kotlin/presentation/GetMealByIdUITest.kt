@@ -8,12 +8,13 @@ import logic.usecase.GetMealByIdUseCase
 import model.InvalidIdException
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import presentation.ui_io.InputReader
 import presentation.ui_io.IntReader
 import presentation.ui_io.Printer
 
 class GetMealByIdUITest {
     private val printer: Printer = mockk(relaxed = true)
-    private val inputReader: IntReader = mockk(relaxed = true)
+    private val inputReader: InputReader<Int> = mockk(relaxed = true)
     private val getMealByIdUseCase: GetMealByIdUseCase = mockk(relaxed = true)
     private lateinit var getMealByIdUI: GetMealByIdUI
 

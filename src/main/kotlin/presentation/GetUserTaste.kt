@@ -1,12 +1,12 @@
 package presentation
 
 import model.WrongInputException
+import presentation.ui_io.InputReader
 import presentation.ui_io.Printer
-import presentation.ui_io.StringReader
 
 class GetUserTaste(
     private val printer: Printer,
-    private val inputReader: StringReader
+    private val inputReader: InputReader<String>
 ) {
     fun run(): Boolean {
         printer.displayLn("Do you like it? {y/n}")
@@ -19,7 +19,6 @@ class GetUserTaste(
                 it.equals("n", true) -> {
                     return false
                 }
-
                 else -> {
                     throw WrongInputException()
                 }

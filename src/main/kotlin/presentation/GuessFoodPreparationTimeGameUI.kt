@@ -4,12 +4,13 @@ import logic.usecase.GetRandomFoodUseCase
 import logic.usecase.GuessFoodPreparationTimeUseCase
 import model.Food
 import model.GuessPreparationTimeState
+import presentation.ui_io.InputReader
 import presentation.ui_io.IntReader
 
 class GuessFoodPreparationTimeGameUI(
     private val getRandomFoodUseCase: GetRandomFoodUseCase,
     private val guessFoodPreparationTimeUseCase: GuessFoodPreparationTimeUseCase,
-    private val intReader: IntReader
+    private val intReader: InputReader<Int>
 ) : ChangeFoodMoodLauncher {
     private var attemptsCount = 0
     private lateinit var food: Food
