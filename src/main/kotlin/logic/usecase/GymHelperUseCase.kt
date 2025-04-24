@@ -11,8 +11,8 @@ class GymHelperUseCase(
     fun getListOfMealsForGym(calories: Float, protein: Float): List<Food> {
         return foodRepository.getFoods().getOrThrow()
             .filter { meal -> isSuitableMeal(meal, calories, protein) }
+            .sortedBy { food: Food -> calculateMealScore(food, calories, protein) }
             .takeIf { foods: List<Food> -> foods.isNotEmpty() }
-            ?.sortedBy { food: Food -> calculateMealScore(food, calories, protein) }
             ?: throw NoMealsFoundException()
     }
 
