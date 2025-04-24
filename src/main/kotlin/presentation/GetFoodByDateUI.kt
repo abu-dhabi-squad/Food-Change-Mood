@@ -4,8 +4,8 @@ import logic.usecase.GetFoodByDateUseCase
 import logic.usecase.GetMealByIdUseCase
 import model.InvalidIdException
 import model.WrongInputException
-import presentation.ui_io.IntReader
-import presentation.ui_io.StringReader
+import presentation.ui_io.InputReader
+
 import util.DateParserInterface
 import util.GetFoodByDateValidationInterface
 import java.time.LocalDate
@@ -15,8 +15,7 @@ class GetFoodByDateUI(
     private val getFoodByDateUseCase: GetFoodByDateUseCase,
     private val getMealByIdUseCase: GetMealByIdUseCase,
     private val getFoodByDateValidationInterface: GetFoodByDateValidationInterface,
-    private val intReader: IntReader,
-    private val stringReader: StringReader
+    private val reader: InputReader,
 ) : ChangeFoodMoodLauncher {
 
     override fun launchUI() {
@@ -33,7 +32,7 @@ class GetFoodByDateUI(
 
     private fun getInputDate(): LocalDate {
         print("Enter the Date (yyyy-M-d) : ")
-        return stringReader.read()
+        return reader.readString()
             ?.takeIf { date -> getFoodByDateValidationInterface.isValidDate(date) }
             ?.let { date -> dateParserInterface.parseDateFromString(date) }
             ?: throw WrongInputException()
@@ -42,7 +41,7 @@ class GetFoodByDateUI(
     private fun getDetailsOfMeals(mealsByDate: List<Pair<Int, String>>) {
         while (true) {
             print("Do you want to see details of one of the Meals (Y/N)? ")
-            val input = stringReader.read()?.trim()?.lowercase()
+            val input = reader.readString()?.trim()?.lowercase()
             when (input) {
                 "y" -> try {
                     getDetailsById(mealsByDate)
@@ -58,13 +57,11 @@ class GetFoodByDateUI(
 
     private fun getDetailsById(mealsByDate: List<Pair<Int, String>>) {
         print("enter id of the meal : ")
-        intReader.read()?.let { enteredID ->
+        reader.readInt()?.let { enteredID ->
             mealsByDate.takeIf { it.any { item -> item.first == enteredID } }
                 ?.let {
                     println(getMealByIdUseCase.getMealById(enteredID).getFullDetails())
                 } ?: throw InvalidIdException()
         } ?: throw WrongInputException()
     }
-
-
 }

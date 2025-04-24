@@ -1,6 +1,6 @@
 package presentation
 
-import presentation.ui_io.IntReader
+import presentation.ui_io.InputReader
 import kotlin.system.exitProcess
 
 class FoodChangeMoodConsoleUI(
@@ -20,7 +20,7 @@ class FoodChangeMoodConsoleUI(
     private val getHighCalorieMealForThinPeopleUI: GetHighCalorieMealForThinPeopleUI,
     private val getIraqiMealsUI: GetIraqiMealsUI,
     private val getRandomMealsByCountryUI: GetRandomMealsByCountryUI,
-    private val intReader: IntReader
+    private val reader: InputReader
 ) : ChangeFoodMoodLauncher {
 
     override fun launchUI() {
@@ -35,7 +35,7 @@ class FoodChangeMoodConsoleUI(
     private fun presentFeature() {
         showOptions()
         print("Enter your choice: ")
-        val input = intReader.read()
+        val input = reader.readInt()
         when (input) {
             1 -> getHealthyMealsUI.launchUI()
             2 -> getMealBySearchForNameUI.launchUI()

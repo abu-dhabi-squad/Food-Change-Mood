@@ -2,11 +2,11 @@ package presentation
 
 import logic.usecase.GuessIngredientUseCase
 import model.WrongInputException
-import presentation.ui_io.IntReader
+import presentation.ui_io.InputReader
 
 class GuessIngredientConsoleUI(
     private val guessIngredientUseCase: GuessIngredientUseCase,
-    private val intReader: IntReader
+    private val reader: InputReader
 ) : ChangeFoodMoodLauncher {
 
     override fun launchUI() {
@@ -20,7 +20,7 @@ class GuessIngredientConsoleUI(
                     println("\t${i + 1}. $answer")
                 }
                 print("\nEnter Your Choice : ")
-                val input = intReader.read()
+                val input = reader.readInt()
                 if (input == null || input !in 1..MAXIMUM_CHOICES) throw WrongInputException()
                 if (answers[input - 1] == question.correctAnswer) {
                     score += POINTS_PER_QUESTION
