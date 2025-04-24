@@ -61,6 +61,53 @@ class GetEasyFoodSuggestionUITest {
     }
 
     @Test
+    fun `should display start message when use case returns meals`() {
+        // given
+        val meals = listOf(
+            createMeal(
+                name = "Apple Pie",
+                minutes = 25,
+                description = "A classic dessert.",
+                ingredients = listOf("Apples", "Flour", "Sugar"),
+                steps = listOf("Step 1", "Step 2")
+            )
+        )
+
+        // when
+        every { getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals() } returns meals
+        ui.launchUI()
+        val output = outContent.toString()
+
+        // then
+        assertTrue(output.contains(GetEasyFoodSuggestionUI.START_MESSAGE))
+
+    }
+
+    @Test
+    fun `should display separator when use case returns meals`() {
+        // given
+        val meals = listOf(
+            createMeal(
+                name = "Apple Pie",
+                minutes = 25,
+                description = "A classic dessert.",
+                ingredients = listOf("Apples", "Flour", "Sugar"),
+                steps = listOf("Step 1", "Step 2")
+            )
+        )
+
+        // when
+        every { getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals() } returns meals
+        ui.launchUI()
+        val output = outContent.toString()
+
+        // then
+        assertTrue(output.contains(GetEasyFoodSuggestionUI.MEAL_SEPARATOR))
+
+    }
+
+
+    @Test
     fun `should show message when no meals are returned`() {
         // when
         every { getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals() } returns emptyList()

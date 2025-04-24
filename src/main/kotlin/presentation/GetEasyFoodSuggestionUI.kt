@@ -21,7 +21,7 @@ class GetEasyFoodSuggestionUI(
             printMealDetails(meals)
             printer.displayLn(MEAL_SEPARATOR)
         } catch (exception: NoEasyMealsFoundException) {
-            printer.displayLn(exception.message ?: ERROR_MESSAGE)
+            printer.displayLn(exception.message)
         }
     }
 
@@ -40,7 +40,6 @@ class GetEasyFoodSuggestionUI(
 
         const val EMPTY_INPUT_MESSAGE = "No easy meals found. Please try again."
         const val START_MESSAGE = "\n Here are 10 easy meals for you: "
-        const val ERROR_MESSAGE = "An error occurred."
         const val MEAL_SEPARATOR = "--------------------------------------------------\n"
         const val UNNAMED_MEAL = "Unnamed Meal"
         const val NO_DESCRIPTION = "No description available"
