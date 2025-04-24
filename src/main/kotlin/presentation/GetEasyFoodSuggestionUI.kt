@@ -35,4 +35,21 @@ class GetEasyFoodSuggestionUI(
             printer.displayLn("$STEPS_LABEL: ${meal.steps.size} $STEPS")
         }
     }
+
+    companion object{
+
+        const val EMPTY_INPUT_MESSAGE = "No easy meals found. Please try again."
+        const val START_MESSAGE = "\n Here are 10 easy meals for you: "
+        const val ERROR_MESSAGE = "An error occurred."
+        const val MEAL_SEPARATOR = "--------------------------------------------------\n"
+        const val UNNAMED_MEAL = "Unnamed Meal"
+        const val NO_DESCRIPTION = "No description available"
+        const val MINUTES = "minutes"
+        const val STEPS = "steps"
+        const val PREP_TIME_LABEL = "Prepared Time"
+        const val DESCRIPTION_LABEL = "Description"
+        const val INGREDIENTS_LABEL = "Ingredients"
+        const val STEPS_LABEL = "Steps"
+
+    }
 }
