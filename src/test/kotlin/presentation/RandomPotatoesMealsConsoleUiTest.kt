@@ -1,14 +1,12 @@
 package presentation
 
-import io.mockk.verify
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import logic.usecase.GetRandomPotatoesMealsUseCase
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Disabled
-import presentation.ui_io.Printer
 import presentation.ui_io.InputReader
-import javax.management.Query.match
+import presentation.ui_io.Printer
 import kotlin.test.Test
 
 class RandomPotatoesMealsConsoleUiTest {
