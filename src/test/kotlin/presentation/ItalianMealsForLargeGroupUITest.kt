@@ -20,7 +20,7 @@ class ItalianMealsForLargeGroupUITest {
     }
 
     @Test
-    fun `should display ita lian meals with their descriptions`() {
+    fun `should display italian meals with their descriptions`() {
         // Given
         every { useCase.getItalianMealForLargeGroup() } returns listOf(
             "Pizza Margherita" to "Classic Neapolitan pizza with tomato, mozzarella, and basil",
@@ -36,4 +36,18 @@ class ItalianMealsForLargeGroupUITest {
         verify { printer.displayLn("\nName: Lasagna") }
         verify { printer.displayLn("Description: Layered pasta with meat and cheese") }
     }
+
+    @Test
+    fun `should display error message when exception is thrown`() {
+        // Given
+        val exceptionMessage = "Something went wrong"
+        every { useCase.getItalianMealForLargeGroup() } throws Exception(exceptionMessage)
+
+        // When
+        ui.launchUI()
+
+        // Then
+        verify { printer.displayLn("Error: $exceptionMessage") }
+    }
+
 }

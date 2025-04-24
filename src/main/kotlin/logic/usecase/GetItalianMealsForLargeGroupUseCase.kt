@@ -3,7 +3,6 @@ package logic.usecase
 import logic.repository.FoodRepository
 import model.EmptyListException
 import model.Food
-import model.NoMealsFoundException
 
 class GetItalianMealsForLargeGroupUseCase(
     private val foodRepository: FoodRepository
@@ -15,7 +14,7 @@ class GetItalianMealsForLargeGroupUseCase(
             .filter { isOnlyHighQualityData(it) && isOnlyItalianMealForLargeGroup(it) }
             .map { it.name to it.description }
             .takeIf { it.isNotEmpty() }
-            ?:throw EmptyListException()
+            ?: throw EmptyListException()
     }
 
     private fun isOnlyItalianMealForLargeGroup(food: Food): Boolean {
