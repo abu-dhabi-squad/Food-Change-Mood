@@ -20,7 +20,7 @@ class GetMealByNameUI(
                 try {
                     printResultFromSearch(input)
                 } catch (exception: NoMealsFoundException) {
-                    printer.displayLn(exception)
+                    printer.displayLn(exception.message)
                 }
             }
             ?: printer.displayLn("Invalid input. Please enter a non-empty keyword.")
@@ -30,7 +30,7 @@ class GetMealByNameUI(
         getMealBySearchNameUseCase.findMealsByName(input)
             .also { results ->
                 printer.displayLn("Search results for '$input':")
-                results.forEach { printer.displayLn(it.name ?: "none") }
+                results.forEach { printer.displayLn(it ?: "none") }
             }
     }
 

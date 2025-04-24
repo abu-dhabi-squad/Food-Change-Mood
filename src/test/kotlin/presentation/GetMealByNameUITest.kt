@@ -115,7 +115,7 @@ class GetMealByNameUITest{
 
         // then
         verify {
-            printer.displayLn(exception)
+            printer.displayLn(exception.message)
         }
     }
 
@@ -133,7 +133,7 @@ class GetMealByNameUITest{
 
         // then
         verify {
-            printer.displayLn(exception)
+            printer.displayLn(exception.message)
         }
         verify(exactly = 0) {
             printer.displayLn("Search results for '$searchInput':")
