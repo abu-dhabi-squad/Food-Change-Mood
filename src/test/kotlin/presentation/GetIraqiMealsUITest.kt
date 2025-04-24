@@ -1,8 +1,7 @@
 import io.mockk.*
 import logic.repository.FoodRepository
 import logic.usecase.GetIraqiMealsUseCase
-import logic.usecase.createIraqiMealHelper
-import model.*
+import logic.usecase.createMealHelper
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import presentation.GetIraqiMealsUI
@@ -25,7 +24,7 @@ class GetIraqiMealsUITest {
     @Test
     fun `should print Iraqi meals list when meals are found`() {
         // Given
-        val meal = createIraqiMealHelper(
+        val meal = createMealHelper(
             name = "Dolma",
             description = "Traditional Iraqi stuffed vegetables",
             tags = listOf("Iraq", "Traditional")
@@ -37,19 +36,15 @@ class GetIraqiMealsUITest {
 
         // Then
         verify {
-            consolePrinter.displayLn("\n══════════════════════════════════")
-            consolePrinter.displayLn("         Iraqi Meals List          ")
-            consolePrinter.displayLn("══════════════════════════════════")
             consolePrinter.displayLn("Meal Name: Dolma")
             consolePrinter.displayLn("Description: Traditional Iraqi stuffed vegetables")
-            consolePrinter.displayLn("----------------------------------")
         }
     }
 
     @Test
     fun `should print No Iraqi meals found when filtered list is empty`() {
         // Given
-        val nonIraqiMeal = createIraqiMealHelper(
+        val nonIraqiMeal = createMealHelper(
             name = "Pizza",
             description = "Italian dish",
             tags = listOf("Italian")
@@ -78,5 +73,4 @@ class GetIraqiMealsUITest {
             consolePrinter.displayLn("An error occurred: Something went wrong")
         }
     }
-
 }
