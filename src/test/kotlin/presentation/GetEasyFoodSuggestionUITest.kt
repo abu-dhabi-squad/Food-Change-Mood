@@ -59,6 +59,7 @@ class GetEasyFoodSuggestionUITest {
         }
 
     }
+
     @Test
     fun `should show message when no meals are returned`() {
         // when
@@ -69,6 +70,7 @@ class GetEasyFoodSuggestionUITest {
         // then
         assertTrue(output.contains(GetEasyFoodSuggestionUI.EMPTY_INPUT_MESSAGE))
     }
+
     @Test
     fun `should show error message when NoEasyMealsFoundException is thrown`() {
         // when

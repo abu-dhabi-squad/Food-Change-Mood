@@ -60,6 +60,7 @@ class EasyFoodSuggestionGameUseCaseTest {
 
 
     }
+
     @Test
     fun `should throw NoEasyMealsFoundException when no easy meals are available`() {
         // given
@@ -78,6 +79,7 @@ class EasyFoodSuggestionGameUseCaseTest {
             easyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
         }
     }
+
     @Test
     fun `should throw NoEasyMealsFoundException when repository fails`() {
         //when
@@ -88,6 +90,7 @@ class EasyFoodSuggestionGameUseCaseTest {
             easyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
         }
     }
+
     @Test
     fun `should throw NoEasyMealsFoundException when repository returns empty list`() {
         every { foodRepository.getFoods() } returns Result.success(emptyList())
@@ -96,6 +99,7 @@ class EasyFoodSuggestionGameUseCaseTest {
             easyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
         }
     }
+
     @Test
     fun `should ignore meals with null description or null names `() {
         // given
@@ -132,6 +136,7 @@ class EasyFoodSuggestionGameUseCaseTest {
         assertThat(result).containsExactly(validEasyMeal)
 
     }
+
     @Test
     fun `should ignore meals with null or empty steps or ingredients`() {
         // given
@@ -169,6 +174,7 @@ class EasyFoodSuggestionGameUseCaseTest {
         // then
         assertThat(result).containsExactly(validMeal)
     }
+
     @Test
     fun `should include meals with exactly max limits`() {
         val validMeal = createMeal(
@@ -185,6 +191,7 @@ class EasyFoodSuggestionGameUseCaseTest {
 
         assertThat(result).containsExactly(validMeal)
     }
+
     @Test
     fun `should ignore meals just over the easy meal limits`() {
         val mealTooLong = createMeal(
