@@ -46,6 +46,5 @@ class GuessIngredientConsoleUI(
         private const val POINTS_PER_QUESTION = 1000
         private const val MAXIMUM_QUESTIONS = 15
         private const val MAXIMUM_INCORRECT_ANSWERS = 2
-
     }
 }
