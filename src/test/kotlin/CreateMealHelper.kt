@@ -3,10 +3,10 @@ import model.Nutrition
 import java.time.LocalDate
 
 fun createMeal(
-    id: Int,
+    id: Int = 0,
     name: String? = null,
     description: String? = null,
-    minutes:Int = 0,
+    minutes: Int = 0,
     submittedDate: LocalDate = LocalDate.now(),
     tags: List<String> = listOf(),
     calories: Float = 0f,
@@ -16,8 +16,8 @@ fun createMeal(
     protein: Float = 0f,
     saturated: Float = 0f,
     carbohydrates: Float = 0f,
-    steps:List<String> = listOf(),
-    ingredients:List<String> = listOf()
+    steps: List<String> = listOf(),
+    ingredients: List<String> = listOf()
 ): Food {
     return Food(
         id,
@@ -25,7 +25,15 @@ fun createMeal(
         minutes = minutes,
         submittedDate = submittedDate,
         tags = tags,
-        nutrition = Nutrition(calories = calories, totalFat = totalFat, sugar, sodium = sodium, protein = protein, saturated = saturated, carbohydrates = carbohydrates),
+        nutrition = Nutrition(
+            calories = calories,
+            totalFat = totalFat,
+            sugar,
+            sodium = sodium,
+            protein = protein,
+            saturated = saturated,
+            carbohydrates = carbohydrates
+        ),
         steps = steps,
         description = description,
         ingredients = ingredients
