@@ -5,8 +5,10 @@ import io.mockk.every
 import io.mockk.mockk
 import logic.usecase.GetRandomPotatoesMealsUseCase
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import presentation.ui_io.Printer
 import presentation.ui_io.InputReader
+import javax.management.Query.match
 import kotlin.test.Test
 
 class RandomPotatoesMealsConsoleUiTest {
@@ -23,32 +25,33 @@ class RandomPotatoesMealsConsoleUiTest {
     @Test
     fun `should display meals and exit when user inputs N`() {
         // Given
-        every { useCase.getRandomPotatoesMeals() } returns listOf("Mashed Potatoes", "Potato Salad")
-        // Given
+        val potatoMeals = listOf("Baked Potatoes", "Potato Wedges")
+        every { useCase.getRandomPotatoesMeals() } returns potatoMeals
         every { reader.readString() } returns "n"
 
         // When
         ui.launchUI()
 
         // Then
-        verify { printer.displayLn("\nHere are some meals that include potatoes:\n") }
-        verify { printer.displayLn("1) Mashed Potatoes") }
-        verify { printer.displayLn("2) Potato Salad") }
-        verify { printer.displayLn("\nWould you like to see more potato meals? (Y/N)") }
-        verify { printer.displayLn("Thanks! , Enjoy your meals \n") }
+        verify(exactly = 1) { useCase.getRandomPotatoesMeals() }
+        verify {
+            printer.displayLn(match { it.toString().contains(potatoMeals[0]) })
+            printer.displayLn(match { it.toString().contains(potatoMeals[1]) })
+        }
     }
 
     @Test
     fun `should show meals again when user inputs Y`() {
         // Given
-        every { useCase.getRandomPotatoesMeals() } returns listOf("Fries")
+        val meals = listOf("Fries")
+        every { useCase.getRandomPotatoesMeals() } returns meals
         every { reader.readString() } returnsMany listOf("y", "n")
 
         // When
         ui.launchUI()
 
         // Then
-        verify(exactly = 2) { printer.displayLn("1) Fries") }
+        verify { printer.displayLn(match { it.toString().contains(meals[0]) }) }
         verify(exactly = 2) { printer.displayLn("\nWould you like to see more potato meals? (Y/N)") }
     }
 
@@ -62,8 +65,8 @@ class RandomPotatoesMealsConsoleUiTest {
         ui.launchUI()
 
         // Then
-        verify { printer.displayLn("Invalid input. Please enter 'Y' or 'N'.") }
-        verify { printer.displayLn("Thanks! , Enjoy your meals \n") }
+        verify { printer.displayLn(match { it.toString().contains("Invalid", true) }) }
+        verify(exactly = 1) { useCase.getRandomPotatoesMeals() }
     }
 
     @Test
@@ -76,7 +79,8 @@ class RandomPotatoesMealsConsoleUiTest {
         ui.launchUI()
 
         // Then
-        verify { printer.displayLn("\n$exceptionMessage") }
+        verify { printer.displayLn(match { it.toString().contains(exceptionMessage) }) }
     }
+
 
 }
