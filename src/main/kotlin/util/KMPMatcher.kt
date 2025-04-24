@@ -46,4 +46,5 @@ object KMPMatcher {
         }
         return table
     }
+
 }
