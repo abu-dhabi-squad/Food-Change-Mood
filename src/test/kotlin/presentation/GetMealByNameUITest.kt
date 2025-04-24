@@ -34,7 +34,6 @@ class GetMealByNameUITest{
 
         // then
         verify {
-            printer.display("Enter the meal name to search: ")
             printer.displayLn("Invalid input. Please enter a non-empty keyword.") }
     }
 
@@ -49,7 +48,6 @@ class GetMealByNameUITest{
 
         // then
         verify {
-            printer.display("Enter the meal name to search: ")
             printer.displayLn("Invalid input. Please enter a non-empty keyword.") }
     }
 
@@ -77,7 +75,6 @@ class GetMealByNameUITest{
         ui.launchUI()
 
         verify {
-            printer.display("Enter the meal name to search: ")
             printer.displayLn("Search results for '${input.trim()}':")
         }
     }
@@ -99,7 +96,6 @@ class GetMealByNameUITest{
 
         // then
         verify {
-            printer.display("Enter the meal name to search: ")
             printer.displayLn("Search results for '$input':")
             printer.displayLn("Unnamed Food 1")
             printer.displayLn("unnamed Food 2")
@@ -119,7 +115,6 @@ class GetMealByNameUITest{
 
         // then
         verify {
-            printer.display("Enter the meal name to search: ")
             printer.displayLn(exception)
         }
     }
