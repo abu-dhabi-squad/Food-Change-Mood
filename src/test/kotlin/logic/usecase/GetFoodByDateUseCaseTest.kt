@@ -33,6 +33,17 @@ class GetFoodByDateUseCaseTest{
     }
 
     @Test
+    fun `getMealsByDate throw when getFood throw`() {
+        //given
+        every { foodRepository.getFoods() } returns Result.failure(Exception())
+        //when & then
+        assertThrows<Exception> {
+            getFoodByDateUseCase.getMealsByDate(LocalDate.now())
+        }
+        verify(exactly = 1) { foodRepository.getFoods() }
+    }
+
+    @Test
     fun `getMealsByDate should throw EmptySearchByDateListException when getFood function return empty list`() {
         //given
         every { foodRepository.getFoods() } returns Result.success(mutableListOf())
@@ -78,6 +89,23 @@ class GetFoodByDateUseCaseTest{
             getFoodByDateUseCase.getMealsByDate(LocalDate.of(2004,3,10))
         }
     }
+
+    @Test
+    fun `getMealsByDate should throw EmptySearchByDateListException when data does not have meal submitted and is not clean`() {
+        //given
+        val data = mutableListOf(
+            createMeal(2100, null, submittedDate = LocalDate.of(2002, 1, 10), description = "description1"),
+            createMeal(2200, "name2", submittedDate = LocalDate.of(2012, 1, 14), description = null),
+            createMeal(2300, "name3", submittedDate = LocalDate.of(2003, 3, 10), description = "description3")
+        )
+        every { foodRepository.getFoods() } returns Result.success(data)
+        //when & then
+        assertThrows<EmptySearchByDateListException> {
+            getFoodByDateUseCase.getMealsByDate(LocalDate.of(2004,3,10))
+        }
+    }
+
+
 
     @Test
     fun `getMealsByDate should return only the data that matches the date when the data is high quality`() {

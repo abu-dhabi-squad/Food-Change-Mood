@@ -13,7 +13,7 @@ class GetFoodByDateUseCase(
             .getOrThrow()
             .filter { meal-> meal.isHighQuality() && meal.submittedDate==date }
             .takeIf { it.isNotEmpty() }
-            ?.mapNotNull { food -> food.name?.let { food.id to it } }
+            ?.map { food -> food.id to food.name!! }
             ?: throw EmptySearchByDateListException()
     }
 
