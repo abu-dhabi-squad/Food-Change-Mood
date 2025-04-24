@@ -1,12 +1,8 @@
 package data
 
 import model.Food
-import model.Nutrition
-import util.DateParserInterface
 import java.io.File
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeParseException
+
 
 class FoodCsvParser(
     private val csvFile: File,
@@ -22,7 +18,7 @@ class FoodCsvParser(
     private fun getFoodsList(): List<Food> {
         return parseCsvLines().drop(1)
             .asSequence()
-            .map { foodMapper.parseFoodRow(it) }
+            .map {  foodMapper.parseFoodRow(it) }
             .toList()
     }
 
@@ -64,7 +60,8 @@ class FoodCsvParser(
         val rows = mutableListOf<List<String>>()
         var buffer = StringBuilder()
         var insideQuotes = false
-        csvFile.forEachLine { rawLine ->
+         csvFile.forEachLine { rawLine ->
+
             buffer.appendLine(rawLine)
             val quoteCount = rawLine.count { it == '"' }
             insideQuotes =
