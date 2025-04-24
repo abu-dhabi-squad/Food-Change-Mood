@@ -2,31 +2,33 @@ package presentation
 
 import logic.usecase.GetRandomPotatoesMealsUseCase
 import presentation.ui_io.InputReader
-import presentation.ui_io.StringReader
+import presentation.ui_io.Printer
 
 class RandomPotatoesMealsConsoleUi(
     private val getRandomPotatoesMealsUseCase: GetRandomPotatoesMealsUseCase,
-    private val stringReader: InputReader<String>
+    private val reader: InputReader,
+    private val  printer: Printer
+
 ) : ChangeFoodMoodLauncher {
 
     override fun launchUI() {
         try {
             val meals = getRandomPotatoesMealsUseCase.getRandomPotatoesMeals()
 
-            println("\nHere are some meals that include potatoes:\n")
+            printer.displayLn("\nHere are some meals that include potatoes:\n")
             meals.also {
-                it.forEachIndexed { index, mealName -> println("${index + 1}) $mealName") }
+                it.forEachIndexed { index, mealName ->    printer.displayLn("${index + 1}) $mealName") }
             }
             promptForMoreMeals()
         } catch (exception: Exception) {
-            println("\n${exception.message}")
+            printer.displayLn("\n${exception.message}")
         }
     }
 
     private fun promptForMoreMeals() {
         while (true) {
-            println("\nWould you like to see more potato meals? (Y/N)")
-            val input = stringReader.read()
+            printer.displayLn("\nWould you like to see more potato meals? (Y/N)")
+            val input = reader.readString()
             when {
                 input.equals("y", ignoreCase = true) -> {
                     launchUI()
@@ -34,13 +36,13 @@ class RandomPotatoesMealsConsoleUi(
                 }
 
                 input.equals("n", ignoreCase = true) -> {
-                    println("Thanks! , Enjoy your meals \n")
+                    printer.displayLn("Thanks! , Enjoy your meals \n")
                     return
 
                 }
 
                 else -> {
-                    println("Invalid input. Please enter 'Y' or 'N'.")
+                    printer.displayLn("Invalid input. Please enter 'Y' or 'N'.")
                 }
             }
         }

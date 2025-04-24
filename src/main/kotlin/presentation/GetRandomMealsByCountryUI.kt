@@ -2,29 +2,42 @@ package presentation
 
 import logic.usecase.GetRandomMealsByCountryUseCase
 import presentation.ui_io.InputReader
-import presentation.ui_io.StringReader
+import presentation.ui_io.Printer
 
 class GetRandomMealsByCountryUI(
-    private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase, private val stringReader: InputReader<String>
-) : ChangeFoodMoodLauncher {
+    private val getRandomMealsByCountryUseCase: GetRandomMealsByCountryUseCase,
+    private val reader: InputReader,
+    private val printer: Printer,
+) : ChangeFoodMoodLauncher{
 
     override fun launchUI() {
-        print("Enter a country name: ")
-        val inputCountry = stringReader.read()?.trim()
+
+        printer.display(ENTER_INPUT_MESSAGE)
+        val inputCountry = reader.readString()?.trim()
+
+        if (inputCountry.isNullOrEmpty()) {
+            printer.displayLn(EMPTY_INPUT_MESSAGE)
+            return
+        }
+
         try {
-            val meals = inputCountry?.let {
-                getRandomMealsByCountryUseCase.getRandomMeals(it)
-            }
+            val meals = getRandomMealsByCountryUseCase.getRandomMeals(inputCountry)
             printRandomMealsByCountry(meals)
         } catch (e: Exception) {
-            println("Error: ${e.message}")
+            printer.displayLn(e.message)
         }
     }
 
-    private fun printRandomMealsByCountry(meals: List<String>?) {
-        meals?.forEachIndexed { index, meal ->
-            println("${index + 1}. $meal")
-        } ?: println("No meals matched your input.")
+    private fun printRandomMealsByCountry(meals: List<String>) {
+        meals.forEachIndexed { index, meal ->
+            printer.displayLn("${index + 1}. $meal")
+        }
     }
 
+    companion object{
+
+        const val EMPTY_INPUT_MESSAGE = "No country was entered. Please try again."
+        const val NO_MEALS_FOUND = "No meals found!"
+        const val ENTER_INPUT_MESSAGE = "Enter a country name: "
+    }
 }

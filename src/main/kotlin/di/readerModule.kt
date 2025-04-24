@@ -1,14 +1,10 @@
 package di
 
 import org.koin.dsl.module
-import presentation.ui_io.FloatReader
+import presentation.ui_io.ConsoleReader
 import presentation.ui_io.InputReader
-import presentation.ui_io.IntReader
-import presentation.ui_io.StringReader
 
-val readerModule = module{
-    single<InputReader<Int>> { IntReader() }
-    single<InputReader<String>> { StringReader() }
-    single<InputReader<Float>> { FloatReader() }
 
+val readerModule = module {
+    single<InputReader> { ConsoleReader() }
 }

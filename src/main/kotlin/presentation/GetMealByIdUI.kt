@@ -1,17 +1,18 @@
 package presentation
 
+import jdk.jfr.Name
 import logic.usecase.GetMealByIdUseCase
 import presentation.ui_io.InputReader
 import presentation.ui_io.Printer
 
 class GetMealByIdUI(
     private val getMealByIdUseCase: GetMealByIdUseCase,
-    private val intReader: InputReader<Int>,
+    private val reader: InputReader
     private val printer: Printer
 ) : ChangeFoodMoodLauncher {
     override fun launchUI() {
         printer.display("enter id of the meal : ")
-        intReader.read()?.let { enteredID ->
+        reader.readInt()?.let { enteredID ->
             try {
                 printer.displayLn(getMealByIdUseCase.getMealById(enteredID).getFullDetails())
             } catch (exception: Exception) {

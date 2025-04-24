@@ -2,16 +2,15 @@ package presentation
 
 import logic.usecase.GetMealBySearchForNameUseCase
 import presentation.ui_io.InputReader
-import presentation.ui_io.StringReader
 
 class GetMealByNameUI(
     private val getMealBySearchForNameUseCase: GetMealBySearchForNameUseCase,
-    private val stringReader: InputReader<String>
+    private val reader: InputReader
 ) : ChangeFoodMoodLauncher {
 
     override fun launchUI() {
         print("Enter the meal name to search: ")
-        stringReader.read()
+        reader.readString()
             ?.trim()
             ?.takeIf { it.isNotEmpty() }
             ?.let { input ->

@@ -5,7 +5,6 @@ import logic.usecase.GetMealByIdUseCase
 import model.InvalidIdException
 import model.WrongInputException
 import presentation.ui_io.InputReader
-import presentation.ui_io.IntReader
 import presentation.ui_io.Printer
 import util.DateParserInterface
 import util.DateValidationInterface
@@ -17,9 +16,8 @@ class GetFoodByDateUI(
     private val getMealByIdUseCase: GetMealByIdUseCase,
     private val DateValidationInterface: DateValidationInterface,
     private val intReader: IntReader,
-    private val stringReader: InputReader<String>,
+    private val reader: InputReader,
     private val printer: Printer
-
 ) : ChangeFoodMoodLauncher {
 
     override fun launchUI() {
@@ -36,7 +34,7 @@ class GetFoodByDateUI(
 
     private fun getInputDate(): LocalDate {
         printer.display("Enter the Date (yyyy-M-d) : ")
-        return stringReader.read()
+        return reader.readString()
             ?.takeIf { date -> DateValidationInterface.isValidDate(date) }
             ?.let { date -> dateParserInterface.parseDateFromString(date) }
             ?: throw WrongInputException()
@@ -44,8 +42,8 @@ class GetFoodByDateUI(
 
     private fun getDetailsOfMeals(mealsByDate: List<Pair<Int, String>>) {
         while (true) {
-            printer.display("Do you want to see details of one of the Meals (Y/N)? ")
-            val input = stringReader.read()?.trim()?.lowercase()
+            print("Do you want to see details of one of the Meals (Y/N)? ")
+            val input = reader.readString()?.trim()?.lowercase()
             when (input) {
                 "y" -> try {
                     getDetailsById(mealsByDate)
@@ -61,7 +59,7 @@ class GetFoodByDateUI(
 
     private fun getDetailsById(mealsByDate: List<Pair<Int, String>>) {
         printer.display("enter id of the meal : ")
-        intReader.read()?.let { enteredID ->
+        reader.readInt()?.let { enteredID ->
             mealsByDate.takeIf { it.any { item -> item.first == enteredID } }
                 ?.let {
                     println(getMealByIdUseCase.getMealById(enteredID).getFullDetails())

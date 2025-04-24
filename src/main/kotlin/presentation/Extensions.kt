@@ -25,6 +25,12 @@ fun Food.getNameAndDescription(): String {
     return strBuilder.toString()
 }
 
+fun Food.getName(): String {
+    val strBuilder = StringBuilder()
+    strBuilder.append("\nName: $name")
+    return strBuilder.toString()
+}
+
 fun Nutrition.getFullDetails(indent: String = ""): String {
     val strBuilder = StringBuilder()
     strBuilder.append("\n${indent}Calories: $calories")
