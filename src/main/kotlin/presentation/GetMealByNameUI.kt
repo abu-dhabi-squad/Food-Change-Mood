@@ -1,10 +1,10 @@
 package presentation
 
-import logic.usecase.GetMealBySearchForNameUseCase
+import logic.usecase.GetMealBySearcNameUseCase
 import presentation.ui_io.InputReader
 
 class GetMealByNameUI(
-    private val getMealBySearchForNameUseCase: GetMealBySearchForNameUseCase,
+    private val getMealBySearcNameUseCase: GetMealBySearcNameUseCase,
     private val reader: InputReader
 ) : ChangeFoodMoodLauncher {
 
@@ -24,7 +24,7 @@ class GetMealByNameUI(
     }
 
     private fun printResultFromSearch(input: String) {
-        getMealBySearchForNameUseCase.findMealsByName(input)
+        getMealBySearcNameUseCase.findMealsByName(input)
             .also { results ->
                 println("Search results for '$input':")
                 results.forEach { println(it.name ?: "none") }

@@ -31,5 +31,5 @@ val useCaseModule = module {
     single { GetSweetsWithoutEggsUseCase(get()) }
     single { GetSeaFoodMealsSortedByProteinUseCase(get()) }
     single { EasyFoodSuggestionGameUseCase(get()) }
-    single { GetMealBySearchForNameUseCase(get())}
+    single { GetMealBySearcNameUseCase(get())}
 }

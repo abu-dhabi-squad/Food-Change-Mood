@@ -4,7 +4,7 @@ import logic.repository.FoodRepository
 import model.Food
 import model.NoMealsFoundException
 
-class GetMealBySearchForNameUseCase(
+class GetMealBySearcNameUseCase(
     private val foodRepository: FoodRepository
 ) {
     private fun buildPrefixTable(pattern: String): IntArray {
