@@ -7,7 +7,7 @@ import presentation.ui_io.Printer
 class RandomPotatoesMealsConsoleUi(
     private val getRandomPotatoesMealsUseCase: GetRandomPotatoesMealsUseCase,
     private val reader: InputReader,
-    private val  printer: Printer
+    private val printer: Printer
 
 ) : ChangeFoodMoodLauncher {
 
@@ -17,7 +17,7 @@ class RandomPotatoesMealsConsoleUi(
 
             printer.displayLn("\nHere are some meals that include potatoes:\n")
             meals.also {
-                it.forEachIndexed { index, mealName ->    printer.displayLn("${index + 1}) $mealName") }
+                it.forEachIndexed { index, mealName -> printer.displayLn("${index + 1}) $mealName") }
             }
             promptForMoreMeals()
         } catch (exception: Exception) {
