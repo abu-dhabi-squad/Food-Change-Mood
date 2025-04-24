@@ -1,6 +1,5 @@
 package presentation
 
-import jdk.jfr.Name
 import logic.usecase.GetMealByIdUseCase
 import presentation.ui_io.InputReader
 import presentation.ui_io.Printer
@@ -17,8 +16,10 @@ class GetMealByIdUI(
                 printer.displayLn(getMealByIdUseCase.getMealById(enteredID).getFullDetails())
             } catch (exception: Exception) {
                 exception.message?.let { printer.displayLn(it) }
+                    ?: printer.displayLn("error")
             }
         }
+            ?: printer.displayLn("wrong input")
     }
 
 }

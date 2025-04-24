@@ -9,12 +9,11 @@ import model.InvalidIdException
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import presentation.ui_io.InputReader
-import presentation.ui_io.IntReader
 import presentation.ui_io.Printer
 
 class GetMealByIdUITest {
     private val printer: Printer = mockk(relaxed = true)
-    private val inputReader: InputReader<Int> = mockk(relaxed = true)
+    private val inputReader: InputReader = mockk(relaxed = true)
     private val getMealByIdUseCase: GetMealByIdUseCase = mockk(relaxed = true)
     private lateinit var getMealByIdUI: GetMealByIdUI
 
@@ -33,6 +32,17 @@ class GetMealByIdUITest {
     }
 
     @Test
+    fun `launchUI should display wrong input when enter wrong input or not entering at all`(){
+        // Given
+        every { inputReader.readInt() } returns null
+        // When
+        getMealByIdUI.launchUI()
+        //then
+        verify { printer.display("enter id of the meal : ") }
+        verify { printer.displayLn("wrong input") }
+    }
+
+    @Test
     fun `launchUI should display Invalid ID Input when getMealById throw InvalidIdException`(){
         // Given
         every { getMealByIdUseCase.getMealById(any()) } throws InvalidIdException()
@@ -42,6 +52,18 @@ class GetMealByIdUITest {
         verify { printer.display("enter id of the meal : ") }
         verify (exactly = 1) { getMealByIdUseCase.getMealById(any()) }
         verify { printer.displayLn("Invalid ID Input") }
+    }
+
+    @Test
+    fun `launchUI should display error when getMealById throw Exception`(){
+        // Given
+        every { getMealByIdUseCase.getMealById(any()) } throws Exception()
+        // When
+        getMealByIdUI.launchUI()
+        //then
+        verify { printer.display("enter id of the meal : ") }
+        verify (exactly = 1) { getMealByIdUseCase.getMealById(any()) }
+        verify { printer.displayLn("error") }
     }
 
     @Test
