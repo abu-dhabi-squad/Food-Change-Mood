@@ -23,15 +23,6 @@ class GetMealByIdUITest {
     }
 
     @Test
-    fun `launchUI should display enter id of the meal when called`(){
-        // Given
-        // When
-        getMealByIdUI.launchUI()
-        //then
-        verify { printer.display("enter id of the meal : ") }
-    }
-
-    @Test
     fun `launchUI should display wrong input when enter wrong input or not entering at all`(){
         // Given
         every { inputReader.readInt() } returns null

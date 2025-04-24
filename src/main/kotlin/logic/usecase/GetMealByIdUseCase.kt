@@ -19,17 +19,3 @@ class GetMealByIdUseCase(
         return name != null && description != null
     }
 }
-
-/**
- * fun `should throw exception when repository fails`() {
- *         // Given
- *         val exception = RuntimeException("Network error")
- *         every { foodRepository.getFoods() } returns Result.failure(exception)
- *
- *         // When & Then
- *         val thrown = Assertions.assertThrows(RuntimeException::class.java) {
- *             getIraqiMealsUseCase.getAllIraqiMeals()
- *         }
- *         Assertions.assertEquals("Network error", thrown.message)
- *     }
- * yyv-qidp-dfd*/
