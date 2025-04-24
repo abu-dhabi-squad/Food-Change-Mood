@@ -24,7 +24,7 @@ class DateValidationImplementaionTest{
         every { dateParserInterface.parseDateFromString(any()) } throws InvalidDateFormatException()
         //when
         assertThrows<InvalidDateFormatException> {
-            dateValidation.isValidDate("2002/10-1")
+            dateValidation.isValidDate("10/1-2002")
         }
     }
 
@@ -32,7 +32,7 @@ class DateValidationImplementaionTest{
     fun `isValidDate should throw InvalidYearException when year from the future`() {
         //given
         val futureYear = LocalDate.now().year + 1
-        val date = "$futureYear-1-1"
+        val date = "1/1/$futureYear"
         every { dateParserInterface.parseDateFromString(any()) } returns LocalDate.of(futureYear,1,1)
         //when & then
         assertThrows<InvalidYearException> {
@@ -44,7 +44,7 @@ class DateValidationImplementaionTest{
     fun `isValidDate should throw InvalidYearException when year before 1000`() {
         //given
         val year = 99
-        val date = "$year-1-1"
+        val date = "1/1/$year"
         every { dateParserInterface.parseDateFromString(any()) } returns LocalDate.of(year,1,1)
         //when & then
         assertThrows<InvalidYearException> {
@@ -56,7 +56,7 @@ class DateValidationImplementaionTest{
     fun `isValidDate should return true when date is valid`() {
         //given
         val year = 2025
-        val date = "2020-2-10"
+        val date = "2020/2/10"
         every { dateParserInterface.parseDateFromString(any()) } returns LocalDate.of(year,1,1)
         //when & then
         Truth.assertThat(dateValidation.isValidDate(date)).isTrue()
@@ -71,7 +71,7 @@ class DateValidationImplementaionTest{
         every{dateParserInterface.parseDateFromString(any())} returns LocalDate.of(year,month,day)
         //when & then
         assertThrows<InvalidDateException> {
-            dateValidation.isValidDate("$year-$month-$day")
+            dateValidation.isValidDate("$month/$day/$year")
         }
     }
 
@@ -84,7 +84,7 @@ class DateValidationImplementaionTest{
         every{dateParserInterface.parseDateFromString(any())} returns LocalDate.of(year,month,day)
         //when & then
         assertThrows<InvalidDateException> {
-            dateValidation.isValidDate("$year-$month-$day")
+            dateValidation.isValidDate("$month/$day/$year")
         }
     }
 

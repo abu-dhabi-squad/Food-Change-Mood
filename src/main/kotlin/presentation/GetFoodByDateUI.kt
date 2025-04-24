@@ -32,7 +32,7 @@ class GetFoodByDateUI(
     }
 
     private fun getInputDate(): LocalDate {
-        printer.display("Enter the Date (yyyy-M-d) : ")
+        printer.display("Enter the Date (M/d/yyyy) : ")
         return reader.readString()
             ?.takeIf { date -> DateValidationInterface.isValidDate(date) }
             ?.let { date -> dateParserInterface.parseDateFromString(date) }
