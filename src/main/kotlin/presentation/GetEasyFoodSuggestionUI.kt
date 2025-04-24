@@ -20,7 +20,7 @@ class GetEasyFoodSuggestionUI(
             printer.displayLn(START_MESSAGE)
             printMealDetails(meals)
             printer.displayLn(MEAL_SEPARATOR)
-        } catch (exception: AppException) {
+        } catch (exception: NoEasyMealsFoundException) {
             printer.displayLn(exception.message ?: ERROR_MESSAGE)
         }
     }
