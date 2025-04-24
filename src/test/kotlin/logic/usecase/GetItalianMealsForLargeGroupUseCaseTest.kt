@@ -1,12 +1,11 @@
 package logic.usecase
 
 import com.google.common.truth.Truth.assertThat
+import createMeal
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import logic.repository.FoodRepository
-import model.Food
-import model.Nutrition
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
@@ -25,43 +24,21 @@ class GetItalianMealsForLargeGroupUseCaseTest {
     fun `should return name and description for meals when tags contain 'italian' and 'for-large-group'`() {
         // Given
         val meals = listOf(
-            Food(
-                1,
-                "Pizza",
-                30,
-                LocalDate.of(2023, 5, 1),
-                listOf("italian", "for-large-groups"),
-                Nutrition(
-                    calories = 300f,
-                    totalFat = 15f,
-                    sugar = 25f,
-                    sodium = 100f,
-                    protein = 3f,
-                    saturated = 5f,
-                    carbohydrates = 40f
-                ),
-                listOf("Slice apples", "Bake the pie"),
-                "Cheesy pizza",
-                ingredients = listOf("Apples", "Flour", "Sugar", "Butter")
+            createMeal(
+                id = 1,
+                name = "Pizza",
+                description = "Cheesy pizza",
+                minutes = 30,
+                submittedDate = LocalDate.of(2023, 5, 1),
+                tags = listOf("italian", "for-large-groups")
             ),
-            Food(
-                3,
-                "Burger",
-                20,
-                LocalDate.of(2023, 5, 1),
-                listOf("fast-food", "for-large-groups"),
-                Nutrition(
-                    calories = 300f,
-                    totalFat = 15f,
-                    sugar = 25f,
-                    sodium = 100f,
-                    protein = 3f,
-                    saturated = 5f,
-                    carbohydrates = 40f
-                ),
-                listOf("Slice apples", "Bake the pie"),
-                "Tasty burger",
-                ingredients = listOf("Apples", "Flour", "Sugar", "Butter")
+            createMeal(
+                id = 3,
+                name = "Burger",
+                description = "Tasty burger",
+                minutes = 20,
+                submittedDate = LocalDate.of(2023, 5, 1),
+                tags = listOf("fast-food", "for-large-groups")
             )
         )
 
@@ -71,55 +48,25 @@ class GetItalianMealsForLargeGroupUseCaseTest {
         val result = getItalianMealsForLargeGroupUseCase.getItalianMealForLargeGroup()
 
         // Then
-        assertThat(result).isEqualTo(
-            listOf(
-                "Pizza" to "Cheesy pizza",
-            )
-        )
+        assertThat(result).isEqualTo(listOf("Pizza" to "Cheesy pizza"))
         verify(exactly = 1) { foodRepository.getFoods() }
     }
 
     @Test
-    fun `should return name and description for meals when tags contain 'italian' and 'for-large-group' and description not equal null`() {
+    fun `should return name and description only if description is not null`() {
         // Given
         val meals = listOf(
-            Food(
-                1,
-                "Pizza",
-                30,
-                LocalDate.of(2023, 5, 1),
-                listOf("italian", "for-large-groups"),
-                Nutrition(
-                    calories = 300f,
-                    totalFat = 15f,
-                    sugar = 25f,
-                    sodium = 100f,
-                    protein = 3f,
-                    saturated = 5f,
-                    carbohydrates = 40f
-                ),
-                listOf("Slice apples", "Bake the pie"),
-                "Cheesy pizza",
-                ingredients = listOf("Apples", "Flour", "Sugar", "Butter")
+            createMeal(
+                id = 1,
+                name = "Pizza",
+                description = "Cheesy pizza",
+                tags = listOf("italian", "for-large-groups")
             ),
-            Food(
-                2,
-                "Pasta",
-                25,
-                LocalDate.of(2023, 5, 1),
-                listOf("italian", "for-large-groups"),
-                Nutrition(
-                    calories = 300f,
-                    totalFat = 15f,
-                    sugar = 25f,
-                    sodium = 100f,
-                    protein = 3f,
-                    saturated = 5f,
-                    carbohydrates = 40f
-                ),
-                listOf("Slice apples", "Bake the pie"),
-                null,
-                ingredients = listOf("Apples", "Flour", "Sugar", "Butter")
+            createMeal(
+                id = 2,
+                name = "Pasta",
+                description = null,
+                tags = listOf("italian", "for-large-groups")
             )
         )
 
@@ -129,55 +76,25 @@ class GetItalianMealsForLargeGroupUseCaseTest {
         val result = getItalianMealsForLargeGroupUseCase.getItalianMealForLargeGroup()
 
         // Then
-        assertThat(result).isEqualTo(
-            listOf(
-                "Pizza" to "Cheesy pizza",
-            )
-        )
+        assertThat(result).isEqualTo(listOf("Pizza" to "Cheesy pizza"))
         verify(exactly = 1) { foodRepository.getFoods() }
     }
 
     @Test
-    fun `should return name and description for meals when tags contain 'italian' and 'for-large-group' and name not equal null`() {
+    fun `should return name and description only if name is not null`() {
         // Given
         val meals = listOf(
-            Food(
-                1,
-                "Pizza",
-                30,
-                LocalDate.of(2023, 5, 1),
-                listOf("italian", "for-large-groups"),
-                Nutrition(
-                    calories = 300f,
-                    totalFat = 15f,
-                    sugar = 25f,
-                    sodium = 100f,
-                    protein = 3f,
-                    saturated = 5f,
-                    carbohydrates = 40f
-                ),
-                listOf("Slice apples", "Bake the pie"),
-                "Cheesy pizza",
-                ingredients = listOf("Apples", "Flour", "Sugar", "Butter")
+            createMeal(
+                id = 1,
+                name = "Pizza",
+                description = "Cheesy pizza",
+                tags = listOf("italian", "for-large-groups")
             ),
-            Food(
-                2,
-                null,
-                25,
-                LocalDate.of(2023, 5, 1),
-                listOf("italian", "for-large-groups"),
-                Nutrition(
-                    calories = 300f,
-                    totalFat = 15f,
-                    sugar = 25f,
-                    sodium = 100f,
-                    protein = 3f,
-                    saturated = 5f,
-                    carbohydrates = 40f
-                ),
-                listOf("Slice apples", "Bake the pie"),
-                "Classic pasta",
-                ingredients = listOf("Apples", "Flour", "Sugar", "Butter")
+            createMeal(
+                id = 2,
+                name = null,
+                description = "Classic pasta",
+                tags = listOf("italian", "for-large-groups")
             )
         )
 
@@ -187,12 +104,7 @@ class GetItalianMealsForLargeGroupUseCaseTest {
         val result = getItalianMealsForLargeGroupUseCase.getItalianMealForLargeGroup()
 
         // Then
-        assertThat(result).isEqualTo(
-            listOf(
-                "Pizza" to "Cheesy pizza",
-            )
-        )
+        assertThat(result).isEqualTo(listOf("Pizza" to "Cheesy pizza"))
         verify(exactly = 1) { foodRepository.getFoods() }
     }
-
 }

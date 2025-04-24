@@ -1,7 +1,6 @@
 package presentation
 
 import logic.usecase.GetItalianMealsForLargeGroupUseCase
-import presentation.ui_io.InputReader
 import presentation.ui_io.Printer
 
 class ItalianMealsForLargeGroupUI(
