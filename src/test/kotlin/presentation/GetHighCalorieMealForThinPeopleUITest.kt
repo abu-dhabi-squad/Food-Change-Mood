@@ -29,7 +29,7 @@ class GetHighCalorieMealForThinPeopleUITest{
         // When
         getHighCalorieMealForThinPeopleUI.launchUI()
         //then
-        verify { printer.displayLn("there is no high calories meals in list") }
+        verify { printer.displayLn(EmptyHighCalorieListException().message) }
     }
 
     @Test

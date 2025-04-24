@@ -40,7 +40,7 @@ class GetMealByIdUITest {
         getMealByIdUI.launchUI()
         //then
         verify (exactly = 1) { getMealByIdUseCase.getMealById(any()) }
-        verify { printer.displayLn("Invalid ID Input") }
+        verify { printer.displayLn(InvalidIdException().message) }
     }
 
     @Test
