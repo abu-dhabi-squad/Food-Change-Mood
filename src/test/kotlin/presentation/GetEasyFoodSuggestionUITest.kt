@@ -5,7 +5,6 @@ import io.mockk.mockk
 import junit.framework.TestCase.assertTrue
 import logic.usecase.EasyFoodSuggestionGameUseCase
 import logic.usecase.createMeal
-import model.AppException
 import model.NoEasyMealsFoundException
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -13,7 +12,6 @@ import presentation.ui_io.ConsolePrinter
 import presentation.ui_io.Printer
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
-import kotlin.test.assertTrue
 
 class GetEasyFoodSuggestionUITest {
     private lateinit var useCase: EasyFoodSuggestionGameUseCase
