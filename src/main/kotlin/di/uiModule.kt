@@ -6,7 +6,7 @@ import presentation.*
 val uiModule = module {
     single { GetMealByIdUI(get(),get()) }
     single { GuessFoodPreparationTimeGameUI(get(), get(), get(),get()) }
-    single { ItalianMealsForLargeGroupUI(get()) }
+    single { ItalianMealsForLargeGroupUI(get(),get()) }
     single { GuessIngredientConsoleUI(get(), get(), get()) }
     single { RandomPotatoesMealsConsoleUi(get(), get(),get()) }
     single { GetIraqiMealsUI(get()) }
