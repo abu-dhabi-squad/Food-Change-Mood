@@ -3,6 +3,7 @@ package presentation
 import logic.usecase.EasyFoodSuggestionGameUseCase
 import model.AppException
 import model.Food
+import model.NoEasyMealsFoundException
 import presentation.ui_io.Printer
 
 class GetEasyFoodSuggestionUI(

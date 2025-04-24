@@ -1,12 +1,19 @@
 package presentation
 
+import io.mockk.every
 import io.mockk.mockk
+import junit.framework.TestCase.assertTrue
 import logic.usecase.EasyFoodSuggestionGameUseCase
+import logic.usecase.createMeal
+import model.AppException
+import model.NoEasyMealsFoundException
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import presentation.ui_io.ConsolePrinter
 import presentation.ui_io.Printer
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
+import kotlin.test.assertTrue
 
 class GetEasyFoodSuggestionUITest {
     private lateinit var useCase: EasyFoodSuggestionGameUseCase
@@ -22,7 +29,57 @@ class GetEasyFoodSuggestionUITest {
         System.setOut(PrintStream(outContent))
     }
 
+    @Test
+    fun `should display meals when use case returns meals`() {
+        // given
+        val meals = listOf(
+            createMeal(
+                name = "Apple Pie",
+                minutes = 25,
+                description = "A classic dessert.",
+                ingredients = listOf("Apples", "Flour", "Sugar"),
+                steps = listOf("Step 1", "Step 2")
+            )
+        )
 
+        // when
+        every { useCase.suggestRandomEasyMeals() } returns meals
+        ui.launchUI()
+        val output = outContent.toString()
 
+        // then
+        val expected = listOf(
+            "1. Apple Pie",
+            "Prepared Time: 25 minutes",
+            "Description: A classic dessert.",
+            "Ingredients: Apples, Flour, Sugar",
+            "Steps: 2 steps"
+        )
+
+        expected.forEach { expected ->
+            assertTrue(output.contains(expected))
+        }
+
+    }
+    @Test
+    fun `should show message when no meals are returned`() {
+        // when
+        every { useCase.suggestRandomEasyMeals() } returns emptyList()
+        ui.launchUI()
+        val output = outContent.toString()
+
+        // then
+        assertTrue(output.contains(GetEasyFoodSuggestionUI.EMPTY_INPUT_MESSAGE))
+    }
+    @Test
+    fun `should show error message when NoEasyMealsFoundException is thrown`() {
+        // when
+        every { useCase.suggestRandomEasyMeals() } throws NoEasyMealsFoundException()
+        ui.launchUI()
+        val output = outContent.toString()
+
+        // then
+        assertTrue(output.contains("No easy meals found matching the criteria."))
+    }
 
 }
