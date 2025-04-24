@@ -4,8 +4,9 @@ import logic.usecase.EasyFoodSuggestionGameUseCase
 import model.AppException
 import model.Food
 
-class GetEasyFoodSuggestionUI(private val easyFoodSuggestionGameUseCase: EasyFoodSuggestionGameUseCase) :
-    ChangeFoodMoodLauncher {
+class GetEasyFoodSuggestionUI(
+    private val easyFoodSuggestionGameUseCase: EasyFoodSuggestionGameUseCase
+) : ChangeFoodMoodLauncher {
 
     override fun launchUI() {
         try {
@@ -33,6 +34,4 @@ class GetEasyFoodSuggestionUI(private val easyFoodSuggestionGameUseCase: EasyFoo
             println("Nutrition: Calories = ${meal.nutrition.calories}, Protein = ${meal.nutrition.protein}g")
         }
     }
-
-
 }
