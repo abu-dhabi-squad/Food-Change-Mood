@@ -24,7 +24,7 @@ class GetIraqiMealsUI(
             }
 
         } catch (e: NoIraqiMealsFoundException) {
-            printer.displayLn("No Iraqi meals found.")
+            printer.displayLn(e.message)
         } catch (e: Exception) {
             printer.displayLn("An error occurred: ${e.message}")
         }
