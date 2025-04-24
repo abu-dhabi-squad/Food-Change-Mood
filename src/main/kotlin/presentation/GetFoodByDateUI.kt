@@ -4,37 +4,37 @@ import logic.usecase.GetFoodByDateUseCase
 import logic.usecase.GetMealByIdUseCase
 import model.InvalidIdException
 import model.WrongInputException
-import presentation.ui_io.IntReader
-import presentation.ui_io.StringReader
-import util.DateParserInterface
-import util.GetFoodByDateValidationInterface
+import presentation.ui_io.InputReader
+import presentation.ui_io.Printer
+import util.DateParser
+import util.DateValidation
 import java.time.LocalDate
 
 class GetFoodByDateUI(
-    private val dateParserInterface: DateParserInterface,
+    private val dateParserInterface: DateParser,
     private val getFoodByDateUseCase: GetFoodByDateUseCase,
     private val getMealByIdUseCase: GetMealByIdUseCase,
-    private val getFoodByDateValidationInterface: GetFoodByDateValidationInterface,
-    private val intReader: IntReader,
-    private val stringReader: StringReader
+    private val DateValidationInterface: DateValidation,
+    private val reader: InputReader,
+    private val printer: Printer
 ) : ChangeFoodMoodLauncher {
 
     override fun launchUI() {
         try {
             getFoodByDateUseCase.getMealsByDate(getInputDate())
                 .let { mealsByDate ->
-                    mealsByDate.forEach { (id, name) -> println("id: $id - name: $name") }
+                    mealsByDate.forEach { (id, name) -> printer.displayLn("id: $id - name: $name") }
                     getDetailsOfMeals(mealsByDate)
                 }
         } catch (e: Exception) {
-            println(e.message)
+            e.message?.let { printer.displayLn(it) }
         }
     }
 
     private fun getInputDate(): LocalDate {
-        print("Enter the Date (yyyy-M-d) : ")
-        return stringReader.read()
-            ?.takeIf { date -> getFoodByDateValidationInterface.isValidDate(date) }
+        printer.display("Enter the Date (M/d/yyyy) : ")
+        return reader.readString()
+            ?.takeIf { date -> DateValidationInterface.isValidDate(date) }
             ?.let { date -> dateParserInterface.parseDateFromString(date) }
             ?: throw WrongInputException()
     }
@@ -42,23 +42,23 @@ class GetFoodByDateUI(
     private fun getDetailsOfMeals(mealsByDate: List<Pair<Int, String>>) {
         while (true) {
             print("Do you want to see details of one of the Meals (Y/N)? ")
-            val input = stringReader.read()?.trim()?.lowercase()
+            val input = reader.readString()?.trim()?.lowercase()
             when (input) {
                 "y" -> try {
                     getDetailsById(mealsByDate)
                 } catch (e: Exception) {
-                    println(e.message)
+                    e.message?.let { printer.displayLn(it) }
                 }
 
                 "n" -> return
-                else -> println("Please enter Y or N.")
+                else -> printer.displayLn("Please enter Y or N.")
             }
         }
     }
 
     private fun getDetailsById(mealsByDate: List<Pair<Int, String>>) {
-        print("enter id of the meal : ")
-        intReader.read()?.let { enteredID ->
+        printer.display("enter id of the meal : ")
+        reader.readInt()?.let { enteredID ->
             mealsByDate.takeIf { it.any { item -> item.first == enteredID } }
                 ?.let {
                     println(getMealByIdUseCase.getMealById(enteredID).getFullDetails())

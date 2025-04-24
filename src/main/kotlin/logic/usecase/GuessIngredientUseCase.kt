@@ -9,38 +9,37 @@ import logic.takeShuffled
 class GuessIngredientUseCase(
     private val foodRepository: FoodRepository
 ) {
-    fun guessIngredient(): List<IngredientQuestion> {
-        return getRandomMeals().map { meal ->
+    fun guessIngredient(incorrectAnswersCount: Int, askedQuestions: Set<Int>): IngredientQuestion {
+        return getRandomMeal(askedQuestions).let { meals ->
+            val meal = meals.random()
             IngredientQuestion(
+                mealId = meal.id,
                 mealName = meal.name.toString(),
                 correctAnswer = meal.ingredients.random(),
-                answers = getIngredients().filter(isNotInMeal(meal)).take(MAXIMUM_INCORRECT_ANSWERS)
+                answers = getIngredients(meals).filter(isNotInMeal(meal)).take(incorrectAnswersCount)
             )
         }
     }
 
-    private fun getRandomMeals(): List<Food> {
+    private fun getRandomMeal(askedQuestions: Set<Int>): List<Food> {
         return foodRepository
             .getFoods()
             .getOrThrow()
-            .filter(isValidMeal())
+            .filter { meal -> isValidMeal(meal) && !askedQuestions.contains(meal.id)}
             .takeIf { meals ->
                 meals.isNotEmpty()
             }
-            ?.takeShuffled(MAXIMUM_QUESTIONS)
+            ?.takeShuffled(MAXIMUM_SHUFFLED_MEALS)
             ?: throw NoMealsFoundException()
     }
 
-    private fun isValidMeal() : (Food) -> Boolean{
-        return { meal ->
-            meal.name.toString().isNotEmpty()
-                    && meal.ingredients.isNotEmpty()
-        }
+    private fun isValidMeal(meal: Food): Boolean {
+        return meal.name.toString().isNotEmpty() && meal.ingredients.isNotEmpty()
     }
 
-    private fun getIngredients(): Set<String> {
-        return getRandomMeals().map { meals ->
-            meals.ingredients
+    private fun getIngredients(meals: List<Food>): Set<String> {
+        return meals.map { meal ->
+            meal.ingredients
         }.flatten().toSet()
     }
 
@@ -49,7 +48,6 @@ class GuessIngredientUseCase(
     }
 
     companion object {
-        private const val MAXIMUM_QUESTIONS = 15
-        private const val MAXIMUM_INCORRECT_ANSWERS = 2
+        private const val MAXIMUM_SHUFFLED_MEALS = 15
     }
 }

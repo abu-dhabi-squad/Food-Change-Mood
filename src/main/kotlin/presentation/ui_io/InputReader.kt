@@ -1,5 +1,7 @@
 package presentation.ui_io
 
-interface InputReader<T> {
-    fun read(): T?
+interface InputReader {
+    fun readString(): String?
+    fun readFloat(): Float?
+    fun readInt(): Int?
 }

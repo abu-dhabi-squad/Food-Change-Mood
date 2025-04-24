@@ -1,12 +1,12 @@
 package presentation
 
 import logic.usecase.GetRandomPotatoesMealsUseCase
+import presentation.ui_io.InputReader
 import presentation.ui_io.Printer
-import presentation.ui_io.StringReader
 
 class RandomPotatoesMealsConsoleUi(
     private val getRandomPotatoesMealsUseCase: GetRandomPotatoesMealsUseCase,
-    private val stringReader: StringReader,
+    private val reader: InputReader,
     private val  printer: Printer
 
 ) : ChangeFoodMoodLauncher {
@@ -28,7 +28,7 @@ class RandomPotatoesMealsConsoleUi(
     private fun promptForMoreMeals() {
         while (true) {
             printer.displayLn("\nWould you like to see more potato meals? (Y/N)")
-            val input = stringReader.read()
+            val input = reader.readString()
             when {
                 input.equals("y", ignoreCase = true) -> {
                     launchUI()

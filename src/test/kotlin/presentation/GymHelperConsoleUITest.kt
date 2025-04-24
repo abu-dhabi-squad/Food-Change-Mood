@@ -16,14 +16,14 @@ import presentation.ui_io.Printer
 
 class GymHelperConsoleUITest {
     private lateinit var gymHelperUseCase: GymHelperUseCase
-    private val floatReader: InputReader<Float> = mockk(relaxed = true)
+    private val reader: InputReader = mockk(relaxed = true)
     private val consolePrinter: Printer = mockk(relaxed = true)
     private lateinit var gymHelperConsoleUI: GymHelperConsoleUI
 
     @BeforeEach
     fun setUp() {
         gymHelperUseCase = mockk(relaxed = true)
-        gymHelperConsoleUI = GymHelperConsoleUI(gymHelperUseCase, floatReader, consolePrinter)
+        gymHelperConsoleUI = GymHelperConsoleUI(gymHelperUseCase, reader, consolePrinter)
     }
 
     @Test
@@ -31,7 +31,7 @@ class GymHelperConsoleUITest {
         // Input
         val calories = 149F
         val proteins = 17F
-        every { floatReader.read() } returns calories andThen proteins
+        every { reader.readFloat() } returns calories andThen proteins
         every { gymHelperUseCase.getListOfMealsForGym(calories, proteins) } returns listOf(
             createMealForGymHelper(name = "Meal 4", calories = 148.0F, proteins = 17.0F),
             createMealForGymHelper(name = "Meal 5", calories = 150.0F, proteins = 18.0F),
@@ -54,7 +54,7 @@ class GymHelperConsoleUITest {
         // Input
         val calories = 1149F
         val proteins = 17F
-        every { floatReader.read() } returns calories andThen proteins
+        every { reader.readFloat() } returns calories andThen proteins
         every { gymHelperUseCase.getListOfMealsForGym(calories, proteins) } throws NoMealsFoundException()
 
         // When
@@ -75,7 +75,7 @@ class GymHelperConsoleUITest {
         proteins: String?,
     ) {
         // Input
-        every { floatReader.read() } returns calories?.toFloatOrNull() andThen proteins?.toFloatOrNull()
+        every { reader.readFloat() } returns calories?.toFloatOrNull() andThen proteins?.toFloatOrNull()
 
         // When
         gymHelperConsoleUI.launchUI()
@@ -95,7 +95,7 @@ class GymHelperConsoleUITest {
         proteins: String?,
     ) {
         // Input
-        every { floatReader.read() } returns calories?.toFloatOrNull() andThen proteins?.toFloatOrNull()
+        every { reader.readFloat() } returns calories?.toFloatOrNull() andThen proteins?.toFloatOrNull()
 
         // When
         gymHelperConsoleUI.launchUI()
