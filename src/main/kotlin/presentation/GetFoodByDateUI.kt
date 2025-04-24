@@ -15,7 +15,6 @@ class GetFoodByDateUI(
     private val getFoodByDateUseCase: GetFoodByDateUseCase,
     private val getMealByIdUseCase: GetMealByIdUseCase,
     private val DateValidationInterface: DateValidationInterface,
-    private val intReader: IntReader,
     private val reader: InputReader,
     private val printer: Printer
 ) : ChangeFoodMoodLauncher {

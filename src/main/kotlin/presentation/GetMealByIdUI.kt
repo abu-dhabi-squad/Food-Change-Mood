@@ -7,7 +7,7 @@ import presentation.ui_io.Printer
 
 class GetMealByIdUI(
     private val getMealByIdUseCase: GetMealByIdUseCase,
-    private val reader: InputReader
+    private val reader: InputReader,
     private val printer: Printer
 ) : ChangeFoodMoodLauncher {
     override fun launchUI() {

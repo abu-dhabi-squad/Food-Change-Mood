@@ -6,7 +6,7 @@ import presentation.*
 val uiModule = module {
     single { GetUserTaste(get(), get()) }
     single { GetMealByIdUI(get(),get(),get()) }
-    single { GuessFoodPreparationTimeGameUI(get(), get(), get()) }
+    single { GuessFoodPreparationTimeGameUI(get(), get(), get(), get()) }
     single { ItalianMealsForLargeGroupUI(get()) }
     single { GuessIngredientConsoleUI(get(), get()) }
     single { RandomPotatoesMealsConsoleUi(get(), get(),get()) }
@@ -19,7 +19,7 @@ val uiModule = module {
     single { SweetsWithoutEggsConsoleUI(get()) }
     single { SeaFoodMealsSortedByProteinUI(get()) }
     single { GetHighCalorieMealForThinPeopleUI(get(),get(),get()) }
-    single { GetFoodByDateUI(get(),get(), get(), get(),get(),get(),get()) }
+    single { GetFoodByDateUI(get(),get(), get(), get(),get(),get()) }
     single { GetEasyFoodSuggestionUI(get()) }
     single { FoodChangeMoodConsoleUI(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
 }
