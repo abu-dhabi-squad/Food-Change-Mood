@@ -125,7 +125,7 @@ class GetHealthyMealsUseCaseTest {
         every { foodRepository.getFoods() } returns Result.success(mockFoods)
 
 
-        // assert
+        // then
         val exception = org.junit.jupiter.api.assertThrows<EmptyHealthFoodListListException> {
             useCase.fetchHealthyFastFoods()
         }
