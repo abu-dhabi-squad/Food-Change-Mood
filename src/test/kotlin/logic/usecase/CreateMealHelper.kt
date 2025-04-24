@@ -80,8 +80,8 @@ fun createPotatoMeal(
 
 
 fun createIraqiMealHelper(
-    name: String? = "Default Name",
-    description: String? = "Default Description",
+    name: String? = " Name",
+    description: String? = " Description",
     tags: List<String> = listOf("tag")
 ): Food {
     return Food(
@@ -90,27 +90,11 @@ fun createIraqiMealHelper(
         minutes = 0,
         submittedDate = null,
         tags = tags,
-        nutrition = Nutrition(0.0f, 0.0f, 0.0f, 0.0f, 0.0f,0.0f,0.0f), // default empty nutrition
+        nutrition = Nutrition(0.0f, 0.0f, 0.0f, 0.0f, 0.0f,0.0f,0.0f),
         steps = emptyList(),
         description = description,
         ingredients =   listOf(),
     )
 }
 
-/*fun createIraqiMealHelper(
-    name: String? = null,
-    description: String? = null,
-    tags: List<String>? = null,
-): Food {
-    return Food(
-        id = 0,
-        name = name,
-        minutes = 0,
-        submittedDate = null,
-        tags = tags,
-        nutrition = Nutrition(0.0f, 0.0f, 0.0f, 0.0f, 0.0f,0.0f,0.0f), // default empty nutrition
-        steps = emptyList(),
-        description = description,
-        ingredients =   listOf(),
-    )
-}*/
+
