@@ -14,16 +14,16 @@ import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 
 class GetEasyFoodSuggestionUITest {
-    private lateinit var useCase: GetEasyFoodSuggestionGameUseCase
+    private lateinit var getEasyFoodSuggestionGameUseCase: GetEasyFoodSuggestionGameUseCase
     private lateinit var ui: GetEasyFoodSuggestionUI
     private lateinit var printer: Printer
     private val outContent = ByteArrayOutputStream()
 
     @BeforeEach
     fun setUp() {
-        useCase = mockk()
+        getEasyFoodSuggestionGameUseCase = mockk()
         printer = ConsolePrinter()
-        ui = GetEasyFoodSuggestionUI(useCase, printer)
+        ui = GetEasyFoodSuggestionUI(getEasyFoodSuggestionGameUseCase, printer)
         System.setOut(PrintStream(outContent))
     }
 
@@ -41,7 +41,7 @@ class GetEasyFoodSuggestionUITest {
         )
 
         // when
-        every { useCase.suggestRandomEasyMeals() } returns meals
+        every { getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals() } returns meals
         ui.launchUI()
         val output = outContent.toString()
 
@@ -63,7 +63,7 @@ class GetEasyFoodSuggestionUITest {
     @Test
     fun `should show message when no meals are returned`() {
         // when
-        every { useCase.suggestRandomEasyMeals() } returns emptyList()
+        every { getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals() } returns emptyList()
         ui.launchUI()
         val output = outContent.toString()
 
@@ -74,12 +74,11 @@ class GetEasyFoodSuggestionUITest {
     @Test
     fun `should show error message when NoEasyMealsFoundException is thrown`() {
         // when
-        every { useCase.suggestRandomEasyMeals() } throws NoEasyMealsFoundException()
+        every { getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals() } throws NoEasyMealsFoundException()
         ui.launchUI()
         val output = outContent.toString()
 
         // then
         assertTrue(output.contains("No easy meals found matching the criteria."))
     }
-
 }
