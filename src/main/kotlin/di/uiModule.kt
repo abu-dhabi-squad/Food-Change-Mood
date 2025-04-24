@@ -7,6 +7,10 @@ val uiModule = module {
     single { GetMealByIdUI(get(),get()) }
     single { GuessFoodPreparationTimeGameUI(get(), get(), get(),get()) }
     single { ItalianMealsForLargeGroupUI(get(),get()) }
+    single { GetUserTaste(get(), get()) }
+    single { GetMealByIdUI(get(),get(),get()) }
+    single { GuessFoodPreparationTimeGameUI(get(), get(), get(), get()) }
+    single { ItalianMealsForLargeGroupUI(get()) }
     single { GuessIngredientConsoleUI(get(), get(), get()) }
     single { RandomPotatoesMealsConsoleUi(get(), get(),get()) }
     single { GetIraqiMealsUI(get()) }
@@ -17,8 +21,8 @@ val uiModule = module {
     single { GymHelperConsoleUI(get(), get(), get()) }
     single { SweetsWithoutEggsConsoleUI(get()) }
     single { SeaFoodMealsSortedByProteinUI(get()) }
-    single { GetHighCalorieMealForThinPeopleUI(get()) }
-    single { GetFoodByDateUI(get(),get(), get(), get(),get()) }
+    single { GetHighCalorieMealForThinPeopleUI(get(),get(),get()) }
+    single { GetFoodByDateUI(get(),get(), get(), get(),get(),get()) }
     single { GetEasyFoodSuggestionUI(get()) }
     single { FoodChangeMoodConsoleUI(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
 }
