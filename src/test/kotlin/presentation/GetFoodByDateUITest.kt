@@ -7,14 +7,12 @@ import io.mockk.verify
 import logic.usecase.GetFoodByDateUseCase
 import logic.usecase.GetMealByIdUseCase
 import model.*
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import presentation.ui_io.InputReader
 import presentation.ui_io.Printer
 import util.DateParser
 import util.DateValidation
-import java.time.LocalDate
 
 class GetFoodByDateUITest {
     private val dateParserInterface: DateParser = mockk(relaxed = true)
