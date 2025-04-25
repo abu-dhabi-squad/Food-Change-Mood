@@ -26,15 +26,13 @@ class GuessIngredientUseCase(
             .getFoods()
             .getOrThrow()
             .filter { meal -> isValidMeal(meal) && !askedQuestions.contains(meal.id)}
-            .takeIf { meals ->
-                meals.isNotEmpty()
-            }
+            .takeIf { meals -> meals.isNotEmpty() }
             ?.takeShuffled(MAXIMUM_SHUFFLED_MEALS)
             ?: throw NoMealsFoundException()
     }
 
     private fun isValidMeal(meal: Food): Boolean {
-        return meal.name.toString().isNotEmpty() && meal.ingredients.isNotEmpty()
+        return meal.name?.isNotBlank() == true && meal.ingredients.isNotEmpty()
     }
 
     private fun getIngredients(meals: List<Food>): Set<String> {
