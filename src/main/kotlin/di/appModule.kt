@@ -1,6 +1,8 @@
 package di
 
 import data.CsvFoodRepositoryImp
+import data.CsvReaderImpl
+import data.FileReader
 import data.FoodCsvParser
 import data.FoodMapper
 import data.FoodParser
@@ -26,4 +28,5 @@ val appModule = module {
     single<DateValidation> { DateValidationImplementaion(get()) }
     single<Printer> { ConsolePrinter() }
     single { FoodMapper(get()) }
+    single<FileReader>{ CsvReaderImpl(get()) }
 }

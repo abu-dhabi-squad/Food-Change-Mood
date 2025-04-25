@@ -11,13 +11,13 @@ val uiModule = module {
     single { GuessIngredientConsoleUI(get(), get(), get()) }
     single { RandomPotatoesMealsConsoleUi(get(), get(),get()) }
     single { GetIraqiMealsUI(get(),get()) }
-    single { RandomKetoMealUI(get()) }
+    single { RandomKetoMealUI(get(),get(),get()) }
     single { GetHealthyMealsUI(get()) }
     single { GetRandomMealsByCountryUI(get(), get() , get()) }
-    single { GetMealByNameUI(get(), get()) }
+    single { GetMealByNameUI(get(), get(),get()) }
     single { GymHelperConsoleUI(get(), get(), get()) }
     single { SweetsWithoutEggsConsoleUI(get()) }
-    single { SeaFoodMealsSortedByProteinUI(get()) }
+    single { SeaFoodMealsSortedByProteinUI(get(), get()) }
     single { GetHighCalorieMealForThinPeopleUI(get(),get(),get()) }
     single { GetFoodByDateUI(get(),get(), get(), get(),get(),get()) }
     single { GetEasyFoodSuggestionUI(get(),get()) }

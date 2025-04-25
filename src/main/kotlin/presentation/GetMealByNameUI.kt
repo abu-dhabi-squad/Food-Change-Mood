@@ -1,33 +1,36 @@
 package presentation
 
-import logic.usecase.GetMealBySearchForNameUseCase
+import logic.usecase.GetMealBySearchNameUseCase
+import model.NoMealsFoundException
 import presentation.ui_io.InputReader
+import presentation.ui_io.Printer
 
 class GetMealByNameUI(
-    private val getMealBySearchForNameUseCase: GetMealBySearchForNameUseCase,
-    private val reader: InputReader
+    private val getMealBySearchNameUseCase: GetMealBySearchNameUseCase,
+    private val reader: InputReader,
+    private val printer: Printer
 ) : ChangeFoodMoodLauncher {
 
     override fun launchUI() {
-        print("Enter the meal name to search: ")
+        printer.display("Enter the meal name to search: ")
         reader.readString()
             ?.trim()
             ?.takeIf { it.isNotEmpty() }
             ?.let { input ->
                 try {
                     printResultFromSearch(input)
-                } catch (exception: Exception) {
-                    println(exception)
+                } catch (exception: NoMealsFoundException) {
+                    printer.displayLn(exception.message)
                 }
             }
-            ?: println("Invalid input. Please enter a non-empty keyword.")
+            ?: printer.displayLn("Invalid input. Please enter a non-empty keyword.")
     }
 
     private fun printResultFromSearch(input: String) {
-        getMealBySearchForNameUseCase.findMealsByName(input)
+        getMealBySearchNameUseCase.findMealsByName(input)
             .also { results ->
-                println("Search results for '$input':")
-                results.forEach { println(it.name ?: "none") }
+                printer.displayLn("Search results for '$input':")
+                results.forEach { printer.displayLn(it.name ?: "none") }
             }
     }
 
