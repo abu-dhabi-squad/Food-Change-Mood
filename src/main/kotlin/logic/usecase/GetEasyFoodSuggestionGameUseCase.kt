@@ -21,7 +21,6 @@ class GetEasyFoodSuggestionGameUseCase(
         return isNameAndDescriptionValid(food) &&
                 isTimeValid(food) &&
                 isIngredientsValid(food) &&
-                isIngredientsValid(food)&&
                 isStepsValid(food)
     }
 
