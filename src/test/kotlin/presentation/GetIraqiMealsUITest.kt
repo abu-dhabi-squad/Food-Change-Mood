@@ -1,7 +1,6 @@
 import io.mockk.*
 import logic.repository.FoodRepository
 import logic.usecase.GetIraqiMealsUseCase
-import logic.usecase.createMeal
 import model.NoIraqiMealsFoundException
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

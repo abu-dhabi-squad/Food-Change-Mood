@@ -1,5 +1,6 @@
 package logic.usecase
 
+import createMeal
 import io.mockk.every
 import io.mockk.mockk
 import junit.framework.TestCase
