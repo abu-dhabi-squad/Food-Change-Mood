@@ -1,6 +1,7 @@
 package logic.usecase
 
 import com.google.common.truth.Truth.assertThat
+import createMeal
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -22,7 +23,7 @@ class GetRandomFoodUseCaseTest {
     @Test
     fun `should return random meal when food repository return success with non empty food list`(){
         // given
-       var foods =  listOf(createFood(id = 1),createFood(id = 2),createFood(id = 3))
+       var foods =  listOf(createMeal(id = 1),createMeal(id = 2),createMeal(id = 3))
         every { foodRepository.getFoods() } returns  Result.success(foods)
        // when
         val food = getRandomFoodUseCase.invoke()

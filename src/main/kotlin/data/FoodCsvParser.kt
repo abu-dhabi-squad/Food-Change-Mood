@@ -4,22 +4,17 @@ import model.Food
 import java.io.File
 
 class FoodCsvParser(
-    private val csvFile: File,
+    private val fileReader: FileReader,
     private val foodMapper: FoodMapper
 ) : FoodParser {
 
     override fun parse(): List<Food> {
-        return if (csvFile.exists()) {
-            getFoodsList()
-        } else emptyList()
-    }
-
-    private fun getFoodsList(): List<Food> {
         return parseCsvLines().drop(1)
             .asSequence()
             .map { foodMapper.parseFoodRow(it) }
             .toList()
     }
+
 
     private fun parseCsvLine(line: String): List<String> {
         val result = mutableListOf<String>()
@@ -59,7 +54,7 @@ class FoodCsvParser(
         val rows = mutableListOf<List<String>>()
         var buffer = StringBuilder()
         var insideQuotes = false
-        csvFile.forEachLine { rawLine ->
+        fileReader.readLines().forEach { rawLine ->
             buffer.appendLine(rawLine)
             val quoteCount = rawLine.count { it == '"' }
             insideQuotes =
@@ -71,6 +66,7 @@ class FoodCsvParser(
                 buffer.clear()
             }
         }
+
         return rows
     }
 
