@@ -1,19 +1,15 @@
 package presentation
 
-import com.google.common.base.Verify.verify
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import junit.framework.TestCase.assertTrue
 import logic.usecase.GetEasyFoodSuggestionGameUseCase
 import logic.usecase.createMeal
 import model.NoEasyMealsFoundException
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import presentation.ui_io.ConsolePrinter
 import presentation.ui_io.Printer
-import java.io.ByteArrayOutputStream
-import java.io.PrintStream
+
 
 class GetEasyFoodSuggestionUITest {
     private lateinit var getEasyFoodSuggestionGameUseCase: GetEasyFoodSuggestionGameUseCase

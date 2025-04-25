@@ -57,8 +57,6 @@ class EasyFoodSuggestionGameUseCaseTest {
         //then
         assertThat(meals).containsExactly(chickenFood,saladFood)
 
-
-
     }
 
     @Test
