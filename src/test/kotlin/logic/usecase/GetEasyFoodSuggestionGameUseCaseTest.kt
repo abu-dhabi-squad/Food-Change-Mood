@@ -23,7 +23,7 @@ class GetEasyFoodSuggestionGameUseCaseTest {
     @Test
     fun `should return random easy meals when food repository return success with non empty food list`(){
         //given
-        val appleFood =createMeal(
+        val appleFood = createFood(
             name = "Apple Pie",
             minutes = 45,
             steps = listOf("Slice apples", "Bake the pie"),
@@ -31,7 +31,7 @@ class GetEasyFoodSuggestionGameUseCaseTest {
             ingredients = listOf("Apples", "Flour", "Sugar", "Butter")
         )
 
-        val chickenFood =   createMeal(
+        val chickenFood = createFood(
             name = "Grilled Chicken",
             minutes = 30,
             steps = listOf("Season chicken", "Grill until done"),
@@ -39,7 +39,7 @@ class GetEasyFoodSuggestionGameUseCaseTest {
             ingredients = listOf("Chicken breast", "Spices")
         )
 
-        val saladFood = createMeal(
+        val saladFood = createFood(
             name = "Greek Salad",
             minutes = 15,
             steps = listOf("Chop veggies", "Mix ingredients"),
@@ -62,7 +62,7 @@ class GetEasyFoodSuggestionGameUseCaseTest {
     @Test
     fun `should throw NoEasyMealsFoundException when no easy meals are available`() {
         // given
-        val hardMeal = createMeal(
+        val hardMeal = createFood(
             name = "Complex Dish",
             minutes = 60,
             steps = List(10) { "Step $it" },
@@ -101,21 +101,21 @@ class GetEasyFoodSuggestionGameUseCaseTest {
     @Test
     fun `should ignore meals with null description or null names `() {
         // given
-        val mealWithNullName = createMeal(
+        val mealWithNullName = createFood(
             name = null,
             minutes = 15,
             steps = List(3) { "Step $it" },
             description = "easy meal",
             ingredients = List(2) { "Ingredient $it" }
         )
-        val mealWithNullDescription = createMeal(
+        val mealWithNullDescription = createFood(
             name = null,
             minutes = 15,
             steps = List(3) { "Step $it" },
             description = null,
             ingredients = List(2) { "Ingredient $it" }
         )
-        val validEasyMeal =   createMeal(
+        val validEasyMeal =   createFood(
             name = "Grilled Chicken",
             minutes = 30,
             steps = listOf("Season chicken", "Grill until done"),
@@ -138,7 +138,7 @@ class GetEasyFoodSuggestionGameUseCaseTest {
     @Test
     fun `should ignore meals with null or empty steps or ingredients`() {
         // given
-        val mealWithEmptySteps = createMeal(
+        val mealWithEmptySteps = createFood(
             name = "Meal With Empty Steps",
             minutes = 20,
             steps = emptyList(),
@@ -146,7 +146,7 @@ class GetEasyFoodSuggestionGameUseCaseTest {
             ingredients = listOf("Ingredient 1", "Ingredient 2")
         )
 
-        val mealWithNullIngredients = createMeal(
+        val mealWithNullIngredients = createFood(
             name = "Meal With Null Ingredients",
             minutes = 20,
             steps = listOf("Step 1", "Step 2"),
@@ -154,7 +154,7 @@ class GetEasyFoodSuggestionGameUseCaseTest {
             ingredients = emptyList()
         )
 
-        val validMeal = createMeal(
+        val validMeal = createFood(
             name = "Greek Salad",
             minutes = 15,
             steps = listOf("Chop veggies", "Mix with dressing"),
@@ -175,7 +175,7 @@ class GetEasyFoodSuggestionGameUseCaseTest {
 
     @Test
     fun `should include meals with exactly max limits`() {
-        val validMeal = createMeal(
+        val validMeal = createFood(
             name = "Exact Limit Meal",
             minutes = 30,
             steps = List(6) { "Step $it" },
@@ -192,7 +192,7 @@ class GetEasyFoodSuggestionGameUseCaseTest {
 
     @Test
     fun `should ignore meals just over the easy meal limits`() {
-        val mealTooLong = createMeal(
+        val mealTooLong = createFood(
             name = "Too Long",
             minutes = 31,
             steps = List(3) { "Step $it" },
@@ -200,7 +200,7 @@ class GetEasyFoodSuggestionGameUseCaseTest {
             ingredients = List(3) { "Ingredient $it" }
         )
 
-        val mealTooManyIngredients = createMeal(
+        val mealTooManyIngredients = createFood(
             name = "Too Many Ingredients",
             minutes = 20,
             steps = List(3) { "Step $it" },
@@ -208,7 +208,7 @@ class GetEasyFoodSuggestionGameUseCaseTest {
             ingredients = List(6) { "Ingredient $it" }
         )
 
-        val mealTooManySteps = createMeal(
+        val mealTooManySteps = createFood(
             name = "Too Many Steps",
             minutes = 20,
             steps = List(7) { "Step $it" },

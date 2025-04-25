@@ -4,7 +4,7 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import logic.usecase.GetEasyFoodSuggestionGameUseCase
-import logic.usecase.createMeal
+import logic.usecase.createFood
 import model.NoEasyMealsFoundException
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -26,7 +26,7 @@ class GetEasyFoodSuggestionUITest {
     fun `should display start message and meals when use case returns meals`() {
         // given
         val meals = listOf(
-            createMeal(
+            createFood(
                 name = "Apple Pie",
                 minutes = 25,
                 description = "A classic dessert.",
