@@ -41,8 +41,6 @@ class GetEasyFoodSuggestionUI(
         const val EMPTY_INPUT_MESSAGE = "No easy meals found. Please try again."
         const val START_MESSAGE = "\n Here are 10 easy meals for you: "
         const val MEAL_SEPARATOR = "--------------------------------------------------\n"
-        const val UNNAMED_MEAL = "Unnamed Meal"
-        const val NO_DESCRIPTION = "No description available"
         const val MINUTES = "minutes"
         const val STEPS = "steps"
         const val PREP_TIME_LABEL = "Prepared Time"
