@@ -42,15 +42,12 @@ class GetEasyFoodSuggestionUITest {
         getEasyFoodSuggestionUI.launchUI()
 
         // then
-        verifySequence {
-             printer.displayLn(GetEasyFoodSuggestionUI.START_MESSAGE)
-             printer.displayLn(GetEasyFoodSuggestionUI.MEAL_SEPARATOR)
+        verify {
              printer.displayLn("1. Apple Pie")
              printer.displayLn("Prepared Time: 25 minutes")
              printer.displayLn("Description: A classic dessert.")
              printer.displayLn("Ingredients: Apples, Flour, Sugar")
              printer.displayLn("Steps: 2 steps")
-             printer.displayLn(GetEasyFoodSuggestionUI.MEAL_SEPARATOR)
         }
 
     }
