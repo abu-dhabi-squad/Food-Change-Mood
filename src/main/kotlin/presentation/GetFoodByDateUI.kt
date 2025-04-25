@@ -18,6 +18,11 @@ class GetFoodByDateUI(
     private val reader: InputReader,
     private val printer: Printer
 ) : ChangeFoodMoodLauncher {
+    override val id: Int
+        get() = 8
+
+    override val name: String
+        get() = "Search Foods by Add Date"
 
     override fun launchUI() {
         try {

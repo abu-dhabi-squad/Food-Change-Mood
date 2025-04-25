@@ -7,6 +7,8 @@ import data.FoodCsvParser
 import data.FoodMapper
 import data.FoodParser
 import logic.repository.FoodRepository
+import logic.usecase.search.KMPMatcher
+import logic.usecase.search.StringSearchAlgorithm
 import org.koin.dsl.module
 import presentation.ui_io.ConsolePrinter
 import presentation.ui_io.Printer
@@ -29,4 +31,5 @@ val appModule = module {
     single<Printer> { ConsolePrinter() }
     single { FoodMapper(get()) }
     single<FileReader>{ CsvReaderImpl(get()) }
+    single<StringSearchAlgorithm>{ KMPMatcher() }
 }

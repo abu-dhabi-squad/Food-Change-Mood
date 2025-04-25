@@ -7,6 +7,11 @@ class ItalianMealsForLargeGroupUI(
     private val getItalianMealsForLargeGroup: GetItalianMealsForLargeGroupUseCase,
     private val printer: Printer
 ) : ChangeFoodMoodLauncher {
+    override val id: Int
+        get() = 15
+
+    override val name: String
+        get() = "Italian Meals for Large Groups"
 
     override fun launchUI() {
         try {
