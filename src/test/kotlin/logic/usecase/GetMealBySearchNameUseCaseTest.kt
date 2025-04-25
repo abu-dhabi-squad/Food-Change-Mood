@@ -3,6 +3,7 @@ package logic.usecase
 import io.mockk.every
 import io.mockk.mockk
 import logic.repository.FoodRepository
+import logic.usecase.search.SearchAlgorithm
 import model.NoMealsFoundException
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
@@ -13,11 +14,13 @@ class GetMealBySearchNameUseCaseTest {
 
     private lateinit var repository: FoodRepository
     private lateinit var getMealBySearchNameUseCase: GetMealBySearchNameUseCase
+    private lateinit var searchAlgorithm: SearchAlgorithm
 
     @BeforeEach
     fun setUp() {
         repository = mockk()
-        getMealBySearchNameUseCase = GetMealBySearchNameUseCase(repository)
+        searchAlgorithm = mockk()
+        getMealBySearchNameUseCase = GetMealBySearchNameUseCase(repository,searchAlgorithm)
     }
 
     @Test
@@ -29,6 +32,11 @@ class GetMealBySearchNameUseCaseTest {
             createFood(name = "Grilled Cheese")
         )
         every { repository.getFoods() } returns Result.success(foods)
+        every { searchAlgorithm.isContainsPattern(any(), any()) } answers {
+            val pattern = firstArg<String>().lowercase()
+            val text = secondArg<String>().lowercase()
+            text.contains(pattern)
+        }
 
         //when
         val result = getMealBySearchNameUseCase.findMealsByName("Pie")
@@ -48,6 +56,12 @@ class GetMealBySearchNameUseCaseTest {
             createFood(name = "Grilled Chicken")
         )
         every { repository.getFoods() } returns Result.success(foods)
+        every { searchAlgorithm.isContainsPattern(any(), any()) } answers {
+            val pattern = firstArg<String>().lowercase()
+            val text = secondArg<String>().lowercase()
+            text.contains(pattern)
+        }
+
 
         //when
         val result = getMealBySearchNameUseCase.findMealsByName("Apple")
@@ -67,6 +81,11 @@ class GetMealBySearchNameUseCaseTest {
             createFood(name = "apple crumble")
         )
         every { repository.getFoods() } returns Result.success(foods)
+        every { searchAlgorithm.isContainsPattern(any(), any()) } answers {
+            val pattern = firstArg<String>().lowercase()
+            val text = secondArg<String>().lowercase()
+            text.contains(pattern)
+        }
 
         //when
         val result = getMealBySearchNameUseCase.findMealsByName("aPpLe")
@@ -86,6 +105,12 @@ class GetMealBySearchNameUseCaseTest {
             createFood(name = "Grilled Chicken")
         )
         every { repository.getFoods() } returns Result.success(foods)
+        every { searchAlgorithm.isContainsPattern(any(), any()) } answers {
+            val pattern = firstArg<String>().lowercase()
+            val text = secondArg<String>().lowercase()
+            text.contains(pattern)
+        }
+
 
         //when and then
         assertFailsWith<NoMealsFoundException> {
@@ -102,6 +127,11 @@ class GetMealBySearchNameUseCaseTest {
             createFood(name = "Apple Pie")
         )
         every { repository.getFoods() } returns Result.success(foods)
+        every { searchAlgorithm.isContainsPattern(any(), any()) } answers {
+            val pattern = firstArg<String>().lowercase()
+            val text = secondArg<String>().lowercase()
+            text.contains(pattern)
+        }
 
         //when and then
         val result = getMealBySearchNameUseCase.findMealsByName("Pie")
@@ -120,6 +150,11 @@ class GetMealBySearchNameUseCaseTest {
             createFood(name = "Pasta")
         )
         every { repository.getFoods() } returns Result.success(foods)
+        every { searchAlgorithm.isContainsPattern(any(), any()) } answers {
+            val pattern = firstArg<String>().lowercase()
+            val text = secondArg<String>().lowercase()
+            text.contains(pattern)
+        }
 
         //when
         val result = getMealBySearchNameUseCase.findMealsByName("")

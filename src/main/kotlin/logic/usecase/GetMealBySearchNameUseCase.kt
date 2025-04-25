@@ -3,10 +3,12 @@ package logic.usecase
 import logic.repository.FoodRepository
 import model.Food
 import model.NoMealsFoundException
-import util.KMPMatcher
+import logic.usecase.search.SearchAlgorithm
 
 class GetMealBySearchNameUseCase(
-    private val foodRepository: FoodRepository
+    private val foodRepository: FoodRepository,
+    private val searchAlgorithm: SearchAlgorithm
+
 ) {
 
     fun findMealsByName(input: String): List<Food> {
@@ -19,7 +21,7 @@ class GetMealBySearchNameUseCase(
 
     private fun isMatchingMealByName(food: Food, input: String): Boolean {
         val mealName = food.name?.lowercase() ?: return false
-        return KMPMatcher.isContainsPattern(mealName, input.lowercase())
+        return searchAlgorithm.isContainsPattern(input, mealName.lowercase())
     }
 
 }

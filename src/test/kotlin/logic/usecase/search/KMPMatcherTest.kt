@@ -1,10 +1,19 @@
-package util
+package logic.usecase.search
+
 
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import kotlin.test.assertContentEquals
 
 class KMPMatcherTest {
+
+    private lateinit var kmpMatcher: KMPMatcher
+
+    @BeforeEach
+    fun setUp() {
+        kmpMatcher = KMPMatcher()
+    }
 
     @Test
     fun `buildPrefixTable should return correct prefix table for meal name`() {
@@ -14,7 +23,7 @@ class KMPMatcherTest {
         val expected = intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0)
 
         //when
-        val result = KMPMatcher.buildPrefixTable(pattern)
+        val result = kmpMatcher.buildPrefixTable(pattern)
 
         //then
         assertContentEquals(expected, result)
@@ -27,7 +36,7 @@ class KMPMatcherTest {
         val expected = intArrayOf(0, 0, 0, 0, 0, 1, 2, 3, 4, 5)
 
         // when
-        val result = KMPMatcher.buildPrefixTable(pattern)
+        val result = kmpMatcher.buildPrefixTable(pattern)
 
         // then
         assertContentEquals(expected, result)
@@ -40,7 +49,7 @@ class KMPMatcherTest {
         val expected = intArrayOf(0, 0, 0, 1, 2, 3, 0)
 
         // when
-        val result = KMPMatcher.buildPrefixTable(pattern)
+        val result = kmpMatcher.buildPrefixTable(pattern)
 
         // then
         assertContentEquals(expected, result)
@@ -53,7 +62,7 @@ class KMPMatcherTest {
         val expected = intArrayOf(0, 0, 0, 0, 0, 1, 2, 3, 0)
 
         // when
-        val result = KMPMatcher.buildPrefixTable(pattern)
+        val result = kmpMatcher.buildPrefixTable(pattern)
 
         // then
         assertContentEquals(expected, result)
@@ -66,7 +75,7 @@ class KMPMatcherTest {
         val expected = intArrayOf()
 
         // when
-        val result = KMPMatcher.buildPrefixTable(pattern)
+        val result = kmpMatcher.buildPrefixTable(pattern)
 
         // then
         assertContentEquals(expected, result)
@@ -81,7 +90,7 @@ class KMPMatcherTest {
         val pattern = "Chicken"
 
         //when + then
-        assertTrue(KMPMatcher.isContainsPattern(text, pattern))
+        assertTrue(kmpMatcher.isContainsPattern(pattern, text))
     }
 
     @Test
@@ -91,7 +100,7 @@ class KMPMatcherTest {
         val pattern = "Pizza"
 
         //when + then
-        assertFalse(KMPMatcher.isContainsPattern(text, pattern))
+        assertFalse(kmpMatcher.isContainsPattern(text, pattern))
     }
 
     @Test
@@ -101,7 +110,7 @@ class KMPMatcherTest {
         val pattern = ""
 
         //then and when
-        assertTrue(KMPMatcher.isContainsPattern(text, pattern))
+        assertTrue(kmpMatcher.isContainsPattern(pattern, text))
     }
 
     @Test
@@ -111,7 +120,7 @@ class KMPMatcherTest {
         val pattern = "Pizza Pizza"
 
         //then and when
-        assertTrue(KMPMatcher.isContainsPattern(text, pattern))
+        assertTrue(kmpMatcher.isContainsPattern(pattern, text))
     }
 
     @Test
@@ -121,7 +130,6 @@ class KMPMatcherTest {
         val pattern = "Burger"
 
         //when and then
-        assertFalse(KMPMatcher.isContainsPattern(text, pattern))
+        assertFalse(kmpMatcher.isContainsPattern(pattern, text))
     }
-
 }

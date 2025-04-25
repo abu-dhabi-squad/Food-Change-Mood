@@ -1,9 +1,10 @@
-package util
+package logic.usecase.search
 
-object KMPMatcher {
+class KMPMatcher : SearchAlgorithm {
 
-     fun isContainsPattern(text: String, pattern: String): Boolean {
+    override fun isContainsPattern(pattern: String, text: String): Boolean {
         if (pattern.isEmpty()) return true
+        if (text.isEmpty()) return false
 
         val prefixTable = buildPrefixTable(pattern)
         var textIndex = 0
