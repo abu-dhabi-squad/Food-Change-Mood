@@ -31,28 +31,32 @@ class GetFoodByDateUI(
                 }
         } catch (e: Exception) {
             e.message?.let { printer.displayLn(it) }
+                ?: printer.displayLn("error")
         }
     }
 
     private fun getInputDate(): LocalDate {
         printer.display("Enter the Date (M/d/yyyy) : ")
         return reader.readString()
-            ?.takeIf { date -> DateValidationInterface.isValidDate(date) }
-            ?.let { date -> dateParserInterface.parseDateFromString(date) }
-            ?: throw WrongInputException()
+            ?.let {
+                it.takeIf { date -> DateValidationInterface.isValidDate(date) }
+                    ?.let { date -> dateParserInterface.parseDateFromString(date) }
+                    ?: throw WrongInputException()
+            }
+            ?:throw WrongInputException()
     }
 
     private fun getDetailsOfMeals(mealsByDate: List<Pair<Int, String>>) {
         while (true) {
-            print("Do you want to see details of one of the Meals (Y/N)? ")
+             printer.display("Do you want to see details of one of the Meals (Y/N)? ")
             val input = reader.readString()?.trim()?.lowercase()
             when (input) {
                 "y" -> try {
                     getDetailsById(mealsByDate)
                 } catch (e: Exception) {
                     e.message?.let { printer.displayLn(it) }
+                        ?: printer.displayLn("error")
                 }
-
                 "n" -> return
                 else -> printer.displayLn("Please enter Y or N.")
             }
@@ -64,7 +68,7 @@ class GetFoodByDateUI(
         reader.readInt()?.let { enteredID ->
             mealsByDate.takeIf { it.any { item -> item.first == enteredID } }
                 ?.let {
-                    println(getMealByIdUseCase.getMealById(enteredID).getFullDetails())
+                    printer.displayLn(getMealByIdUseCase.getMealById(enteredID).getFullDetails())
                 } ?: throw InvalidIdException()
         } ?: throw WrongInputException()
     }
