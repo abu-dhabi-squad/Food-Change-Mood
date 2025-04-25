@@ -5,11 +5,9 @@ import logic.usecase.GetSweetsWithoutEggsUseCase
 class SweetsWithoutEggsConsoleUI(
     private val getSweetsWithoutEggsUseCase: GetSweetsWithoutEggsUseCase,
 ) : ChangeFoodMoodLauncher {
-    override val id: Int
-        get() = 6
+    override val id: Int = 6
 
-    override val name: String
-        get() = "Egg-Free Sweets"
+    override val name: String = "Egg-Free Sweets"
 
     override fun launchUI() {
         val shownMeals = mutableSetOf<Int>()

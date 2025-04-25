@@ -9,11 +9,9 @@ class GetMealByIdUI(
     private val reader: InputReader,
     private val printer: Printer
 ) : ChangeFoodMoodLauncher {
-    override val id: Int
-        get() = 16
+    override val id: Int = 16
 
-    override val name: String
-        get() = "search meal by ID"
+    override val name: String = "search meal by ID"
 
     override fun launchUI() {
         printer.display("enter id of the meal : ")

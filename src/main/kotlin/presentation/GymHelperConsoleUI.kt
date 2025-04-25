@@ -11,11 +11,9 @@ class GymHelperConsoleUI(
     private val reader: InputReader,
     private val consolePrinter: Printer,
 ) : ChangeFoodMoodLauncher {
-    override val id: Int
-        get() = 9
+    override val id: Int = 9
 
-    override val name: String
-        get() = "Gym Helper (Calories/Protein)"
+    override val name: String = "Gym Helper (Calories/Protein)"
 
     override fun launchUI() {
         try {

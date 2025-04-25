@@ -10,11 +10,9 @@ class RandomKetoMealUI(
     private val getUserTaste : GetUserTaste,
     private val printer : Printer
 ) : ChangeFoodMoodLauncher {
-    override val id: Int
-        get() = 7
+    override val id: Int = 7
 
-    override val name: String
-        get() = "Keto Diet Meal Helper"
+    override val name: String = "Keto Diet Meal Helper"
 
     private lateinit var ketoMeal: Food
     private val showedKetoMeals = mutableListOf<Int>()

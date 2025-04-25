@@ -7,11 +7,9 @@ class SeaFoodMealsSortedByProteinUI(
     private val getSeafoodMealsSortedByProtein: GetSeaFoodMealsSortedByProteinUseCase,
     private val consolePrinter: Printer,
 ) : ChangeFoodMoodLauncher {
-    override val id: Int
-        get() = 14
+    override val id: Int = 14
 
-    override val name: String
-        get() = "Seafood Meals (Protein Sorted)"
+    override val name: String = "Seafood Meals (Protein Sorted)"
 
     override fun launchUI() {
         try {
