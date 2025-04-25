@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class EasyFoodSuggestionGameUseCaseTest {
+class GetEasyFoodSuggestionGameUseCaseTest {
 
     private lateinit var foodRepository: FoodRepository
     private lateinit var getEasyFoodSuggestionGameUseCase: GetEasyFoodSuggestionGameUseCase
@@ -224,5 +224,5 @@ class EasyFoodSuggestionGameUseCaseTest {
             getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
         }
     }
-
+  
 }
