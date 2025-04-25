@@ -1,16 +1,25 @@
 package presentation
 
 import logic.usecase.GetItalianMealsForLargeGroupUseCase
+import presentation.ui_io.Printer
 
 class ItalianMealsForLargeGroupUI(
-    private val getItalianMealsForLargeGroup: GetItalianMealsForLargeGroupUseCase
-):ChangeFoodMoodLauncher {
+    private val getItalianMealsForLargeGroup: GetItalianMealsForLargeGroupUseCase,
+    private val printer: Printer
+) : ChangeFoodMoodLauncher {
 
     override fun launchUI() {
-        getItalianMealsForLargeGroup.getItalianMealForLargeGroup().forEach {
-            println("\nName: ${it.first}")
-            println("Description: ${it.second}")
+        try {
+            getItalianMealsForLargeGroup.getItalianMealForLargeGroup().forEach {
+                printer.displayLn("\nName: ${it.first}")
+                printer.displayLn("Description: ${it.second}")
+            }
+        } catch (
+            exception: Exception
+        ) {
+            printer.displayLn("Error: ${exception.message}")
         }
+
     }
 
 }
