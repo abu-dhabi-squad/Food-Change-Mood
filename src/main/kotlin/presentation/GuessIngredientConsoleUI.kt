@@ -11,6 +11,12 @@ class GuessIngredientConsoleUI(
     private val reader: InputReader,
     private val consolePrinter: Printer,
 ) : ChangeFoodMoodLauncher {
+    override val id: Int
+        get() = 11
+
+    override val name: String
+        get() = "Ingredient Guess Game"
+
     override fun launchUI() {
         try {
             val askedQuestions = mutableSetOf<Int>()

@@ -10,6 +10,11 @@ class GetMealByNameUI(
     private val reader: InputReader,
     private val printer: Printer
 ) : ChangeFoodMoodLauncher {
+    override val id: Int
+        get() = 2
+
+    override val name: String
+        get() = "Search Meal by Name"
 
     override fun launchUI() {
         printer.display("Enter the meal name to search: ")
