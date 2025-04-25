@@ -1,11 +1,11 @@
 package presentation
 
 import com.google.common.truth.Truth.assertThat
+import createMeal
 import io.mockk.every
 import io.mockk.mockk
 import logic.usecase.GetRandomFoodUseCase
 import logic.usecase.GuessFoodPreparationTimeUseCase
-import logic.usecase.createFood
 import model.GuessPreparationTimeState
 import model.RichMaxAttemptException
 import org.junit.jupiter.api.BeforeEach
@@ -34,7 +34,7 @@ class GuessFoodPreparationTimeGameUITest {
     @Test
     fun `launchUI should show food name when get random food use case return food object`(){
         // given
-        val food = createFood(name = "chicken" , minutes = 5)
+        val food = createMeal(name = "chicken" , minutes = 5)
         every { getRandomFoodUseCase.invoke() } returns food
         every { reader.readInt() } returns 5
         every { guessFoodPreparationTimeUseCase.invoke(5,5,1) } returns GuessPreparationTimeState.CORRECT
@@ -47,7 +47,7 @@ class GuessFoodPreparationTimeGameUITest {
 
     @Test
     fun `launchUI should show prompt message to allow the user enter preparation time when game starts`(){
-        val food = createFood(name = "chicken" , minutes = 5)
+        val food = createMeal(name = "chicken" , minutes = 5)
         every { getRandomFoodUseCase.invoke() } returns food
         every { reader.readInt() } returns 5
         every { guessFoodPreparationTimeUseCase.invoke(5,5,1) } returns GuessPreparationTimeState.CORRECT
@@ -61,7 +61,7 @@ class GuessFoodPreparationTimeGameUITest {
     @CsvSource("5,5,1","5,5,3")
     fun `launchUI should show congratulation message when user guess the correct preparation time`(userGuess : Int ,preparationTime : Int, attempts:Int){
         // given
-        val food = createFood(name = "chicken" , minutes = preparationTime)
+        val food = createMeal(name = "chicken" , minutes = preparationTime)
         every { getRandomFoodUseCase.invoke() } returns food
         every { reader.readInt() } returns userGuess
         every { guessFoodPreparationTimeUseCase.invoke(userGuess,preparationTime,attempts) } returns GuessPreparationTimeState.CORRECT
@@ -74,7 +74,7 @@ class GuessFoodPreparationTimeGameUITest {
     @Test
     fun `launchUI should show too low  message when user guess is less than the preparation time`(){
         // given
-        val food = createFood(name = "chicken" , minutes = 5)
+        val food = createMeal(name = "chicken" , minutes = 5)
         every { getRandomFoodUseCase.invoke() } returns food
         every { reader.readInt() } returns 3
         every { guessFoodPreparationTimeUseCase.invoke(3,5,1) } returns GuessPreparationTimeState.TOO_LOW
@@ -88,7 +88,7 @@ class GuessFoodPreparationTimeGameUITest {
     @Test
     fun `launchUI should show rich max attempt message when user guess wrong after 2 attempts`(){
         // given
-        val food = createFood(name = "chicken" , minutes = 5)
+        val food = createMeal(name = "chicken" , minutes = 5)
         every { getRandomFoodUseCase.invoke() } returns food
         every { reader.readInt() } returns 3
         every { guessFoodPreparationTimeUseCase.invoke(3,5,any()) } throws RichMaxAttemptException(preparationTime = food.minutes)
@@ -103,7 +103,7 @@ class GuessFoodPreparationTimeGameUITest {
     @Test
     fun `launchUI should show too high  message when user guess is higher than the preparation time`(){
         // given
-        val food = createFood(name = "chicken" , minutes = 5)
+        val food = createMeal(name = "chicken" , minutes = 5)
         every { getRandomFoodUseCase.invoke() } returns food
         every { reader.readInt() } returns 7
         every { guessFoodPreparationTimeUseCase.invoke(7,5,1) } returns GuessPreparationTimeState.TOO_HIGH
@@ -131,7 +131,7 @@ class GuessFoodPreparationTimeGameUITest {
     @Test
     fun `launchUI should show invalid input message when intReader return null`(){
         // given
-        val food = createFood(name = "chicken" , minutes = 5)
+        val food = createMeal(name = "chicken" , minutes = 5)
         every { getRandomFoodUseCase.invoke() } returns food
         every { reader.readInt() } returns null andThen 5
         every { guessFoodPreparationTimeUseCase.invoke(5,5,1) } returns GuessPreparationTimeState.CORRECT
