@@ -42,7 +42,7 @@ class GetEasyFoodSuggestionUITest {
         getEasyFoodSuggestionUI.launchUI()
 
         // then
-        verifySequence {
+        verify {
              printer.displayLn(GetEasyFoodSuggestionUI.START_MESSAGE)
              printer.displayLn(GetEasyFoodSuggestionUI.MEAL_SEPARATOR)
              printer.displayLn("1. Apple Pie")
