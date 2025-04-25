@@ -3,6 +3,7 @@ package presentation
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import io.mockk.verifySequence
 import logic.usecase.GetEasyFoodSuggestionGameUseCase
 import logic.usecase.createFood
 import model.NoEasyMealsFoundException
@@ -41,15 +42,18 @@ class GetEasyFoodSuggestionUITest {
         getEasyFoodSuggestionUI.launchUI()
 
         // then
-        verify { printer.displayLn(GetEasyFoodSuggestionUI.START_MESSAGE) }
-        verify { printer.displayLn("1. Apple Pie") }
-        verify { printer.displayLn("Prepared Time: 25 minutes") }
-        verify { printer.displayLn("Description: A classic dessert.") }
-        verify { printer.displayLn("Ingredients: Apples, Flour, Sugar") }
-        verify { printer.displayLn("Steps: 2 steps") }
-        verify { printer.displayLn(GetEasyFoodSuggestionUI.MEAL_SEPARATOR) }
-
+        verifySequence {
+             printer.displayLn(GetEasyFoodSuggestionUI.START_MESSAGE)
+             printer.displayLn(GetEasyFoodSuggestionUI.MEAL_SEPARATOR)
+             printer.displayLn("1. Apple Pie")
+             printer.displayLn("Prepared Time: 25 minutes")
+             printer.displayLn("Description: A classic dessert.")
+             printer.displayLn("Ingredients: Apples, Flour, Sugar")
+             printer.displayLn("Steps: 2 steps")
+             printer.displayLn(GetEasyFoodSuggestionUI.MEAL_SEPARATOR)
         }
+
+    }
 
     @Test
     fun `should display empty input message when meals list is empty`() {
@@ -74,4 +78,5 @@ class GetEasyFoodSuggestionUITest {
         // Then
         verify { printer.displayLn("No easy meals found matching the criteria.") }
     }
+
 }

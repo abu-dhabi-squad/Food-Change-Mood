@@ -27,10 +27,10 @@ class GetEasyFoodSuggestionUI(
 
     private fun printMealDetails(meals: List<Food>) {
         meals.forEachIndexed { index, meal ->
-            println(MEAL_SEPARATOR)
-            printer.displayLn("${index + 1}. ${meal.name ?: UNNAMED_MEAL}")
+            printer.displayLn(MEAL_SEPARATOR)
+            printer.displayLn("${index + 1}. ${meal.name}")
             printer.displayLn("$PREP_TIME_LABEL: ${meal.minutes} $MINUTES")
-            printer.displayLn("$DESCRIPTION_LABEL: ${meal.description ?: NO_DESCRIPTION}")
+            printer.displayLn("$DESCRIPTION_LABEL: ${meal.description}")
             printer.displayLn("$INGREDIENTS_LABEL: ${meal.ingredients.joinToString(", ")}")
             printer.displayLn("$STEPS_LABEL: ${meal.steps.size} $STEPS")
         }
