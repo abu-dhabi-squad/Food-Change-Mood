@@ -1,25 +1,26 @@
 package di
 
+import org.koin.dsl.bind
 import org.koin.dsl.module
 import presentation.*
 
 val uiModule = module {
-    single { ItalianMealsForLargeGroupUI(get(),get()) }
+    single { ItalianMealsForLargeGroupUI(get(),get()) } bind ChangeFoodMoodLauncher::class
+    single { GetMealByIdUI(get(),get(),get()) } bind ChangeFoodMoodLauncher::class
+    single { GuessFoodPreparationTimeGameUI(get(), get(), get(), get()) } bind ChangeFoodMoodLauncher::class
+    single { GuessIngredientConsoleUI(get(), get(), get()) } bind ChangeFoodMoodLauncher::class
+    single { RandomPotatoesMealsConsoleUi(get(), get(),get()) } bind ChangeFoodMoodLauncher::class
+    single { GetIraqiMealsUI(get(),get()) } bind ChangeFoodMoodLauncher::class
+    single { RandomKetoMealUI(get(),get(),get()) } bind ChangeFoodMoodLauncher::class
+    single { GetHealthyMealsUI(get()) } bind ChangeFoodMoodLauncher::class
+    single { GetRandomMealsByCountryUI(get(), get(), get()) } bind ChangeFoodMoodLauncher::class
+    single { GetEasyFoodSuggestionUI(get(),get()) } bind ChangeFoodMoodLauncher::class
+    single { GetMealByNameUI(get(), get(),get()) } bind ChangeFoodMoodLauncher::class
+    single { GymHelperConsoleUI(get(), get(), get()) } bind ChangeFoodMoodLauncher::class
+    single { SweetsWithoutEggsConsoleUI(get()) } bind ChangeFoodMoodLauncher::class
+    single { SeaFoodMealsSortedByProteinUI(get(), get()) } bind ChangeFoodMoodLauncher::class
+    single { GetHighCalorieMealForThinPeopleUI(get(),get(),get()) } bind ChangeFoodMoodLauncher::class
+    single { GetFoodByDateUI(get(),get(), get(), get(),get(),get()) } bind ChangeFoodMoodLauncher::class
     single { GetUserTaste(get(), get()) }
-    single { GetMealByIdUI(get(),get(),get()) }
-    single { GuessFoodPreparationTimeGameUI(get(), get(), get(), get()) }
-    single { GuessIngredientConsoleUI(get(), get(), get()) }
-    single { RandomPotatoesMealsConsoleUi(get(), get(),get()) }
-    single { GetIraqiMealsUI(get(),get()) }
-    single { RandomKetoMealUI(get(),get(),get()) }
-    single { GetHealthyMealsUI(get()) }
-    single { GetRandomMealsByCountryUI(get(), get() , get()) }
-    single { GetMealByNameUI(get(), get(),get()) }
-    single { GymHelperConsoleUI(get(), get(), get()) }
-    single { SweetsWithoutEggsConsoleUI(get(),get(),get()) }
-    single { SeaFoodMealsSortedByProteinUI(get(), get()) }
-    single { GetHighCalorieMealForThinPeopleUI(get(),get(),get()) }
-    single { GetFoodByDateUI(get(),get(), get(), get(),get(),get()) }
-    single { GetEasyFoodSuggestionUI(get(),get()) }
-    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
+    single { FoodChangeMoodConsoleUI(getAll(), get()) }
 }

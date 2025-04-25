@@ -9,6 +9,11 @@ class RandomPotatoesMealsConsoleUi(
     private val reader: InputReader,
     private val printer: Printer
 ) : ChangeFoodMoodLauncher {
+    override val id: Int
+        get() = 12
+
+    override val name: String
+        get() = "Potato-Based Meals"
 
     override fun launchUI() {
         try {

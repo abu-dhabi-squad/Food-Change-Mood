@@ -8,6 +8,11 @@ class GetHighCalorieMealForThinPeopleUI(
     private val printer: Printer,
     private val getUserTaste: GetUserTaste,
 ) : ChangeFoodMoodLauncher {
+    override val id: Int
+        get() = 13
+
+    override val name: String
+        get() = "High-Calorie Meals (>700 cal)"
 
     override fun launchUI() {
         val shownSet = mutableSetOf<Int>()

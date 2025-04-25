@@ -9,6 +9,11 @@ class GetRandomMealsByCountryUI(
     private val reader: InputReader,
     private val printer: Printer,
 ) : ChangeFoodMoodLauncher{
+    override val id: Int
+        get() = 10
+
+    override val name: String
+        get() = "Explore Country Food Culture"
 
     override fun launchUI() {
 
