@@ -8,13 +8,13 @@ import model.Nutrition
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import util.DateParserInterface
+import util.DateParser
 import java.time.LocalDate
 import java.time.format.DateTimeParseException
 
 class FoodMapperTest {
     private lateinit var foodMapper: FoodMapper
-    private lateinit var dateParserInterface: DateParserInterface
+    private lateinit var dateParserInterface: DateParser
 
     @BeforeEach
     fun setup() {
