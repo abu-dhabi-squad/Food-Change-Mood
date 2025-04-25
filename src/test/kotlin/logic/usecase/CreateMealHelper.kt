@@ -36,10 +36,65 @@ fun createFood(
     )
 }
 
-fun createMeal(
+
+fun createMealForGymHelper(name: String, calories: Float, proteins: Float): Food {
+    return Food(
+        id = 1,
+        name = name,
+        minutes = 15,
+        submittedDate = null,
+        nutrition = Nutrition(
+            calories = calories,
+            protein = proteins,
+            sugar = 0.0F,
+            sodium = 0.0F,
+            totalFat = 0.0F,
+            saturated = 0.0F,
+            carbohydrates = 0.0F,
+        ),
+        description = "This is description for $name",
+        tags = listOf(),
+        steps = listOf(),
+        ingredients = listOf(),
+    )
+}
+
+
+fun getNonKetoMeal(
+    id: Int = 2,
+    name: String = "Spaghetti",
+    calories: Float = 600f,
+    totalFat: Float = 10f,
+    protein: Float = 15f,
+    carbohydrates: Float = 80f,
+    sugar: Float = 15f,
+    saturated: Float = 5f
+): Food {
+    return Food(
+        id = id,
+        name = name,
+        minutes = 40,
+        submittedDate = LocalDate.now(),
+        tags = listOf("italian"),
+        nutrition = Nutrition(
+            sugar = sugar,
+            totalFat = totalFat,
+            protein = protein,
+            carbohydrates = carbohydrates,
+            saturated = saturated,
+            calories = calories,
+            sodium = 0.0F,
+        ),
+        steps = listOf("Boil pasta", "Add sauce"),
+        description = "Tasty pasta meal",
+        ingredients = listOf("Pasta", "Tomato", "Cheese")
+    )
+}
+
+fun createMealHelper(
     id: Int = 0,
-    name: String? = null,
-    description: String? = null,
+    name: String? = "Unnamed Food",
+    description: String? = "No description",
     minutes: Int = 10,
     submittedDate: LocalDate? = LocalDate.now(),
     tags: List<String> = listOf("misc"),
