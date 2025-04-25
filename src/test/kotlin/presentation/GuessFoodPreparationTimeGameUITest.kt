@@ -39,7 +39,13 @@ class GuessFoodPreparationTimeGameUITest {
         val food = createMeal(name = "chicken", minutes = 5)
         every { getRandomFoodUseCase.invoke() } returns food
         every { reader.readInt() } returns 5
-        every { guessFoodPreparationTimeUseCase.invoke(5, 5, 1) } returns GuessPreparationTimeState.CORRECT
+        every {
+            guessFoodPreparationTimeUseCase.invoke(
+                5,
+                5,
+                1
+            )
+        } returns GuessPreparationTimeState.CORRECT
 
         // when
         guessFoodPreparationTimeGameUI.launchUI()
@@ -54,13 +60,23 @@ class GuessFoodPreparationTimeGameUITest {
         val food = createMeal(name = "chicken", minutes = 5)
         every { getRandomFoodUseCase.invoke() } returns food
         every { reader.readInt() } returns 5
-        every { guessFoodPreparationTimeUseCase.invoke(5, 5, 1) } returns GuessPreparationTimeState.CORRECT
+        every {
+            guessFoodPreparationTimeUseCase.invoke(
+                5,
+                5,
+                1
+            )
+        } returns GuessPreparationTimeState.CORRECT
 
         // when
         guessFoodPreparationTimeGameUI.launchUI()
 
         // then
-        verify { printer.display("Guess the preparation time in minutes:") }
+        verify {
+            printer.display(match {
+                it.toString().contains("Guess the preparation time (in minutes): ", true)
+            })
+        }
     }
 
     @ParameterizedTest
@@ -74,7 +90,13 @@ class GuessFoodPreparationTimeGameUITest {
         val food = createMeal(name = "chicken", minutes = preparationTime)
         every { getRandomFoodUseCase.invoke() } returns food
         every { reader.readInt() } returns userGuess
-        every { guessFoodPreparationTimeUseCase.invoke(userGuess, preparationTime, attempts) } returns GuessPreparationTimeState.CORRECT
+        every {
+            guessFoodPreparationTimeUseCase.invoke(
+                userGuess,
+                preparationTime,
+                attempts
+            )
+        } returns GuessPreparationTimeState.CORRECT
 
         // when
         guessFoodPreparationTimeGameUI.launchUI()
@@ -89,7 +111,13 @@ class GuessFoodPreparationTimeGameUITest {
         val food = createMeal(name = "chicken", minutes = 5)
         every { getRandomFoodUseCase.invoke() } returns food
         every { reader.readInt() } returns 3
-        every { guessFoodPreparationTimeUseCase.invoke(3, 5, 1) } returns GuessPreparationTimeState.TOO_LOW
+        every {
+            guessFoodPreparationTimeUseCase.invoke(
+                3,
+                5,
+                1
+            )
+        } returns GuessPreparationTimeState.TOO_LOW
 
         // when
         guessFoodPreparationTimeGameUI.launchUI()
@@ -104,7 +132,13 @@ class GuessFoodPreparationTimeGameUITest {
         val food = createMeal(name = "chicken", minutes = 5)
         every { getRandomFoodUseCase.invoke() } returns food
         every { reader.readInt() } returns 3
-        every { guessFoodPreparationTimeUseCase.invoke(3, 5, any()) } throws RichMaxAttemptException(preparationTime = food.minutes)
+        every {
+            guessFoodPreparationTimeUseCase.invoke(
+                3,
+                5,
+                any()
+            )
+        } throws RichMaxAttemptException(preparationTime = food.minutes)
 
         // when
         guessFoodPreparationTimeGameUI.launchUI()
@@ -121,7 +155,13 @@ class GuessFoodPreparationTimeGameUITest {
         val food = createMeal(name = "chicken", minutes = 5)
         every { getRandomFoodUseCase.invoke() } returns food
         every { reader.readInt() } returns 7
-        every { guessFoodPreparationTimeUseCase.invoke(7, 5, 1) } returns GuessPreparationTimeState.TOO_HIGH
+        every {
+            guessFoodPreparationTimeUseCase.invoke(
+                7,
+                5,
+                1
+            )
+        } returns GuessPreparationTimeState.TOO_HIGH
 
         // when
         guessFoodPreparationTimeGameUI.launchUI()
@@ -149,7 +189,13 @@ class GuessFoodPreparationTimeGameUITest {
         val food = createMeal(name = "chicken", minutes = 5)
         every { getRandomFoodUseCase.invoke() } returns food
         every { reader.readInt() } returns null andThen 5
-        every { guessFoodPreparationTimeUseCase.invoke(5, 5, 1) } returns GuessPreparationTimeState.CORRECT
+        every {
+            guessFoodPreparationTimeUseCase.invoke(
+                5,
+                5,
+                1
+            )
+        } returns GuessPreparationTimeState.CORRECT
 
         // when
         guessFoodPreparationTimeGameUI.launchUI()
