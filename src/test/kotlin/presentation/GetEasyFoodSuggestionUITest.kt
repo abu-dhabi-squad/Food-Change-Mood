@@ -1,7 +1,9 @@
 package presentation
 
+import com.google.common.base.Verify.verify
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import junit.framework.TestCase.assertTrue
 import logic.usecase.GetEasyFoodSuggestionGameUseCase
 import logic.usecase.createMeal
@@ -15,20 +17,17 @@ import java.io.PrintStream
 
 class GetEasyFoodSuggestionUITest {
     private lateinit var getEasyFoodSuggestionGameUseCase: GetEasyFoodSuggestionGameUseCase
-    private lateinit var ui: GetEasyFoodSuggestionUI
-    private lateinit var printer: Printer
-    private val outContent = ByteArrayOutputStream()
+    private lateinit var getEasyFoodSuggestionUI: GetEasyFoodSuggestionUI
+    private val printer: Printer = mockk(relaxed = true)
 
     @BeforeEach
     fun setUp() {
         getEasyFoodSuggestionGameUseCase = mockk()
-        printer = ConsolePrinter()
-        ui = GetEasyFoodSuggestionUI(getEasyFoodSuggestionGameUseCase, printer)
-        System.setOut(PrintStream(outContent))
+        getEasyFoodSuggestionUI = GetEasyFoodSuggestionUI(getEasyFoodSuggestionGameUseCase, printer)
     }
 
     @Test
-    fun `should display meals when use case returns meals`() {
+    fun `should display start message and meals when use case returns meals`() {
         // given
         val meals = listOf(
             createMeal(
@@ -40,92 +39,43 @@ class GetEasyFoodSuggestionUITest {
             )
         )
 
-        // when
         every { getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals() } returns meals
-        ui.launchUI()
-        val output = outContent.toString()
+
+        // when
+        getEasyFoodSuggestionUI.launchUI()
 
         // then
-        val expected = listOf(
-            "1. Apple Pie",
-            "Prepared Time: 25 minutes",
-            "Description: A classic dessert.",
-            "Ingredients: Apples, Flour, Sugar",
-            "Steps: 2 steps"
-        )
+        verify { printer.displayLn(GetEasyFoodSuggestionUI.START_MESSAGE) }
+        verify { printer.displayLn("1. Apple Pie") }
+        verify { printer.displayLn("Prepared Time: 25 minutes") }
+        verify { printer.displayLn("Description: A classic dessert.") }
+        verify { printer.displayLn("Ingredients: Apples, Flour, Sugar") }
+        verify { printer.displayLn("Steps: 2 steps") }
+        verify { printer.displayLn(GetEasyFoodSuggestionUI.MEAL_SEPARATOR) }
 
-        expected.forEach { expected ->
-            assertTrue(output.contains(expected))
         }
 
-    }
-
     @Test
-    fun `should display start message when use case returns meals`() {
-        // given
-        val meals = listOf(
-            createMeal(
-                name = "Apple Pie",
-                minutes = 25,
-                description = "A classic dessert.",
-                ingredients = listOf("Apples", "Flour", "Sugar"),
-                steps = listOf("Step 1", "Step 2")
-            )
-        )
-
-        // when
-        every { getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals() } returns meals
-        ui.launchUI()
-        val output = outContent.toString()
-
-        // then
-        assertTrue(output.contains(GetEasyFoodSuggestionUI.START_MESSAGE))
-
-    }
-
-    @Test
-    fun `should display separator when use case returns meals`() {
-        // given
-        val meals = listOf(
-            createMeal(
-                name = "Apple Pie",
-                minutes = 25,
-                description = "A classic dessert.",
-                ingredients = listOf("Apples", "Flour", "Sugar"),
-                steps = listOf("Step 1", "Step 2")
-            )
-        )
-
-        // when
-        every { getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals() } returns meals
-        ui.launchUI()
-        val output = outContent.toString()
-
-        // then
-        assertTrue(output.contains(GetEasyFoodSuggestionUI.MEAL_SEPARATOR))
-
-    }
-
-
-    @Test
-    fun `should show message when no meals are returned`() {
-        // when
+    fun `should display empty input message when meals list is empty`() {
+        // Given
         every { getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals() } returns emptyList()
-        ui.launchUI()
-        val output = outContent.toString()
 
-        // then
-        assertTrue(output.contains(GetEasyFoodSuggestionUI.EMPTY_INPUT_MESSAGE))
+        // When
+        getEasyFoodSuggestionUI.launchUI()
+
+        // Then
+        verify { printer.displayLn(GetEasyFoodSuggestionUI.EMPTY_INPUT_MESSAGE) }
     }
 
     @Test
     fun `should show error message when NoEasyMealsFoundException is thrown`() {
-        // when
+        // Given
         every { getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals() } throws NoEasyMealsFoundException()
-        ui.launchUI()
-        val output = outContent.toString()
 
-        // then
-        assertTrue(output.contains("No easy meals found matching the criteria."))
+        // When
+        getEasyFoodSuggestionUI.launchUI()
+
+        // Then
+        verify { printer.displayLn("No easy meals found matching the criteria.") }
     }
 }
