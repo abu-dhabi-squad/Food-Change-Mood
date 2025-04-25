@@ -1,10 +1,10 @@
 package presentation
 
+import createMeal
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import logic.usecase.GymHelperUseCase
-import logic.usecase.createMealForGymHelper
 import model.NoMealsFoundException
 import model.WrongInputException
 import org.junit.jupiter.api.BeforeEach
@@ -33,19 +33,22 @@ class GymHelperConsoleUITest {
         val proteins = 17F
         every { reader.readFloat() } returns calories andThen proteins
         every { gymHelperUseCase.getListOfMealsForGym(calories, proteins) } returns listOf(
-            createMealForGymHelper(name = "Meal 4", calories = 148.0F, proteins = 17.0F),
-            createMealForGymHelper(name = "Meal 5", calories = 150.0F, proteins = 18.0F),
+            createMeal(name = "Meal 4", calories = 148.0F, protein = 17.0F),
+            createMeal(name = "Meal 5", calories = 150.0F, protein = 18.0F),
         )
 
         // When
         gymHelperConsoleUI.launchUI()
 
         // Then
-        listOf(
-            createMealForGymHelper(name = "Meal 4", calories = 148.0F, proteins = 17.0F),
-            createMealForGymHelper(name = "Meal 5", calories = 150.0F, proteins = 18.0F),
-        ).forEach {
-            verify(exactly = 1) { consolePrinter.displayLn(it.getFullDetails()) }
+        verify(exactly = 1) {
+            gymHelperUseCase.getListOfMealsForGym(calories, proteins)
+            consolePrinter.displayLn(match {
+                it.toString().contains(createMeal(name = "Meal 4", calories = 148.0F, protein = 17.0F).getFullDetails())
+            })
+            consolePrinter.displayLn(match {
+                it.toString().contains(createMeal(name = "Meal 5", calories = 150.0F, protein = 18.0F).getFullDetails())
+            })
         }
     }
 
@@ -61,7 +64,27 @@ class GymHelperConsoleUITest {
         gymHelperConsoleUI.launchUI()
 
         // Then
-        verify(exactly = 1) { consolePrinter.displayLn(NoMealsFoundException().message) }
+        verify(exactly = 1) {
+            gymHelperUseCase.getListOfMealsForGym(calories, proteins)
+            consolePrinter.displayLn(NoMealsFoundException().message)
+        }
+    }
+
+    @Test
+    fun `launch GymHelperConsoleUI should prints error when getListOfMealsForGym throws any Exception`() {
+        // Input
+        val calories = 1149F
+        val proteins = 17F
+        every { reader.readFloat() } returns calories andThen proteins
+        every { gymHelperUseCase.getListOfMealsForGym(calories, proteins) } throws Exception()
+
+        // When
+        gymHelperConsoleUI.launchUI()
+
+        // Then
+        verify(exactly = 1) {
+            gymHelperUseCase.getListOfMealsForGym(any(), any())
+        }
     }
 
     @ParameterizedTest
@@ -81,6 +104,7 @@ class GymHelperConsoleUITest {
         gymHelperConsoleUI.launchUI()
 
         // Then
+        verify(exactly = 0) { gymHelperUseCase.getListOfMealsForGym(any(), any()) }
         verify(exactly = 1) { consolePrinter.displayLn(WrongInputException().message) }
     }
 
@@ -101,6 +125,7 @@ class GymHelperConsoleUITest {
         gymHelperConsoleUI.launchUI()
 
         // Then
+        verify(exactly = 0) { gymHelperUseCase.getListOfMealsForGym(any(), any()) }
         verify(exactly = 1) { consolePrinter.displayLn(WrongInputException().message) }
     }
 }
