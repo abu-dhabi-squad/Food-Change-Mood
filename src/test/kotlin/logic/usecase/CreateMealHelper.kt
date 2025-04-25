@@ -59,56 +59,7 @@ fun createMealForGymHelper(name: String, calories: Float, proteins: Float): Food
     )
 }
 
-fun createPotatoMeal(
-    name: String?,
-    description: String? = null,
-    tags: List<String> = emptyList<String>(),
-    ingredients: List<String> = emptyList<String>()
-): Food {
-    return Food(
-        id = 0,
-        name = name,
-        minutes = 0,
-        submittedDate = null,
-        tags = tags,
-        nutrition = Nutrition(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f), // default empty nutrition
-        steps = emptyList(),
-        description = description,
-        ingredients = ingredients
-    )
-}
 
-
-fun getKetoMeal(
-    id: Int = 1,
-    name: String = "Keto Chicken",
-    calories: Float = 900f,
-    totalFat: Float = 70f,
-    protein: Float = 20f,
-    carbohydrates: Float = 5f,
-    sugar: Float = 2f,
-    saturated: Float = 15f
-): Food {
-    return Food(
-        id = id,
-        name = name,
-        minutes = 30,
-        submittedDate = LocalDate.now(),
-        tags = listOf("keto"),
-        nutrition = Nutrition(
-            sugar = sugar,
-            totalFat = totalFat,
-            protein = protein,
-            carbohydrates = carbohydrates,
-            saturated = saturated,
-            calories = calories,
-            sodium = 0.0F,
-        ),
-        steps = listOf("Step 1", "Step 2"),
-        description = "Delicious keto meal",
-        ingredients = listOf("Chicken", "Butter", "Broccoli")
-    )
-}
 fun getNonKetoMeal(
     id: Int = 2,
     name: String = "Spaghetti",
@@ -139,3 +90,44 @@ fun getNonKetoMeal(
         ingredients = listOf("Pasta", "Tomato", "Cheese")
     )
 }
+
+fun createMealHelper(
+    id: Int = 0,
+    name: String? = "Unnamed Food",
+    description: String? = "No description",
+    minutes: Int = 10,
+    submittedDate: LocalDate? = LocalDate.now(),
+    tags: List<String> = listOf("misc"),
+    steps: List<String> = listOf("No steps provided"),
+    ingredients: List<String> = listOf("Unknown ingredient"),
+    calories: Float = 100f,
+    totalFat: Float = 5f,
+    sugar: Float = 5f,
+    sodium: Float = 50f,
+    protein: Float = 2f,
+    saturated: Float = 1f,
+    carbohydrates: Float = 10f
+): Food {
+    return Food(
+        id = id,
+        name = name,
+        minutes = minutes,
+        submittedDate = submittedDate,
+        tags = tags,
+        steps = steps,
+        description = description,
+        ingredients = ingredients,
+        nutrition = Nutrition(
+            calories = calories,
+            totalFat = totalFat,
+            sugar = sugar,
+            sodium = sodium,
+            protein = protein,
+            saturated = saturated,
+            carbohydrates = carbohydrates
+        )
+    )
+}
+
+
+

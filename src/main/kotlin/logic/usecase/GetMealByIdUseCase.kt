@@ -11,7 +11,11 @@ class GetMealByIdUseCase(
     fun getMealById(id: Int): Food {
         return foodRepository.getFoods()
             .getOrThrow()
+            .filter{it.isHighQuality()}
             .find{it.id == id}
             ?: throw InvalidIdException()
+    }
+    private fun Food.isHighQuality(): Boolean {
+        return name != null && description != null
     }
 }

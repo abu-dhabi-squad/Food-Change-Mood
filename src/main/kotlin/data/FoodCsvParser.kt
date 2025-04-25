@@ -1,12 +1,7 @@
 package data
 
 import model.Food
-import model.Nutrition
-import util.DateParserInterface
 import java.io.File
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeParseException
 
 class FoodCsvParser(
     private val fileReader: FileReader,
