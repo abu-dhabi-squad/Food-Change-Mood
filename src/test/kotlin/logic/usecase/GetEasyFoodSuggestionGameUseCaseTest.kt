@@ -3,25 +3,26 @@ package logic.usecase
 import com.google.common.truth.Truth.assertThat
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import logic.repository.FoodRepository
 import model.NoEasyMealsFoundException
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import kotlin.test.assertFailsWith
 
 class GetEasyFoodSuggestionGameUseCaseTest {
 
-    private lateinit var foodRepository: FoodRepository
+    private val foodRepository: FoodRepository = mockk()
     private lateinit var getEasyFoodSuggestionGameUseCase: GetEasyFoodSuggestionGameUseCase
 
     @BeforeEach
     fun setup(){
-        foodRepository = mockk()
         getEasyFoodSuggestionGameUseCase = GetEasyFoodSuggestionGameUseCase(foodRepository)
     }
 
     @Test
-    fun `should return random easy meals when food repository return success with non empty food list`(){
+    fun `should return random easy meals when valid meals exist`(){
         //given
         val appleFood = createFood(
             name = "Apple Pie",
@@ -223,6 +224,136 @@ class GetEasyFoodSuggestionGameUseCaseTest {
         assertThrows(NoEasyMealsFoundException::class.java) {
             getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
         }
+    }
+
+    @Test
+    fun `should throw NoEasyMealsFoundException when meal has invalid description`() {
+        val invalidMeal = createFood(
+            name = "Apple Pie",
+            description = null, // Invalid description
+            minutes = 25,
+            ingredients = listOf("Apples", "Flour", "Sugar"),
+            steps = listOf("Step 1", "Step 2")
+        )
+
+        every { foodRepository.getFoods() } returns Result.success(listOf(invalidMeal))
+
+        assertFailsWith<NoEasyMealsFoundException> {
+            getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
+        }
+
+        verify { foodRepository.getFoods() }
+    }
+
+    @Test
+    fun `should throw NoEasyMealsFoundException when meal has invalid time`() {
+        val invalidMeal = createFood(
+            name = "Apple Pie",
+            description = "A classic dessert.",
+            minutes = 40, // Invalid time
+            ingredients = listOf("Apples", "Flour", "Sugar"),
+            steps = listOf("Step 1", "Step 2")
+        )
+
+        every { foodRepository.getFoods() } returns Result.success(listOf(invalidMeal))
+
+        assertFailsWith<NoEasyMealsFoundException> {
+            getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
+        }
+
+        verify { foodRepository.getFoods() }
+    }
+
+    @Test
+    fun `should throw NoEasyMealsFoundException when meal has too many ingredients`() {
+        val invalidMeal = createFood(
+            name = "Apple Pie",
+            description = "A classic dessert.",
+            minutes = 25,
+            ingredients = listOf("Apples", "Flour", "Sugar", "Butter", "Eggs", "Vanilla"), // Too many ingredients
+            steps = listOf("Step 1", "Step 2")
+        )
+
+        every { foodRepository.getFoods() } returns Result.success(listOf(invalidMeal))
+
+        assertFailsWith<NoEasyMealsFoundException> {
+            getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
+        }
+
+        verify { foodRepository.getFoods() }
+    }
+
+    @Test
+    fun `should throw NoEasyMealsFoundException when meal has too few steps`() {
+        val invalidMeal = createFood(
+            name = "Apple Pie",
+            description = "A classic dessert.",
+            minutes = 25,
+            ingredients = listOf("Apples", "Flour", "Sugar"),
+            steps = listOf() // Invalid steps (empty)
+        )
+
+        every { foodRepository.getFoods() } returns Result.success(listOf(invalidMeal))
+
+        assertFailsWith<NoEasyMealsFoundException> {
+            getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
+        }
+
+        verify { foodRepository.getFoods() }
+    }
+
+    @Test
+    fun `should return valid meals when meal has valid steps`() {
+        val validMeal = createFood(
+            name = "Apple Pie",
+            description = "A classic dessert.",
+            minutes = 25,
+            ingredients = listOf("Apples", "Flour", "Sugar"),
+            steps = listOf("Step 1", "Step 2")
+        )
+
+        every { foodRepository.getFoods() } returns Result.success(listOf(validMeal))
+
+        val result = getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
+
+        assertTrue(result.contains(validMeal))
+        verify { foodRepository.getFoods() }
+    }
+
+    @Test
+    fun `should return valid meals when meal has valid ingredients`() {
+        val validMeal = createFood(
+            name = "Apple Pie",
+            description = "A classic dessert.",
+            minutes = 25,
+            ingredients = listOf("Apples", "Flour", "Sugar"),
+            steps = listOf("Step 1", "Step 2")
+        )
+
+        every { foodRepository.getFoods() } returns Result.success(listOf(validMeal))
+
+        val result = getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
+
+        assertTrue(result.contains(validMeal))
+        verify { foodRepository.getFoods() }
+    }
+
+    @Test
+    fun `should return valid meals when meal has valid time, ingredients, and steps`() {
+        val validMeal = createFood(
+            name = "Apple Pie",
+            description = "A classic dessert.",
+            minutes = 25,
+            ingredients = listOf("Apples", "Flour", "Sugar"),
+            steps = listOf("Step 1", "Step 2")
+        )
+
+        every { foodRepository.getFoods() } returns Result.success(listOf(validMeal))
+
+        val result = getEasyFoodSuggestionGameUseCase.suggestRandomEasyMeals()
+
+        assertTrue(result.contains(validMeal))
+        verify { foodRepository.getFoods() }
     }
   
 }
