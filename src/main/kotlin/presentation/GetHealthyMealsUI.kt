@@ -5,13 +5,11 @@ import presentation.ui_io.Printer
 
 class GetHealthyMealsUI(
     private val getHealthyMealsUseCase: GetHealthyMealsUseCase,
-    private val printer : Printer
-    ) : ChangeFoodMoodLauncher {
-    override val id: Int
-        get() = 1
+    private val printer: Printer
+) : ChangeFoodMoodLauncher {
+    override val id: Int = 1
 
-    override val name: String
-        get() = "Healthy Fast Meals (<=15 min)"
+    override val name: String = "Healthy Fast Meals (<=15 min)"
 
     override fun launchUI() {
         try {
