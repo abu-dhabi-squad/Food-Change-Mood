@@ -8,7 +8,6 @@ class RandomPotatoesMealsConsoleUi(
     private val getRandomPotatoesMealsUseCase: GetRandomPotatoesMealsUseCase,
     private val reader: InputReader,
     private val printer: Printer
-
 ) : ChangeFoodMoodLauncher {
     override val id: Int = 12
 

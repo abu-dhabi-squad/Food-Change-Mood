@@ -25,9 +25,10 @@ class GetSweetsWithoutEggsUseCase(
 
     private fun isValidMeal(meal: Food) = !meal.name.isNullOrBlank() && !meal.description.isNullOrBlank()
 
-    private fun isSweet(meal: Food) = meal.name?.lowercase()?.split(" ")?.contains(SWEET_KEYWORD) == true
-            || meal.description?.lowercase()?.split(" ")?.contains(SWEET_KEYWORD) == true
-            || meal.tags.any { it.equals(SWEET_KEYWORD, true) }
+    private fun isSweet(meal: Food) =
+        meal.name!!.lowercase().split(" ").contains(SWEET_KEYWORD)
+                || meal.description!!.lowercase().split(" ").contains(SWEET_KEYWORD)
+                || meal.tags.any { it.equals(SWEET_KEYWORD, true) }
 
     private fun isEggFree(meal: Food) = meal.ingredients.isNotEmpty() && !meal.ingredients.contains(EGG_KEYWORD)
 
