@@ -18,13 +18,27 @@ class GetEasyFoodSuggestionGameUseCase(
     }
 
     private fun isValidEasyMeal(food: Food): Boolean {
-        return food.name != null &&
-                food.description != null &&
-                food.minutes <= MAX_MINUTES &&
-                food.ingredients.isNotEmpty()&&
-                food.ingredients.size <= MAX_INGREDIENTS &&
-                food.steps.isNotEmpty() &&
-                food.steps.size <= MAX_STEPS
+        return isNameAndDescriptionValid(food) &&
+                isTimeValid(food) &&
+                isIngredientsValid(food) &&
+                isIngredientsValid(food)&&
+                isStepsValid(food)
+    }
+
+    private fun isNameAndDescriptionValid(food: Food): Boolean {
+        return food.name != null && food.description != null
+    }
+
+    private fun isTimeValid(food: Food): Boolean {
+        return food.minutes <= MAX_MINUTES
+    }
+
+    private fun isIngredientsValid(food: Food): Boolean {
+        return food.ingredients.isNotEmpty() && food.ingredients.size <= MAX_INGREDIENTS
+    }
+
+    private fun isStepsValid(food: Food): Boolean {
+        return food.steps.isNotEmpty() && food.steps.size <= MAX_STEPS
     }
 
     companion object {
