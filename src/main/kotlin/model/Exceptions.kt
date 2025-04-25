@@ -14,7 +14,7 @@ class EmptyHighCalorieListException : AppException("there is no high calories me
 
 class RichMaxAttemptException(preparationTime:Int) : Exception("You have reached the maximum number of attempts.The correct preparation time is $preparationTime minutes")
 
-class EmptyHealthFoodListListException : AppException("there is no Fast Foods this date list")
+class EmptyHealthFoodListListException : AppException("No healthy meals found")
 
 class EmptySearchByDateListException : AppException("there is no meals in this date list")
 

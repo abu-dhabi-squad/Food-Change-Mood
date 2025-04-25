@@ -1,8 +1,7 @@
 package logic.usecase
 
 import com.google.common.truth.Truth
-import data.CsvFoodRepositoryImp
-import data.FoodCsvParser
+import createMeal
 import io.mockk.every
 import io.mockk.mockk
 import logic.repository.FoodRepository
@@ -36,13 +35,13 @@ class GymHelperUseCaseTest {
     ) {
         // Input
         every { foodRepository.getFoods() } returns Result.success(mutableListOf(
-            createMealForGymHelper(name = "Meal 1", calories = 50.0F, proteins = 7.0F),
-            createMealForGymHelper(name = "Meal 2", calories = 93.0F, proteins = 8.0F),
-            createMealForGymHelper(name = "Meal 3", calories = 112.0F, proteins = 14.0F),
-            createMealForGymHelper(name = "Meal 4", calories = 148.0F, proteins = 17.0F),
-            createMealForGymHelper(name = "Meal 5", calories = 150.0F, proteins = 18.0F),
-            createMealForGymHelper(name = "Meal 6", calories = 308.0F, proteins = 35.0F),
-            createMealForGymHelper(name = "Meal 7", calories = 890.0F, proteins = 70.0F),
+            createMeal(name = "Meal 1", calories = 50.0F, protein = 7.0F),
+            createMeal(name = "Meal 2", calories = 93.0F, protein = 8.0F),
+            createMeal(name = "Meal 3", calories = 112.0F, protein = 14.0F),
+            createMeal(name = "Meal 4", calories = 148.0F, protein = 17.0F),
+            createMeal(name = "Meal 5", calories = 150.0F, protein = 18.0F),
+            createMeal(name = "Meal 6", calories = 308.0F, protein = 35.0F),
+            createMeal(name = "Meal 7", calories = 890.0F, protein = 70.0F),
         ))
 
         // When
@@ -63,13 +62,13 @@ class GymHelperUseCaseTest {
     ) {
         // Input
         every { foodRepository.getFoods() } returns Result.success(mutableListOf(
-            createMealForGymHelper(name = "Meal 1", calories = 50.0F, proteins = 7.0F),
-            createMealForGymHelper(name = "Meal 2", calories = 93.0F, proteins = 8.0F),
-            createMealForGymHelper(name = "Meal 3", calories = 112.0F, proteins = 14.0F),
-            createMealForGymHelper(name = "Meal 4", calories = 148.0F, proteins = 17.0F),
-            createMealForGymHelper(name = "Meal 5", calories = 150.0F, proteins = 18.0F),
-            createMealForGymHelper(name = "Meal 6", calories = 308.0F, proteins = 35.0F),
-            createMealForGymHelper(name = "Meal 7", calories = 890.0F, proteins = 70.0F),
+            createMeal(name = "Meal 1", calories = 50.0F, protein = 7.0F),
+            createMeal(name = "Meal 2", calories = 93.0F, protein = 8.0F),
+            createMeal(name = "Meal 3", calories = 112.0F, protein = 14.0F),
+            createMeal(name = "Meal 4", calories = 148.0F, protein = 17.0F),
+            createMeal(name = "Meal 5", calories = 150.0F, protein = 18.0F),
+            createMeal(name = "Meal 6", calories = 308.0F, protein = 35.0F),
+            createMeal(name = "Meal 7", calories = 890.0F, protein = 70.0F),
         ))
 
         // When && then
@@ -100,14 +99,14 @@ class GymHelperUseCaseTest {
             Arguments.of(
                 149.0F, 17.0F,
                 listOf(
-                    createMealForGymHelper(name = "Meal 4", calories = 148.0F, proteins = 17.0F),
-                    createMealForGymHelper(name = "Meal 5", calories = 150.0F, proteins = 18.0F),
+                    createMeal(name = "Meal 4", calories = 148.0F, protein = 17.0F),
+                    createMeal(name = "Meal 5", calories = 150.0F, protein = 18.0F),
                 )
             ),
             Arguments.of(
                 105.0F, 13.5F,
                 listOf(
-                    createMealForGymHelper(name = "Meal 3", calories = 112.0F, proteins = 14.0F),
+                    createMeal(name = "Meal 3", calories = 112.0F, protein = 14.0F),
                 )
             )
         )
