@@ -27,9 +27,9 @@ class SeaFoodMealsSortedByProteinUITest {
     fun `launchUI should display meals sorted by protein`() {
         // Given
         val meals = listOf(
-            createMeal(id = 1, tags = listOf("Seafood"), protein = 20.0f),
-            createMeal(id = 4, tags = listOf("seaFOOD"), protein = 18.0f),
-            createMeal(id = 2, tags = listOf("Seafood"), protein = 15.0f)
+            createMeal(id = 1, name = "Crispy Crab Cakes with Tomato Butter", tags = listOf("Seafood"), protein = 20.0f),
+            createMeal(id = 4, name = "Seared Tuna with Soy and Red Chiles", tags = listOf("seaFOOD"), protein = 18.0f),
+            createMeal(id = 2, name = "Mussels with Harissa and Basil", tags = listOf("Seafood"), protein = 15.0f)
         )
         every { useCase() } returns meals
 
@@ -40,9 +40,9 @@ class SeaFoodMealsSortedByProteinUITest {
         verify { useCase() }
         verifySequence {
             consolePrinter.displayLn("🍤 All Seafood Meals Sorted by Protein Content:")
-            consolePrinter.displayLn("1. null - \u001B[32m${"Protein: 20.0g"}\u001B[0m")
-            consolePrinter.displayLn("2. null - \u001B[32m${"Protein: 18.0g"}\u001B[0m")
-            consolePrinter.displayLn("3. null - \u001B[32m${"Protein: 15.0g"}\u001B[0m")
+            consolePrinter.displayLn("1. Crispy Crab Cakes with Tomato Butter - \u001B[32m${"Protein: 20.0g"}\u001B[0m")
+            consolePrinter.displayLn("2. Seared Tuna with Soy and Red Chiles - \u001B[32m${"Protein: 18.0g"}\u001B[0m")
+            consolePrinter.displayLn("3. Mussels with Harissa and Basil - \u001B[32m${"Protein: 15.0g"}\u001B[0m")
         }
     }
 
