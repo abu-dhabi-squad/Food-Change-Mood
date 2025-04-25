@@ -20,6 +20,6 @@ val uiModule = module {
     single { SeaFoodMealsSortedByProteinUI(get()) }
     single { GetHighCalorieMealForThinPeopleUI(get(),get(),get()) }
     single { GetFoodByDateUI(get(),get(), get(), get(),get(),get()) }
-    single { GetEasyFoodSuggestionUI(get()) }
-    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
+    single { GetEasyFoodSuggestionUI(get(),get()) }
+    single { FoodChangeMoodConsoleUI(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }  
 }
