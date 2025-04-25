@@ -1,6 +1,7 @@
 package presentation
 
 import presentation.ui_io.InputReader
+import kotlin.system.exitProcess
 
 class FoodChangeMoodConsoleUI(
     private val featuresUi: List<ChangeFoodMoodLauncher>,
@@ -28,6 +29,8 @@ class FoodChangeMoodConsoleUI(
         val input = reader.readInt()
         if (input != null && input in 1 .. featuresUi.size) {
             featuresUi.find { it.id == input }?.launchUI()
+        } else if(input == 0) {
+            exitProcess(0)
         } else {
             println("Invalid input")
         }
