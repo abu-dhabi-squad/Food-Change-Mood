@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
@@ -23,59 +24,53 @@ class GetRandomKetoDietMealsUseCaseTest {
         foodRepository = mockk()
         getRandomKetoDietMealsUseCase = GetRandomKetoDietMealsUseCase(foodRepository)
     }
-
     @Test
-    fun `should return random keto meal when food list has keto meal`() {
-        // given
-        val ketoMeal = createMeal(
-            id = 1, calories = 500f, totalFat = 35f,
-            sugar = 2f, sodium = 400f, protein = 25f, saturated = 7f, carbohydrates = 8f
-        )
-
-        val mealWithHighSugar = createMeal(
-            id = 2, calories = 500f, totalFat = 35f,
-            sugar = 6f, sodium = 400f, protein = 25f, saturated = 7f, carbohydrates = 8f
-        )
-
-        val mealWithLowFat = createMeal(
-            id = 3, calories = 500f, totalFat = 10f,
-            sugar = 2f, sodium = 400f, protein = 25f, saturated = 2f, carbohydrates = 8f
-        )
-
-        val mealWithHighProtein = createMeal(
-            id = 4, calories = 500f, totalFat = 35f,
-            sugar = 2f, sodium = 400f, protein = 40f, saturated = 7f, carbohydrates = 8f
-        )
-
-        val mealWithHighCarbs = createMeal(
-            id = 5, calories = 500f, totalFat = 35f,
-            sugar = 2f, sodium = 400f, protein = 25f, saturated = 7f, carbohydrates = 20f
-        )
-
-        val mealWithInvalidSaturatedFat = createMeal(
-            id = 6, calories = 500f, totalFat = 35f,
-            sugar = 2f, sodium = 400f, protein = 25f, saturated = 12f, carbohydrates = 8f
-        )
-
-        every { foodRepository.getFoods() } returns Result.success(
-            listOf(
-                ketoMeal,
-                mealWithHighSugar,
-                mealWithLowFat,
-                mealWithHighProtein,
-                mealWithHighCarbs,
-                mealWithInvalidSaturatedFat
-            )
-        )
-
-        val shown = mutableListOf<Int>()
-
-        // when
-        val result = getRandomKetoDietMealsUseCase.invoke(shown)
-
-        // then
-        assertThat(result).isEqualTo(ketoMeal)
+    fun `should return meal when get meal from repo and its valid keto meal`() {
+        // Given
+        val meal = createMeal(id = 1, sugar = 4.9f, totalFat = 33.34f, protein = 31.25f, carbohydrates = 12.5f, saturated = 8.0f, calories = 500.0f)
+        every { foodRepository.getFoods() } returns Result.success(listOf(meal))
+        // When
+        val result = getRandomKetoDietMealsUseCase(mutableListOf())
+        // Then
+        assertThat(result).isEqualTo(meal)
     }
+
+    @ParameterizedTest
+    @CsvSource(
+        "5.1, 40.0, 20.0, 10.0, 8.0, 500.0",
+        "2.0, 33.33, 20.0, 10.0, 8.0, 500.0",
+        "2.0, 40.0, 31.26, 10.0, 8.0, 500.0",
+        "2.0, 40.0, 20.0, 12.6, 8.0, 500.0",
+        "2.0, 40.0, 20.0, 10.0, 7.99, 500.0",
+        "2.0, 40.0, 20.0, 10.0, 10.01, 500.0",
+        "0.0, 0.0, 0.0, 0.0, 0.0, 0.0",
+        "2.0, 0.0, 20.0, 10.0, 0.0, 500.0"
+    )
+    fun `should throw exception when nutritiona values are invalid`(
+        sugar: Float,
+        totalFat: Float,
+        protein: Float,
+        carbs: Float,
+        saturated: Float,
+        calories: Float
+    ) {
+        // Given
+        val meal = createMeal(
+            id = 1,
+            sugar = sugar,
+            totalFat = totalFat,
+            protein = protein,
+            carbohydrates = carbs,
+            saturated = saturated,
+            calories = calories
+        )
+        every { foodRepository.getFoods() } returns Result.success(listOf(meal))
+        // When & Then
+        assertThrows<NoSuchElementException> {
+            getRandomKetoDietMealsUseCase(mutableListOf())
+        }
+    }
+
 
     @ParameterizedTest(name = "should throw for food list size={0}, shown={1}")
     @MethodSource("provideInvalidFoodLists")
@@ -142,6 +137,7 @@ class GetRandomKetoDietMealsUseCaseTest {
             )
         }
     }
+
 
 
 }

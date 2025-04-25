@@ -1,7 +1,9 @@
 package logic.usecase
 
+import createMeal
 import io.mockk.every
 import io.mockk.mockk
+import junit.framework.TestCase
 import logic.repository.FoodRepository
 import model.NoIraqiMealsFoundException
 import org.junit.jupiter.api.Assertions
@@ -11,6 +13,7 @@ import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals
 
 class GetIraqiMealsUseCaseTest {
+
 
     private lateinit var foodRepository: FoodRepository
     private lateinit var getIraqiMealsUseCase: GetIraqiMealsUseCase
@@ -25,12 +28,12 @@ class GetIraqiMealsUseCaseTest {
     fun `should return only meals containing Iraq in name, description or tags`() {
         // Given
         val foods = listOf(
-            createFood(name = "Iraqi Kebab", description = "Yummy", tags = listOf("Iraq")),
-            createFood(name = "Kebab", description = "Famous in Iraq", tags = listOf("MiddleEast")),
-            createFood(name = "Kebab", description = "Popular in the MiddleEast", tags = listOf("iraqi")),
-            createFood(name = "Pizza", description = "Italian", tags = listOf("Italian")),
-            createFood(name = "Sushi", description = "Traditional Japanese dish", tags = listOf("Japanese")),
-            createFood(name = "Ramen", description = "Hot noodle soup", tags = listOf("Japanese", "Noodles"))
+            createMeal(id = 1, name = "Iraqi Kebab", description = "Yummy", tags = listOf("Iraq")),
+            createMeal(id = 2, name = "Kebab", description = "Famous in Iraq", tags = listOf("MiddleEast")),
+            createMeal(id = 3, name = "Kebab", description = "Popular in the MiddleEast", tags = listOf("iraqi")),
+            createMeal(id = 4, name = "Pizza", description = "Italian", tags = listOf("Italian")),
+            createMeal(id = 5, name = "Sushi", description = "Traditional Japanese dish", tags = listOf("Japanese")),
+            createMeal(id = 6, name = "Ramen", description = "Hot noodle soup", tags = listOf("Japanese", "Noodles"))
         )
 
         every { foodRepository.getFoods() } returns Result.success(foods)
@@ -39,56 +42,45 @@ class GetIraqiMealsUseCaseTest {
         val result = getIraqiMealsUseCase.getAllIraqiMeals()
 
         // Then
-        val expected = listOf(
-            createFood(name = "Iraqi Kebab", description = "Yummy", tags = listOf("Iraq")),
-            createFood(name = "Kebab", description = "Famous in Iraq", tags = listOf("MiddleEast")),
-            createFood(name = "Kebab", description = "Popular in the MiddleEast", tags = listOf("iraqi"))
-        )
-
-        // Assert that the result matches the expected list of Iraqi meals
-        assertEquals(expected, result)
+        val expected = foods.subList(0, 3)
+        TestCase.assertEquals(expected, result)
     }
-
-
 
     @Test
     fun `should exclude meals with null or empty name or description`() {
         // Given
-        val invalidFood1 = createMealHelper(name = null, description = "Desc")
-        val invalidFood2 = createMealHelper(name = "", description = "Desc")
-        val invalidFood3 = createMealHelper(name = "Name", description = null)
-        val validFood = createMealHelper(name = "Iraqi Dolma", description = "Traditional")
+        val foods = listOf(
+            createMeal(id = 1, name = null, description = "Desc"),
+            createMeal(id = 2, name = "", description = "Desc"),
+            createMeal(id = 3, name = "Name", description = null),
+            createMeal(id = 4, name = "Iraqi Dolma", description = "Traditional")
+        )
 
-        every { foodRepository.getFoods() } returns Result.success(listOf(
-            invalidFood1, invalidFood2, invalidFood3, validFood
-        ))
+        every { foodRepository.getFoods() } returns Result.success(foods)
 
         // When
         val result = getIraqiMealsUseCase.getAllIraqiMeals()
 
         // Then
-        val expected = listOf(validFood)
-        Assertions.assertEquals(expected, result)
+        val expected = listOf(foods[3])
+        TestCase.assertEquals(expected, result)
     }
-
 
     @Test
     fun `should throw NoIraqiMealsFoundException when no Iraqi meals exist`() {
         // Given
         val foods = listOf(
-            createFood(name = "Pizza", description = "Italian", tags = listOf("Italian")),
-            createFood(name = "Sushi", description = "Japanese", tags = listOf("Japanese"))
+            createMeal(id = 1, name = "Pizza", description = "Italian", tags = listOf("Italian")),
+            createMeal(id = 2, name = "Sushi", description = "Japanese", tags = listOf("Japanese"))
         )
 
         every { foodRepository.getFoods() } returns Result.success(foods)
 
         // Then
         assertThrows<NoIraqiMealsFoundException> {
-            // When
             getIraqiMealsUseCase.getAllIraqiMeals()
         }
     }
-
 
     @Test
     fun `should propagate repository failure`() {
@@ -98,19 +90,18 @@ class GetIraqiMealsUseCaseTest {
 
         // Then
         val exception = assertThrows<RuntimeException> {
-            // When
             getIraqiMealsUseCase.getAllIraqiMeals()
         }
-        assertEquals("Database error", exception.message)
+        TestCase.assertEquals("Database error", exception.message)
     }
 
     @Test
     fun `should handle case insensitive Iraq matching`() {
         // Given
         val foods = listOf(
-            createMealHelper(name = "IRAQI KEBAB"),
-            createMealHelper(description = "traditional iraqi dish"),
-            createMealHelper(tags = listOf("IRAQ"))
+            createMeal(id = 1, name = "IRAQI KEBAB"),
+            createMeal(id = 2, description = "traditional iraqi dish"),
+            createMeal(id = 3, name = "meal", description = "meal", tags = listOf("IRAQ"))
         )
 
         every { foodRepository.getFoods() } returns Result.success(foods)
@@ -120,14 +111,13 @@ class GetIraqiMealsUseCaseTest {
 
         // Then
         val expected = foods
-        Assertions.assertEquals(expected, result)
+        TestCase.assertEquals(expected, result)
     }
-
 
     @Test
     fun `should handle meals with multiple tags`() {
         // Given
-        val food = createMealHelper(name = "Kebab", tags = listOf("MiddleEast", "Iraq", "Grill"))
+        val food = createMeal(id = 1, name = "Kebab", tags = listOf("MiddleEast", "Iraq", "Grill"))
 
         every { foodRepository.getFoods() } returns Result.success(listOf(food))
 
@@ -136,41 +126,37 @@ class GetIraqiMealsUseCaseTest {
 
         // Then
         val expected = listOf(food)
-        Assertions.assertEquals(expected, result)
+        TestCase.assertEquals(expected, result)
     }
-
 
     @Test
     fun `should reject meal when name or description is null`() {
         // Given
-        val nullNameMeal = createMealHelper(name = null, description = "Desc")
-        val nullDescMeal = createMealHelper(name = "Name", description = null)
+        val nullNameMeal = createMeal(id = 1, name = null, description = "Desc")
+        val nullDescMeal = createMeal(id = 2, name = "Name", description = null)
 
         every { foodRepository.getFoods() } returns Result.success(listOf(nullNameMeal, nullDescMeal))
 
         // Then
         assertThrows<NoIraqiMealsFoundException> {
-            // When
             getIraqiMealsUseCase.getAllIraqiMeals()
         }
     }
-
 
     @Test
     fun `should reject meal when both name and description are null or empty`() {
         // Given
         val invalidMeals = listOf(
-            createMealHelper(name = null, description = null),
-            createMealHelper(name = "", description = ""),
-            createMealHelper(name = null, description = ""),
-            createMealHelper(name = "", description = null)
+            createMeal(id = 1, name = null, description = null),
+            createMeal(id = 2, name = "", description = ""),
+            createMeal(id = 3, name = null, description = ""),
+            createMeal(id = 4, name = "", description = null)
         )
 
         every { foodRepository.getFoods() } returns Result.success(invalidMeals)
 
         // Then
         assertThrows<NoIraqiMealsFoundException> {
-            // When
             getIraqiMealsUseCase.getAllIraqiMeals()
         }
     }
@@ -179,10 +165,10 @@ class GetIraqiMealsUseCaseTest {
     fun `should accept meal when either name or description is not null or empty`() {
         // Given
         val validMeals = listOf(
-            createMealHelper(name = "Iraqi Dish", description = null),
-            createMealHelper(name = null, description = "Iraqi Dish"),
-            createMealHelper(name = "Iraqi Dish", description = ""),
-            createMealHelper(name = "", description = "Iraqi Dish")
+            createMeal(id = 1, name = "Iraqi Dish", description = null),
+            createMeal(id = 2, name = null, description = "Iraqi Dish"),
+            createMeal(id = 3, name = "Iraqi Dish", description = ""),
+            createMeal(id = 4, name = "", description = "Iraqi Dish")
         )
 
         every { foodRepository.getFoods() } returns Result.success(validMeals)
@@ -192,7 +178,7 @@ class GetIraqiMealsUseCaseTest {
 
         // Then
         val expected = validMeals
-        Assertions.assertEquals(expected, result)
+        TestCase.assertEquals(expected, result)
     }
 
 

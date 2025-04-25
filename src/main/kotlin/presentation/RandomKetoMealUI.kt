@@ -17,13 +17,12 @@ class RandomKetoMealUI(
         try {
             ketoMeal = getRandomKetoDietMealsUseCase(showedKetoMeals)
             showedKetoMeals.add(ketoMeal.id)
-            printer.displayLn(ketoMeal.name)
+            printer.displayLn( "${ketoMeal.name}")
             if (getUserTaste.run()) {
                 printer.displayLn(ketoMeal.getFullDetails())
             } else {
                 launchUI()
             }
-
         } catch (ex: Exception) {
             printer.displayLn(ex.message)
         }
