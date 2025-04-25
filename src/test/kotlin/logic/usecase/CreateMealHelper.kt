@@ -36,43 +36,10 @@ fun createFood(
     )
 }
 
-fun createMeal(
-    id: Int = 0,
-    name: String? = null,
-    description: String? = null,
-    minutes: Int = 10,
-    submittedDate: LocalDate? = LocalDate.now(),
-    tags: List<String> = listOf("misc"),
-    steps: List<String> = listOf("No steps provided"),
-    ingredients: List<String> = listOf("Unknown ingredient"),
-    calories: Float = 100f,
-    totalFat: Float = 5f,
-    sugar: Float = 5f,
-    sodium: Float = 50f,
-    protein: Float = 2f,
-    saturated: Float = 1f,
-    carbohydrates: Float = 10f
-): Food {
-    return Food(
-        id = id,
-        name = name,
-        minutes = minutes,
-        submittedDate = submittedDate,
-        tags = tags,
-        steps = steps,
-        description = description,
-        ingredients = ingredients,
-        nutrition = Nutrition(
-            calories = calories,
-            totalFat = totalFat,
-            sugar = sugar,
-            sodium = sodium,
-            protein = protein,
-            saturated = saturated,
-            carbohydrates = carbohydrates
-        )
-    )
-}
+
+
+
+
 
 
 

@@ -1,6 +1,7 @@
 package model
 
 data class IngredientQuestion(
+    val mealId: Int,
     val mealName: String,
     val correctAnswer : String,
     private val answers: List<String>,
