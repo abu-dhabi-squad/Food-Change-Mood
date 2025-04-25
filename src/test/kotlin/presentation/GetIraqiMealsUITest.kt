@@ -1,7 +1,7 @@
 import io.mockk.*
 import logic.repository.FoodRepository
 import logic.usecase.GetIraqiMealsUseCase
-import logic.usecase.createMealHelper
+import logic.usecase.createMeal
 import model.NoIraqiMealsFoundException
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -25,7 +25,8 @@ class GetIraqiMealsUITest {
     @Test
     fun `should print Iraqi meals list when meals are found`() {
         // Given
-        val meal = createMealHelper(
+        val meal = createMeal(
+            id = 1,
             name = "Dolma",
             description = "Traditional Iraqi stuffed vegetables",
             tags = listOf("Iraq", "Traditional")
@@ -45,7 +46,8 @@ class GetIraqiMealsUITest {
     @Test
     fun `should print No Iraqi meals found when filtered list is empty`() {
         // Given
-        val nonIraqiMeal = createMealHelper(
+        val nonIraqiMeal = createMeal(
+            id = 2,
             name = "Pizza",
             description = "Italian dish",
             tags = listOf("Italian")
