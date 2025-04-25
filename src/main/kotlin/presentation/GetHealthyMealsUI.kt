@@ -1,8 +1,12 @@
 package presentation
 
 import logic.usecase.GetHealthyMealsUseCase
+import presentation.ui_io.Printer
 
-class GetHealthyMealsUI(private val getHealthyMealsUseCase: GetHealthyMealsUseCase) : ChangeFoodMoodLauncher {
+class GetHealthyMealsUI(
+    private val getHealthyMealsUseCase: GetHealthyMealsUseCase,
+    private val printer : Printer
+    ) : ChangeFoodMoodLauncher {
     override val id: Int
         get() = 1
 
@@ -12,13 +16,13 @@ class GetHealthyMealsUI(private val getHealthyMealsUseCase: GetHealthyMealsUseCa
     override fun launchUI() {
         try {
             getHealthyMealsUseCase.fetchHealthyFastFoods().also { meals ->
-                println("Healthy meals:\n")
+                printer.displayLn("Healthy meals:\n")
                 meals.forEach {
-                    println("\nName: ${it.name ?: "Unnamed meal"}\nDescription: ${it.description ?: "No description"}")
+                    printer.displayLn("\nName: ${it.name ?: "Unnamed meal"}\nDescription: ${it.description ?: "No description"}")
                 }
             }
         } catch (exception: Exception) {
-            println(exception.message)
+            printer.displayLn(exception.message)
         }
     }
 }

@@ -12,7 +12,7 @@ val uiModule = module {
     single { RandomPotatoesMealsConsoleUi(get(), get(),get()) } bind ChangeFoodMoodLauncher::class
     single { GetIraqiMealsUI(get(),get()) } bind ChangeFoodMoodLauncher::class
     single { RandomKetoMealUI(get(),get(),get()) } bind ChangeFoodMoodLauncher::class
-    single { GetHealthyMealsUI(get()) } bind ChangeFoodMoodLauncher::class
+    single { GetHealthyMealsUI(get(),get()) } bind ChangeFoodMoodLauncher::class
     single { GetRandomMealsByCountryUI(get(), get(), get()) } bind ChangeFoodMoodLauncher::class
     single { GetEasyFoodSuggestionUI(get(),get()) } bind ChangeFoodMoodLauncher::class
     single { GetMealByNameUI(get(), get(),get()) } bind ChangeFoodMoodLauncher::class
