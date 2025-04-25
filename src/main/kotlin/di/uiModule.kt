@@ -17,7 +17,7 @@ val uiModule = module {
     single { GetEasyFoodSuggestionUI(get(),get()) } bind ChangeFoodMoodLauncher::class
     single { GetMealByNameUI(get(), get(),get()) } bind ChangeFoodMoodLauncher::class
     single { GymHelperConsoleUI(get(), get(), get()) } bind ChangeFoodMoodLauncher::class
-    single { SweetsWithoutEggsConsoleUI(get()) } bind ChangeFoodMoodLauncher::class
+    single { SweetsWithoutEggsConsoleUI(get(),get(),get()) } bind ChangeFoodMoodLauncher::class
     single { SeaFoodMealsSortedByProteinUI(get(), get()) } bind ChangeFoodMoodLauncher::class
     single { GetHighCalorieMealForThinPeopleUI(get(),get(),get()) } bind ChangeFoodMoodLauncher::class
     single { GetFoodByDateUI(get(),get(), get(), get(),get(),get()) } bind ChangeFoodMoodLauncher::class
