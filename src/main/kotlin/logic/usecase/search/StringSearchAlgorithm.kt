@@ -1,6 +1,6 @@
 package logic.usecase.search
 
-interface SearchAlgorithm {
+interface StringSearchAlgorithm {
 
     fun isContainsPattern(pattern: String, text: String): Boolean
 

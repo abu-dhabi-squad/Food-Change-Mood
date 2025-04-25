@@ -1,6 +1,6 @@
 package logic.usecase.search
 
-class KMPMatcher : SearchAlgorithm {
+class KMPMatcher : StringSearchAlgorithm {
 
     override fun isContainsPattern(pattern: String, text: String): Boolean {
         if (pattern.isEmpty()) return true
