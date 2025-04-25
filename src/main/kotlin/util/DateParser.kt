@@ -2,6 +2,6 @@ package util
 
 import java.time.LocalDate
 
-interface DateParserInterface {
+interface DateParser {
     fun parseDateFromString(date: String): LocalDate
 }
