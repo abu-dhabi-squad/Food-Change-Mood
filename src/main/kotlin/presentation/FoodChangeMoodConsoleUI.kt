@@ -79,6 +79,7 @@ class FoodChangeMoodConsoleUI(
         println("║ 13. High-Calorie Meals (>700 cal)  ║")
         println("║ 14. Seafood Meals (Protein Sorted) ║")
         println("║ 15. Italian Meals for Large Groups ║")
+        println("║ 16. search meal by ID              ║")
         println("║ 0.  Exit                           ║")
         println("╚════════════════════════════════════╝")
     }

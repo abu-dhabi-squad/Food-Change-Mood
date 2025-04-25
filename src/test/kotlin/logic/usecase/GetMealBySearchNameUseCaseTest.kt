@@ -185,4 +185,19 @@ class GetMealBySearchNameUseCaseTest {
         }
     }
 
+    @Test
+    fun `should throw NoMealsFoundException when all food names are null`() {
+        // given
+        val foods = listOf(
+            createFood(name = null),
+            createFood(name = null)
+        )
+        every { repository.getFoods() } returns Result.success(foods)
+
+        // when & then
+        assertFailsWith<NoMealsFoundException> {
+            getMealBySearchNameUseCase.findMealsByName("Pizza")
+        }
+    }
+
 }
