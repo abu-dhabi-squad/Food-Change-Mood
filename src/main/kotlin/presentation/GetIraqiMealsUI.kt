@@ -8,11 +8,9 @@ class GetIraqiMealsUI(
     private val getIraqiMealsUseCase: GetIraqiMealsUseCase,
     private val printer: Printer
 ) : ChangeFoodMoodLauncher {
-    override val id: Int
-        get() = 3
+    override val id: Int = 3
 
-    override val name: String
-        get() = "Iraqi Meals"
+    override val name: String = "Iraqi Meals"
 
     override fun launchUI() {
         try {

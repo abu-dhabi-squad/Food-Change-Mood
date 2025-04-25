@@ -9,11 +9,9 @@ class GetEasyFoodSuggestionUI(
     private val getEasyFoodSuggestionGameUseCase: GetEasyFoodSuggestionGameUseCase,
     private val printer: Printer
 ) : ChangeFoodMoodLauncher {
-    override val id: Int
-        get() = 4
+    override val id: Int = 4
 
-    override val name: String
-        get() = "Easy Food Suggestions"
+    override val name: String = "Easy Food Suggestions"
 
     override fun launchUI() {
         try {

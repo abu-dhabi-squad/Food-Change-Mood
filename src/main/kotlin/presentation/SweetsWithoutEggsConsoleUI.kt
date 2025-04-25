@@ -8,11 +8,9 @@ class SweetsWithoutEggsConsoleUI(
     private val printer: Printer,
     private val userTaste: GetUserTaste
 ) : ChangeFoodMoodLauncher {
-    override val id: Int
-        get() = 6
+    override val id: Int = 6
 
-    override val name: String
-        get() = "Egg-Free Sweets"
+    override val name: String = "Egg-Free Sweets"
 
     override fun launchUI() {
         val shownMeals = mutableSetOf<Int>()

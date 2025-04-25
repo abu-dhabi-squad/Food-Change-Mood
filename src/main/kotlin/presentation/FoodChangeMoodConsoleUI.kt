@@ -7,11 +7,9 @@ class FoodChangeMoodConsoleUI(
     private val featuresUi: List<ChangeFoodMoodLauncher>,
     private val reader: InputReader
 ) : ChangeFoodMoodLauncher {
-    override val id: Int
-        get() = 0
+    override val id: Int = 0
 
-    override val name: String
-        get() = "Main Menu"
+    override val name: String = "Main Menu"
 
     override fun launchUI() {
         sortMenu()

@@ -13,11 +13,9 @@ class GuessFoodPreparationTimeGameUI(
     private val reader: InputReader,
     private val printer : Printer
 ) : ChangeFoodMoodLauncher {
-    override val id: Int
-        get() = 5
+    override val id: Int = 5
 
-    override val name: String
-        get() = "Guess Prep Time Game"
+    override val name: String = "Guess Prep Time Game"
 
     private var attemptsCount = 0
     private lateinit var food: Food
