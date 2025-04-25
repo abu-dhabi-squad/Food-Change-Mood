@@ -40,7 +40,7 @@ class FoodChangeMoodConsoleUI(
         println("║       Food Change Mood Console       ║")
         println("╠══════════════════════════════════════╣")
         featuresUi.sortedBy { it.id }.forEach { printFeatureLine(it) }
-        println("║ 00.  Exit                            ║")
+        println("║  0.  Exit                            ║")
         println("╚══════════════════════════════════════╝")
     }
 
